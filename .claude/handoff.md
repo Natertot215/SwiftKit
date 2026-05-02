@@ -46,7 +46,7 @@ SwiftKit's job is to *render* Apple primitives, not *replace* them. A "Button" g
    - On HTTP failure: writes `status: failed` stub
    - On jq filter failure: falls back to a recursive text-walker
 
-   **Final capture run (2026-05-02)**: ~2,450+ markdown files across HIG/SwiftUI/AppKit, mostly real Apple content (median 6KB+ for HIG, similar for SwiftUI/AppKit symbol pages). Failed URLs are explicitly stubbed with `status: failed`.
+   **Final capture (2026-05-02, commit `cc7e40f`)**: **2,536 markdown files / 6.17 MB** across HIG (180, median 6.4KB), SwiftUI (1,707, median 1.4KB), AppKit (649, median 1.4KB). Zero empty folders. 5 `status:failed` stubs (URL-list typos from the original manifest gather — edge cases, not capture failures). The smaller SwiftUI/AppKit medians reflect that many individual symbol pages (single methods, properties, small enums) are genuinely small at the source — verified by spot-checking against the live Apple JSON.
 
    **Key lessons (record these as durable rules)**:
    - **Don't trust agent self-reports.** Agents will say "all done" with fabricated content from training data. Always verify by file size + spot-check vs raw fetched JSON.
@@ -72,7 +72,6 @@ Plus at project root: `.gitignore`, `README.md`. Git initialized on 2026-05-02, 
 
 The full plan lives at `~/.claude/plans/yeah-lets-do-it-synchronous-dongarra.md`. Remaining phases:
 
-- **Phase 3 (in progress)** — finish the doc capture. When all 13 agents complete, aggregate failure lists, re-launch a second-pass capture agent for any failed URLs (Firecrawl as primary this time), confirm 100% coverage (or explicitly marked-failed).
 - **Phase 4 — Gallery scaffold.** Build `SwiftKit/Sidebar/{GalleryNode,GalleryCatalog,SidebarView}.swift` and `SwiftKit/Detail/{GalleryDetailView,GalleryPageScaffold,ColorSchemeToggle}.swift`. Wire into `ContentView` as a 2-column `NavigationSplitView` with `.navigationSplitViewStyle(.prominentDetail)` (per L-003). Sidebar pinned to `min: 240, ideal: 280, max: 360` (per L-009 — slightly wider than Pommora because of 3-level hierarchy). Search via `.searchable(placement: .sidebar)`. Light/dark toggle on detail pane via `@AppStorage("preferredScheme")` defaulting to `.dark`. Every catalog node points to a shared `PlaceholderPage` view until its real page is written.
 - **Phase 5 — Gallery pages.** One file per primitive in `SwiftKit/Pages/<Framework>/<Category>/<Name>Page.swift`. Each composes `GalleryPageScaffold` (Header / Default / Variants / States / Notes). Read the corresponding markdown file under `Documentation/` to determine which variants and `@available` versions exist — do **not** enumerate variants from training memory. Priority order: SwiftUI Lists & Tables → Navigation → Materials & Effects → Controls → Layout → Text & Symbols → Toolbars & Menus → Sheets/Popovers → everything else → AppKit.
 - **Phase 6 — Cleanup & finalize.** Verify every node has a real page; every page passes `swiftui-expert-skill`; every page has dark+light screenshots in `Screen Recordings/`.
