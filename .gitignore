@@ -1,0 +1,33 @@
+.DS_Store
+*.tmp
+*.log
+node_modules/
+.env
+.env.local
+.env.*.local
+dist/
+build/
+.next/
+.vercel/
+.cache/
+.idea/
+*.swp
+.python-version
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Xcode
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.swiftpm/
+.swiftpm/
+*.xcworkspace
+!*.xcodeproj/project.xcworkspace
+build/
+.build/
+
+# Screen recordings (dev artifacts, not source)
+Screen\ Recordings/
