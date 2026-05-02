@@ -1,0 +1,49 @@
+---
+url: https://developer.apple.com/documentation/swiftui/view/tipimagestyle(_:)
+framework: SwiftUI
+category: Technology-specific views
+title: tipImageStyle(_:)
+kind: method
+captured: 2026-05-02
+---
+
+# tipImageStyle(_:)
+
+Sets the style for a tip’s image.
+
+## Declaration
+
+```swift
+nonisolated func tipImageStyle<S>(_ style: S) -> some View where S : ShapeStyle
+
+```
+
+
+
+
+
+
+
+
+
+## Availability
+
+- iOS 18.0
+- iPadOS 18.0
+- Mac Catalyst 18.0
+- macOS 15.0
+- tvOS 18.0
+- visionOS 2.0
+- watchOS 11.0
+
+
+
+## See Also
+
+- `popoverTip(_:arrowEdge:action:)`
+- `tipBackground(_:)`
+- `tipCornerRadius(_:antialiased:)`
+- `tipImageSize(_:)`
+- `tipViewStyle(_:)`
+- `tipImageStyle(_:_:)`
+- `tipImageStyle(_:_:_:)`

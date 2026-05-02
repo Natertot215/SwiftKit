@@ -1,0 +1,49 @@
+---
+url: https://developer.apple.com/documentation/swiftui/view/filedialogdefaultdirectory(_:)
+framework: SwiftUI
+category: Modal presentations
+title: fileDialogDefaultDirectory(_:)
+kind: method
+captured: 2026-05-02
+---
+
+# fileDialogDefaultDirectory(_:)
+
+Configures the `fileExporter`, `fileImporter`, or `fileMover` to open with the specified default directory.
+
+## Declaration
+
+```swift
+nonisolated func fileDialogDefaultDirectory(_ defaultDirectory: URL?) -> some View
+
+```
+
+
+
+## Parameters
+
+- **defaultDirectory**: The directory to show when the system file dialog launches. If the given file dialog has a `fileDialogCustomizationID` if stores the user-chosen directory and subsequently opens with it, ignoring the default value provided in this modifier.
+
+
+
+
+
+## Availability
+
+- iOS 17.0
+- iPadOS 17.0
+- Mac Catalyst 17.0
+- macOS 14.0
+- visionOS 1.0
+
+
+
+## See Also
+
+- `fileDialogBrowserOptions(_:)`
+- `fileDialogConfirmationLabel(_:)`
+- `fileDialogCustomizationID(_:)`
+- `fileDialogImportsUnresolvedAliases(_:)`
+- `fileDialogMessage(_:)`
+- `fileDialogURLEnabled(_:)`
+- `FileDialogBrowserOptions`

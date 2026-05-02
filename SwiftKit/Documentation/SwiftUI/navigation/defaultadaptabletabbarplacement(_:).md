@@ -1,0 +1,73 @@
+---
+url: https://developer.apple.com/documentation/swiftui/view/defaultadaptabletabbarplacement(_:)
+framework: SwiftUI
+category: Navigation
+title: defaultAdaptableTabBarPlacement(_:)
+kind: method
+captured: 2026-05-02
+---
+
+# defaultAdaptableTabBarPlacement(_:)
+
+Specifies the default placement for the tabs in a tab view using the adaptable sidebar style.
+
+## Declaration
+
+```swift
+nonisolated func defaultAdaptableTabBarPlacement(_ defaultPlacement: AdaptableTabBarPlacement = .automatic) -> some View
+
+```
+
+### Discussion
+
+This modifier is only effective on iPadOS in the `TabViewStyle/sidebarAdaptable` style. In any other configuration, the system ignores it.
+
+The following example shows a `TabView` with three tabs, where the tab view displays the sidebar representation when the app initially launches.
+
+```swift
+TabView(selection: $selection) {
+    Tab("Home", systemImage: "house", value: MyTab.home) {
+        MyHomeView()
+    }
+
+    Tab("Downloads", systemImage: "square.and.arrow.down.fill",
+        value: MyTab.downloads
+    ) {
+        MyDownloadsView()
+    }
+
+    Tab("Browse", systemImage: "list.bullet", value: MyTab.browse) {
+        MyBrowseView()
+    }
+}
+.tabViewStyle(.sidebarAdaptable)
+.defaultAdaptableTabBarPlacement(.sidebar)
+```
+
+## Parameters
+
+- **defaultPlacement**: The default arrangement for the tab view.
+
+
+
+
+
+## Availability
+
+- iOS 18.0
+- iPadOS 18.0
+- Mac Catalyst 18.0
+
+
+
+## See Also
+
+- `tabViewSidebarHeader(content:)`
+- `tabViewSidebarFooter(content:)`
+- `tabViewSidebarBottomBar(content:)`
+- `AdaptableTabBarPlacement`
+- `tabBarPlacement`
+- `TabBarPlacement`
+- `isTabBarShowingSections`
+- `TabBarMinimizeBehavior`
+- `TabViewBottomAccessoryPlacement`

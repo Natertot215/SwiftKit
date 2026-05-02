@@ -1,0 +1,83 @@
+---
+url: https://developer.apple.com/documentation/swiftui/view/translationtask(source:target:preferredstrategy:action:)
+framework: SwiftUI
+category: Technology-specific views
+title: translationTask(source:target:preferredStrategy:action:)
+kind: method
+captured: 2026-05-02
+---
+
+# translationTask(source:target:preferredStrategy:action:)
+
+Adds a task to perform before this view appears or when the specified source or target languages change.
+
+## Declaration
+
+```swift
+nonisolated func translationTask(source: Locale.Language? = nil, target: Locale.Language? = nil, preferredStrategy: TranslationSession.Strategy, action: @escaping (TranslationSession) async -> Void) -> some View
+
+```
+
+### Discussion
+
+This task provides an instance of `TranslationSession` to use to perform translations.
+
+Perform new translations with the same `source` and `target` language, use `View/translationTask(_:action:)` and call `TranslationSession/Configuration/invalidate()`.
+
+For example, you can translate when content appears:
+
+```swift
+ struct ContentView: View {
+     var sourceText = "Hallo, Welt!"
+     var sourceLanguage: Locale.Language?
+     var targetLanguage: Locale.Language?
+
+     @State private var targetText: String?
+
+     var body: some View {
+         Text(targetText ?? sourceText)
+             .translationTask(
+                 source: sourceLanguage,
+                 target: targetLanguage,
+                 preferredStrategy: .lowLatency
+             ) { session in
+                 Task { @MainActor in
+                     do {
+                         let response = try await session.translate(sourceText)
+                         targetText = response.targetText
+                     } catch {
+                         // code to handle error
+                     }
+                 }
+             }
+     }
+ }
+```
+
+The system throws a `fatalError` if you use a `TranslationSession` instance after the attached view disappears or if you use it after changing the `source` or `target` parameters. This causes the `action` closure to provide a new instance.
+
+## Parameters
+
+- **source**: The language the source content is in. If this is `nil`, the session tries to identify the language and prompts the person to pick the source language if it’s unclear. All text translated within the session should be in the same source language. Changing this value cancels previous tasks and creates a new session to perform translations again.
+- **target**: The language to translate content into. A `nil` value means the session picks a target according to the person’s `Locale.preferredLanguages` and the `source`. Changing this value cancels previous tasks and creates a new one to perform translations again.
+- **preferredStrategy**: The translation strategy to use. `TranslationSession/Strategy/highFidelity` provides more fluent translations using Apple Intelligence models when available, or traditional models otherwise. `TranslationSession/Strategy/lowLatency` uses traditional models. Each strategy supports different sets of languages.
+- **action**: A closure that runs when the view first appears and when `source` or `target` change.  It provides a `TranslationSession` instance to perform one or more translations.
+
+
+
+
+
+## Availability
+
+- iOS 26.4
+- iPadOS 26.4
+- Mac Catalyst 26.0
+- macOS 26.4
+
+
+
+## See Also
+
+- `translationPresentation(isPresented:text:attachmentAnchor:arrowEdge:replacementAction:)`
+- `translationTask(_:action:)`
+- `translationTask(source:target:action:)`
