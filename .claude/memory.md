@@ -28,6 +28,31 @@ Non-obvious project state and architectural decisions. Things that aren't visibl
 
 **Reason:** Per-method/per-property pages exist in Apple docs but are sub-symbols of larger types. Gallery entries operate at the type level (NSView, NSTableView, NSWindow). The 636-URL list captures every type/protocol/article that has standalone meaning. If a future need surfaces (e.g., a gallery page wanting to enumerate every NSColor system property), the deeper recursion can be triggered for that subtree. **Listed here so a future agent doesn't re-crawl thinking it was incomplete.**
 
+## 2026-05-02 — Doc mirror has zero failed stubs; 4 URL typos fixed
+
+**Reason:** Initial Phase 3 capture left 4 `status: failed` stubs caused by URL-list typos in the original manifest gather, not capture failures. Cleanup (2026-05-02): confirmed canonical URLs against Apple's JSON variant API, fixed typos in `_links/{hig,swiftui,appkit}-urls.md` + `access-links.md`, deleted old stub files, recaptured. All 4 now hold authentic Apple content. Mirror total still 2,540 markdown files.
+
+| Original (typo) | Corrected |
+|---|---|
+| `appkit/nssliderccessory` | `appkit/nsslideraccessory` |
+| `appkit/nsseguperforming` | `appkit/nsseguePerforming` (camelCase — only working casing) |
+| `swiftui/manipulableresponermodifier` | `swiftui/manipulablerespondermodifier` |
+| `design/human-interface-guidelines` (404 via default JSON URL) | reached via `tutorials/data/design/human-interface-guidelines.json` |
+
+**How to apply:** When auditing the mirror, the canonical "is this complete" check is `grep -r -l "status: failed\|status: stub" Documentation/` excluding the script source. Many genuine Apple symbol pages are <1500 bytes (single methods, typealiases, struct-only modifiers); small size alone is not a defect signal.
+
+## 2026-05-02 — `Documentation/` lives at project root, NOT inside the Xcode target
+
+**Reason:** The Xcode project uses `PBXFileSystemSynchronizedRootGroup` — anything under `SwiftKit/SwiftKit/` auto-bundles. With `Documentation/` originally nested at `SwiftKit/SwiftKit/Documentation/`, all 2,540 markdown files were swept into the .app bundle's flat `Resources/` folder, causing duplicate-filename collisions (Apple cross-references mean `width.md`, `windowgroup.md`, `tabviewstyle(_:).md` etc. exist in multiple framework subfolders) → BUILD FAILED. Resolved by `git mv SwiftKit/Documentation Documentation` — Documentation/ is now a peer of `SwiftKit/`, not a child. Bundle size dropped from 6+ MB to 332 KB; zero .md leakage; single DerivedData hash. Capture scripts updated. **Path canonical going forward: `/SwiftKit/Documentation/...`, not `/SwiftKit/SwiftKit/Documentation/...`.**
+
+**How to apply:** Never put development-only artifacts (docs, design refs, screenshots) inside `SwiftKit/SwiftKit/`. The synchronized group will bundle them into the app. Project-root peer folders (`Documentation/`, `Screen Recordings/`, etc.) stay out of the app target.
+
+## 2026-05-02 — Capture scripts live in `Documentation/_index/`
+
+**Reason:** Original capture script was at `/tmp/swiftkit_capture.sh` — non-portable, untrusted by some sandboxes (transcript-invisible writes get blocked), and not committed. Moved into project at `Documentation/_index/capture.sh` (full-mirror, idempotent, MIN_BYTES=2500 skip) and `Documentation/_index/recapture-targets.sh` (small TARGETS array for surgical re-fetches that bypasses the size-skip).
+
+**How to apply:** For one-off URL fixes, edit `recapture-targets.sh`'s TARGETS array, run it. For a full re-walk after manifest changes, run `./capture.sh all`. Don't recreate the `/tmp` version — it'll be denied as untrusted.
+
 ---
 
 *(no further entries yet)*

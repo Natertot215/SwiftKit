@@ -169,7 +169,7 @@ Index page: [Resource management](https://developer.apple.com/documentation/appk
 
 - [NSStoryboard](https://developer.apple.com/documentation/appkit/nsstoryboard)
 - [NSStoryboardSegue](https://developer.apple.com/documentation/appkit/nsstoryboardsegue)
-- [NSSeguePerforming](https://developer.apple.com/documentation/appkit/nsseguperforming)
+- [NSSeguePerforming](https://developer.apple.com/documentation/appkit/nsseguePerforming)
 
 ### Assets
 
@@ -328,7 +328,7 @@ Index page: [Views and controls](https://developer.apple.com/documentation/appki
 - [Slider](https://developer.apple.com/documentation/appkit/slider)
 - [NSSlider](https://developer.apple.com/documentation/appkit/nsslider)
 - [NSSliderCell](https://developer.apple.com/documentation/appkit/nsslidercell)
-- [NSSliderAccessory](https://developer.apple.com/documentation/appkit/nssliderccessory)
+- [NSSliderAccessory](https://developer.apple.com/documentation/appkit/nsslideraccessory)
 - [NSSliderAccessoryBehavior](https://developer.apple.com/documentation/appkit/nsslideraccessorybehavior)
 - [NSSliderAccessory.Width](https://developer.apple.com/documentation/appkit/nsslideraccessory/width)
 - [NSStepper](https://developer.apple.com/documentation/appkit/nsstepper)

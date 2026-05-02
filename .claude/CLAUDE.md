@@ -1,6 +1,6 @@
 # SwiftKit — Project Context
 
-A personal Apple-component reference library — one screen per SwiftUI / AppKit primitive, every documented variant rendered side-by-side and labeled with its exact API call. Like a Figma component library, native to macOS. The companion output is `SwiftKit/Documentation/` — a complete local mirror of Apple's HIG, SwiftUI, and AppKit documentation as flat markdown files, with a master URL index.
+A personal Apple-component reference library — one screen per SwiftUI / AppKit primitive, every documented variant rendered side-by-side and labeled with its exact API call. Like a Figma component library, native to macOS. The companion output is `Documentation/` (project-root sibling of the Xcode target) — a complete local mirror of Apple's HIG, SwiftUI, and AppKit documentation as flat markdown files, with a master URL index.
 
 This file is the thin operational hub. The substance lives in the linked files below — read those before planning or coding.
 

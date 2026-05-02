@@ -5,7 +5,7 @@
 A personal Apple-component reference library, native to macOS. Two outputs:
 
 1. **`SwiftKit.app`** — a macOS gallery app. Sidebar navigates HIG → framework → category → primitive. Detail pane shows that primitive in every documented variant and state (default, hover, selected, disabled, focused), with the exact API call labeled beside each rendering. Light/dark toggle on the detail pane (default dark).
-2. **`SwiftKit/Documentation/`** — a complete local mirror of Apple's HIG, SwiftUI, and AppKit documentation as flat markdown files, with a master URL index (`access-links.md`).
+2. **`Documentation/`** (project-root sibling of the Xcode app target) — a complete local mirror of Apple's HIG, SwiftUI, and AppKit documentation as flat markdown files, with a master URL index (`access-links.md`). Lives outside the app target so it isn't bundled into `SwiftKit.app`.
 
 The motivation is concrete: Pommora's UI shell rebuild stalled because there was no confirmed visual reference for what Apple's primitives actually render as on macOS 26. Every "build the sidebar" task became a guessing game off after-the-fact screenshots. SwiftKit is the reference. When Pommora needs a component, Nathan points at SwiftKit and says "that one." No invention. No interpretation.
 
@@ -45,7 +45,7 @@ Captured in the project plan at `~/.claude/plans/yeah-lets-do-it-synchronous-don
 ## Standing constraints
 
 - **`PBXFileSystemSynchronizedRootGroup`.** New `.swift` files in `SwiftKit/SwiftKit/` compile automatically — no `project.pbxproj` edit needed.
-- **DerivedData hash to pin.** Captured on first build, recorded here. *(TBD — first build after Phase 0 will produce it.)*
+- **DerivedData hash to pin.** `SwiftKit-dqolyhtwikfvruchpznkybfwhsmy` (captured 2026-05-02 on first clean build after `Documentation/` relocation). Use `-derivedDataPath ~/Library/Developer/Xcode/DerivedData/SwiftKit-dqolyhtwikfvruchpznkybfwhsmy` for any debugging session per L-005.
 - **Skills location.** `swiftui-expert-skill` and `find-docs` (Context7) installed globally at `~/.agents/skills/`. No project-local copies.
 
 ## Components log
@@ -58,6 +58,8 @@ Chronological record of what's in the app. **No code** — just name + date.
 | `ContentView` (placeholder) | 2026-05-01 |
 | `Documentation/_links/{hig,swiftui,appkit}-urls.md` | 2026-05-01 |
 | `Documentation/access-links.md` | 2026-05-01 |
+| `Documentation/_index/capture.sh` (full-mirror capture, idempotent) | 2026-05-02 |
+| `Documentation/_index/recapture-targets.sh` (targeted recapture) | 2026-05-02 |
 
 ## Planning checklist
 

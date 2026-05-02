@@ -139,6 +139,29 @@ NavigationSplitView { ... } detail: { ... }
 
 ---
 
+## L-010 · Don't nest non-Swift bulk content inside the Xcode target's source folder
+
+**Applies before:** dropping any folder of non-Swift files (markdown docs, design exports, screenshots, fixtures) into a project that uses Xcode's synchronized file groups (default since Xcode 16 / macOS 26).
+
+**The mistake:** Placing a tree of resources at `SwiftKit/SwiftKit/<bulk-folder>/`. Synchronized groups (`PBXFileSystemSynchronizedRootGroup`) auto-include every file in the target's source folder — Swift files compile, anything else gets bundled into `.app/Contents/Resources/` as a flat directory. If the bulk folder has cross-referenced subdirectories with files of the same name (Apple's docs mirror has `width.md` in both `AppKit/views-and-controls/` and `SwiftUI/<topic>/` — and ~15 other collisions), the build fails with `error: duplicate output file` for each pair.
+
+**Why it's wrong:** The synchronized-group design assumes the source folder is for Swift sources, asset catalogs, and build-relevant resources. It's not the right place for development reference material. The build pipeline cannot deduplicate by subdirectory — Resources is flat.
+
+**The rule:** Development-only bulk content (doc mirrors, capture scripts, dev screenshots) lives at the project root as a peer of the Xcode target folder, NOT inside it.
+
+```
+✅ /SwiftKit/Documentation/          (peer of the Xcode target, not bundled)
+✅ /SwiftKit/Screen Recordings/      (peer, .gitignored as dev artifact)
+❌ /SwiftKit/SwiftKit/Documentation/ (inside synchronized group — auto-bundled)
+```
+
+**If migrating an existing project:** `git mv SwiftKit/<folder> <folder>`, update absolute paths in any scripts (relative paths under the moved folder stay valid), confirm clean build with `find <built.app> -name "*.md" | wc -l` (should be 0 for non-resource extensions), pin the new DerivedData hash per L-005.
+
+**Incidents (SwiftKit):**
+- 2026-05-02 — `Documentation/` mirror (2,540 .md files) sat at `SwiftKit/SwiftKit/Documentation/` after Phase 3. First build attempt before Phase 4 scaffold failed with ~15 duplicate-output errors. Resolved by relocating to `SwiftKit/Documentation/` (project root). Bundle size dropped from 6+ MB to 332 KB.
+
+---
+
 ## L-009 · Pin sidebar width with `.navigationSplitViewColumnWidth(min:ideal:max:)` when collapsing other columns conditionally
 
 **Applies before:** any task that toggles a `NavigationSplitView` column's width based on selection — or, more generally, any time one column's width changes dynamically while another column should stay visually stable.

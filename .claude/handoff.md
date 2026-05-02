@@ -85,4 +85,4 @@ Whatever you're being asked to do, run through this checklist before writing cod
 3. Are you about to write a `View` struct that re-implements system UI? → **stop.** Compose Apple primitives directly. The PreToolUse hook will deny the write if you don't.
 4. Are you adding a `NavigationSplitView`? → use `.prominentDetail` (L-003). If any column's width is conditional, pin the sidebar with `.navigationSplitViewColumnWidth(min:ideal:max:)` (L-009).
 5. Is SwiftData involved? → SwiftKit has no `@Model` types and no `ModelContainer`. Don't add an empty one (L-007).
-6. After UI changes: build → screenshot in **dark and light** → review → close with the verbatim phrase from `macuix-rules.md`.
+6. After UI changes: build → screenshot in **dark and light** → review → close with the verbatim phrase from `macuix-mrules.md`.
