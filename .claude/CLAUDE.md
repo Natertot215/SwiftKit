@@ -38,7 +38,7 @@ How to apply:
 | Run / debug | Xcode `Cmd+R` |
 | SwiftUI Previews | Xcode only |
 | Edit `Info.plist`, `*.entitlements`, `*.xcassets/Contents.json` | VS Code (text formats) |
-| Add a new `.swift` file | Drop into `SwiftKit/SwiftKit/<subdir>/` — synchronized groups pick it up |
+| Add a new `.swift` file | Drop into `SwiftKit/<subdir>/` — synchronized groups pick it up (paths in this file are project-root-relative; cwd = `/Users/nathantaichman/The Studio/Projects/SwiftKit/`) |
 | Adjust target settings, schemes, capabilities | Xcode (rare) |
 
 ## File index

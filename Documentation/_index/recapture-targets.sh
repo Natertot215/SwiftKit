@@ -17,6 +17,9 @@ TARGETS=(
   "https://developer.apple.com/documentation/appkit/nsseguePerforming|AppKit/resource-management/nsseguePerforming.md|AppKit|Resource management"
   "https://developer.apple.com/documentation/swiftui/manipulablerespondermodifier|SwiftUI/view-fundamentals/manipulablerespondermodifier.md|SwiftUI|View fundamentals"
   "https://developer.apple.com/design/human-interface-guidelines|HIG/root/human-interface-guidelines.md|HIG|Root"
+  "https://developer.apple.com/design/human-interface-guidelines/typography|HIG/foundations/typography.md|HIG|Foundations"
+  "https://developer.apple.com/design/human-interface-guidelines/layout|HIG/foundations/layout.md|HIG|Foundations"
+  "https://developer.apple.com/design/human-interface-guidelines/color|HIG/foundations/color.md|HIG|Foundations"
 )
 
 for target in "${TARGETS[@]}"; do

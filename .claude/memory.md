@@ -12,9 +12,57 @@ Non-obvious project state and architectural decisions. Things that aren't visibl
 
 **Reason:** Pommora's UI shell rebuild kept failing because no one had a confirmed visual reference for what Apple's primitives render as on macOS 26 — selection styling iterated 8+ times, materials behaved differently than expected, custom components silently re-introduced. SwiftKit exists to be that reference. Once SwiftKit's gallery covers a primitive, Pommora work for that primitive is unblocked.
 
-## 2026-05-01 — Two-column `NavigationSplitView`, not three
+## 2026-05-02 — Two-column `NavigationSplitView` with a 3-tier disclosure sidebar
 
-**Reason:** A middle column would imply a list of sub-items between sidebar selection and content — but each primitive *is* a single detail page. Three columns add no value here. Two-column shape: sidebar (categorized list) + detail (the gallery page).
+**Reason:** Two columns: sidebar + detail. Sidebar shape (Nathan's terminology, locked 2026-05-02): **toggle heading > label/folder > item**. Concretely: "Reference" / "SwiftUI" / "AppKit" are the toggle headings (each a `DisclosureGroup` whose label is tagged for selection — Mail.app's "All Inboxes" pattern); "Modal presentations" / "Images" / "Controls" / etc. are the label/folders (also `DisclosureGroup`s with tagged labels); the leaves are the items. AppKit's `Subheading` catalog tier flattens into the parent Folder's item list — it does not surface as a 4th sidebar disclosure level. Reference's shape is `heading → item` (no Folder layer; its catalog children are Leaves directly). Both shapes coexist in the same sidebar without issue. HIG-compliant: folder + item ARE the two disclosure levels HIG permits; the heading row is a clickable parent like Mail's, which HIG allows when the deeper data isn't being pushed further into nested disclosures.
+
+**How to apply:** `NavigationSplitView { sidebar } detail: { … }` with `.navigationSplitViewStyle(.prominentDetail)` (L-003) and `.navigationSplitViewColumnWidth(min: 240, ideal: 280, max: 360)` on the sidebar (L-009). Sidebar `List(selection:)` uses `.listStyle(.sidebar)`. Each tier renders as `DisclosureGroup` (heading + folder) or `Label(...).tag(node.id)` (item), all inside the same root `List`. Implementation in `SwiftKit/App/SidebarView.swift`.
+
+## 2026-05-02 — Catalog data ≠ sidebar depth
+
+**Reason:** The catalog tree (Section → Folder → optional Sub-heading → Leaf) is a data model. The sidebar maps these tiers to UI rows: catalog Section → sidebar toggle heading; catalog Folder → sidebar label/folder; catalog Leaf → sidebar item. Catalog Sub-headings (AppKit only) currently flatten into the parent Folder's item list — they do not become a 4th sidebar disclosure level. If a future iteration wants Sub-headings to surface, the options are: (a) split each AppKit Folder into multiple Folders by Sub-heading, (b) introduce a content list (3-column NavigationSplitView) with Sub-headings as Section dividers there. Both stay HIG-compliant. The depth difference between SwiftUI (`heading → folder → item`) and AppKit (same, with sub-headings absorbed into folders) is Apple's own taxonomy and intentional.
+
+## 2026-05-02 — Implementation-agent skill kit for SwiftKit page work
+
+**Reason:** When dispatching future implementation agents to write Phase 5 gallery pages (or any SwiftUI/macOS feature work), Nathan wants them equipped with these four skills so each agent has the same baseline as the orchestrator. Each Page-author dispatch should explicitly load these in the agent's prompt.
+
+| Skill | Purpose |
+|---|---|
+| `swiftui-expert-skill` | Code review and review of new SwiftUI files for state management, view composition, performance, macOS-specific APIs, Liquid Glass adoption. Globally installed at `~/.agents/skills/swiftui-expert-skill/` |
+| `find-docs` (Context7) | Authoritative Apple/SwiftUI doc lookup — fall back from local mirror when needed |
+| `superpowers:subagent-driven-development` | When the implementation has independent sub-tasks; dispatches further sub-agents while keeping shared state |
+| `superpowers:executing-plans` | When the agent receives a written implementation plan and needs to execute it with review checkpoints |
+
+**How to apply:** Every Agent dispatch for a Phase 5 page (or any meaningful Swift implementation in this project) must include in the prompt: "Load and use these skills as needed: `swiftui-expert-skill`, `find-docs`, `superpowers:subagent-driven-development`, `superpowers:executing-plans`." Don't pre-invoke them on the agent's behalf — let the agent decide when each applies, but make sure they're aware.
+
+## 2026-05-02 — "Reference" toggle heading sits at the top of the sidebar
+
+**Reason:** Curated cross-cutting reference pages (Typography first; future Color, Iconography) live above the framework-specific catalog. In the 3-tier sidebar (per the "Two-column NavigationSplitView" entry), Reference is a toggle heading whose children are Leaves directly (no Folder layer) — `heading → item`, two tiers. SwiftUI and AppKit are `heading → folder → item`, three tiers. Both shapes coexist in the same sidebar. The order is Reference → SwiftUI → AppKit, putting cross-cutting docs above framework-specific content (matches HIG's hierarchy where Foundations precede framework references).
+
+**How to apply:** When adding a new reference page (Color, Iconography), append it as a sibling Leaf under `referenceTree`. At 4+ leaves, restructure into named Folders inside Reference (Foundations / Patterns / Tools etc.) so it matches the 3-tier `heading → folder → item` shape used by SwiftUI and AppKit, and update this entry.
+
+## 2026-05-02 — `.safeAreaInset(edge: .bottom)` is the documented Apple pattern for bottom-anchored sidebar actions (when one is needed)
+
+**Reason:** Apple's SwiftUI tutorial sidebar uses `List { Sections } .safeAreaInset(edge: .bottom) { Button(...) .buttonStyle(.borderless) .foregroundColor(.accentColor) }` for any persistent action below the sidebar list (Add, Settings, About, etc.). The inset hooks into the source-list material correctly so the button sits inside the sidebar chrome rather than below it. **SwiftKit's sidebar does NOT currently have a bottom action** — an earlier "About SwiftKit" placeholder was added then removed 2026-05-02. The pattern is documented here for the next time a bottom action is needed.
+
+**How to apply:** When adding a bottom action, use `.safeAreaInset(edge: .bottom)` on the sidebar `List`. Do NOT wrap the sidebar in `VStack { List; Button }` — that pushes the button outside the source-list material. Style the button with `.buttonStyle(.borderless).foregroundColor(.accentColor)` (both semantic tokens — encouraged, not L-012 violations). Important: an EMPTY `.safeAreaInset(edge: .bottom) { }` with no content reserves dead space and was observed to interfere with row hit testing — only apply the modifier when there's actual content.
+
+## 2026-05-02 — Sidebar selection chrome reality (macOS 26)
+
+**Reason:** Verified empirically 2026-05-02: SwiftUI's `List(selection:).listStyle(.sidebar)` on a **focused** window draws the **emphasized** selection state — solid `Color.accentColor` fill + white text/icon. On an **unfocused** window it draws the unemphasized state — translucent `NSColor.unemphasizedSelectedContentBackgroundColor` fill + accent text + accent icon. Both fill and text track the system accent (verified by changing system accent to orange).
+
+Mail.app, Finder, and Notes deliberately render selection as if always unemphasized — that's a custom AppKit-level behavior on `NSOutlineView`, NOT the SwiftUI framework default. SwiftUI exposes no public knob to suppress the emphasized state for `List(.sidebar)` selection on macOS 26. SwiftKit currently ships with the framework default (deferred Mail-style override — see [`sidebar-plan.md`](sidebar-plan.md)).
+
+**How to apply:** For SwiftKit's current shape, use `List(selection: $binding) { Label(...).tag(id) }.listStyle(.sidebar)` and apply NO row-level styling. Three known anti-patterns confirmed this session:
+- `.environment(\.appearsActive, false)` — no-op for `List(.sidebar)` selection chrome on macOS 26.
+- Custom `.listRowBackground(...)` — even with `Color.clear` for unselected rows, triggers macOS 26 source-list grouping chrome (a "pure grey rectangle" container around the rows).
+- Explicit `Label { Text } icon: { Image }` builder + per-element `.foregroundStyle` — breaks click-to-select hit testing on sidebar rows.
+
+If/when Mail's look is wanted, see [`sidebar-plan.md`](sidebar-plan.md) for the AppKit-bridge path. See [`SwiftKit/App/SidebarView.swift`](../SwiftKit/App/SidebarView.swift) for the canonical current structure.
+
+---
+
+*(no further entries yet)*
 
 ## 2026-05-01 — Gallery catalog is a static Swift tree, not data-driven from the doc mirror
 

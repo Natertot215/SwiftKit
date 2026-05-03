@@ -56,7 +56,20 @@ def block:
       elif .type == "orderedList" then ((.items // []) | to_entries | map((.key+1|tostring) + ". " + ((.value.content // []) | block)) | join("\n"))
       elif .type == "aside" then "> **" + (((.style // .name // "Note") | tostring | ascii_upcase)) + ":** " + ((.content // []) | block)
       elif .type == "termList" then ((.items // []) | map("**" + ((.term.inlineContent // []) | inline) + "**: " + ((.definition.content // []) | block)) | join("\n\n"))
-      elif .type == "table" then "[table — see source]"
+      elif .type == "table" then
+        (.rows // []) as $rows |
+        if ($rows | length) == 0 then ""
+        else
+          ($rows | map(map([.. | objects | select(.type == "text") | .text] | join(" ")))) as $r |
+          ($r[0] | length) as $cols |
+          if (.header // "") == "row" then
+            "| " + ($r[0] | join(" | ")) + " |\n" +
+            "|" + ([range(0; $cols)] | map("---") | join("|")) + "|\n" +
+            ($r[1:] | map("| " + (. | join(" | ")) + " |") | join("\n"))
+          else
+            ($r | map("| " + (. | join(" | ")) + " |") | join("\n"))
+          end
+        end
       elif .type == "row" then ""
       elif .type == "step" then "1. " + ((.content // []) | block)
       else

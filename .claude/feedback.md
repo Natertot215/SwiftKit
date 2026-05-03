@@ -23,4 +23,20 @@ Nathan's direct behavior corrections for this project. Append the moment Nathan 
 
 ---
 
+## 2026-05-02 — Nathan's UI terminology is descriptive, not canonical
+
+**Rule:** Treat every UI term Nathan uses ("items," "pills," "rows," "tabs," "panels," "nested," "compact barrier," "spacing between each layer," "selected items stay selected," etc.) as a *description of intent*, not a *spec name*. Translate it into the Apple-documented component before writing code (per `macuix-rules.md` "Search → Identify → Confirm"). When Nathan cites a system app by name (Mail, Finder, Notes) OR sends a screenshot, those ARE valid pointers — they trigger the Search step against that app's actual implementation, which is the documented and intended workflow.
+
+**Push back, don't comply silently.** If Nathan describes a UI element in a way that contradicts the screenshot he just sent, or names a component that doesn't exist as a primitive, or asks for a behavior that contradicts HIG, the right response is to surface the contradiction with citations — not to invent an implementation that satisfies the literal words. Reference apps (Mail, Finder, Notes) and reference screenshots are the source of truth for what to build; Nathan's verbal description is a hint about what HE'S looking at, which may or may not match what HE'S asking for.
+
+**Why:** Nathan's direct instruction (2026-05-02): *"DO NOT trust me to correctly identify components or UI."* Verbatim continuation: *"consider that terms I may have used 'items' 'pills' and other things may not be correct."* Past failures (the deleted `Sidebar/CatalogOutlineView.swift`, the multiple iterations of "fix the selection coloring" that kept replacing semantic tokens with literals) all stem from agents implementing the literal terminology instead of identifying the underlying Apple primitive. The meta-rule prevents the recurrence.
+
+**How to apply:**
+1. When Nathan uses any UI term, ask yourself "what Apple-documented component does he mean?" before reaching for an implementation.
+2. When Nathan sends a screenshot, treat the screenshot as the spec, not his verbal description of it.
+3. When Nathan names a system app, run "Search → Identify → Confirm" against that app's actual implementation.
+4. When Nathan's terminology contradicts the screenshot or the docs, surface the contradiction in plain language with citations and let him redirect.
+
+---
+
 *(no further entries yet)*

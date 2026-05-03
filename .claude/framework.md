@@ -33,6 +33,18 @@ Captured in the project plan at `~/.claude/plans/yeah-lets-do-it-synchronous-don
 - **Phase 5 — Gallery pages.** One file per primitive in `SwiftKit/Pages/<Framework>/<Category>/<Name>Page.swift`. Each composes the universal `GalleryPageScaffold` (Header / Default / Variants / States / Notes). Priority order: SwiftUI Lists & Tables → Navigation → Materials & Effects → Controls → Layout → Text & Symbols → Toolbars & Menus → Sheets/Popovers/Alerts → everything else → AppKit.
 - **Phase 6 — Cleanup & finalize.** Verify every node has a real page, every page passes `swiftui-expert-skill`, every page has dark+light screenshots.
 
+### Deferred TODOs
+
+- **Sidebar selection redo (deferred 2026-05-02).** Current `SidebarView.swift` uses framework-default selection chrome on macOS 26 (solid accent fill + white text/icon when window is focused). Target is the Mail/Finder pattern (translucent gray fill + accent text/icon, regardless of focus). See [`.claude/sidebar-plan.md`](sidebar-plan.md) for full context, what was tried, and the two implementation paths (AppKit `NSOutlineView` bridge vs. less-explored SwiftUI APIs). Revisit when comfortable with AppKit-bridging tradeoffs.
+
+### Resume next session (2026-05-03+)
+
+The 2026-05-02 session ended after committing Phase 4 baseline + `.claude/` audit + Pommora cross-sync. Pick up at **Phase 5 — Gallery pages** (Stages 6–8 of `~/.claude/plans/get-an-idea-of-mighty-teacup.md`):
+
+1. **Identify the first Phase 5 page.** Read `SwiftKit/Catalog/Catalog+SwiftUI.swift`, find the section matching "Lists/Tables" in Apple's SwiftUI taxonomy (per Phase 5 priority order in this file), pick the first Leaf in that section. Surface to Nathan via `AskUserQuestion` for go-ahead.
+2. **Author the first page end-to-end.** Use `SwiftKit/Detail/PageScaffold/GalleryPageScaffold.swift` (Header / Default / Variants / States / Notes). Author at `SwiftKit/Pages/<framework>/<PageName>.swift`. Wire into `SwiftKit/Catalog/PageRegistry.swift`. Use the documented skill kit per `memory.md` (`swiftui-expert-skill`, `find-docs` / Context7).
+3. **Decide batching strategy** based on Stage 7 timing: one-at-a-time, agent-batched, or hybrid.
+
 ## Hard Constraints
 
 - **Apple-only.** Every view, modifier, type, and style must come from Apple's documented SwiftUI or AppKit. No third-party UI libraries. No Claude-authored wrapper views. Carrying Pommora's "Apple-only" rule verbatim — see `feedback.md`.
