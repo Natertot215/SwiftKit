@@ -39,11 +39,12 @@ Captured in the project plan at `~/.claude/plans/yeah-lets-do-it-synchronous-don
 
 ### Resume next session (2026-05-03+)
 
-The 2026-05-02 session ended after committing Phase 4 baseline + `.claude/` audit + Pommora cross-sync. Pick up at **Phase 5 — Gallery pages** (Stages 6–8 of `~/.claude/plans/get-an-idea-of-mighty-teacup.md`):
+The 2026-05-02 session ended after committing SwiftKit's Phase 4 baseline + `.claude/` audit (commit `f096456`). Pommora's cross-sync was started but **not committed** — see "Pommora cross-sync — finish + commit" below for the situation. Pick up in this order:
 
-1. **Identify the first Phase 5 page.** Read `SwiftKit/Catalog/Catalog+SwiftUI.swift`, find the section matching "Lists/Tables" in Apple's SwiftUI taxonomy (per Phase 5 priority order in this file), pick the first Leaf in that section. Surface to Nathan via `AskUserQuestion` for go-ahead.
-2. **Author the first page end-to-end.** Use `SwiftKit/Detail/PageScaffold/GalleryPageScaffold.swift` (Header / Default / Variants / States / Notes). Author at `SwiftKit/Pages/<framework>/<PageName>.swift`. Wire into `SwiftKit/Catalog/PageRegistry.swift`. Use the documented skill kit per `memory.md` (`swiftui-expert-skill`, `find-docs` / Context7).
-3. **Decide batching strategy** based on Stage 7 timing: one-at-a-time, agent-batched, or hybrid.
+1. **Pommora cross-sync — finish + commit (deferred from 2026-05-02).** A general-purpose Opus agent ran on 2026-05-02 to port universal Apple/SwiftUI/macOS 26 lessons from SwiftKit into Pommora's `.claude/` (specifically: the "Nathan's UI terminology is descriptive" meta-rule into `feedback.md`, the L-012 scope clarification into `lessons.md`, and the SwiftUI-vs-AppKit decision rule + macOS 26 sidebar selection findings + "always focus before screenshotting" into `macuix-rules.md`). Edits are on disk in `/Users/nathantaichman/The Studio/Projects/Project Pommora/.claude/` but were NOT committed. The repo had ~25+ files of pre-existing uncommitted work from a prior skeleton-strip session (Swift file deletions, `.claude/*.md` modifications, screenshot deletions, etc.) that I had no context on, so I refused to commit anything. **Action:** review Pommora's `git status` and `git diff` carefully; decide what to commit from the prior session's orphaned state vs what to revert; then commit the agent's `.claude/` additions separately. Agent flagged one ambiguity: Pommora's `Pommora/Pommora/<subdir>/` path notation may be correct given Pommora's actual nested folder layout (unlike SwiftKit's path bug). Verify before "fixing."
+2. **Identify the first Phase 5 page.** Read `SwiftKit/Catalog/Catalog+SwiftUI.swift`, find the section matching "Lists/Tables" in Apple's SwiftUI taxonomy (per Phase 5 priority order in this file), pick the first Leaf in that section. Surface to Nathan via `AskUserQuestion` for go-ahead.
+3. **Author the first page end-to-end.** Use `SwiftKit/Detail/PageScaffold/GalleryPageScaffold.swift` (Header / Default / Variants / States / Notes). Author at `SwiftKit/Pages/<framework>/<PageName>.swift`. Wire into `SwiftKit/Catalog/PageRegistry.swift`. Use the documented skill kit per `memory.md` (`swiftui-expert-skill`, `find-docs` / Context7).
+4. **Decide batching strategy** based on Step 3 timing: one-at-a-time, agent-batched, or hybrid.
 
 ## Hard Constraints
 
