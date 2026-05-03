@@ -15,7 +15,8 @@ enum PageRegistry {
     }
 
     private static let realPages: [String: (Leaf) -> AnyView] = [
-        "Typography": { _ in AnyView(TypographyPage()) },
-        "List":       { _ in AnyView(ListPage()) }
+        "Typography":      { _ in AnyView(TypographyPage()) },
+        "List":            { _ in AnyView(ListPage()) },
+        "DisclosureGroup": { _ in AnyView(DisclosureGroupPage()) }
     ]
 }
