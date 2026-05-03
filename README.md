@@ -1,6 +1,6 @@
 # SwiftKit
 
-Personal Apple-component reference library — a native macOS gallery app + complete local mirror of Apple's HIG, SwiftUI, and AppKit documentation. Built so future projects (Pommora and beyond) have a ground-truth reference for what each Apple primitive renders as on macOS 26.
+Personal Apple-component reference library — a native macOS gallery app + complete local mirror of Apple's HIG, SwiftUI, and AppKit documentation. Built so future projects for myself and othes have a ground-truth reference for what each Apple primitive renders as on macOS 26.
 
 ## Status
 
