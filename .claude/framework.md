@@ -37,14 +37,13 @@ Captured in the project plan at `~/.claude/plans/yeah-lets-do-it-synchronous-don
 
 - **Sidebar selection redo (deferred 2026-05-02).** Current `SidebarView.swift` uses framework-default selection chrome on macOS 26 (solid accent fill + white text/icon when window is focused). Target is the Mail/Finder pattern (translucent gray fill + accent text/icon, regardless of focus). See [`.claude/sidebar-plan.md`](sidebar-plan.md) for full context, what was tried, and the two implementation paths (AppKit `NSOutlineView` bridge vs. less-explored SwiftUI APIs). Revisit when comfortable with AppKit-bridging tradeoffs.
 
-### Resume next session (2026-05-03+)
+### Resume next session
 
-The 2026-05-02 session ended after committing SwiftKit's Phase 4 baseline + `.claude/` audit (commit `f096456`). Pommora's cross-sync was started but **not committed** — see "Pommora cross-sync — finish + commit" below for the situation. Pick up in this order:
+Phase 5 in progress. First page (`ListPage`) authored, wired, and verified 2026-05-03. Outstanding:
 
-1. **Pommora cross-sync — finish + commit (deferred from 2026-05-02).** A general-purpose Opus agent ran on 2026-05-02 to port universal Apple/SwiftUI/macOS 26 lessons from SwiftKit into Pommora's `.claude/` (specifically: the "Nathan's UI terminology is descriptive" meta-rule into `feedback.md`, the L-012 scope clarification into `lessons.md`, and the SwiftUI-vs-AppKit decision rule + macOS 26 sidebar selection findings + "always focus before screenshotting" into `macuix-rules.md`). Edits are on disk in `/Users/nathantaichman/The Studio/Projects/Project Pommora/.claude/` but were NOT committed. The repo had ~25+ files of pre-existing uncommitted work from a prior skeleton-strip session (Swift file deletions, `.claude/*.md` modifications, screenshot deletions, etc.) that I had no context on, so I refused to commit anything. **Action:** review Pommora's `git status` and `git diff` carefully; decide what to commit from the prior session's orphaned state vs what to revert; then commit the agent's `.claude/` additions separately. Agent flagged one ambiguity: Pommora's `Pommora/Pommora/<subdir>/` path notation may be correct given Pommora's actual nested folder layout (unlike SwiftKit's path bug). Verify before "fixing."
-2. **Identify the first Phase 5 page.** Read `SwiftKit/Catalog/Catalog+SwiftUI.swift`, find the section matching "Lists/Tables" in Apple's SwiftUI taxonomy (per Phase 5 priority order in this file), pick the first Leaf in that section. Surface to Nathan via `AskUserQuestion` for go-ahead.
-3. **Author the first page end-to-end.** Use `SwiftKit/Detail/PageScaffold/GalleryPageScaffold.swift` (Header / Default / Variants / States / Notes). Author at `SwiftKit/Pages/<framework>/<PageName>.swift`. Wire into `SwiftKit/Catalog/PageRegistry.swift`. Use the documented skill kit per `memory.md` (`swiftui-expert-skill`, `find-docs` / Context7).
-4. **Decide batching strategy** based on Step 3 timing: one-at-a-time, agent-batched, or hybrid.
+1. **Pommora cross-sync — finish + commit (deferred from 2026-05-02).** Opus agent ported universal lessons (Nathan's-terminology meta-rule, L-012 scope clarification, SwiftUI-vs-AppKit decision rule, macOS 26 sidebar findings, always-focus-before-screenshot) into `/Users/nathantaichman/The Studio/Projects/Project Pommora/.claude/` but did NOT commit because Pommora had ~25+ files of pre-existing uncommitted work from a prior skeleton-strip session. **Action:** review Pommora's `git status` / `git diff`; sort out prior-session orphans (commit vs revert); commit the agent's `.claude/` additions separately. Note: Pommora's `Pommora/Pommora/<subdir>/` path notation may be intentional given its nested layout — verify before "fixing."
+2. **Phase 5 — next page.** Per priority order (Lists & Tables → Navigation → Materials → Controls → Layout), the next leaves in `swiftui_lists` are `ForEach`, `OutlineGroup`, `DisclosureGroup`. Pick the next valuable primitive and author it the same way `ListPage` was: GalleryPageScaffold composition, doc-driven variant enumeration, register in `PageRegistry`, flip the leaf's `pageBuilder` from `.placeholder` to `.real(symbol:)`.
+3. **Decide batching strategy.** With one page authored hand-on, judge whether subsequent pages should be one-at-a-time, agent-batched, or hybrid. Open question.
 
 ## Hard Constraints
 
@@ -73,6 +72,7 @@ Chronological record of what's in the app. **No code** — just name + date.
 | `Documentation/access-links.md` | 2026-05-01 |
 | `Documentation/_index/capture.sh` (full-mirror capture, idempotent) | 2026-05-02 |
 | `Documentation/_index/recapture-targets.sh` (targeted recapture) | 2026-05-02 |
+| `ListPage` (Phase 5 first page — Lists/List) | 2026-05-03 |
 
 ## Planning checklist
 
