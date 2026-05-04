@@ -1,13 +1,12 @@
 import SwiftUI
 
-// SwiftUI `DisclosureGroup` reference page.
-// Source: Documentation/SwiftUI/lists/disclosuregroup.md
-// Four documented initializers:
-//   init(_:content:)                        — uncontrolled, string label
-//   init(content:label:)                    — uncontrolled, view-builder label
-//   init(_:isExpanded:content:)             — controlled, string label
-//   init(isExpanded:content:label:)         — controlled, view-builder label
-// macOS 11.0+. Style hooks via `.disclosureGroupStyle(_:)` are deferred to that page.
+// SwiftUI `DisclosureGroup` family — merged page covering:
+//   1. DisclosureGroup view (four initializers)
+//   2. disclosureGroupStyle(_:) modifier + DisclosureGroupStyle protocol
+//      (with DisclosureGroupStyleConfiguration)
+// Source: Documentation/SwiftUI/lists/disclosuregroup.md,
+//         Documentation/SwiftUI/view-styles/disclosuregroupstyle(_:).md
+// macOS 11.0+ (DisclosureGroup); macOS 13.0+ (DisclosureGroupStyle protocol).
 
 private let demoFrameWidth: CGFloat = 360
 
@@ -16,6 +15,8 @@ struct DisclosureGroupPage: View {
     @State private var subExpanded = false
     @State private var oneIsOn = false
     @State private var twoIsOn = true
+    @State private var styleExpanded1: Bool = true
+    @State private var styleExpanded2: Bool = false
 
     var body: some View {
         GalleryPageScaffold {
@@ -35,11 +36,11 @@ struct DisclosureGroupPage: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("DisclosureGroup")
+            Text("DisclosureGroup + disclosureGroupStyle(_:)")
                 .font(.largeTitle)
                 .fontWeight(.semibold)
                 .foregroundStyle(.primary)
-            Text("A view that shows or hides another content view, based on the state of a disclosure control.")
+            Text("A view that shows or hides content via a disclosure control, plus the style modifier and protocol for customizing its appearance.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
             Text("Documentation/SwiftUI/lists/disclosuregroup.md · macOS 11.0+")
@@ -65,37 +66,99 @@ struct DisclosureGroupPage: View {
 
     @ViewBuilder
     private var variantsContent: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            VariantBlock(title: "String label, uncontrolled state") {
-                DemoCard(api: "DisclosureGroup(\"Items\") { … }") {
-                    DisclosureGroup("Items") {
-                        Toggle("Toggle 1", isOn: $oneIsOn)
-                        Toggle("Toggle 2", isOn: $twoIsOn)
-                    }
-                }
-            }
+        VStack(alignment: .leading, spacing: 40) {
 
-            VariantBlock(title: "View-builder label, uncontrolled state") {
-                DemoCard(api: "DisclosureGroup { … } label: { Label(\"Items\", systemImage: \"folder\") }") {
-                    DisclosureGroup {
-                        Toggle("Toggle 1", isOn: $oneIsOn)
-                        Toggle("Toggle 2", isOn: $twoIsOn)
-                    } label: {
-                        Label("Items", systemImage: "folder")
-                    }
-                }
-            }
+            // Section 1: DisclosureGroup view
+            Group {
+                Text("DisclosureGroup")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.primary)
+                Divider()
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Four documented initializers — two label forms × two state forms.")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
 
-            VariantBlock(title: "Nested groups") {
-                DemoCard(api: "DisclosureGroup(\"Items\") { … DisclosureGroup(\"Sub-items\") { … } }") {
-                    DisclosureGroup("Items") {
-                        Toggle("Toggle 1", isOn: $oneIsOn)
-                        Toggle("Toggle 2", isOn: $twoIsOn)
-                        DisclosureGroup("Sub-items") {
-                            Text("Sub-item 1")
-                            Text("Sub-item 2")
+                    VariantBlock(title: "String label, uncontrolled state") {
+                        DemoCard(api: "DisclosureGroup(\"Items\") { … }") {
+                            DisclosureGroup("Items") {
+                                Toggle("Toggle 1", isOn: $oneIsOn)
+                                Toggle("Toggle 2", isOn: $twoIsOn)
+                            }
                         }
                     }
+
+                    VariantBlock(title: "View-builder label, uncontrolled state") {
+                        DemoCard(api: "DisclosureGroup { … } label: { Label(\"Items\", systemImage: \"folder\") }") {
+                            DisclosureGroup {
+                                Toggle("Toggle 1", isOn: $oneIsOn)
+                                Toggle("Toggle 2", isOn: $twoIsOn)
+                            } label: {
+                                Label("Items", systemImage: "folder")
+                            }
+                        }
+                    }
+
+                    VariantBlock(title: "Nested groups") {
+                        DemoCard(api: "DisclosureGroup { … DisclosureGroup(\"Sub-items\") { … } }") {
+                            DisclosureGroup("Items") {
+                                Toggle("Toggle 1", isOn: $oneIsOn)
+                                Toggle("Toggle 2", isOn: $twoIsOn)
+                                DisclosureGroup("Sub-items") {
+                                    Text("Sub-item 1")
+                                    Text("Sub-item 2")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Section 2: disclosureGroupStyle(_:) + DisclosureGroupStyle protocol
+            Group {
+                Text("disclosureGroupStyle(_:) + DisclosureGroupStyle")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.primary)
+                Divider()
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Sets the style for disclosure groups within this view. Apple ships .automatic publicly. The DisclosureGroupStyle protocol is the extension point for custom conformers.")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                    APICallout("func disclosureGroupStyle<S: DisclosureGroupStyle>(_ style: S) -> some View  // macOS 13.0+")
+
+                    HStack(alignment: .top, spacing: 24) {
+                        DGSCard(title: ".automatic — collapsed", api: ".disclosureGroupStyle(.automatic)") {
+                            sampleGroup($styleExpanded2).disclosureGroupStyle(.automatic)
+                        }
+                        DGSCard(title: ".automatic — expanded", api: ".disclosureGroupStyle(.automatic)") {
+                            sampleGroup($styleExpanded1).disclosureGroupStyle(.automatic)
+                        }
+                    }
+
+                    Text("Protocol surface")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    DGSCodeBlock(text:
+                        """
+                        @MainActor protocol DisclosureGroupStyle {
+                            associatedtype Body : View
+                            typealias Configuration = DisclosureGroupStyleConfiguration
+
+                            @ViewBuilder @MainActor
+                            func makeBody(configuration: Self.Configuration) -> Self.Body
+                        }
+
+                        struct DisclosureGroupStyleConfiguration {
+                            @Binding var isExpanded: Bool
+                            var label: Label          // type-erased title
+                            var content: Content      // type-erased body
+                        }
+                        """)
+                    Text("Public conformer types are private; .automatic is the only literal you reference.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
             }
         }
@@ -181,12 +244,12 @@ struct DisclosureGroupPage: View {
         .init(title: "Nest freely — each nested group manages its own state.",
               detail: "An inner DisclosureGroup is a fresh instance with its own expansion state (or its own binding, if controlled). There is no parent/child cascade: collapsing the outer group hides — but does not collapse — the inner group's state.",
               symbol: "list.bullet.indent"),
-        .init(title: "Inside a List, DisclosureGroup is how SwiftKit's sidebar renders.",
-              detail: "SwiftKit's SidebarView composes DisclosureGroups inside List(selection:).listStyle(.sidebar). The List provides selection chrome, row metrics, and source-list material; the DisclosureGroup provides expand/collapse. See SwiftKit/App/SidebarView.swift.",
-              symbol: "sidebar.left"),
-        .init(title: "Style via .disclosureGroupStyle(_:) — separate page.",
-              detail: "macOS supports the .automatic style by default. Custom DisclosureGroupStyle conformers can replace the chevron + label arrangement. That surface is documented under View styles → disclosureGroupStyle(_:).",
-              symbol: "paintbrush")
+        .init(title: ".automatic is the only public DisclosureGroupStyle conformer.",
+              detail: "Custom conformers exist via the protocol but Apple ships no .borderless / .indented / etc. literals. The Configuration exposes isExpanded as a Binding — that's how disclosure triangle clicks toggle the group.",
+              symbol: "chevron.down.circle"),
+        .init(title: "DisclosureGroupStyle requires macOS 13.0+; DisclosureGroup is macOS 11+.",
+              detail: "DisclosureGroup landed on macOS 11. The styling protocol was retrofitted in macOS 13 — older OS just renders the default appearance without any style modifier.",
+              symbol: "calendar")
     ]
 
     @ViewBuilder
@@ -205,9 +268,21 @@ struct DisclosureGroupPage: View {
             }
         }
     }
+
+    // MARK: Helper
+
+    private func sampleGroup(_ binding: Binding<Bool>) -> some View {
+        DisclosureGroup("Advanced", isExpanded: binding) {
+            VStack(alignment: .leading, spacing: 4) {
+                Toggle("Auto-update", isOn: .constant(true))
+                Toggle("Send analytics", isOn: .constant(false))
+                Toggle("Beta channel", isOn: .constant(false))
+            }
+        }
+    }
 }
 
-// MARK: - Reusable demo helpers (page-local)
+// MARK: - Page-local demo helpers
 
 private struct DemoCard<Content: View>: View {
     let api: String
@@ -227,10 +302,28 @@ private struct DemoCard<Content: View>: View {
             }
             .padding(12)
             .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .strokeBorder(.separator, lineWidth: 1)
-            )
+            .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator, lineWidth: 1))
+            APICallout(api)
+        }
+    }
+}
+
+private struct DGSCard<Content: View>: View {
+    let title: String
+    let api: String
+    @ViewBuilder var content: () -> Content
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.subheadline)
+                .fontWeight(.semibold)
+                .foregroundStyle(.primary)
+            content()
+                .padding(12)
+                .frame(width: 320, height: 200, alignment: .topLeading)
+                .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
+                .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator, lineWidth: 1))
             APICallout(api)
         }
     }
@@ -264,15 +357,27 @@ private struct StateColumn<Content: View>: View {
                 .frame(width: 280, alignment: .leading)
                 .padding(12)
                 .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .strokeBorder(.separator, lineWidth: 1)
-                )
+                .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator, lineWidth: 1))
         }
+    }
+}
+
+private struct DGSCodeBlock: View {
+    let text: String
+    var body: some View {
+        Text(text)
+            .font(.callout)
+            .fontDesign(.monospaced)
+            .textSelection(.enabled)
+            .foregroundStyle(.primary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(12)
+            .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
+            .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator, lineWidth: 1))
     }
 }
 
 #Preview {
     DisclosureGroupPage()
-        .frame(width: 1100, height: 800)
+        .frame(width: 1200, height: 1200)
 }

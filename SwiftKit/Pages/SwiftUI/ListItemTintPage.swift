@@ -1,11 +1,9 @@
 import SwiftUI
 
-// SwiftUI `View/listItemTint(_:)` reference page.
-// Source: Documentation/SwiftUI/lists/listitemtint(_:).md
-// Two overloads exist:
-//   func listItemTint(_ tint: Color?) -> some View
-//   func listItemTint(_ tint: ListItemTint?) -> some View
-// On macOS sidebars: applied to Label icons, overriding the accent color.
+// SwiftUI `ListItemTint` family — merged page covering:
+//   1. View/listItemTint(_:) modifier
+//   2. ListItemTint type (.fixed(_:), .preferred(_:), .monochrome)
+// Source: Documentation/SwiftUI/lists/listitemtint(_:).md, listitemtint.md
 // macOS 11.0+.
 
 private let demoFrameWidth: CGFloat = 360
@@ -19,11 +17,18 @@ private struct TintFolder: Identifiable, Hashable {
 }
 
 private let folders: [TintFolder] = [
-    TintFolder(name: "Inbox",   symbol: "tray",                tint: .blue),
-    TintFolder(name: "Drafts",  symbol: "doc.text",            tint: .orange),
-    TintFolder(name: "Sent",    symbol: "paperplane",          tint: .green),
-    TintFolder(name: "Junk",    symbol: "xmark.bin",           tint: .red),
-    TintFolder(name: "Archive", symbol: "archivebox",          tint: .gray)
+    TintFolder(name: "Inbox",   symbol: "tray",       tint: .blue),
+    TintFolder(name: "Drafts",  symbol: "doc.text",   tint: .orange),
+    TintFolder(name: "Sent",    symbol: "paperplane",  tint: .green),
+    TintFolder(name: "Junk",    symbol: "xmark.bin",   tint: .red),
+    TintFolder(name: "Archive", symbol: "archivebox",  tint: .gray)
+]
+
+private let shortFolders: [TintFolder] = [
+    TintFolder(name: "Inbox",   symbol: "tray",      tint: .indigo),
+    TintFolder(name: "Drafts",  symbol: "doc.text",  tint: .indigo),
+    TintFolder(name: "Sent",    symbol: "paperplane", tint: .indigo),
+    TintFolder(name: "Archive", symbol: "archivebox", tint: .indigo)
 ]
 
 struct ListItemTintPage: View {
@@ -45,14 +50,14 @@ struct ListItemTintPage: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("listItemTint(_:)")
+            Text("listItemTint(_:) + ListItemTint")
                 .font(.largeTitle)
                 .fontWeight(.semibold)
                 .foregroundStyle(.primary)
-            Text("Sets a fixed tint color for content in a list.")
+            Text("The modifier that sets a tint color on list row icons, and the type that describes fixed, preferred, and monochrome tinting.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            Text("Documentation/SwiftUI/lists/listitemtint(_:).md · macOS 11.0+")
+            Text("Documentation/SwiftUI/lists/listitemtint(_:).md, listitemtint.md · macOS 11.0+")
                 .font(.caption)
                 .fontDesign(.monospaced)
                 .foregroundStyle(.tertiary)
@@ -78,60 +83,88 @@ struct ListItemTintPage: View {
 
     @ViewBuilder
     private var variantsContent: some View {
-        VStack(alignment: .leading, spacing: 24) {
-            VariantBlock(title: "Color overload — direct color tint") {
-                DemoCard(api: ".listItemTint(.purple)") {
-                    List {
-                        ForEach(folders) { folder in
-                            Label(folder.name, systemImage: folder.symbol)
-                                .listItemTint(.purple)
+        VStack(alignment: .leading, spacing: 40) {
+
+            // Section 1: listItemTint(_:) modifier
+            Group {
+                Text("View/listItemTint(_:)")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.primary)
+                Divider()
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Sets a fixed tint color for content in a list. On macOS sidebar lists, replaces the accent color for the row's Label icon. Two overloads exist — one taking Color?, one taking ListItemTint?.")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                    APICallout("func listItemTint(_ tint: Color?) -> some View")
+                    APICallout("func listItemTint(_ tint: ListItemTint?) -> some View")
+
+                    VariantBlock(title: "Color overload — direct color tint") {
+                        DemoCard(api: ".listItemTint(.purple)") {
+                            List {
+                                ForEach(folders) { folder in
+                                    Label(folder.name, systemImage: folder.symbol)
+                                        .listItemTint(.purple)
+                                }
+                            }
+                            .listStyle(.sidebar)
                         }
                     }
-                    .listStyle(.sidebar)
+
+                    VariantBlock(title: "nil — inherit (don't override)") {
+                        DemoCard(api: ".listItemTint(nil)") {
+                            List {
+                                ForEach(folders) { folder in
+                                    Label(folder.name, systemImage: folder.symbol)
+                                        .listItemTint(nil as Color?)
+                                }
+                            }
+                            .listStyle(.sidebar)
+                        }
+                    }
                 }
             }
 
-            VariantBlock(title: "ListItemTint enum — .fixed vs .preferred vs .monochrome") {
-                HStack(alignment: .top, spacing: 24) {
-                    StateColumn(label: ".fixed(.blue)", api: ".listItemTint(.fixed(.blue))") {
-                        List {
-                            ForEach(folders) { folder in
-                                Label(folder.name, systemImage: folder.symbol)
-                                    .listItemTint(.fixed(.blue))
-                            }
-                        }
-                        .listStyle(.sidebar)
-                    }
-                    StateColumn(label: ".preferred(.green)", api: ".listItemTint(.preferred(.green))") {
-                        List {
-                            ForEach(folders) { folder in
-                                Label(folder.name, systemImage: folder.symbol)
-                                    .listItemTint(.preferred(.green))
-                            }
-                        }
-                        .listStyle(.sidebar)
-                    }
-                    StateColumn(label: ".monochrome", api: ".listItemTint(.monochrome)") {
-                        List {
-                            ForEach(folders) { folder in
-                                Label(folder.name, systemImage: folder.symbol)
-                                    .listItemTint(.monochrome)
-                            }
-                        }
-                        .listStyle(.sidebar)
-                    }
-                }
-            }
+            // Section 2: ListItemTint type
+            Group {
+                Text("ListItemTint")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.primary)
+                Divider()
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("A tint effect configuration for list content. Three documented static members with distinct priority behaviors.")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                    APICallout("struct ListItemTint : Equatable, Sendable")
 
-            VariantBlock(title: "nil — inherit (don't override)") {
-                DemoCard(api: ".listItemTint(nil)") {
-                    List {
-                        ForEach(folders) { folder in
-                            Label(folder.name, systemImage: folder.symbol)
-                                .listItemTint(nil as Color?)
+                    VStack(alignment: .leading, spacing: 8) {
+                        caseRow(name: "ListItemTint.fixed(_ color: Color)",
+                                summary: "Wins over all context tinting. Use when the color carries semantic meaning that must not be overridden.")
+                        Divider()
+                        caseRow(name: "ListItemTint.preferred(_ color: Color)",
+                                summary: "A hint — yields to higher-priority context tints. Use when the color is a default that other code may override.")
+                        Divider()
+                        caseRow(name: "ListItemTint.monochrome",
+                                summary: "No chromatic tint — renders icon in secondary text style without color.")
+                    }
+                    .padding(12)
+                    .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
+                    .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator, lineWidth: 1))
+
+                    VariantBlock(title: ".fixed vs .preferred vs .monochrome — side by side") {
+                        HStack(alignment: .top, spacing: 24) {
+                            StateColumn(label: ".fixed(.blue)", api: ".listItemTint(.fixed(.blue))") {
+                                sidebarList(tint: .fixed(.blue))
+                            }
+                            StateColumn(label: ".preferred(.orange)", api: ".listItemTint(.preferred(.orange))") {
+                                sidebarList(tint: .preferred(.orange))
+                            }
+                            StateColumn(label: ".monochrome", api: ".listItemTint(.monochrome)") {
+                                sidebarList(tint: .monochrome)
+                            }
                         }
                     }
-                    .listStyle(.sidebar)
                 }
             }
         }
@@ -187,9 +220,9 @@ struct ListItemTintPage: View {
         .init(title: "Pass nil to clear and inherit.",
               detail: "Color? and ListItemTint? both accept nil = no override; inherit from the surrounding context. Use this in conditional code paths that need to revert.",
               symbol: "arrow.uturn.backward"),
-        .init(title: "Per L-012, semantic accent is the default for sidebar icons.",
-              detail: "Use .listItemTint when content semantically demands a fixed color (mailbox category color, calendar source). For 'I want this row to look interesting' — let the accent color drive it instead.",
-              symbol: "exclamationmark.triangle")
+        .init(title: ".monochrome removes chromatic tinting entirely.",
+              detail: "Useful when an icon should render in the secondary text style without color. Pairs with sidebar lists where some rows are 'system' (monochrome) and others are 'colored' (fixed).",
+              symbol: "circle.lefthalf.filled")
     ]
 
     @ViewBuilder
@@ -208,9 +241,34 @@ struct ListItemTintPage: View {
             }
         }
     }
+
+    // MARK: Helpers
+
+    private func sidebarList(tint: ListItemTint) -> some View {
+        List {
+            ForEach(shortFolders) { folder in
+                Label(folder.name, systemImage: folder.symbol)
+                    .listItemTint(tint)
+            }
+        }
+        .listStyle(.sidebar)
+    }
+
+    private func caseRow(name: String, summary: String) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(name)
+                .font(.caption)
+                .fontDesign(.monospaced)
+                .foregroundStyle(.secondary)
+                .textSelection(.enabled)
+            Text(summary)
+                .font(.callout)
+                .foregroundStyle(.primary)
+        }
+    }
 }
 
-// MARK: - Reusable demo helpers (page-local)
+// MARK: - Page-local demo helpers
 
 private struct DemoCard<Content: View>: View {
     let api: String
@@ -222,10 +280,7 @@ private struct DemoCard<Content: View>: View {
             content()
                 .frame(width: demoFrameWidth, height: height)
                 .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .strokeBorder(.separator, lineWidth: 1)
-                )
+                .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator, lineWidth: 1))
             APICallout(api)
         }
     }
@@ -259,10 +314,7 @@ private struct StateColumn<Content: View>: View {
             content()
                 .frame(width: 220, height: demoFrameHeight)
                 .background(.background.secondary, in: RoundedRectangle(cornerRadius: 8))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .strokeBorder(.separator, lineWidth: 1)
-                )
+                .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(.separator, lineWidth: 1))
             APICallout(api)
         }
     }
@@ -270,5 +322,5 @@ private struct StateColumn<Content: View>: View {
 
 #Preview {
     ListItemTintPage()
-        .frame(width: 1100, height: 800)
+        .frame(width: 1100, height: 1200)
 }
