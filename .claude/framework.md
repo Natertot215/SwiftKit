@@ -35,7 +35,7 @@ Captured in the project plan at `~/.claude/plans/yeah-lets-do-it-synchronous-don
 
 ### Deferred TODOs
 
-- **Sidebar selection redo (deferred 2026-05-02).** Current `SidebarView.swift` uses framework-default selection chrome on macOS 26 (solid accent fill + white text/icon when window is focused). Target is the Mail/Finder pattern (translucent gray fill + accent text/icon, regardless of focus). See [`.claude/sidebar-plan.md`](sidebar-plan.md) for full context, what was tried, and the two implementation paths (AppKit `NSOutlineView` bridge vs. less-explored SwiftUI APIs). Revisit when comfortable with AppKit-bridging tradeoffs.
+- **Sidebar selection redo (deferred 2026-05-02).** Current `SidebarView.swift` uses framework-default selection chrome on macOS 26 (solid accent fill + white text/icon when window is focused). Target is the Mail/Finder pattern (translucent gray fill + accent text/icon, regardless of focus). See [`Planning/sidebar-plan.md`](Planning/sidebar-plan.md) for full context, what was tried, and the two implementation paths (AppKit `NSOutlineView` bridge vs. less-explored SwiftUI APIs). Revisit when comfortable with AppKit-bridging tradeoffs.
 
 ### Resume next session
 
@@ -47,7 +47,7 @@ Phase 5 in progress. First page (`ListPage`) authored, wired, and verified 2026-
 
 ## Hard Constraints
 
-- **Apple-only.** Every view, modifier, type, and style must come from Apple's documented SwiftUI or AppKit. No third-party UI libraries. No Claude-authored wrapper views. Carrying Pommora's "Apple-only" rule verbatim — see `feedback.md`.
+- **Apple-only.** Every view, modifier, type, and style must come from Apple's documented SwiftUI or AppKit. No third-party UI libraries. No Claude-authored wrapper views. Carrying Pommora's "Apple-only" rule verbatim — see `Guidelines/feedback.md`.
 - **macOS 26 only** — no backward compat.
 - **Dark mode first.**
 - **No SwiftData.** SwiftKit has no `@Model` types, no `.modelContainer(...)`. (L-007)
