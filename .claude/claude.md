@@ -2,6 +2,8 @@
 
 Apple-component reference library — one screen per SwiftUI/AppKit primitive, every documented variant rendered side-by-side with its exact API call. Companion output is `Documentation/` (project-root sibling) — a local mirror of Apple HIG, SwiftUI, and AppKit docs as flat markdown.
 
+**Git remote:** <https://github.com/Natertot215/SwiftKit.git>
+
 ## Stack
 
 - **Swift 6.x** — SwiftUI shell, AppKit first-class via `NSViewRepresentable` / `NSViewControllerRepresentable` when SwiftUI doesn't expose the needed behavior.
