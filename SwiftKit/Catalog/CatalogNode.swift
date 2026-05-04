@@ -38,6 +38,27 @@ struct Leaf: Hashable {
     let docMarkdownPath: String
     let availability: String?
     let pageBuilder: PageBuilderID
+    let symbolName: String?
+
+    init(
+        id: String,
+        displayName: String,
+        apiSignature: String,
+        framework: Framework,
+        docMarkdownPath: String,
+        availability: String?,
+        pageBuilder: PageBuilderID,
+        symbolName: String? = nil
+    ) {
+        self.id = id
+        self.displayName = displayName
+        self.apiSignature = apiSignature
+        self.framework = framework
+        self.docMarkdownPath = docMarkdownPath
+        self.availability = availability
+        self.pageBuilder = pageBuilder
+        self.symbolName = symbolName
+    }
 }
 
 enum CatalogNode: Hashable, Identifiable {

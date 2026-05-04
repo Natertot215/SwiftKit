@@ -78,6 +78,7 @@ private struct SidebarNodeRow: View {
     }
 
     private func leafSymbolName(for leaf: Leaf) -> String {
+        if let override = leaf.symbolName { return override }
         switch leaf.framework {
         case .swiftUI: return "swift"
         case .appKit:  return "square.grid.2x2"
