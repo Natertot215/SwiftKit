@@ -7,7 +7,7 @@ import SwiftUI
 struct NSAnimationProgressDescribePage: View {
     var body: some View {
         DescribePage(
-            title: "NSAnimation.Progress",
+            title: "NSAnimationProgress",
             docPath: "Documentation/AppKit/animation/progress.md",
             availability: "macOS 10.4+",
             blurb: """

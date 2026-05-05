@@ -112,7 +112,7 @@ enum PageRegistry {
         "NavigationView":                                                                           { _ in AnyView(NavigationViewPage()) },
         "NSAnimatablePropertyContainer":                                                            { _ in AnyView(NSAnimatablePropertyContainerDescribePage()) },
         "NSAnimation":                                                                              { _ in AnyView(NSAnimationDescribePage()) },
-        "NSAnimation.Progress":                                                                     { _ in AnyView(NSAnimationProgressDescribePage()) },
+        "NSAnimationProgress":                                                                      { _ in AnyView(NSAnimationProgressDescribePage()) },
         "NSAnimationContext":                                                                       { _ in AnyView(NSAnimationContextPage()) },
         "NSAnimationDelegate":                                                                      { _ in AnyView(NSAnimationDelegateDescribePage()) },
         "NSAnimationEffect":                                                                        { _ in AnyView(NSAnimationEffectDescribePage()) },
