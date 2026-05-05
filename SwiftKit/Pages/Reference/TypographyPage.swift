@@ -21,6 +21,7 @@ struct TypographyPage: View {
             }
             .padding(.horizontal, 32)
             .padding(.vertical, 24)
+            .frame(maxWidth: galleryReadableContentWidth, alignment: .leading)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
