@@ -81,7 +81,8 @@ struct ContextMenuPage: View {
                             Button("Share") {}
                         } preview: {
                             Image(systemName: "star.fill")
-                                .font(.system(size: 60))
+                                .font(.largeTitle)
+                                .imageScale(.large)
                                 .foregroundStyle(.yellow)
                                 .padding(24)
                         }
