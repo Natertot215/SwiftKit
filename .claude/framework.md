@@ -58,7 +58,7 @@ Phase 5 in progress. First page (`ListPage`) authored, wired, and verified 2026-
 
 - **`PBXFileSystemSynchronizedRootGroup`.** New `.swift` files in `SwiftKit/SwiftKit/` compile automatically — no `project.pbxproj` edit needed.
 - **DerivedData hash to pin.** `SwiftKit-dqolyhtwikfvruchpznkybfwhsmy` (captured 2026-05-02 on first clean build after `Documentation/` relocation). Use `-derivedDataPath ~/Library/Developer/Xcode/DerivedData/SwiftKit-dqolyhtwikfvruchpznkybfwhsmy` for any debugging session per L-005.
-- **Skills location.** `swiftui-expert-skill` and `find-docs` (Context7) installed globally at `~/.agents/skills/`. No project-local copies.
+- **Skills location.** All globally-installed skills live at `~/.claude/skills/`. Relevant for SwiftKit: `find-docs` (Context7) and `swiftui-expert-skill`. Invoke via `Skill` tool. No project-local copies.
 
 ## Components log
 

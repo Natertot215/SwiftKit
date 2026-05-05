@@ -58,6 +58,6 @@ Original capture script was at `/tmp/swiftkit_capture.sh` — non-portable and u
 
 - **PBXFileSystemSynchronizedRootGroup** — Drop `.swift` files into `SwiftKit/<subdir>/`; Xcode auto-syncs. Never put dev-only artifacts (docs, design refs, screenshots) inside `SwiftKit/SwiftKit/` — they get bundled into the app.
 - **DerivedData hash** — Capture after first build; use in all subsequent `xcodebuild` commands.
-- **Skills location** — `~/.agents/skills/`; invoke via Skill tool.
+- **Skills location** — `~/.claude/skills/` (and `~/.agents/skills/` for legacy installs symlinked in); invoke via Skill tool.
 - **`.safeAreaInset(edge: .bottom)`** — Pattern for bottom sidebar action rows; only apply when there's actual content.
 - **Reference toggle heading** — Top of sidebar; order is Reference → SwiftUI → AppKit.
