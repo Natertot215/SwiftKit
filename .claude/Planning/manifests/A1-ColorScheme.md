@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/ViewConfiguration/ColorSchemePage.swift (new)
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.view-configuration` subsection, single line replacing former 413–417
-**Status:** reviewed
+**Status:** merged
 
 ## Absorbed leaves
 
@@ -106,7 +106,7 @@ Ordered list of `PageSection` titles in the new dense ColorSchemePage, with one-
 
 - **Implementer:** 2026-05-05 — ColorSchemePage authored at SwiftKit/Pages/SwiftUI/ViewConfiguration/ColorSchemePage.swift; 6 source pages deleted; Catalog+SwiftUI consolidated to one ColorScheme leaf in swiftui.view-configuration; PageRegistry remapped "ColorScheme" -> ColorSchemePage(); xcodebuild Debug clean; L-001 grep clean.
 - **Spec-compliance reviewer:** 2026-05-05 — All 60 manifest boxes verified against commit 3fd20a2; 8-section plan intact; helpers are pure Apple-primitive compositions (no custom-component violations).
-- **Code-quality reviewer:** (to be filled after spec-compliance approval)
+- **Code-quality reviewer:** 2026-05-05 — Build clean; zero L-001/L-012 hits; reporter rows confirmed pure Apple-primitive compositions; shell rhythm matches TypographyPage; @State private, ForEach identity stable, semantic tokens throughout. Approved.
 
 ---
 
