@@ -1,9 +1,9 @@
 import SwiftUI
 
 // Layout Adjustments conceptual doc pages — grouped describe page.
-// Covers: Aligning views across stacks, Aligning views within a stack,
-//         Inspecting view layout, Laying out a simple view,
-//         Making fine adjustments to a view's position
+// Covers: Aligning views across stacks, Aligning views within a stack.
+// (Laying out a simple view, Inspecting view layout, and Making fine
+//  adjustments to a view's position now have dedicated describe pages.)
 // macOS 10.15+
 
 struct LayoutAdjustmentsDocsPage: View {
@@ -41,7 +41,7 @@ struct LayoutAdjustmentsDocsPage: View {
             ],
             notes: [
                 "These are guide articles — the renderable primitives are wired as separate gallery pages.",
-                "AlignmentPage, OffsetPositionPage cover the live demos for alignment and position APIs."
+                "AlignmentPage covers alignment APIs; PositionXYPage / PositionPointPage / OffsetXYPage / OffsetSizePage cover position and offset modifiers."
             ]
         )
     }
