@@ -39,6 +39,20 @@ Nathan's direct behavior corrections for this project. Append the moment Nathan 
 
 ---
 
+## 2026-05-05 — Verification tiering: skip per-batch screenshot loops; one final verification agent at the end
+
+**Rule:** Per-batch populate agents do NOT take screenshots, do NOT relaunch the app, do NOT navigate the sidebar at all. Verification per batch = `xcodebuild` clean build + `swiftui-expert-skill` review of any new Gallery pages. Describe pages skip the swiftui-expert-skill pass too. A single dedicated verification agent runs once at the very end of all populate work — after the last placeholder is flipped — to walk every newly-authored leaf, capture a representative screenshot, and report any blank/clipped/broken pages for fix.
+
+**Why:** Nathan's direct instruction (2026-05-05) after the batch-5 efficiency review: *"the screenshotting rule is not that important anyways and only slows down the work — we're not building UI here."* Empirically the per-batch screenshot loop burned ~25–35% of each agent's wall time on a workflow where 99%+ of leaves are doc-style content (Describe pages, statically-composed Gallery pages with simple `NSViewRepresentable` bridges). The batch-4 NSSplitView constraint catch was the ONE bug screenshots caught in 207 leaves (~0.5% rate). One end-of-job sweep catches the same bugs at a fraction of the cost.
+
+**How to apply:**
+1. Populate agent prompts must NOT include a screenshot loop, NOT include sidebar navigation, NOT include `pkill+open` instructions. Verification = build clean + L-001 grep + skill review of Gallery pages only.
+2. Track which leaves have been populated since the last full verification pass. When the catalog reaches 0 placeholders (or at session end), dispatch ONE verification agent for all newly-authored leaves at once.
+3. The final verification agent gets the full Apple-only and screenshot-rule briefing; it's the one that walks the running app, captures representative states, and reports per-leaf verdicts.
+4. The 2026-05-04 "don't move/relaunch the SwiftKit window" rule still applies — but only inside that one final verification agent, since populate agents no longer touch the app at all.
+
+---
+
 ## 2026-05-04 — Don't move or relaunch the SwiftKit window during screenshot loops
 
 **Rule:** When capturing dark/light screenshots, **do not move, resize, or relaunch** the SwiftKit window. Query its current `osascript` bounds in place and `screencapture -o -R<x>,<y>,<w>,<h>` over those bounds. If the app is already running and the build hasn't changed, do NOT `pkill -x SwiftKit; open …SwiftKit.app` between captures — that respawns the window at its default position and steals focus from whatever the user had on screen.
