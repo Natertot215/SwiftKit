@@ -39,4 +39,15 @@ Nathan's direct behavior corrections for this project. Append the moment Nathan 
 
 ---
 
-*(no further entries yet)*
+## 2026-05-04 — Don't move or relaunch the SwiftKit window during screenshot loops
+
+**Rule:** When capturing dark/light screenshots, **do not move, resize, or relaunch** the SwiftKit window. Query its current `osascript` bounds in place and `screencapture -o -R<x>,<y>,<w>,<h>` over those bounds. If the app is already running and the build hasn't changed, do NOT `pkill -x SwiftKit; open …SwiftKit.app` between captures — that respawns the window at its default position and steals focus from whatever the user had on screen.
+
+**Why:** Nathan said directly (2026-05-04, mid-batch-5): *"dont mpve the app from its current position; i need to see my screen."* Subagents had been pkill+open looping the app between dark and light captures, repeatedly stealing the foreground and displacing his actual workspace. He needs to keep his terminal/IDE/whatever else visible while the screenshot loop runs.
+
+**How to apply (for every screenshot-bearing agent):**
+1. Launch the app **once per agent run**, after the final build, only if it isn't already running.
+2. To toggle dark/light, flip system Appearance via `osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true|false'` — this does NOT move or refocus SwiftKit.
+3. Query window bounds in place with `osascript`; do not call `osascript` to move/resize the window.
+4. Before any `pkill`, ask whether it's actually needed (a build change requires relaunch; a sidebar navigation does not).
+5. The `-o` flag on `screencapture` already prevents the screenshot from opening in Preview. Use it.
