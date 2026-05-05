@@ -124,7 +124,7 @@ struct GeometryPage: View {
                                         y: pt.y * 40 - 5
                                     )
                             }
-                            Text(name).font(.system(size: 9)).fontDesign(.monospaced).foregroundStyle(.secondary)
+                            Text(name).font(.caption2).fontDesign(.monospaced).foregroundStyle(.secondary)
                         }
                     }
                 }

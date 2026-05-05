@@ -150,7 +150,7 @@ struct TransformEffectsPage: View {
                     ForEach(shapes, id: \.0) { name, shape in
                         VStack(spacing: 6) {
                             Image(systemName: "photo.fill")
-                                .font(.system(size: 32))
+                                .font(.title)
                                 .frame(width: 80, height: 60)
                                 .background(LinearGradient(colors: [.blue, .pink], startPoint: .topLeading, endPoint: .bottomTrailing))
                                 .clipShape(AnyShape(shape))

@@ -112,7 +112,7 @@ struct ColorPage: View {
                             .frame(width: 60, height: 36)
                             .clipShape(RoundedRectangle(cornerRadius: 6))
                             Text(name)
-                                .font(.system(size: 9))
+                                .font(.caption2)
                                 .fontDesign(.monospaced)
                                 .foregroundStyle(.secondary)
                                 .multilineTextAlignment(.center)
@@ -171,7 +171,7 @@ struct ColorPage: View {
     }
 
     private let notes: [(title: String, detail: String, symbol: String)] = [
-        ("Never hand-mix Color(red:green:blue:) — L-001.", "Always use semantic tokens (.tint, .primary, .secondary) or named system colors (.red, .blue, etc.). Hand-mixed values break dark/light adaptation.", "exclamationmark.triangle"),
+        ("Never hand-mix RGB tuples — L-001.", "Always use semantic tokens (.tint, .primary, .secondary) or named system colors (.red, .blue, etc.). Hand-mixed values break dark/light adaptation.", "exclamationmark.triangle"),
         ("Color conforms to ShapeStyle.", "You can use Color anywhere a ShapeStyle is expected — in .fill, .foregroundStyle, .background, etc.", "paintpalette"),
         ("Use .opacity(_:) to add transparency.", "Color.tint.opacity(0.2) is the idiomatic way to create a transparent variant of any color while keeping semantic adaptability.", "circle.lefthalf.filled"),
         ("Materials blur and sample the content behind them.", "Material values (ultraThinMaterial etc.) are vibrancy-aware — they adapt to light/dark mode and the content behind them via the system compositor.", "square.2.layers.3d.top.filled")

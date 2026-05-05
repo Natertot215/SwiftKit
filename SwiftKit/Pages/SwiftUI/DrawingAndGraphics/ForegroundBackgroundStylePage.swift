@@ -40,7 +40,7 @@ struct ForegroundBackgroundStylePage: View {
     private var defaultDemo: some View {
         VStack(alignment: .leading, spacing: 8) {
             Image(systemName: "star.fill")
-                .font(.system(size: 48))
+                .font(.largeTitle).imageScale(.large)
                 .foregroundStyle(.tint)
             APICallout("Image(systemName: \"star.fill\").foregroundStyle(.tint)")
         }
@@ -61,20 +61,20 @@ struct ForegroundBackgroundStylePage: View {
                         }()
                         VStack(spacing: 6) {
                             Image(systemName: "circle.hexagongrid.fill")
-                                .font(.system(size: 36))
+                                .font(.largeTitle).imageScale(.large)
                                 .foregroundStyle(style)
                             Text(".\(level)").font(.caption).fontDesign(.monospaced).foregroundStyle(.secondary)
                         }
                     }
                     VStack(spacing: 6) {
                         Image(systemName: "star.fill")
-                            .font(.system(size: 36))
+                            .font(.largeTitle).imageScale(.large)
                             .foregroundStyle(LinearGradient(colors: [.blue, .pink], startPoint: .top, endPoint: .bottom))
                         Text("gradient").font(.caption).fontDesign(.monospaced).foregroundStyle(.secondary)
                     }
                     VStack(spacing: 6) {
                         Image(systemName: "flame.fill")
-                            .font(.system(size: 36))
+                            .font(.largeTitle).imageScale(.large)
                             .foregroundStyle(.tint)
                         Text(".tint").font(.caption).fontDesign(.monospaced).foregroundStyle(.secondary)
                     }
@@ -85,13 +85,13 @@ struct ForegroundBackgroundStylePage: View {
                 HStack(spacing: 16) {
                     VStack(spacing: 6) {
                         Image(systemName: "cloud.sun.fill")
-                            .font(.system(size: 48))
+                            .font(.largeTitle).imageScale(.large)
                             .foregroundStyle(.yellow, .blue)
                         APICallout(".foregroundStyle(.yellow, .blue)")
                     }
                     VStack(spacing: 6) {
                         Image(systemName: "heart.fill")
-                            .font(.system(size: 48))
+                            .font(.largeTitle).imageScale(.large)
                             .foregroundStyle(.tint, .secondary)
                         APICallout(".foregroundStyle(.tint, .secondary)")
                     }
@@ -101,7 +101,7 @@ struct ForegroundBackgroundStylePage: View {
             FBSVariantRow(title: "foregroundStyle(_:_:_:) — three-layer hierarchy") {
                 VStack(spacing: 6) {
                     Image(systemName: "person.3.fill")
-                        .font(.system(size: 48))
+                        .font(.largeTitle).imageScale(.large)
                         .foregroundStyle(.tint, .tint.opacity(0.6), .tint.opacity(0.3))
                     APICallout(".foregroundStyle(.tint, .tint.opacity(0.6), .tint.opacity(0.3))")
                 }
@@ -177,7 +177,7 @@ struct ForegroundBackgroundStylePage: View {
                     }
                     VStack(spacing: 6) {
                         Image(systemName: "star.fill")
-                            .font(.system(size: 40))
+                            .font(.largeTitle).imageScale(.large)
                             .foregroundStyle(.yellow)
                             .shadow(color: .yellow.opacity(0.6), radius: 10, x: 0, y: 0)
                         APICallout("inner glow .shadow")
@@ -208,20 +208,20 @@ struct ForegroundBackgroundStylePage: View {
                 HStack(spacing: 24) {
                     VStack(spacing: 6) {
                         Image(systemName: "externaldrive.fill.badge.checkmark")
-                            .font(.system(size: 48))
+                            .font(.largeTitle).imageScale(.large)
                             .symbolRenderingMode(.hierarchical)
                             .foregroundStyle(.tint)
                         Text(".hierarchical").font(.caption).foregroundStyle(.secondary)
                     }
                     VStack(spacing: 6) {
                         Image(systemName: "externaldrive.fill.badge.checkmark")
-                            .font(.system(size: 48))
+                            .font(.largeTitle).imageScale(.large)
                             .symbolRenderingMode(.multicolor)
                         Text(".multicolor").font(.caption).foregroundStyle(.secondary)
                     }
                     VStack(spacing: 6) {
                         Image(systemName: "externaldrive.fill.badge.checkmark")
-                            .font(.system(size: 48))
+                            .font(.largeTitle).imageScale(.large)
                             .symbolRenderingMode(.palette)
                             .foregroundStyle(.tint, .green)
                         Text(".palette").font(.caption).foregroundStyle(.secondary)

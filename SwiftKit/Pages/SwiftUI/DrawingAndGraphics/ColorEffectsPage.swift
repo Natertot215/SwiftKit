@@ -152,7 +152,7 @@ struct ColorEffectsPage: View {
                         ZStack {
                             Color.accentColor
                             Image(systemName: "star.fill")
-                                .font(.system(size: 48))
+                                .font(.largeTitle).imageScale(.large)
                                 .foregroundStyle(.white)
                                 .luminanceToAlpha()
                         }
