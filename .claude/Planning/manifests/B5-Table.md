@@ -4,7 +4,7 @@
 
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.tables` subsection, line 1039
 
-**Status:** reviewed
+**Status:** merged
 
 ## Absorbed leaves
 
@@ -99,7 +99,7 @@ Ordered list of `PageSection` titles in the new dense page:
 
 - Implementer: Claude Sonnet 4.6 — 2026-05-05
 - Spec-compliance reviewer: Claude Sonnet 4.6 — 2026-05-05 ✅ APPROVED (after fix in f1a6cfd — Sections 10 & 11 confirmed present and complete)
-- Code-quality reviewer: (pending)
+- Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05 ✅ APPROVED (no Critical/Important; AnyView in style gallery and shared sortablePeople array are Suggestion-only; L-001/L-012 clean; BUILD SUCCEEDED)
 
 ## Manifest metadata
 
