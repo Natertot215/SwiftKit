@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/Shapes/ShapesGalleryPage.swift (expand CircleEllipseCapsulePage in place, rename to ShapesGalleryPage)
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.shapes` subsection, line ~759 (section root) — current empty subsection. New parent leaf will be `swiftui.shapes.gallery` (displayName: "Shapes Gallery", pageBuilder: .real(symbol: "ShapesGallery"))
-**Status:** reviewed
+**Status:** merged
 **Implementer:** Claude Sonnet 4.6 — 2026-05-05
 **Reviewer:** Claude Sonnet 4.6 — 2026-05-05
 
@@ -163,7 +163,7 @@ Ordered list of `PageSection` titles in the new dense ShapesGalleryPage:
 - [x] Discovery agent confirms all primitive shape leaves enumerated from Catalog+SwiftUI.swift `swiftui.shapes` section
 - [x] Implementer verifies no placeholder leaf is missed
 - [x] Spec-compliance reviewer audits consolidated ShapesGalleryPage against manifest checklist — ✅ APPROVED (commit b7d9ff5, reviewed 2026-05-05)
-- [x] Code-quality reviewer approves dense page composition, reuse of PageSection, conformance to TypographyPage rhythm
+- [x] Code-quality reviewer approves dense page composition, reuse of PageSection, conformance to TypographyPage rhythm — ✅ APPROVED (Phase 6 B3, 2026-05-05): L-001/L-012 zero hits; build clean; Apple-only compliant; TypographyPage rhythm matched; named colors in gradient demos are illustration precedent, not system-chrome violations.
 
 ## Manifest metadata
 
