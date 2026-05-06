@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/DrawingAndGraphics/GradientPage.swift
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.drawing-and-graphics` subsection (Gradient leaf — only surviving leaf)
-**Status:** reviewed
+**Status:** merged
 **Implementer:** Claude Sonnet 4.6 (2026-05-05)
 **Reviewer:** Claude Sonnet 4.6 (spec-compliance, 2026-05-05)
 
@@ -119,8 +119,8 @@ Ordered list of `PageSection` or subsection titles in the final consolidated Gra
 - [x] Discovery agent confirms all gradient leaves enumerated from Catalog+SwiftUI.swift `swiftui.drawing-and-graphics` section
 - [x] Implementer verifies MeshGradientPage.swift and AnyGradientDescribePage.swift content integrated into GradientPage
 - [x] Spec-compliance reviewer audits consolidated GradientPage against manifest checklist — all boxes ✅ (2026-05-05)
-- [ ] Code-quality reviewer approves dense page composition
-- [ ] Manifest committed in `merged` state alongside code commit
+- [x] Code-quality reviewer approves dense page composition (2026-05-05)
+- [x] Manifest committed in `merged` state alongside code commit
 
 ## Manifest metadata
 
