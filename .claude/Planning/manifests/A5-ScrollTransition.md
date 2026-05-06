@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/ScrollViews/ScrollTransitionPage.swift (rewritten in place)
 **Parent leaf (Catalog+SwiftUI.swift):** Line 1149
-**Status:** reviewed
+**Status:** merged
 
 ## Absorbed leaves
 
@@ -73,7 +73,7 @@ Ordered list of `PageSection` titles in the new dense page:
 
 - Implementer: Claude Opus 4.7 (1M context) — 2026-05-05
 - Spec-compliance reviewer: Claude Opus 4.7 (1M context) — 2026-05-05 — APPROVED (commit 0727c68; all 36 checklist boxes verified; section order matches plan; describe-track placement satisfied; Apple primitives only; parent leaf retained, 3 absorbed leaves removed from Catalog+SwiftUI.swift and PageRegistry.swift; symbol maps to ScrollTransitionPage())
-- Code-quality reviewer: (unchecked — pending spec compliance)
+- Code-quality reviewer: Claude Opus 4.7 (1M context) — 2026-05-05 — APPROVED (build clean; L-001 grep clean; L-012 grep clean; Apple primitives only — every demo uses real `.scrollTransition` calls, `EmptyVisualEffect` chains, and `LazyHStack`/`ScrollView`; semantic tokens throughout — `.primary`/`.secondary`/`.tertiary`/`.separator`/`.tint`/`.background.secondary`/`.fill.tertiary`, zero hex or hand-mixed RGBA; rhythm matches PaddingPage / TypographyPage — single ScrollView + VStack(spacing: 32) + PageSection per topic, describe-track sections placed above demos, header/notes/card helpers shaped identically; `noteRow` uses `Label` so SF Symbol weight inherits from `.headline` per macuix-rules.md; no L-001/L-012 violations, no dead code, no parameter sprawl, no copy-paste duplication beyond rhythm-required structure)
 
 ## Manifest metadata
 
