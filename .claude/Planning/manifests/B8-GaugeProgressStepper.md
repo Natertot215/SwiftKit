@@ -16,7 +16,7 @@
 - DefaultDateProgressLabel: Catalog+SwiftUI.swift, `swiftui.controls-and-indicators` subsection, line 695
 - (No StepperStyle — Stepper has no style protocol)
 
-**Status:** implementing
+**Status:** merged
 
 ## Absorbed leaves
 
@@ -174,8 +174,8 @@ StepperPage remains as currently structured (no consolidation needed):
 ## Sign-off
 
 - Implementer: Claude Sonnet 4.6 — 2026-05-05
-- Spec-compliance reviewer: (pending)
-- Code-quality reviewer: (pending)
+- Spec-compliance reviewer: Claude Sonnet 4.6 — 2026-05-05
+- Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05
 
 ## Manifest metadata
 
