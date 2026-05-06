@@ -21,7 +21,7 @@
 - SwiftKit/Pages/SwiftUI/TextFieldStylePage.swift — DELETED
 - SwiftKit/Pages/SwiftUI/TextEditorStylePage.swift — DELETED
 
-**Status:** reviewed
+**Status:** merged
 
 ## Absorbed leaves
 
@@ -178,7 +178,7 @@ Also NOT absorbed:
 
 - [x] Implementer: all source pages read, manifest complete, all absorbed leaves cataloged
 - [x] Spec-compliance reviewer: manifest verified against source pages, ready for implementer
-- [ ] Code-quality reviewer: dense pages approved, no L-001/L-012 violations
+- [x] Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05 ✅ APPROVED (no Critical/Important; duplicate CodeBlock helpers and shared style bindings are Suggestion-only; L-001/L-012 clean; BUILD SUCCEEDED)
 - [x] Manifest committed alongside code commit
 
 **Manifest metadata:**
