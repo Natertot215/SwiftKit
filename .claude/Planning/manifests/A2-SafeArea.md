@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/LayoutAdjustments/SafeAreaPage.swift (rewrite existing)
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.layout-adjustments` subsection; `safeAreaBar` currently in `swiftui.scroll-views` subsection (to absorb in place)
-**Status:** implementing
+**Status:** reviewed
 
 ## Absorbed leaves
 
@@ -116,7 +116,7 @@ Ordered list of `PageSection` titles in the new dense SafeAreaPage, with one-lin
 ## Sign-off
 
 - **Implementer:** Claude Opus 4.7 (1M context) — 2026-05-05; build clean, L-001 grep clean (zero hits), 7 leaves consolidated into single dense page (852 lines)
-- **Spec-compliance reviewer:** (awaiting review)
+- **Spec-compliance reviewer:** Claude Opus 4.7 (1M context) — 2026-05-05; all 70 boxes verified against commit 2221af6; section plan order intact (Header → Reference → safeAreaPadding(_:) → safeAreaPadding(_:_:) → safeAreaInset → ignoresSafeArea → safeAreaBar → HIG Notes); Reference subsection placed above demos per describe-track placement rule; SafeArea symbol mapped in PageRegistry to SafeAreaPage(); SafeArea leaf retained in Catalog+SwiftUI.swift `swiftui.layout-adjustments`; absorbed source pages deleted from filesystem; no custom-component violations (Apple primitives only — PageSection / APICallout / noteRow are presentation helpers, not re-implemented system controls)
 - **Code-quality reviewer:** (awaiting review)
 
 ---
