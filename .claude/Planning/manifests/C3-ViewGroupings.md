@@ -2,7 +2,7 @@
 
 **Parent task:** Phase 6 · C3 — SwiftUI view-groupings section consolidation (placeholder leaf → dense page authoring)
 **Catalog subsections affected:** `swiftui.view-groupings` (primary), `swiftui.view-styles` (absorbs style-related leaves)
-**Status:** implementing
+**Status:** reviewed
 **Implementer:** Claude Sonnet 4.6 — 2026-05-05
 
 ## Overview
@@ -462,16 +462,18 @@ Ordered sections:
 - [x] L-001/L-012 grep: zero Color(red:, Color(hex:, NSColor, .font(.system(size: violations; .frame(height:) uses are all on demo Form/List containers matching gallery pattern
 - [x] All manifest checklists checked
 
-**Spec-compliance reviewer phase (will update):**
-- [ ] All 27 absorbed-leaf signatures present in dense pages
-- [ ] All demo subsections landed in correct pages
-- [ ] GroupPage logic verified (Group, GroupElementsOfContent, GroupSectionsOfContent subsections present)
-- [ ] SectionPage logic verified (Section, SectionCollection, etc. subsections)
-- [ ] FormPage logic verified (Form + FormStyle family subsections)
-- [ ] LabeledContentPage logic verified (LabeledContent + LabeledContentStyle family subsections)
-- [ ] ControlGroupPage logic verified (ControlGroup + ControlGroupStyle family subsections)
-- [ ] No unverifiable manifest checks
-- [ ] Manifest status updated to `reviewed`
+**Spec-compliance reviewer phase (completed 2026-05-05):**
+- [x] All 27 absorbed-leaf signatures present in dense pages
+- [x] All demo subsections landed in correct pages
+- [x] GroupPage logic verified (Group container / GroupElementsOfContent Reference / GroupSectionsOfContent Reference / GroupBox sections present; all 3 GroupBox init variants demoed; HIG Notes section present)
+- [x] SectionPage logic verified (Section container with List+Form+header/footer demos / SectionCollection Reference / SectionConfiguration Reference / ForEachSectionCollection Reference / HIG Notes sections all present)
+- [x] FormPage logic verified (FormStyle protocol Reference + FormStyleConfiguration Reference placed BEFORE Form container demo; style gallery with .automatic/.grouped/.columns; formStyle modifier section; HIG Notes present; Reference-before-demo order correct)
+- [x] LabeledContentPage logic verified (LabeledContentStyle Reference + LabeledContentStyleConfiguration Reference before LabeledContent demo; variants section with custom content / Label as label / standalone / labelsHidden; labeledContentStyle modifier section; HIG Notes present)
+- [x] ControlGroupPage logic verified (ControlGroupStyle Reference + ControlGroupStyleConfiguration Reference before default ControlGroup demo; style gallery .automatic/.navigation/.palette/.menu/.compactMenu; controlGroupStyle modifier section; HIG Notes present)
+- [x] Catalog: 11 placeholder→.real promotions confirmed (Group, GroupElementsOfContent, GroupSectionsOfContent, GroupBox, Section, SectionCollection, SectionConfiguration, ForEachSectionCollection, Form, LabeledContent, ControlGroup); 9 view-styles leaves removed (FormStyle/FormStyleConfiguration/formStyle(_:), LabeledContentStyle/LabeledContentStyleConfiguration/labeledContentStyle(_:), ControlGroupStyle/ControlGroupStyleConfiguration/controlGroupStyle(_:)); supporting-structure leaves (Subview, SubviewsCollection, etc.) retained as .placeholder per implementer decision
+- [x] Registry entries verified for all 27 absorbed symbols
+- [x] BUILD SUCCEEDED
+- [x] Manifest status updated to `reviewed`
 
 **Code-quality reviewer phase (will update):**
 - [ ] Build clean; zero L-001 visual-rule violations
