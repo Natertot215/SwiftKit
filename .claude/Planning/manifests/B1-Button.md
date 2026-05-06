@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/ControlsAndIndicators/ButtonPage.swift (rewrite in place)
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.controls-and-indicators` subsection, line 702 (Button) — absorbs lines 703–708 (ButtonBorderShape variants, ButtonRole, ButtonRepeatBehavior, ButtonSizing) and lines 436–443 (ButtonStyle, ButtonStyleConfiguration, GlassButtonStyle, GlassProminentButtonStyle, PrimitiveButtonStyle, PrimitiveButtonStyleConfiguration) plus lines 439 (View/buttonStyle(_:))
-**Status:** reviewed
+**Status:** merged
 
 ## Absorbed leaves
 
@@ -208,7 +208,7 @@ Ordered list of `PageSection` titles in the new dense ButtonPage, with one-line 
 
 - Implementer: Claude Opus 4.7 (1M ctx) — 2026-05-05
 - Spec-compliance reviewer: Claude Opus 4.7 (1M ctx) — 2026-05-05
-- Code-quality reviewer: _____ (date)
+- Code-quality reviewer: Claude Opus 4.7 (1M ctx) — 2026-05-05
 
 ## Manifest metadata
 
