@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/InputEvents/KeyboardInputPage.swift (new)
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.input-events` subsection, lines 1240–1253
-**Status:** implementing
+**Status:** reviewed
 
 ## Absorbed leaves
 
@@ -217,7 +217,7 @@ Ordered list of `PageSection` titles in the new dense KeyboardInputPage, with on
 ## Sign-off
 
 - **Implementer:** Claude (Opus 4.7, 1M context) — 2026-05-05
-- **Spec-compliance reviewer:** (to be completed)
+- **Spec-compliance reviewer:** Claude (Opus 4.7, 1M context) — 2026-05-05 — APPROVED. All 140 coverage boxes verified. Section plan implemented in declared order (header → 4 type-describe Reference subsections → 11 demo subsections → HIG notes). Describe-track rule satisfied: KeyEquivalent / EventModifiers / KeyPress / KeyboardShortcut Reference sections placed above all demo subsections. Catalog leaf "KeyboardInput" present at `swiftui.input-events` with `pageBuilder: .real(symbol: "KeyboardInput")`; PageRegistry maps `"KeyboardInput"` → `KeyboardInputPage()`; 14 absorbed leaves removed; legacy symbol IDs rerouted to KeyboardInputPage. Apple primitives only — TextField / Button / Text / Label / ScrollView / VStack / HStack / RoundedRectangle / ForEach with native onKeyPress, keyboardShortcut, onModifierKeysChanged, modifierKeyAlternate, focused modifiers; no third-party UI.
 - **Code-quality reviewer:** (to be completed)
 
 ---
