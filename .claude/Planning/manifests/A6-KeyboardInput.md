@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/InputEvents/KeyboardInputPage.swift (new)
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.input-events` subsection, lines 1240–1253
-**Status:** reviewed
+**Status:** merged
 
 ## Absorbed leaves
 
@@ -218,7 +218,7 @@ Ordered list of `PageSection` titles in the new dense KeyboardInputPage, with on
 
 - **Implementer:** Claude (Opus 4.7, 1M context) — 2026-05-05
 - **Spec-compliance reviewer:** Claude (Opus 4.7, 1M context) — 2026-05-05 — APPROVED. All 140 coverage boxes verified. Section plan implemented in declared order (header → 4 type-describe Reference subsections → 11 demo subsections → HIG notes). Describe-track rule satisfied: KeyEquivalent / EventModifiers / KeyPress / KeyboardShortcut Reference sections placed above all demo subsections. Catalog leaf "KeyboardInput" present at `swiftui.input-events` with `pageBuilder: .real(symbol: "KeyboardInput")`; PageRegistry maps `"KeyboardInput"` → `KeyboardInputPage()`; 14 absorbed leaves removed; legacy symbol IDs rerouted to KeyboardInputPage. Apple primitives only — TextField / Button / Text / Label / ScrollView / VStack / HStack / RoundedRectangle / ForEach with native onKeyPress, keyboardShortcut, onModifierKeysChanged, modifierKeyAlternate, focused modifiers; no third-party UI.
-- **Code-quality reviewer:** (to be completed)
+- **Code-quality reviewer:** Claude (Opus 4.7, 1M context) — 2026-05-05 — APPROVED. Build clean (`xcodebuild ... build` → `** BUILD SUCCEEDED **`). L-001/L-012 grep clean: zero hand-rolled colors, zero `font(.system(size:))`, zero hand-tuned dimensions on system surfaces. Two `frame(width:)` hits are layout-only — `width: 170` on the reference-row label column (matches ScrollTransitionPage precedent) and `width: 1100` on the `#Preview` frame. Apple primitives only — no custom wrapper structs. Page composes `ScrollView` / `VStack` / `HStack` / `TextField` / `Button` / `Text` / `Label` / `RoundedRectangle` / `ForEach` directly with native `onKeyPress`, `keyboardShortcut`, `onModifierKeysChanged`, `modifierKeyAlternate`, `focused`, `disabled`. Helpers (`referenceRow`, `noteRow`, `phaseLabel`, `modifierLabel`) are private functions on the page struct, not new types. TypographyPage rhythm matched: one `ScrollView` → one `VStack(spacing: 32)` → header + describe-track Reference subsections (4) → demo subsections (10) → HIG notes; `padding(.horizontal: 32, .vertical: 24)`; `galleryReadableContentWidth`. Five demo subsections share a TextField+focus+log shape but variation in match arguments (single key vs phases vs characters vs key set) is the documented surface — duplication is < 10 near-identical blocks and represents the API-overload axis the page is documenting, so no extraction needed.
 
 ---
 
