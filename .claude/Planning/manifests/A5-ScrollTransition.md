@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/ScrollViews/ScrollTransitionPage.swift (rewritten in place)
 **Parent leaf (Catalog+SwiftUI.swift):** Line 1149
-**Status:** implementing
+**Status:** reviewed
 
 ## Absorbed leaves
 
@@ -72,7 +72,7 @@ Ordered list of `PageSection` titles in the new dense page:
 ## Sign-off
 
 - Implementer: Claude Opus 4.7 (1M context) — 2026-05-05
-- Spec-compliance reviewer: (unchecked — pending)
+- Spec-compliance reviewer: Claude Opus 4.7 (1M context) — 2026-05-05 — APPROVED (commit 0727c68; all 36 checklist boxes verified; section order matches plan; describe-track placement satisfied; Apple primitives only; parent leaf retained, 3 absorbed leaves removed from Catalog+SwiftUI.swift and PageRegistry.swift; symbol maps to ScrollTransitionPage())
 - Code-quality reviewer: (unchecked — pending spec compliance)
 
 ## Manifest metadata
