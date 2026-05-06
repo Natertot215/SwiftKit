@@ -2,7 +2,7 @@
 
 **Parent page:** SwiftKit/Pages/SwiftUI/LayoutAdjustments/FramePage.swift (new)
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.layout-adjustments` subsection, lines 961–967 (5 leaves to consolidate into 1)
-**Status:** implementing
+**Status:** reviewed
 
 ## Absorbed leaves
 
@@ -91,7 +91,7 @@ Ordered list of `PageSection` titles in the new dense FramePage, with one-line d
 ## Sign-off
 
 - **Implementer:** Claude (Opus 4.7, Phase 6 A4 — 2026-05-05)
-- **Spec-compliance reviewer:** (to be filled)
+- **Spec-compliance reviewer:** Claude (Opus 4.7, Phase 6 A4 — 2026-05-05) — all 50 boxes verified against commit 1121303
 - **Code-quality reviewer:** (to be filled)
 
 ---
