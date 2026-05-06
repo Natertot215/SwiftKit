@@ -4,7 +4,7 @@
 
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.menus-and-commands` subsection, line 732
 
-**Status:** reviewed
+**Status:** merged
 
 ## Absorbed leaves
 
@@ -137,7 +137,7 @@ Ordered list of `PageSection` titles in the new dense page:
 
 - Implementer: Claude Sonnet 4.6 (2026-05-05)
 - Spec-compliance reviewer: Claude Sonnet 4.6 (2026-05-05) — all 8 leaves verified ✓
-- Code-quality reviewer: (pending)
+- Code-quality reviewer: Claude Sonnet 4.6 (2026-05-05) — approved ✓
 
 ## Manifest metadata
 
