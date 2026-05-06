@@ -64,6 +64,29 @@ private let styleRows: [TSRow] = [
     TSRow(id: 3, title: "Operations",  count: 3),
 ]
 
+// Hierarchical data for disclosure rows demo
+private struct TeamMember: Identifiable, Hashable {
+    let id = UUID()
+    let name: String
+    let role: String
+    let joined: Int
+    var children: [TeamMember]?
+}
+
+private let teamTree: [TeamMember] = [
+    TeamMember(name: "Engineering", role: "Department", joined: 2015, children: [
+        TeamMember(name: "Mei Chen",    role: "Engineer",    joined: 2021),
+        TeamMember(name: "Luca Rossi",  role: "Engineer",    joined: 2023),
+    ]),
+    TeamMember(name: "Design", role: "Department", joined: 2016, children: [
+        TeamMember(name: "Juan Chavez", role: "Designer",    joined: 2019),
+        TeamMember(name: "Aiko Tanaka", role: "Designer",    joined: 2020),
+    ]),
+    TeamMember(name: "Research", role: "Department", joined: 2017, children: [
+        TeamMember(name: "Gita Kumar",  role: "Researcher",  joined: 2022),
+    ]),
+]
+
 private let tableFrameWidth: CGFloat = 460
 private let tableFrameHeight: CGFloat = 240
 private let styleCardWidth: CGFloat = 360
@@ -79,6 +102,11 @@ struct TablePage: View {
     @State private var sortOrder: [KeyPathComparator<Person>] = [KeyPathComparator(\Person.familyName)]
     @State private var sortableJoined: [KeyPathComparator<Person>] = [KeyPathComparator(\Person.joined, order: .reverse)]
     @State private var sortablePeople: [Person] = people
+    // Column customization state (Section 10)
+    @State private var columnCustomization = TableColumnCustomization<Person>()
+    // Disclosure / hierarchical state (Section 11)
+    @State private var disclosureExpanded: Bool = true
+    @State private var hierarchySelection: Set<TeamMember.ID> = []
 
     private var sortOrderDisplay: String {
         sortOrder.map { kp -> String in
@@ -100,6 +128,8 @@ struct TablePage: View {
                 tableStyleGallerySection
                 selectionSection
                 sortingSection
+                columnCustomizationSection
+                disclosureRowsSection
                 notesSection
             }
             .padding(.horizontal, 32)
@@ -607,6 +637,196 @@ KeyPathComparator(\\.joined, order: .reverse)
 """
                     )
                 }
+            }
+        }
+    }
+
+    // MARK: TableColumnCustomization
+
+    private var columnCustomizationSection: some View {
+        PageSection("TableColumnCustomization",
+                    subtitle: "struct TableColumnCustomization \u{00b7} columnCustomization binding \u{00b7} macOS 14.0+") {
+            VStack(alignment: .leading, spacing: 20) {
+                Text("TableColumnCustomization stores visibility, ordering, and width for table columns. Attach it via a `columnCustomization:` binding — each column opted in must carry a unique `customizationID`. Right-click a column header to access the visibility menu.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Declaration and initializer")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    codeBlock(
+"""
+struct TableColumnCustomization<RowValue> where RowValue : Identifiable
+
+// Create and hold state:
+@State private var columnCustomization = TableColumnCustomization<Person>()
+
+// Pass to Table:
+Table(people, columnCustomization: $columnCustomization) { columns }
+
+// Each column that should be customizable needs an ID:
+TableColumn("Family", value: \\.familyName)
+    .customizationID("family")
+"""
+                    )
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Live demo — right-click a column header to show/hide columns; drag headers to reorder")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    tableCard(api: "Table(people, columnCustomization: $columnCustomization) { col.customizationID(\"...\") }") {
+                        Table(people, columnCustomization: $columnCustomization) {
+                            TableColumn("Given",  value: \.givenName)
+                                .customizationID("given")
+                            TableColumn("Family", value: \.familyName)
+                                .customizationID("family")
+                            TableColumn("Role",   value: \.role)
+                                .customizationID("role")
+                            TableColumn("Joined") { person in
+                                Text(person.joined.formatted(.number.grouping(.never)))
+                                    .monospacedDigit()
+                            }
+                            .customizationID("joined")
+                        }
+                    }
+                }
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("@AppStorage persistence — survives app relaunches")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    codeBlock(
+"""
+// TableColumnCustomization : Codable — @AppStorage encodes it automatically.
+@AppStorage("PeopleTableColumns")
+private var columnCustomization = TableColumnCustomization<Person>()
+
+// Programmatic visibility control:
+columnCustomization[visibility: "joined"] = .hidden
+"""
+                    )
+                }
+
+                noteRow(
+                    title: "Columns without a customizationID cannot be customized.",
+                    detail: "Only columns that carry .customizationID(_:) participate in reorder and visibility. The ID must be stable across launches — it is the key used when decoding persisted state.",
+                    symbol: "key.horizontal"
+                )
+            }
+        }
+    }
+
+    // MARK: Disclosure Rows and Hierarchical Tables
+
+    private var disclosureRowsSection: some View {
+        PageSection("Disclosure Rows and Hierarchical Tables",
+                    subtitle: "DisclosureTableRow · Table(children:) shorthand · macOS 14.0+") {
+            VStack(alignment: .leading, spacing: 20) {
+                Text("DisclosureTableRow wraps a label row and a set of content rows behind a disclosure triangle. The `children:` KeyPath shorthand on `Table` is equivalent, but manual `DisclosureTableRow` nesting gives finer control over expansion state and mixed-depth trees.")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("DisclosureTableRow declaration")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    codeBlock(
+"""
+struct DisclosureTableRow<Label, Content>
+    where Label : TableRowContent,
+          Content : TableRowContent,
+          Label.TableRowValue == Content.TableRowValue
+
+// Manual nesting (full control over isExpanded):
+Table(of: TeamMember.self) {
+    TableColumn("Name", value: \\.name)
+} rows: {
+    DisclosureTableRow(parentRow, isExpanded: $expanded) {
+        TableRow(child1)
+        TableRow(child2)
+    }
+}
+
+// children: keypath shorthand — equivalent for uniform trees:
+Table(teamTree, children: \\.children) {
+    TableColumn("Name", value: \\.name)
+}
+"""
+                    )
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("children: keypath shorthand — click disclosure triangles to expand/collapse")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    tableCard(api: "Table(teamTree, children: \\.children, selection: $hierarchySelection) { columns }") {
+                        Table(teamTree, children: \.children, selection: $hierarchySelection) {
+                            TableColumn("Name") { member in
+                                Label(
+                                    member.name,
+                                    systemImage: member.children != nil ? "person.2" : "person"
+                                )
+                            }
+                            TableColumn("Role",   value: \.role)
+                            TableColumn("Joined") { member in
+                                Text(member.joined.formatted(.number.grouping(.never)))
+                                    .monospacedDigit()
+                                    .foregroundStyle(member.children != nil ? .primary : .secondary)
+                            }
+                        }
+                    }
+                    Text("\(hierarchySelection.count) selected")
+                        .font(.caption)
+                        .fontDesign(.monospaced)
+                        .foregroundStyle(.secondary)
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Manual DisclosureTableRow with bound expansion state")
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    tableCard(api: "DisclosureTableRow(engineeringRow, isExpanded: $disclosureExpanded) { child rows }") {
+                        Table(of: TeamMember.self) {
+                            TableColumn("Name") { member in
+                                Label(
+                                    member.name,
+                                    systemImage: member.children != nil ? "person.2" : "person"
+                                )
+                            }
+                            TableColumn("Role",   value: \.role)
+                        } rows: {
+                            DisclosureTableRow(teamTree[0], isExpanded: $disclosureExpanded) {
+                                ForEach(teamTree[0].children ?? []) { child in
+                                    TableRow(child)
+                                }
+                            }
+                            TableRow(teamTree[1])
+                            TableRow(teamTree[2])
+                        }
+                    }
+                    HStack(spacing: 4) {
+                        Text("Engineering group:")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(disclosureExpanded ? "expanded" : "collapsed")
+                            .font(.caption)
+                            .fontDesign(.monospaced)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                noteRow(
+                    title: "children: is syntactic sugar for DisclosureTableRow.",
+                    detail: "Table(_:children:) infers the row type from a KeyPath to Optional<[RowValue]> and automatically generates DisclosureTableRow entries — no rows: closure needed. Use the manual form when rows have heterogeneous depth or conditional expansion logic.",
+                    symbol: "list.bullet.indent"
+                )
+                noteRow(
+                    title: "The model's children property must be Optional<[Self]>.",
+                    detail: "Leaf nodes set children to nil; branch nodes set it to a non-empty array. An empty array is treated as an expandable row with no children (shows a disclosure triangle but reveals nothing).",
+                    symbol: "point.3.filled.connected.trianglepath.dotted"
+                )
             }
         }
     }
