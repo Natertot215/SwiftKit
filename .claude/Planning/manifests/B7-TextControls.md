@@ -21,7 +21,7 @@
 - SwiftKit/Pages/SwiftUI/TextFieldStylePage.swift — DELETED
 - SwiftKit/Pages/SwiftUI/TextEditorStylePage.swift — DELETED
 
-**Status:** implementing
+**Status:** reviewed
 
 ## Absorbed leaves
 
@@ -177,7 +177,7 @@ Also NOT absorbed:
 ## Sign-off
 
 - [x] Implementer: all source pages read, manifest complete, all absorbed leaves cataloged
-- [ ] Spec-compliance reviewer: manifest verified against source pages, ready for implementer
+- [x] Spec-compliance reviewer: manifest verified against source pages, ready for implementer
 - [ ] Code-quality reviewer: dense pages approved, no L-001/L-012 violations
 - [x] Manifest committed alongside code commit
 
@@ -187,6 +187,7 @@ Also NOT absorbed:
 - Created: 2026-05-05
 - Implemented: 2026-05-05
 - Implementer: Claude Sonnet 4.6
+- Spec-compliance reviewer: Claude Sonnet 4.6 (2026-05-05)
 - Absorbed file count: 2 pages (TextFieldStylePage.swift, TextEditorStylePage.swift)
 - Absorbed catalog leaves: 5 leaves
 - Consolidated Catalog entries: 3 parents retained, 5 leaves deleted
