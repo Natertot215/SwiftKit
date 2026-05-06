@@ -2,7 +2,7 @@
 
 **Parent task:** Phase 6 · C3 — SwiftUI view-groupings section consolidation (placeholder leaf → dense page authoring)
 **Catalog subsections affected:** `swiftui.view-groupings` (primary), `swiftui.view-styles` (absorbs style-related leaves)
-**Status:** reviewed
+**Status:** merged
 **Implementer:** Claude Sonnet 4.6 — 2026-05-05
 
 ## Overview
@@ -476,14 +476,14 @@ Ordered sections:
 - [x] Manifest status updated to `reviewed`
 
 **Code-quality reviewer phase (will update):**
-- [ ] Build clean; zero L-001 visual-rule violations
-- [ ] Zero L-012 violations (no .system(size:) custom colors)
-- [ ] Compositions use pure Apple primitives only
-- [ ] Helper naming follows conventions
-- [ ] PageSection structure matches TypographyPage rhythm
-- [ ] @State private where used; ForEach identity stable
-- [ ] swiftui-expert-skill review passed
-- [ ] Manifest status updated to `merged`
+- [x] Build clean; zero L-001 visual-rule violations
+- [x] Zero L-012 violations (no Color(red:), Color(hex:), .font(.system(size:)) — .green.opacity(0.18) on mock "Online" badge is illustrative content per L-012 scope)
+- [x] Compositions use pure Apple primitives only
+- [x] Helper naming follows conventions (noteRow/referenceRow/styleSpecimen/sampleGroup/sampleForm all private)
+- [x] PageSection structure matches TypographyPage rhythm; all 5 pages follow one-ScrollView/one-VStack/PageSection pattern
+- [x] @State private correct (FormPage: name/newsletter/notifications); ForEach identity stable (\.self on String arrays, \.1 on zip pairs)
+- [x] swiftui-expert-skill review passed — Claude Sonnet 4.6 — 2026-05-05
+- [x] Manifest status updated to `merged`
 
 ---
 
