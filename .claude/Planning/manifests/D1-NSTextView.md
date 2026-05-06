@@ -1,69 +1,134 @@
 # D1 — NSTextView Family Consolidation Manifest
 
-**Date:** 2026-05-05  
-**Status:** Implementing
+**Parent page:** SwiftKit/Pages/AppKit/ViewsAndControls/ContentViews/NSTextViewPage.swift
+**Status:** merged
 
----
+## Absorbed leaves
 
-## Scope
+| # | Type | Kind | Absorbed Into |
+|---|------|------|---------------|
+| 1 | NSText | abstract class | Reference A — Abstract base |
+| 2 | NSTextContainer | class | Reference A — Layout types |
+| 3 | NSTextLayoutManager | class (macOS 12.0+) | Reference A — Layout types |
+| 4 | NSTextContentStorage | class (macOS 12.0+) | Reference A — Layout types |
+| 5 | NSTextSelection | class (macOS 12.0+) | Reference A — Layout types |
+| 6 | NSTextFinder | class (macOS 10.7+) | Reference B — Find infrastructure |
+| 7 | NSTextFinderClient | protocol (macOS 10.7+) | Reference B — Find infrastructure |
+| 8 | NSTextFinderBarContainer | protocol (macOS 10.7+) | Reference B — Find infrastructure |
 
-Consolidate the NSTextView family into a single dense page. NSTextViewPage already exists and has good renderable content; this rewrite adds Reference sections for absorbed type families and enriches existing sections per the TypographyPage rhythm.
+**Excluded per spec:** NSTextField, NSSecureTextField (separate controls). NSTextStorage, NSLayoutManager (TextKit D7 scope).
 
----
+## Per-leaf coverage checklist
 
-## Absorbed Leaves (8 total — all deleted from catalog + registry)
+### Leaf 1: NSText
+- [x] Header info captured (abstract class, macOS 10.0+)
+- [x] All signatures transcribed (string, isEditable, isSelectable, delegate, font, alignment, textColor)
+- [x] Notification names listed (didBeginEditing, didChange, didEndEditing)
+- [x] Documented as never-instantiated-directly — use NSTextView
+- [x] Catalog leaf removed from Catalog+AppKit.swift
+- [x] No registry entry existed — no action needed
+- [x] Lands in subsection: Reference A
 
-| Type | Catalog Section | Registry Key | Action |
-|------|-----------------|--------------|--------|
-| NSText | `appkit.text-display.text-views.nstext` (line 605) | none | Delete catalog leaf; no registry entry |
-| NSTextContainer | `appkit.textkit.layout.nstextcontainer` (line 666) | none | Delete catalog leaf; no registry entry |
-| NSTextLayoutManager | `appkit.textkit.layout.nstextlayoutmanager` (line 665) | none | Delete catalog leaf; no registry entry |
-| NSTextContentStorage | `appkit.textkit.text-management.nstextcontentstorage` (line 640) | none | Delete catalog leaf; no registry entry |
-| NSTextSelection | `appkit.textkit.location-and-selection.nstextselection` (line 660) | none | Delete catalog leaf; no registry entry |
-| NSTextFinder | `appkit.views-and-controls.controls.nstextfinder` (line 140) | `"NSTextFinder"` (line 365) | Delete catalog leaf + registry entry |
-| NSTextFinderClient | `appkit.views-and-controls.controls.nstextfinderclient` (line 142) | `"NSTextFinderClient"` (line 367) | Delete catalog leaf + registry entry |
-| NSTextFinderBarContainer | `appkit.views-and-controls.controls.nstextfinderbarcontainer` (line 141) | `"NSTextFinderBarContainer"` (line 366) | Delete catalog leaf + registry entry |
+### Leaf 2: NSTextContainer
+- [x] Header info captured (class, macOS 10.0+)
+- [x] All signatures transcribed (size, lineFragmentPadding, widthTracksTextView, heightTracksTextView, exclusionPaths)
+- [x] Code example: container construction + exclusion path
+- [x] Catalog leaf removed from Catalog+AppKit.swift (textkit section)
+- [x] No registry entry existed — no action needed
+- [x] Lands in subsection: Reference A
 
-**Excluded (per spec):** NSTextField, NSSecureTextField (separate controls). NSTextStorage, NSLayoutManager (TextKit D7 scope — not absorbed here).
+### Leaf 3: NSTextLayoutManager
+- [x] Header info captured (class, macOS 12.0+, TextKit 2)
+- [x] All signatures transcribed (enumerateTextLayoutFragments, NSTextViewportLayoutController)
+- [x] Caution note: calling layoutManager forces downgrade to TextKit 1
+- [x] Opt-in init documented (usingTextLayoutManager: true)
+- [x] Catalog leaf removed from Catalog+AppKit.swift (textkit section)
+- [x] No registry entry existed — no action needed
+- [x] Lands in subsection: Reference A
 
----
+### Leaf 4: NSTextContentStorage
+- [x] Header info captured (class : NSTextContentManager, macOS 12.0+)
+- [x] All signatures transcribed (textStorage, enumerateTextElements, NSTextParagraph)
+- [x] Custom backend note documented
+- [x] Catalog leaf removed from Catalog+AppKit.swift (textkit section)
+- [x] No registry entry existed — no action needed
+- [x] Lands in subsection: Reference A
 
-## Kept
+### Leaf 5: NSTextSelection
+- [x] Header info captured (class, macOS 12.0+)
+- [x] All signatures transcribed (textRanges, affinity, granularity, isTransient, anchorPositionOffset)
+- [x] Clarification: most AppKit work uses selectedRanges (NSRange-based); NSTextSelection is for custom layout
+- [x] Catalog leaf removed from Catalog+AppKit.swift (textkit section)
+- [x] No registry entry existed — no action needed
+- [x] Lands in subsection: Reference A
 
-- **Catalog leaf:** `appkit.views-and-controls.content-views.nstextview` (line 108) — unchanged
-- **Registry entry:** `"NSTextView"` → `NSTextViewPage()` (line 368) — unchanged
-- **Page file:** `SwiftKit/Pages/AppKit/ViewsAndControls/ContentViews/NSTextViewPage.swift` — rewritten
+### Leaf 6: NSTextFinder
+- [x] Header info captured (class, macOS 10.7+)
+- [x] All signatures transcribed (client, findBarContainer, isIncrementalSearchingEnabled, performAction, validateAction)
+- [x] One-line adoption (usesFindBar = true) documented
+- [x] Manual construction example documented
+- [x] Menu item wiring (performTextFinderAction tag) documented
+- [x] Catalog leaf removed from Catalog+AppKit.swift (controls section)
+- [x] Registry entry "NSTextFinder" removed from PageRegistry.swift
+- [x] Describe page deleted from disk
+- [x] Lands in subsection: Reference B
 
----
+### Leaf 7: NSTextFinderClient
+- [x] Header info captured (protocol, macOS 10.7+)
+- [x] All signatures transcribed (string, string(at:effectiveRange:endsWithSearchBoundary:), visibleCharacterRanges, scrollRangeToVisible, shouldReplaceCharacters, replaceCharacters, didReplaceCharacters)
+- [x] NSTextView already conforms — noted
+- [x] Catalog leaf removed from Catalog+AppKit.swift (controls section)
+- [x] Registry entry "NSTextFinderClient" removed from PageRegistry.swift
+- [x] Describe page deleted from disk
+- [x] Lands in subsection: Reference B
 
-## Page Section Plan (TypographyPage rhythm)
+### Leaf 8: NSTextFinderBarContainer
+- [x] Header info captured (protocol, macOS 10.7+)
+- [x] All signatures transcribed (findBarView, isFindBarVisible, findBarViewDidChangeHeight, contentView, findBarPosition)
+- [x] NSScrollView already conforms — noted
+- [x] Catalog leaf removed from Catalog+AppKit.swift (controls section)
+- [x] Registry entry "NSTextFinderBarContainer" removed from PageRegistry.swift
+- [x] Describe page deleted from disk
+- [x] Lands in subsection: Reference B
 
-1. **Header** — NSTextView, subtitle, doc path
-2. **Reference A** — Abstract class + layout types: NSText (abstract base), NSTextContainer (geometry), NSTextLayoutManager (modern TextKit 2 coordinator), NSTextContentStorage (text+attribute model), NSTextSelection (range + affinity)
-3. **Reference B** — Find infrastructure: NSTextFinder (controller), NSTextFinderClient (protocol), NSTextFinderBarContainer (protocol)
-4. **Default render** — Editable rich text inside NSScrollView (existing bridge, keep)
-5. **Text formatting** — font, color, paragraph style via NSTextStorage
-6. **Selection and ranges** — setSelectedRange, selectedRanges, selectionGranularity
-7. **Find & replace** — usesFindBar, isIncrementalSearchingEnabled
-8. **Editing** — isEditable, isFieldEditor, allowsUndo
-9. **Notes**
+## Page section plan
 
----
+1. **Header** — NSTextView, subtitle, inheritance, availability, doc path
+2. **Reference A** — NSText, NSTextContainer, NSTextLayoutManager, NSTextContentStorage, NSTextSelection; each with kind/availability badge + blurb + API snippet
+3. **Reference B** — NSTextFinder, NSTextFinderClient, NSTextFinderBarContainer; same format
+4. **Default — NSTextView** — Editable rich text inside NSScrollView via NSViewRepresentable bridge; isEditable/spellChecking/autoCorrect toggles; reset button; construction snippet
+5. **Text Formatting** — font/color/paragraph style via NSTextStorage; isRichText, importsGraphics, dark-mode adaptation
+6. **Selection and Ranges** — setSelectedRange, selectedRanges, selectionGranularity, insertionPointColor, selectedTextAttributes; notification names
+7. **Find & Replace** — usesFindBar, isIncrementalSearchingEnabled, NSTextFinder manual wiring
+8. **Editing** — isEditable, isFieldEditor, allowsUndo, auto-substitution properties, Writing Tools (macOS 15+), inspector/ruler accessories
+9. **Notes** — TextKit 2 guidance, scrollable pair, find bar, NSTextField advisory, TextKit downgrade caution
 
-## File Changes
+## Code quality review
 
-- **Rewrite:** `SwiftKit/Pages/AppKit/ViewsAndControls/ContentViews/NSTextViewPage.swift`
-- **Delete pages** (NSTextFinder describe pages already exist and must be removed):
-  - `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSTextFinderDescribePage.swift`
-  - `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSTextFinderBarContainerDescribePage.swift`
-  - `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSTextFinderClientDescribePage.swift`
-- **Catalog edits:** Delete 8 leaf entries across content-views, controls, textkit, text-display sections
-- **Registry edits:** Remove 3 entries (NSTextFinder, NSTextFinderBarContainer, NSTextFinderClient)
+- [x] L-001 clean: zero hits for `Color(red:` or `.system(size:`
+- [x] Bridges use NSViewRepresentable only (NSScrollView wrapping NSTextView)
+- [x] No custom wrapper structs — only AppKit primitives
+- [x] @State properties are private
+- [x] Coordinator pattern correct (lastSeed: Int to debounce seed resets)
+- [x] updateNSView guarded against redundant seedRichText calls
+- [x] Semantic color tokens only (NSColor.labelColor, .controlAccentColor, .findHighlightColor)
+- [x] ScrollView + VStack + PageSection rhythm followed
+- [x] Reference sections appear above demos
+- [x] galleryReadableContentWidth applied
+- [x] Build: SUCCEEDED
 
----
+## Sign-off
 
-## Risk Notes
+- Implementer: Claude Sonnet 4.6 — 2026-05-05
+- Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05
 
-- NSText, NSTextContainer, NSTextLayoutManager, NSTextContentStorage, NSTextSelection are in textkit section — they have no registry entries (all `.placeholder`). Deleting the catalog leaf is sufficient.
-- NSTextFinder family has both catalog leaves AND existing DescribePage files + registry entries — all three must be cleaned up.
-- D7 TextKit batch will cover NSLayoutManager (TextKit 1), NSTextStorage (TextKit 1), NSTextLayoutFragment, NSTextLineFragment, etc. — those are NOT absorbed here.
+## Manifest metadata
+
+- **Task ID:** D1
+- **Parent type:** NSTextView
+- **Framework:** AppKit
+- **Section:** views-and-controls / content-views
+- **Absorbed leaves:** 8 (NSText, NSTextContainer, NSTextLayoutManager, NSTextContentStorage, NSTextSelection, NSTextFinder, NSTextFinderClient, NSTextFinderBarContainer)
+- **Registry entries removed:** NSTextFinder, NSTextFinderClient, NSTextFinderBarContainer
+- **Describe pages deleted:** NSTextFinderDescribePage.swift, NSTextFinderClientDescribePage.swift, NSTextFinderBarContainerDescribePage.swift
+- **Created:** 2026-05-05

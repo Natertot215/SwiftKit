@@ -1,71 +1,110 @@
 # D5 — NSButton Family Consolidation Manifest
 
-**Date:** 2026-05-05  
-**Status:** Implementing
+**Parent page:** SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSButtonPage.swift
+**Status:** merged
 
----
+## Absorbed leaves
 
-## Scope
+| # | Type | Kind | Absorbed Into |
+|---|------|------|---------------|
+| 1 | NSPopUpButton | class : NSButton (macOS 10.0+) | NSPopUpButton section |
+| 2 | NSComboButton | class : NSControl (macOS 13.0+) | NSComboButton section |
+| 3 | NSStatusBarButton | class : NSButton (macOS 10.10+) | NSStatusBarButton section |
+| 4 | NSButtonTouchBarItem | class : NSTouchBarItem (macOS 10.15+) | NSButtonTouchBarItem section (describe-only) |
 
-Consolidate the NSButton family into a single dense page. NSButtonPage exists with good content. NSPopUpButtonPage and NSComboButtonPage are real separate pages that must be absorbed as subsections and then deleted.
+**Total absorbed:** 4 leaves (1 parent kept, 4 siblings documented inline)
 
----
+## Per-leaf coverage checklist
 
-## Absorbed Leaves (4 absorbed, parent kept)
+### Leaf 1: NSPopUpButton
+- [x] Header info captured (class : NSButton, macOS 10.0+)
+- [x] Hierarchy note: NSButton → NSPopUpButton in Reference section
+- [x] Pop-up vs pull-down modes documented (pullsDown: Bool)
+- [x] All initializers documented (frame:pullsDown:, image:pullDownMenu:, popUpMenu:target:action:, title:image:pullDownMenu:)
+- [x] Item management documented (addItem, addItems, insertItem, removeItem, removeAllItems)
+- [x] Selection API documented (selectItem(at:), selectItem(withTitle:), selectItem(withTag:), select(_:))
+- [x] Properties documented (selectedItem, titleOfSelectedItem, indexOfSelectedItem, altersStateOfSelectedItem, usesItemFromMenu, preferredEdge, autoenablesItems)
+- [x] Live NSViewRepresentable bridge with pullsDown toggle and selectedIndex Stepper
+- [x] Coordinator pattern with @objc selectionChanged(_:)
+- [x] Catalog leaf removed from Catalog+AppKit.swift (controls section, line 133)
+- [x] Registry entry "NSPopUpButton" removed from PageRegistry.swift (line 326)
+- [x] NSPopUpButtonPage.swift deleted from disk
 
-| Type | Catalog Section | Registry Key | Action |
-|------|-----------------|--------------|--------|
-| NSPopUpButton | `appkit.views-and-controls.controls.nspopupbutton` (line 133) | `"NSPopUpButton"` (line 326) | Delete catalog leaf + registry entry + page file |
-| NSComboButton | `appkit.views-and-controls.controls.nscombobutton` (line 119) | `"NSComboButton"` (line 297) | Delete catalog leaf + registry entry + page file |
-| NSStatusBarButton | `appkit.menus-cursors-and-the-dock.menu-bar-items.nsstatusbarbutton` (line 362) | none (.placeholder) | Delete catalog leaf |
-| NSButtonTouchBarItem | `appkit.touch-bar.touch-bar-items.nsbuttontouchbaritem` (line 416) | none (.placeholder) | Delete catalog leaf |
+### Leaf 2: NSComboButton
+- [x] Header info captured (class : NSControl, macOS 13.0+)
+- [x] Clarification: NSComboButton is NOT an NSButton subclass — separate NSControl
+- [x] .split vs .unified styles documented with semantic distinction
+- [x] All initializers documented (title:menu:target:action:, image:menu:target:action:, title:image:menu:target:action:)
+- [x] Menu construction pattern documented (NSMenu + addItem)
+- [x] Primary action wiring documented (target + action)
+- [x] image and imageScaling properties documented
+- [x] Live NSViewRepresentable bridge with title TextField and style RadioGroup picker
+- [x] Catalog leaf removed from Catalog+AppKit.swift (controls section, line 119)
+- [x] Registry entry "NSComboButton" removed from PageRegistry.swift (line 297)
+- [x] NSComboButtonPage.swift deleted from disk
 
----
+### Leaf 3: NSStatusBarButton
+- [x] Header info captured (class : NSButton, macOS 10.10+)
+- [x] Never-instantiate-directly rule documented — always via NSStatusItem.button
+- [x] NSStatusItem creation patterns documented (squareLength, variableLength)
+- [x] Key properties documented (image, alternateImage, title, toolTip, isEnabled, appearsDisabled, sendAction(on:))
+- [x] Menu assignment pattern documented (statusItem.menu vs button.action exclusion noted)
+- [x] No live bridge — correct; status bar items require an application context outside a SwiftUI preview
+- [x] Code snippets document full usage pattern
+- [x] Catalog leaf removed from Catalog+AppKit.swift (menu-bar-items section, line 362, was .placeholder)
+- [x] No registry entry existed — no action needed
 
-## Kept
+### Leaf 4: NSButtonTouchBarItem
+- [x] Header info captured (class : NSTouchBarItem, macOS 10.15+)
+- [x] Describe-only note explaining no live demo possible without Touch Bar hardware
+- [x] Class type signatures documented (init, withTitleAndTarget, withImage factory methods)
+- [x] Properties documented (title, image, bezelColor, isEnabled, target, action, customizationLabel)
+- [x] Touch Bar setup context documented (makeTouchBar(), touchBar(_:makeItemForIdentifier:))
+- [x] Catalog leaf removed from Catalog+AppKit.swift (touch-bar-items section, line 416, was .placeholder)
+- [x] No registry entry existed — no action needed
 
-- **Catalog leaf:** `appkit.views-and-controls.controls.nsbutton` (line 111) — unchanged
-- **Registry entry:** `"NSButton"` → `NSButtonPage()` (line 250) — unchanged
-- **Page file:** `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSButtonPage.swift` — rewritten
+## Page section plan
 
----
+Rendered via ScrollView + VStack + PageSection rhythm (TypographyPage style):
 
-## Deleted Page Files
+1. **Header** — NSButton, subtitle, inheritance : NSControl : NSView, availability (macOS 10.0+), doc path
+2. **Reference — NSButton Subclass Hierarchy** — refBlock for NSButton (root); refBlock for NSPopUpButton (subclass); refBlock for NSStatusBarButton (subclass); refBlock for NSComboButton (separate NSControl, NOT NSButton subclass)
+3. **Default — NSButton** — Live bridge with title/bezelStyle/state/isBordered/isTransparent/allowsMixedState controls; NSButtonStandardSet showing 4 convenience initializers; construction snippet
+4. **Button Types (Bezel Styles)** — Semantic bezel style enum values; image/tint/prominence properties; keyEquivalent and tri-state
+5. **NSPopUpButton** — Pop-up vs pull-down live bridge; pullsDown RadioGroup; selectedIndex Stepper; all initializers; item management; pull-down configuration
+6. **NSComboButton** — .split vs .unified live bridge; title TextField; style RadioGroup; initializers; menu construction
+7. **NSStatusBarButton** — Status bar item integration snippet; key properties; right-click/long-press menu pattern
+8. **NSButtonTouchBarItem** — Describe-only block; type signatures; Touch Bar setup context
+9. **Notes** — inheritance hierarchy summary; bezelStyle semantic guidance; tri-state checkbox; tintProminence; NSStatusBarButton always via NSStatusItem; NSButtonTouchBarItem hardware requirement
 
-- `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSPopUpButtonPage.swift`
-- `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSComboButtonPage.swift`
+## Code quality review
 
----
+- [x] L-001 clean: zero hits for `Color(red:` or `.system(size:`
+- [x] Bridges use NSViewRepresentable (NSButtonDemo, NSButtonStandardSet, NSPopUpButtonDemo, NSComboButtonDemo)
+- [x] No custom wrapper structs beyond NSViewRepresentable bridges
+- [x] @State properties are private (title, bezelStyle, isBordered, isTransparent, allowsMixedState, state, selectedIndex, pullsDown, comboTitle, comboStyle)
+- [x] NSPopUpButtonDemo Coordinator correctly guards sender.pullsDown before updating selectedIndex
+- [x] NSComboButtonDemo makeNSView creates menu with NSMenuItem.separator() — correct AppKit pattern
+- [x] NSButtonStandardSet correctly uses all 4 convenience initializers
+- [x] popUpItems is a private let constant — not state
+- [x] Semantic tokens only (no hand-mixed colors)
+- [x] ScrollView + VStack + PageSection rhythm followed
+- [x] Reference section appears above demos
+- [x] galleryReadableContentWidth applied
+- [x] Build: SUCCEEDED
 
-## Page Section Plan (TypographyPage rhythm)
+## Sign-off
 
-1. **Header** — NSButton, subtitle, doc path
-2. **Reference** — Subclass hierarchy note: NSButton → NSPopUpButton, NSButton → NSStatusBarButton
-3. **Default NSButton** — title + target/action + keyEquivalent (existing bridge, enriched)
-4. **Button types (bezel styles)** — .push, .toolbar, .circular, .helpButton, .accessoryBar, .glass, etc.
-5. **NSPopUpButton** — pop-up vs pull-down, item management, bound selectedIndex (content from NSPopUpButtonPage absorbed)
-6. **NSComboButton** — .split vs .unified, menu construction (content from NSComboButtonPage absorbed)
-7. **NSStatusBarButton** — statusItem.button usage, image, toolTip, appearsDisabled
-8. **NSButtonTouchBarItem** — describe-only (no renderable demo without hardware); type signatures
-9. **Notes** — tri-state checkbox, tintProminence, hasDestructiveAction
+- Implementer: Claude Sonnet 4.6 — 2026-05-05
+- Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05
 
----
+## Manifest metadata
 
-## File Changes
-
-- **Rewrite:** `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSButtonPage.swift`
-- **Delete:**
-  - `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSPopUpButtonPage.swift`
-  - `SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSComboButtonPage.swift`
-- **Catalog edits:** Delete 4 leaves (NSPopUpButton from controls, NSComboButton from controls, NSStatusBarButton from menu-bar-items, NSButtonTouchBarItem from touch-bar-items)
-- **Registry edits:** Remove 2 entries (NSPopUpButton, NSComboButton)
-
----
-
-## Risk Notes
-
-- NSStatusBarButton and NSButtonTouchBarItem are `.placeholder` — no registry entries. Catalog delete only.
-- NSPopUpButton and NSComboButton have both existing `.real` pages and registry entries — page files, catalog leaves, and registry entries all need cleanup.
-- NSComboButton is macOS 13.0+ — bridge must be gated with `if #available(macOS 13.0, *)`; however since the project is macOS 26 only this is guaranteed available.
-- NSButtonTouchBarItem cannot show a live demo without Touch Bar hardware — describe-only is correct.
-- NSStatusBarButton lives in `NSStatusItem.button` — a live demo requires creating an `NSStatusBar.system.statusItem(withLength:)`. Include a renderable bridge using `NSViewRepresentable` to show the concept.
+- **Task ID:** D5
+- **Parent type:** NSButton
+- **Framework:** AppKit
+- **Section:** views-and-controls / controls
+- **Absorbed leaves:** 4 (NSPopUpButton, NSComboButton, NSStatusBarButton, NSButtonTouchBarItem)
+- **Registry entries removed:** NSPopUpButton, NSComboButton
+- **Files deleted:** NSPopUpButtonPage.swift, NSComboButtonPage.swift
+- **Created:** 2026-05-05

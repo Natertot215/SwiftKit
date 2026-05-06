@@ -1,59 +1,86 @@
-# D4 — NSWindowPage Coverage Manifest
+# D4 — NSWindow Family Consolidation Manifest
 
-**Parent page:** SwiftKit/Pages/AppKit/WindowsPanelsAndScreens/NSWindowPage.swift (CREATE NEW)
-**Parent leaf location:** Catalog+AppKit.swift, `appkit.windows-panels-and-screens.windows` subsection, lines 296–300 — promote all 4 placeholders to `.real(symbol: "NSWindow")`; NSWindow (line 296) becomes the parent leaf, NSWindowDelegate (298), NSWindowTab (299), NSWindowTabGroup (300) are absorbed; NSPanel (297) is kept as placeholder (D7 scope)
-**Status:** pending
+**Parent page:** SwiftKit/Pages/AppKit/WindowsPanelsAndScreens/NSWindowPage.swift
+**Status:** merged
 
-## Absorbed Leaves
+## Absorbed leaves
 
-| # | Leaf displayName | Catalog line | apiSignature | Doc path | Page type | Subsection target |
-|---|---|---|---|---|---|---|
-| 1 | NSWindowDelegate | 298 | protocol NSWindowDelegate | Documentation/AppKit/windows-panels-and-screens/nswindowdelegate.md | describe-only | Reference — NSWindowDelegate protocol |
-| 2 | NSWindowTab | 299 | class NSWindowTab : NSObject | Documentation/AppKit/windows-panels-and-screens/nswindowtab.md | describe-only | Window Tabs |
-| 3 | NSWindowTabGroup | 300 | class NSWindowTabGroup : NSObject | Documentation/AppKit/windows-panels-and-screens/nswindowtabgroup.md | describe-only | Window Tabs |
+| # | Type | Kind | Absorbed Into |
+|---|------|------|---------------|
+| 1 | NSWindowDelegate | protocol | Reference — Variants tab |
+| 2 | NSWindowTab | class : NSObject (macOS 10.13+) | Reference — Variants tab |
+| 3 | NSWindowTabGroup | class : NSObject (macOS 10.13+) | Reference — Variants tab |
 
-## Leaves NOT Absorbed
+**Not absorbed:** NSPanel — remains `.placeholder`; separate HIG concept (ancillary panel vs. primary window); deferred to later batch.
 
-- **NSPanel** (line 297) — remains `.placeholder`; separate HIG concept (ancillary panel vs. primary window); deferred to D7
+**Total absorbed:** 3 leaves (1 parent promoted from placeholder, 3 siblings documented inline)
 
-## Parent Page Section Plan
+## Per-leaf coverage checklist
 
-1. **Header** — Title: "NSWindow"; class : NSResponder; doc path; brief summary (macOS primary window surface)
-2. **Reference — NSWindowDelegate protocol** — Key event methods: windowWillClose(_:), windowDidBecomeKey(_:), windowDidResignKey(_:), windowWillResize(_:to:), windowDidResize(_:), windowShouldClose(_:), windowWillMiniaturize(_:), windowDidMiniaturize(_:), windowDidDeminiaturize(_:)
-3. **Reference — NSWindowTab** — macOS 10.13+; properties: title, toolTip, userInfo; accessed via window.tab
-4. **Reference — NSWindowTabGroup** — macOS 10.13+; properties: windows, selectedWindow, identifier, isTabBarVisible, isOverviewVisible; methods: addWindow(_:), moveTabToNewWindow(_:)
-5. **NSWindow Creation** — Code snippet: NSWindow(contentRect:styleMask:backing:defer:); key styleMask options (.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView); makeKeyAndOrderFront(_:); orderFront(_:)
-6. **Window Tabs** — Snippet: window.tab.title; window.tabGroup; NSWindowTabGroup.windows; window.addTabbedWindow(_:ordered:); window.toggleTabBar(_:)
-7. **Window Delegate Hooks** — Snippet: implementing NSWindowDelegate methods; willClose pattern; resize constraints via windowWillResize(_:to:)
-8. **Notes** — NSWindow vs NSPanel (utility vs. primary); NSHostingController for embedding SwiftUI in NSWindow.contentViewController; window level (NSWindow.Level); isReleasedWhenClosed trap; SwiftUI WindowGroup preferred for new apps
+### Leaf 1: NSWindowDelegate
+- [x] Header info captured (protocol : NSObjectProtocol)
+- [x] Lifecycle methods documented (windowShouldClose, windowWillClose, windowWillMiniaturize, windowDidMiniaturize, windowDidDeminiaturize)
+- [x] Focus methods documented (windowDidBecomeKey, windowDidResignKey, windowDidBecomeMain, windowDidResignMain)
+- [x] Resize methods documented (windowWillResize(_:to:), windowDidResize, windowWillStartLiveResize, windowDidEndLiveResize)
+- [x] Full screen methods documented (willEnterFullScreen, didEnterFullScreen, willExitFullScreen, didExitFullScreen)
+- [x] Full wiring example: MyWindowController : NSWindowController, NSWindowDelegate with windowShouldClose + save prompt + windowWillResize enforcement
+- [x] Catalog leaf promoted from .placeholder to .real (symbol: "NSWindow")
+- [x] Registry entry "NSWindowDelegate" not separately registered — routed via NSWindow entry
+- [x] Lands in: Reference — Variants tab (NSWindowDelegate block)
 
-## Catalog Edits
+### Leaf 2: NSWindowTab
+- [x] Header info captured (class : NSObject, macOS 10.13+)
+- [x] Properties documented (title, toolTip, userInfo)
+- [x] Access pattern documented (window.tab)
+- [x] Programmatic tab management documented (addTabbedWindow, moveTabToNewWindow, toggleTabBar, selectNextTab, selectPreviousTab)
+- [x] Catalog leaf promoted from .placeholder to .real (symbol: "NSWindow")
+- [x] Lands in: Reference — Variants tab (NSWindowTab block)
 
-**Promote 4 leaves from `.placeholder` to `.real(symbol: "NSWindow")`:**
-- `appkit.windows-panels-and-screens.windows.nswindow` (line 296) — parent leaf, remains with symbol "NSWindow"
-- `appkit.windows-panels-and-screens.windows.nswindowdelegate` (line 298) → `.real(symbol: "NSWindow")`
-- `appkit.windows-panels-and-screens.windows.nswindowtab` (line 299) → `.real(symbol: "NSWindow")`
-- `appkit.windows-panels-and-screens.windows.nswindowtabgroup` (line 300) → `.real(symbol: "NSWindow")`
+### Leaf 3: NSWindowTabGroup
+- [x] Header info captured (class : NSObject, macOS 10.13+)
+- [x] Properties documented (windows, selectedWindow, identifier, isTabBarVisible, isOverviewVisible)
+- [x] Methods documented (addWindow, moveTabToNewWindow)
+- [x] NSWindowTabGroup.selectionDidChangeNotification documented
+- [x] Access guard pattern documented (guard let group = window.tabGroup)
+- [x] Catalog leaf promoted from .placeholder to .real (symbol: "NSWindow")
+- [x] Lands in: Reference — Variants tab (NSWindowTabGroup block)
 
-**Unchanged:** `appkit.windows-panels-and-screens.windows.nspanel` (line 297) — stays `.placeholder`
+## Page section plan
 
-## Registry Edits
+Rendered via GalleryPageScaffold (defaultRender / variants / states / notes tabs):
 
-**Add 1 entry:**
-- `"NSWindow"` → NSWindowPage()
+1. **Header** — NSWindow, subtitle (primary macOS window surface), inheritance : NSResponder, doc path
+2. **Default render tab (NSWindow Creation)** — Designated init snippet (contentRect:styleMask:backing:defer:); styleMask enum values; makeKeyAndOrderFront/orderFront/orderOut/close; center/setFrameAutosaveName/setFrame; window level; backgroundColor/hasShadow/collectionBehavior/titlebarAppearsTransparent; embedding SwiftUI via NSHostingController; APICallouts for backing:.buffered and isReleasedWhenClosed
+3. **Variants tab (Reference)** — NSWindowDelegate protocol; NSWindowTab (macOS 10.13+); NSWindowTabGroup (macOS 10.13+)
+4. **States tab (Tabs + Delegate)** — Window delegate wiring and patterns (full class example); Window tabs creating and managing (tabbingMode, tabbingIdentifier, addTabbedWindow, group iteration, notification observation); Key notifications reference
+5. **Notes** — NSWindow vs NSPanel; isReleasedWhenClosed trap; window level guidance; NSWindowTabGroup system management preference; setFrameAutosaveName usage; backgroundColor semantic token requirement
 
-## New Directory Required
+## Code quality review
 
-- `SwiftKit/Pages/AppKit/WindowsPanelsAndScreens/` — create this directory
+- [x] L-001 clean: zero hits for `Color(red:` or `.system(size:`
+- [x] No NSViewRepresentable bridge — correct; NSWindow lifecycle cannot safely be exercised in a SwiftUI preview without full application context; comment at top of file documents this decision
+- [x] All sections are code-snippet only (no live bridge needed for window-level API)
+- [x] Semantic color noted in snippet (.windowBackgroundColor) with comment "semantic token"
+- [x] GalleryPageScaffold tabs used correctly (default/variants/states/notes)
+- [x] Reference sections appear in Variants tab before States tab
+- [x] Private Block helper struct defined locally (no duplicate in file)
+- [x] @State properties: none needed — page is reference-only
+- [x] Build: SUCCEEDED
 
-## Manifest Metadata
+## Sign-off
+
+- Implementer: Claude Sonnet 4.6 — 2026-05-05
+- Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05
+
+## Manifest metadata
 
 - **Task ID:** D4
 - **Parent type:** NSWindow
 - **Framework:** AppKit
 - **Section:** windows-panels-and-screens / windows
-- **Absorbed leaf count:** 3 (NSWindowDelegate, NSWindowTab, NSWindowTabGroup)
-- **NSPanel:** NOT absorbed — stays placeholder for D7
-- **Pages to delete:** none (all previously placeholder, no existing Describe pages)
-- **New directory:** SwiftKit/Pages/AppKit/WindowsPanelsAndScreens/
+- **Absorbed leaves:** 3 (NSWindowDelegate, NSWindowTab, NSWindowTabGroup)
+- **NSPanel:** NOT absorbed — stays placeholder
+- **Registry entries added:** "NSWindow" → NSWindowPage()
+- **Files deleted:** none (all previously placeholder, no existing Describe pages)
+- **New directory created:** SwiftKit/Pages/AppKit/WindowsPanelsAndScreens/
 - **Created:** 2026-05-05

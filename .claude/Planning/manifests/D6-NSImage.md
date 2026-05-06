@@ -1,65 +1,114 @@
-# D6 — NSImageViewPage Expansion Manifest
+# D6 — NSImageView / NSImage Family Consolidation Manifest
 
-**Parent page:** SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSImageViewPage.swift (rewrite in place)
-**Parent leaf location:** Catalog+AppKit.swift, `appkit.views-and-controls.controls`, line 124 (NSImageView, `.real(symbol: "NSImageView")`) — stays as parent
-**Absorbed leaves:** NSImage (images-and-pdf, line 523), NSImageDelegate (images-and-pdf, line 524), NSImageRep (images-and-pdf, line 525) → routed to NSImageViewPage; NSAccessibilityImage (accessibility-for-appkit, line 468) → removed from catalog; NSScrubberImageItemView (touch-bar, line 429) → removed from catalog
-**Status:** pending
+**Parent page:** SwiftKit/Pages/AppKit/ViewsAndControls/Controls/NSImageViewPage.swift
+**Status:** merged
 
-## Absorbed Leaves
+## Absorbed leaves
 
-| # | Leaf displayName | Catalog section / line | apiSignature | Doc path | Treatment |
-|---|---|---|---|---|---|
-| 1 | NSImage | images-and-pdf.images, line 523 | class NSImage : NSObject | Documentation/AppKit/images-and-pdf/nsimage.md | Full reference section + demo |
-| 2 | NSImageDelegate | images-and-pdf.images, line 524 | protocol NSImageDelegate | Documentation/AppKit/images-and-pdf/nsimagedelegate.md | Reference subsection (describe-only) |
-| 3 | NSImageRep | images-and-pdf.images, line 525 | class NSImageRep : NSObject | Documentation/AppKit/images-and-pdf/nsimagerep.md | Reference subsection (describe-only) |
-| 4 | NSAccessibilityImage | accessibility-for-appkit.custom-view-subclasses, line 468 | protocol NSAccessibilityImage | Documentation/AppKit/accessibility-for-appkit/nsaccessibilityimage.md | Describe-only reference row; removed from catalog |
-| 5 | NSScrubberImageItemView | touch-bar.scrubber-items, line 429 | class NSScrubberImageItemView : NSScrubberItemView | Documentation/AppKit/touch-bar/nsscrubberimageitemview.md | Describe-only reference row; removed from catalog |
+| # | Type | Kind | Absorbed Into |
+|---|------|------|---------------|
+| 1 | NSImage | class : NSObject | Default render tab (NSImage creation + system images) |
+| 2 | NSImageDelegate | protocol | Reference — Variants tab |
+| 3 | NSImageRep | abstract class | Reference — Variants tab |
+| 4 | NSAccessibilityImage | protocol (describe-only) | Reference — Variants tab |
+| 5 | NSScrubberImageItemView | class : NSScrubberItemView (describe-only) | Reference — Variants tab |
 
-## Parent Page Section Plan
+**Total absorbed:** 5 leaves (1 parent kept, 5 siblings documented inline)
 
-1. **Header** — Title: "NSImageView / NSImage"; class : NSControl (NSImageView) and class : NSObject (NSImage); doc paths; brief summary
-2. **Reference — NSImage API** — Class definition; key constructors (init(named:), init(systemSymbolName:accessibilityDescription:), init(data:), init(contentsOfFile:)); key properties (size, representations, isTemplate, capInsets, resizingMode); drawing methods (draw(in:from:operation:fraction:))
-3. **Reference — NSImageDelegate protocol** — Single optional method: image(_:didLoadRepresentation:withStatus:); usage for async load monitoring
-4. **Reference — NSImageRep class** — Abstract base for image representations; subclasses (NSBitmapImageRep, NSCIImageRep, NSPDFImageRep, NSEPSImageRep, NSCustomImageRep); key properties (size, colorSpaceName, bitsPerSample, pixelsWide, pixelsHigh)
-5. **Reference — NSAccessibilityImage** — Describe-only; protocol provides accessibilityLabel(); conformed to by NSImageView automatically; custom views adopt when displaying images
-6. **Reference — NSScrubberImageItemView** — Describe-only; macOS 10.12.2+; class : NSScrubberItemView; imageView property (NSImageView); used in Touch Bar scrubbers
-7. **NSImage Creation + Named System Images** — Live demo: NSImage(systemSymbolName:) with several SF Symbols; snippet showing init variants; NSImage.Name constants (NSImageNameApplicationIcon etc.); isTemplate flag
-8. **NSImageView Display Modes + Scaling** — Live NSViewRepresentable bridge (existing demo preserved); controls for imageScaling, imageAlignment, imageFrameStyle, contentTintColor; snippet for all FrameStyle values
-9. **Image Accessibility** — Snippet: NSImageView auto-conforms NSAccessibilityImage; set accessibilityDescription on NSImage at creation time; contentTintColor does not affect accessibility; VoiceOver reads the description
-10. **Notes** — NSImageView vs SwiftUI Image/AsyncImage; isTemplate for tinting; symbolConfiguration for SF Symbols; NSImageDelegate for async load; NSImageRep internals rarely needed directly
+## Per-leaf coverage checklist
 
-## Catalog Edits
+### Leaf 1: NSImage
+- [x] Header info captured (class : NSObject)
+- [x] All constructor variants documented: systemSymbolName:accessibilityDescription:, named:, data:, contentsOfFile:, contentsOf: URL, cgImage:size:
+- [x] NSImage.Name constants documented (applicationIcon, cautionName, menuOnStateTemplate)
+- [x] Key properties documented (size, representations, isTemplate, capInsets, resizingMode)
+- [x] Drawing methods documented (draw(in:), draw(in:from:operation:fraction:))
+- [x] Cache control documented (cacheMode, recache)
+- [x] Live NSViewRepresentable bridge: 6 SF Symbols rendered in NSStackView with NSImageView + NSColor.controlAccentColor tint
+- [x] APICallout: accessibilityDescription accessibility guidance
+- [x] Catalog leaf promoted from .placeholder to .real (symbol: "NSImageView") in images-and-pdf section
+- [x] Registry entry "NSImage" added → NSImageViewPage()
+- [x] Lands in: Default render tab
 
-**images-and-pdf.images:**
-- `appkit.images-and-pdf.images.nsimage` (line 523): `.placeholder` → `.real(symbol: "NSImageView")`
-- `appkit.images-and-pdf.images.nsimagedelegate` (line 524): `.placeholder` → `.real(symbol: "NSImageView")`
-- `appkit.images-and-pdf.images.nsimagerep` (line 525): `.placeholder` → `.real(symbol: "NSImageView")`
+### Leaf 2: NSImageDelegate
+- [x] Header info captured (protocol : NSObjectProtocol)
+- [x] All optional methods documented: image(_:didLoadRepresentation:with:) with NSImage.LoadStatus enum cases (.completed, .cancelled, .invalidData, .unexpectedEOF, .readError)
+- [x] image(_:willLoadRepresentation:) documented
+- [x] Usage pattern documented (myImage.delegate = self)
+- [x] Practical scope note: only needed for async/on-demand loading
+- [x] Catalog leaf promoted from .placeholder to .real (symbol: "NSImageView")
+- [x] Registry entry "NSImageDelegate" added → NSImageViewPage()
+- [x] Lands in: Reference — Variants tab
 
-**accessibility-for-appkit.custom-view-subclasses:**
-- `appkit.accessibility-for-appkit.custom-view-subclasses.nsaccessibilityimage` (line 468): DELETE leaf entirely (trivial; folded into page reference)
+### Leaf 3: NSImageRep
+- [x] Header info captured (abstract class : NSObject)
+- [x] Concrete subclasses documented: NSBitmapImageRep, NSCIImageRep, NSPDFImageRep, NSEPSImageRep, NSCustomImageRep
+- [x] Key properties documented (size, pixelsWide, pixelsHigh, colorSpaceName, bitsPerSample, bitsPerPixel, isOpaque)
+- [x] Rep management documented (addRepresentation, removeRepresentation, representations)
+- [x] bestRepresentation(for:context:hints:) documented
+- [x] Catalog leaf promoted from .placeholder to .real (symbol: "NSImageView")
+- [x] Registry entry "NSImageRep" added → NSImageViewPage()
+- [x] Lands in: Reference — Variants tab
 
-**touch-bar.scrubber-items:**
-- `appkit.touch-bar.scrubber-items.nsscrubberimageitemview` (line 429): DELETE leaf entirely (trivial; folded into page reference)
+### Leaf 4: NSAccessibilityImage
+- [x] Header info captured (protocol : NSAccessibilityElementProtocol, describe-only)
+- [x] NSImageView auto-adoption noted
+- [x] Single required method documented: accessibilityLabel() -> String?
+- [x] VoiceOver forwarding mechanism documented (forwards to image?.accessibilityDescription)
+- [x] Decorative image nil pattern documented
+- [x] Custom view adoption example shown
+- [x] Catalog leaf deleted from Catalog+AppKit.swift (accessibility-for-appkit section, line 468)
+- [x] No registry entry added (trivial reference, not a navigation target)
+- [x] Lands in: Reference — Variants tab (describe-only block)
 
-**Unchanged:** `appkit.views-and-controls.controls.nsimageview` (line 124) — parent leaf, `.real(symbol: "NSImageView")` stays
+### Leaf 5: NSScrubberImageItemView
+- [x] Header info captured (class : NSScrubberItemView, macOS 10.12.2+, describe-only)
+- [x] Usage as NSScrubber item view class documented
+- [x] scrubber.register pattern documented
+- [x] NSScrubberDataSource callback shown (scrubber(_:viewForItemAt:))
+- [x] imageView property noted (embedded NSImageView for scaling/tint configuration)
+- [x] Catalog leaf deleted from Catalog+AppKit.swift (touch-bar scrubber-items section, line 429)
+- [x] No registry entry added (Touch Bar describe-only, not a navigation target)
+- [x] Lands in: Reference — Variants tab (describe-only block)
 
-## Registry Edits
+## Page section plan
 
-**Add 3 entries** (point absorbed image-section leaves to NSImageViewPage):
-- `"NSImage"` → NSImageViewPage()
-- `"NSImageDelegate"` → NSImageViewPage()
-- `"NSImageRep"` → NSImageViewPage()
+Rendered via GalleryPageScaffold (defaultRender / variants / states / notes tabs):
 
-**NSAccessibilityImage and NSScrubberImageItemView:** not added to registry (catalog leaves deleted)
+1. **Header** — NSImageView / NSImage, subtitle describing both roles, inheritance info, doc paths
+2. **Default render tab (NSImage creation)** — Live NSStackView bridge showing 6 SF Symbols with accent tint; NSImage constructor variants snippet; key properties snippet; APICallout for accessibilityDescription
+3. **Variants tab (Reference)** — NSImageDelegate protocol; NSImageRep class (with subclasses list); NSAccessibilityImage protocol (describe-only); NSScrubberImageItemView (describe-only)
+4. **States tab (NSImageView)** — Live NSImageViewDemo bridge with symbolName picker, imageScaling picker, imageFrameStyle picker, useTint toggle; NSImageView full configurable API snippet; Image Accessibility snippet
+5. **Notes** — NSImageView vs SwiftUI Image; contentTintColor / multicolor note; symbol effects order requirement; isEditable vs NSButton for tap-to-act; NSImageRep direct construction rarity; NSAccessibilityImage auto-adoption
 
-**Keep:** `"NSImageView"` → NSImageViewPage() (already present)
+## Code quality review
 
-## Manifest Metadata
+- [x] L-001 clean: zero hits for `Color(red:` or `.system(size:`
+- [x] Bridges use NSViewRepresentable (NSImageViewDemo, NSImageNamedDemo)
+- [x] No custom wrapper structs beyond NSViewRepresentable bridges
+- [x] @State properties are private (symbolName, scaling, alignment, frameStyle, useTint)
+- [x] NSImageNamedDemo uses a let constant for symbols — not state, not a @State
+- [x] NSImageViewDemo updateNSView sets all 5 properties on every update — correct for a demo with independent controls
+- [x] symbolConfiguration set before effects (respects ordering requirement)
+- [x] contentTintColor: useTint ? .controlAccentColor : nil — correct nil to suppress tint
+- [x] Semantic tokens only (NSColor.controlAccentColor in demo bridge)
+- [x] GalleryPageScaffold tabs used correctly (default/variants/states/notes)
+- [x] Reference sections appear in Variants tab before States tab
+- [x] Private Block helper struct defined locally
+- [x] Build: SUCCEEDED
+
+## Sign-off
+
+- Implementer: Claude Sonnet 4.6 — 2026-05-05
+- Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05
+
+## Manifest metadata
 
 - **Task ID:** D6
 - **Parent type:** NSImageView (expanded to cover NSImage family)
 - **Framework:** AppKit
 - **Section:** views-and-controls / controls (primary); images-and-pdf; accessibility-for-appkit; touch-bar (source sections)
-- **Absorbed leaf count:** 5 total (3 rerouted, 2 deleted from catalog)
-- **Pages to delete:** none (all previously placeholder, no existing Describe pages)
+- **Absorbed leaves:** 5 (NSImage, NSImageDelegate, NSImageRep rerouted; NSAccessibilityImage, NSScrubberImageItemView deleted from catalog)
+- **Registry entries added:** NSImage, NSImageDelegate, NSImageRep → NSImageViewPage()
+- **Files deleted:** none (all previously placeholder, no existing Describe pages)
 - **Created:** 2026-05-05

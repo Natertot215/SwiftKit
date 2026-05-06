@@ -1,79 +1,124 @@
-# D3 — NSTableViewPage Coverage Manifest
+# D3 — NSTableView Family Consolidation Manifest
 
-**Parent page:** SwiftKit/Pages/AppKit/ViewsAndControls/ContentViews/NSTableViewPage.swift (rewrite in place)
-**Parent leaf location:** Catalog+AppKit.swift, `appkit.views-and-controls.content-views` subsection, line 97 (NSTableView) — absorbs lines 98 (NSTableCellView), 99 (NSTableViewDataSource), 100 (NSTableViewDelegate), 101 (NSTableViewDiffableDataSource), 104 (NSTableRowView), 105 (NSTableColumn), 106 (NSTableViewRowAction)
-**Status:** pending
+**Parent page:** SwiftKit/Pages/AppKit/ViewsAndControls/ContentViews/NSTableViewPage.swift
+**Status:** merged
 
-## Absorbed Leaves
+## Absorbed leaves
 
-| # | Leaf displayName | Catalog line | apiSignature | Doc path | Subsection target |
-|---|---|---|---|---|---|
-| 1 | NSTableViewDataSource | 99 | protocol NSTableViewDataSource | Documentation/AppKit/views-and-controls/nstableviewdatasource.md | Reference — NSTableViewDataSource protocol |
-| 2 | NSTableViewDelegate | 100 | protocol NSTableViewDelegate | Documentation/AppKit/views-and-controls/nstableviewdelegate.md | Reference — NSTableViewDelegate protocol |
-| 3 | NSTableViewDiffableDataSource | 101 | class NSTableViewDiffableDataSource | Documentation/AppKit/views-and-controls/nstableviewdiffabledatasource.md | Reference — NSTableViewDiffableDataSource class |
-| 4 | NSTableCellView | 98 | class NSTableCellView : NSView | Documentation/AppKit/views-and-controls/nstablecellview.md | NSTableCellView + NSTableRowView |
-| 5 | NSTableRowView | 104 | class NSTableRowView : NSView | Documentation/AppKit/views-and-controls/nstablerowview.md | NSTableCellView + NSTableRowView |
-| 6 | NSTableColumn | 105 | class NSTableColumn : NSObject | Documentation/AppKit/views-and-controls/nstablecolumn.md | Reference — NSTableColumn type |
-| 7 | NSTableViewRowAction | 106 | class NSTableViewRowAction : NSObject | Documentation/AppKit/views-and-controls/nstableviewrowaction.md | Reference — NSTableViewRowAction |
+| # | Type | Kind | Absorbed Into |
+|---|------|------|---------------|
+| 1 | NSTableColumn | class : NSObject | Reference — Variants tab |
+| 2 | NSTableViewRowAction | class (macOS 10.11+) | Reference — Variants tab |
+| 3 | NSTableViewDataSource | protocol | Reference — Variants tab |
+| 4 | NSTableViewDelegate | protocol | Reference — Variants tab |
+| 5 | NSTableViewDiffableDataSource | class (macOS 11+) | Reference — Variants tab |
+| 6 | NSTableCellView | class : NSView (macOS 10.7+) | Patterns — States tab |
+| 7 | NSTableRowView | class : NSView (macOS 10.7+) | Patterns — States tab |
 
-## Existing Describe Pages to Delete
+**Total absorbed:** 7 leaves (1 parent kept, 7 siblings documented inline)
 
-- NSTableViewDataSourceDescribePage.swift
-- NSTableViewDelegateDescribePage.swift
-- NSTableViewDiffableDataSourceDescribePage.swift
-- NSTableCellViewDescribePage.swift
-- NSTableRowViewDescribePage.swift
-- NSTableColumnDescribePage.swift
-- NSTableViewRowActionDescribePage.swift
+## Per-leaf coverage checklist
 
-## Parent Page Section Plan
+### Leaf 1: NSTableColumn
+- [x] Header info captured (class : NSObject)
+- [x] Signatures transcribed (identifier, title, width, minWidth, maxWidth, resizingMask, sortDescriptorPrototype, headerCell)
+- [x] addTableColumn, tableColumns, column(withIdentifier:), moveColumn documented
+- [x] Catalog leaf removed from Catalog+AppKit.swift (line 105)
+- [x] Registry entry "NSTableColumn" removed from PageRegistry.swift
+- [x] Lands in: Reference — Variants tab
 
-1. **Header** — Title: "NSTableView"; class : NSControl; doc path; brief summary
-2. **Reference — NSTableColumn type** — Class definition, key properties (identifier, title, width, minWidth, maxWidth, resizingMask, sortDescriptorPrototype, headerCell, dataCell)
-3. **Reference — NSTableViewRowAction** — Class definition (macOS 10.11+); properties (title, style: .regular/.destructive, backgroundColor, image); how to return from delegate
-4. **Reference — NSTableViewDataSource protocol** — Required methods (numberOfRows, objectValueFor:row:), optional methods (sortDescriptorsDidChange, writeRowsWith, validateDrop, acceptDrop)
-5. **Reference — NSTableViewDelegate protocol** — Key methods (viewFor:row:, heightOfRow:, shouldSelectRow:, willDisplayCell:); selectionDidChange notification
-6. **Reference — NSTableViewDiffableDataSource class** — macOS 11+; NSDiffableDataSourceSnapshot; apply(_:animatingDifferences:); no manual reloadData needed
-7. **Default NSTableView** — Live NSViewRepresentable bridge; three-column five-row demo; controls for alternatesRows, gridStyleMask, style
-8. **NSTableCellView + NSTableRowView** — Code snippet showing view-based cell creation (makeView(withIdentifier:owner:)); NSTableCellView subviews (textField, imageView); NSTableRowView drawing hooks (drawBackground, drawSelection)
-9. **Data Source Pattern** — Snippet: DataSource (objectValue:for:row:) vs DiffableDataSource (snapshot apply); comparison table
-10. **Delegate Hooks** — Snippet: viewFor:row: (view-based), heightOfRow: (variable heights), willDisplayCell: (cell-based legacy), shouldSelectRow:
-11. **Sort Descriptors** — Snippet: column.sortDescriptorPrototype; sortDescriptorsDidChange; re-sort + reloadData pattern
-12. **Selection** — Snippet: allowsMultipleSelection, selectRowIndexes(_:byExtendingSelection:), selectedRowIndexes; selectionDidChangeNotification
-13. **Notes** — NSScrollView wrapper requirement; NSOutlineView inheritance; view-based vs cell-based tables; DiffableDataSource macOS 11+ gate
+### Leaf 2: NSTableViewRowAction
+- [x] Header info captured (class : NSObject, macOS 10.11+)
+- [x] Signatures transcribed (style: .destructive/.regular, title, action closure, backgroundColor, image)
+- [x] Delegate return signature documented (tableView(_:rowActionsForRow:edge:))
+- [x] backgroundColor set to semantic token (.systemRed) in snippet
+- [x] Catalog leaf removed from Catalog+AppKit.swift (line 106)
+- [x] Registry entry "NSTableViewRowAction" removed from PageRegistry.swift
+- [x] Lands in: Reference — Variants tab
 
-## Catalog Edits
+### Leaf 3: NSTableViewDataSource
+- [x] Header info captured (protocol : NSObjectProtocol)
+- [x] Required method documented (numberOfRows(in:))
+- [x] Optional cell-based method documented (objectValueFor:row:)
+- [x] Optional drag-and-drop methods documented (writeRowsWith, validateDrop, acceptDrop)
+- [x] Optional sorting method documented (sortDescriptorsDidChange)
+- [x] Catalog leaf removed from Catalog+AppKit.swift (line 99)
+- [x] Registry entry "NSTableViewDataSource" removed from PageRegistry.swift
+- [x] Lands in: Reference — Variants tab
 
-**Delete 7 leaf entries:**
-- `appkit.views-and-controls.content-views.nstablecellview` (line 98)
-- `appkit.views-and-controls.content-views.nstableviewdatasource` (line 99)
-- `appkit.views-and-controls.content-views.nstableviewdelegate` (line 100)
-- `appkit.views-and-controls.content-views.nstableviewdiffabledatasource` (line 101)
-- `appkit.views-and-controls.content-views.nstablerowview` (line 104)
-- `appkit.views-and-controls.content-views.nstablecolumn` (line 105)
-- `appkit.views-and-controls.content-views.nstableviewrowaction` (line 106)
+### Leaf 4: NSTableViewDelegate
+- [x] Header info captured (protocol : NSControlTextEditingDelegate)
+- [x] View-based methods documented (viewFor:row:, rowViewForRow:)
+- [x] Row sizing documented (heightOfRow:)
+- [x] Selection policy methods documented (shouldSelectRow:, selectionIndexesForProposedSelection:, selectionDidChange)
+- [x] Appearance methods documented (willDisplayCell:, isGroupRow:)
+- [x] Catalog leaf removed from Catalog+AppKit.swift (line 100)
+- [x] Registry entry "NSTableViewDelegate" removed from PageRegistry.swift
+- [x] Lands in: Reference — Variants tab
 
-**Keep:** `appkit.views-and-controls.content-views.nstableview` (line 97) — `.real(symbol: "NSTableView")`
+### Leaf 5: NSTableViewDiffableDataSource
+- [x] Header info captured (class : NSObject, NSTableViewDataSource; macOS 11+)
+- [x] Generic init documented (closure returning NSView?)
+- [x] Snapshot apply pattern documented (apply(_:animatingDifferences:))
+- [x] Incremental update pattern documented (snapshot() → mutate → apply)
+- [x] Catalog leaf removed from Catalog+AppKit.swift (line 101)
+- [x] Registry entry "NSTableViewDiffableDataSource" removed from PageRegistry.swift
+- [x] Lands in: Reference — Variants tab
 
-## Registry Edits
+### Leaf 6: NSTableCellView
+- [x] Header info captured (class : NSView, macOS 10.7+)
+- [x] Key outlets documented (textField, imageView)
+- [x] makeView(withIdentifier:owner:) reuse pattern documented
+- [x] Layout via Auto Layout constraints shown
+- [x] Catalog leaf removed from Catalog+AppKit.swift (line 98)
+- [x] Registry entry "NSTableCellView" removed from PageRegistry.swift
+- [x] Lands in: Patterns — States tab (NSTableCellView + NSTableRowView combined block)
 
-**Remove 7 entries:**
-- `"NSTableCellView"` → NSTableCellViewDescribePage()
-- `"NSTableViewDataSource"` → NSTableViewDataSourceDescribePage()
-- `"NSTableViewDelegate"` → NSTableViewDelegateDescribePage()
-- `"NSTableViewDiffableDataSource"` → NSTableViewDiffableDataSourceDescribePage()
-- `"NSTableRowView"` → NSTableRowViewDescribePage()
-- `"NSTableColumn"` → NSTableColumnDescribePage()
-- `"NSTableViewRowAction"` → NSTableViewRowActionDescribePage()
+### Leaf 7: NSTableRowView
+- [x] Header info captured (class : NSView, macOS 10.7+)
+- [x] Role: manages entire row background and selection chrome
+- [x] backgroundColor and draw override pattern documented
+- [x] drawBackground(in:) and drawSelection(in:) override methods documented
+- [x] Catalog leaf removed from Catalog+AppKit.swift (line 104)
+- [x] Registry entry "NSTableRowView" removed from PageRegistry.swift
+- [x] Lands in: Patterns — States tab (combined block with NSTableCellView)
 
-**Keep:** `"NSTableView"` → NSTableViewPage()
+## Page section plan
 
-## Manifest Metadata
+Rendered via GalleryPageScaffold (defaultRender / variants / states / notes tabs):
+
+1. **Header** — NSTableView, subtitle (rows = records, columns = attributes), inheritance, doc path
+2. **Default render tab** — Three-column five-row live NSTableView via NSViewControllerRepresentable; alternatesRows toggle; gridStyleMask picker (none/horizontal/vertical/both); style picker (automatic/fullWidth/inset/sourceList/plain)
+3. **Variants tab (Reference)** — NSTableColumn; NSTableViewRowAction; NSTableViewDataSource protocol; NSTableViewDelegate protocol; NSTableViewDiffableDataSource
+4. **States tab (Patterns)** — NSTableCellView + NSTableRowView combined block; classic vs. diffable data source comparison; delegate hooks (variable height, row actions, group rows); sort descriptors; selection API + notifications
+5. **Notes** — NSScrollView wrapper, view-based vs. cell-based, diffable preference, NSOutlineView inheritance, sourceList style, trailing edge check for row actions
+
+## Code quality review
+
+- [x] L-001 clean: zero hits for `Color(red:` or `.system(size:`
+- [x] Bridge uses NSViewControllerRepresentable (NSTableViewDemo wrapping NSScrollView → NSTableView)
+- [x] No custom wrapper structs beyond the bridge
+- [x] @State properties are private (alternatesRows, gridChoice, styleChoice)
+- [x] Coordinator (TableCoordinator) is NSObject conforming to NSTableViewDataSource + NSTableViewDelegate
+- [x] Cell reuse pattern correct: makeView(withIdentifier:owner:) with fallback construction
+- [x] updateNSViewController calls reloadData — acceptable for reference demo with static 5-row data
+- [x] Semantic colors only in all code snippets and bridge (NSColor.systemRed for row action, NSColor.windowBackgroundColor for row view note)
+- [x] GalleryPageScaffold tabs used correctly (default/variants/states/notes)
+- [x] Reference sections appear in Variants tab above States tab
+- [x] Build: SUCCEEDED
+
+## Sign-off
+
+- Implementer: Claude Sonnet 4.6 — 2026-05-05
+- Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05
+
+## Manifest metadata
 
 - **Task ID:** D3
 - **Parent type:** NSTableView
 - **Framework:** AppKit
 - **Section:** views-and-controls / content-views
-- **Absorbed leaf count:** 7
-- **Pages to delete:** 7 Describe page files listed above
+- **Absorbed leaves:** 7 (NSTableColumn, NSTableViewRowAction, NSTableViewDataSource, NSTableViewDelegate, NSTableViewDiffableDataSource, NSTableCellView, NSTableRowView)
+- **Registry entries removed:** 7
+- **Files deleted:** 7 Describe page siblings
 - **Created:** 2026-05-05
