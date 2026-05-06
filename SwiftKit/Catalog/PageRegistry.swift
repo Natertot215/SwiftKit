@@ -332,6 +332,7 @@ enum PageRegistry {
         "NSUserInterfaceValidations":                                                               { _ in AnyView(NSUserInterfaceValidationsDescribePage()) },
         "NSValidatedUserInterfaceItem":                                                             { _ in AnyView(NSValidatedUserInterfaceItemDescribePage()) },
         "NSView":                                                                                   { _ in AnyView(NSViewPage()) },
+        "NSWindow":                                                                                 { _ in AnyView(NSWindowPage()) },
         "NSViewAnimation":                                                                          { _ in AnyView(NSViewAnimationPage()) },
         "NSViewControllerPresentationAnimator":                                                     { _ in AnyView(NSViewControllerPresentationAnimatorDescribePage()) },
         "NSViewToolTipOwner":                                                                       { _ in AnyView(NSViewToolTipOwnerDescribePage()) },
