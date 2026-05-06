@@ -122,7 +122,6 @@ enum PageRegistry {
         "EmptyModifier":                                                                            { _ in AnyView(EmptyModifierPage()) },
         "EmptyVisualEffect":                                                                        { _ in AnyView(BlendCompositingPage()) },
         "Enhancing your app content with tab navigation":                                           { _ in AnyView(EnhancingTabNavigationPage()) },
-        "EnvironmentValues/backgroundMaterial":                                                     { _ in AnyView(BackgroundOverlayPage()) },
         "EnvironmentValues/contentTransition":                                                      { _ in AnyView(ContentTransitionPage()) },
         "EnvironmentValues/contentTransitionAddsDrawingGroup":                                      { _ in AnyView(ContentTransitionPage()) },
         "EnvironmentValues/dismiss":                                                                { _ in AnyView(DismissPage()) },
