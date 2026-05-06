@@ -13,7 +13,7 @@
 - DatePickerStyle: Catalog+SwiftUI.swift, `swiftui.view-styles` subsection, line 441
 - (No ColorPickerStyle — ColorPicker has no style protocol)
 
-**Status:** implementing
+**Status:** reviewed
 
 ## Absorbed leaves
 
@@ -172,7 +172,7 @@ ColorPickerPage remains as currently structured (no consolidation needed):
 ## Sign-off
 
 - Implementer: Claude Opus 4.7 (1M ctx) — 2026-05-05
-- Spec-compliance reviewer: _awaiting review_
+- Spec-compliance reviewer: Claude Opus 4.7 (1M ctx) — 2026-05-05 — APPROVED (commit 07f5ee3)
 - Code-quality reviewer: _awaiting review_
 
 ## Manifest metadata
