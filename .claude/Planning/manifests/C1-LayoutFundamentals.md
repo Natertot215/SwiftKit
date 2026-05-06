@@ -4,7 +4,7 @@
 
 **Parent leaves:** Catalog+SwiftUI.swift lines ~864–901 (`swiftui.layout-fundamentals` section)
 
-**Status:** implementing
+**Status:** merged
 
 **Task type:** Authoring (not absorption) — consolidate 34 real leaves into ~10 dense pages
 
@@ -251,7 +251,7 @@ Target: ~10 pages consolidating 34 leaves.
 
 - [x] Implementer: Claude Sonnet 4.6 — 2026-05-05 — all 7 dense pages authored, catalog + registry updated, build clean, L-001/L-012 zero hits
 - [x] Spec-compliance reviewer: Claude Sonnet 4.6 — 2026-05-05 — all manifest checklist boxes confirmed against produced pages; StacksPage (VStack/HStack/ZStack/zIndex sections present, body order matches plan, alignment+spacing variants, notes); LazyStackPage (LazyVStack/LazyHStack/PinnedViews/Notes, guide content absorbed); GridPage (Grid/GridRow/GridItem + all 4 gridCell* modifiers, correct subsections and demos); LazyGridPage (LazyVGrid/LazyHGrid/GridItem reference, 3 column modes demoed); BackgroundOverlayPage (all 5 background + 3 overlay + 2 containerBackground variants + ContainerBackgroundPlacement enum); SpacerPage (default/minLength/HStack/VStack/Notes); ViewThatFitsPage (default+axes+notes); catalog 34→9 leaves confirmed; registry entries verified; BUILD SUCCEEDED
-- [ ] Code-quality reviewer: Dense pages follow TypographyPage structure and Guidelines/macuix-rules.md
+- [x] Code-quality reviewer: Claude Sonnet 4.6 — 2026-05-05 — all 7 dense pages clean; L-001/L-012 zero violations (Color(hue:) in LazyStackPage is illustrative demo content per L-012 scope, not system chrome); named Color.red/blue/green in StacksPage/GridPage are illustrative palette colors; build clean; TypographyPage rhythm consistent; @State private correct; ForEach stable IDs; Apple-only primitives throughout
 
 ---
 
