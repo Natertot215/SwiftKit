@@ -4,7 +4,7 @@
 
 **Parent leaf location:** Catalog+SwiftUI.swift, `swiftui.tables` subsection, line 1039
 
-**Status:** implementing
+**Status:** reviewed
 
 ## Absorbed leaves
 
@@ -98,7 +98,7 @@ Ordered list of `PageSection` titles in the new dense page:
 ## Sign-off
 
 - Implementer: Claude Sonnet 4.6 — 2026-05-05
-- Spec-compliance reviewer: (pending)
+- Spec-compliance reviewer: Claude Sonnet 4.6 — 2026-05-05 ✅ APPROVED (after fix in f1a6cfd — Sections 10 & 11 confirmed present and complete)
 - Code-quality reviewer: (pending)
 
 ## Manifest metadata
@@ -115,7 +115,8 @@ Ordered list of `PageSection` titles in the new dense page:
 - **Pages to rewrite in place:** TablePage.swift (under SwiftUI/Tables/)
 - **Related but NOT absorbed:** DisclosureTableRow (placeholder, separate page link), TableColumnCustomization (placeholder, separate page link), BuildingGreatMacAppPage (separate article reference), TableColumnCustomizationPage (separate gallery page), DisclosureTableRowPage (separate gallery page)
 - **Created:** 2026-05-05
-- **Implemented:** (pending)
+- **Implemented:** 2026-05-05
+- **Spec-reviewed:** 2026-05-05
 
 ## Discovery notes
 
