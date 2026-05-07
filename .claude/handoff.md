@@ -2,11 +2,11 @@
 
 > Rewrite at the end of every session. Always reflects current state.
 
-**Last session:** 2026-05-07 *(strip-and-restart event)*
-**Git:** `main` ahead of `origin/main`. Last commit `ee95864` is the strip commit.
-**HEAD:** `ee95864 Strip — restart from canonical Reference shape`
+**Last session:** 2026-05-07 *(strip-and-restart + sidebar placeholder template)*
+**Git:** `main` ahead of `origin/main`. Last commit `753f4d9` is the placeholder-template commit.
+**HEAD:** `753f4d9 Sidebar placeholder template — 3 folders × 3 sub × 9 pages`
 **Tags:** `pre-restart` → `62db021` *(snapshot of full pre-strip corpus, recoverable via `git show pre-restart:<path>`)*
-**Build:** ✅ `** BUILD SUCCEEDED **` after the strip.
+**Build:** ✅ `** BUILD SUCCEEDED **` after both the strip *(`ee95864`)* and the placeholder template *(`753f4d9`)*.
 
 ## What the strip did *(2026-05-07)*
 
@@ -27,17 +27,17 @@ Documented in `// The Nexus // Claude // SwiftKit — Where The Mess Came From.m
 ## Current state
 
 ```
-Total Swift files:         20
+Total Swift files:         21
   Shell + scaffolds:       14
-  Reference pages:         5
-  Shared:                  1 (DescribePage.swift)
+  Reference pages:         5 (on disk, unregistered while placeholder template active)
+  Shared:                  2 (DescribePage.swift, PlaceholderGalleryPage.swift)
 
-GalleryRegistry entries:   5 (all Reference)
-Sidebar folders:           1 (Reference, single-tier-collapsed)
+GalleryRegistry entries:   81 (placeholder template: 3 frameworks × 3 sub-folders × 9 pages)
+Sidebar folders:           3 main ("Folder 1/2/3"), 9 sub-folders ("Subfolder X.Y"), 81 pages
 Documentation mirror:      2,535 markdown files (intact, unchanged)
 ```
 
-The shell, scaffolds, and Reference pages are all proven and unchanged. The Documentation mirror is intact and is the authoring source for everything that comes next.
+The shell, scaffolds, and Reference pages are all proven and unchanged. The placeholder template exercises the full 3-tier disclosure (framework → folder → page). The 5 Reference pages remain on disk as authoring models; they re-register when their slot is replaced by real content. The Documentation mirror is intact and is the authoring source for everything that comes next.
 
 ## What's next
 
@@ -83,6 +83,7 @@ Both retained for historical record. **Do not execute either plan** — both ass
 
 ## Open follow-ups
 
-- Author the pilot page *(`ButtonGalleryPage`)*.
+- Visual QA pass on placeholder template — confirm 3-tier disclosure mechanics, default selection, and `PlaceholderGalleryPage` routing all behave as desired.
+- Settle the open decisions before pilot *(see `// The Nexus // Projects // Project SwiftKit // SwiftKit Handoff - 5-7.md`)*: GalleryPageScaffold delete? DescribePage keep? Folder name lock-in? Button as pilot?
+- Author the pilot page *(`ButtonGalleryPage`)*. When it lands, replace the matching placeholder block in `GalleryRegistry` and revert `Framework.displayName` for that case to its canonical label.
 - After pilot, write `.claude/Planning/2026-05-07-restart-spec.md` with the locked-in folder + page list.
-- Visual QA pass through running app *(currently 5 Reference pages — should all render correctly)*.
