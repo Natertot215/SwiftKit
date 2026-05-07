@@ -9,10 +9,63 @@ struct AccessibilityCustomContentGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Importance variants
+
+            VariantTile(
+                name: ".default importance",
+                api: #".accessibilityCustomContent("Author", "K. Wong")"#
+            ) {
+                VStack(alignment: .leading) {
+                    Text("Designing for VoiceOver")
+                        .font(.headline)
+                    Text("K. Wong")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityCustomContent("Author", "K. Wong")
+            }
+
+            VariantTile(
+                name: ".high importance",
+                api: #".accessibilityCustomContent("Status", "Overdue", importance: .high)"#
+            ) {
+                Label("Q3 Report", systemImage: "doc.text")
+                    .accessibilityCustomContent("Status", "Overdue", importance: .high)
+            }
+
+            // MARK: Keyed content
+
+            VariantTile(
+                name: "AccessibilityCustomContentKey",
+                api: #"AccessibilityCustomContentKey("Reading time")"#
+            ) {
+                Text("12 min read")
+                    .font(.callout)
+                    .accessibilityCustomContent(
+                        AccessibilityCustomContentKey("Reading time"),
+                        Text("12 minutes")
+                    )
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityCustomContentKey",
+                signature: "struct AccessibilityCustomContentKey",
+                note: "Pre-key your custom content so multiple values share a label across the app — VoiceOver can present them as a unified attribute."
+            )
+
+            ReferenceTile(
+                name: "AXCustomContent.Importance",
+                signature: "enum AXCustomContent.Importance { case `default`, high }",
+                note: ".default: the value is announced when the user requests more info. .high: announced automatically on every focus."
+            )
+
+            ReferenceTile(
+                name: "Apple guidance",
+                signature: "Surface secondary metadata without bloating the visible label.",
+                note: "Use for attributes the visible UI conveys via icons or position — author, due date, file type. Don't replace `accessibilityLabel`."
             )
         }
     }

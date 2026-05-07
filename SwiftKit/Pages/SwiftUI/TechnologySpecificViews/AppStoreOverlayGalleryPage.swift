@@ -9,10 +9,29 @@ struct AppStoreOverlayGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "appStoreOverlay(isPresented:configuration:)",
+                signature: "func appStoreOverlay(isPresented: Binding<Bool>, configuration: () -> SKOverlay.Configuration) -> some View",
+                note: "Presents an SKOverlay over the current scene. The closure returns a configured SKOverlay.AppConfiguration (or AppClipConfiguration) describing which app to promote and the position style. iOS-only — overlays are not displayed on macOS.",
+                badge: "iOS only"
+            )
+
+            ReferenceTile(
+                name: "Required import",
+                signature: "import StoreKit",
+                note: "SKOverlay and SKOverlay.Configuration come from StoreKit. The modifier itself lives in the SwiftUI overlay-bridging layer."
+            )
+
+            ReferenceTile(
+                name: "Configuration shape",
+                signature: "SKOverlay.AppConfiguration(appIdentifier: String, position: SKOverlay.Position)",
+                note: "Apple App Store ID is required. Position is typically .bottom or .bottomRaised so the overlay clears the home indicator."
+            )
+
+            ReferenceTile(
+                name: "Use case",
+                signature: "Cross-promote a sibling app or App Clip parent",
+                note: "Use sparingly — Apple recommends overlays for genuine cross-promotion (companion app, parent app from an App Clip), not generic upsell."
             )
         }
     }

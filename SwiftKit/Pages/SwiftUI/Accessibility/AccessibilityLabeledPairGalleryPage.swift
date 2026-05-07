@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct AccessibilityLabeledPairGalleryPage: View {
+    @Namespace private var pairNamespace
+
     var body: some View {
         GalleryItemPage(
             title: Self.item.title,
@@ -9,10 +11,55 @@ struct AccessibilityLabeledPairGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: ".label / .content",
+                api: ".accessibilityLabeledPair(role: .label, id: \"battery\", in: ns)"
+            ) {
+                HStack(spacing: 12) {
+                    Text("Battery")
+                        .accessibilityLabeledPair(role: .label, id: "battery", in: pairNamespace)
+                    Text("78%")
+                        .accessibilityLabeledPair(role: .content, id: "battery", in: pairNamespace)
+                }
+                .font(.callout)
+            }
+
+            VariantTile(
+                name: "decoupled label/value pair",
+                api: "Same id across non-adjacent views",
+                height: 110
+            ) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Wi-Fi")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .accessibilityLabeledPair(role: .label, id: "wifi", in: pairNamespace)
+                    Text("Studio-5G")
+                        .font(.headline)
+                        .accessibilityLabeledPair(role: .content, id: "wifi", in: pairNamespace)
+                }
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityLabeledPairRole",
+                signature: "enum AccessibilityLabeledPairRole { case label, content }",
+                note: "Identifies which side of the pair a view represents. VoiceOver reads them as a single concatenated element."
+            )
+
+            ReferenceTile(
+                name: "Namespace required",
+                signature: "@Namespace private var ns",
+                note: "The id must be unique within the namespace. Declare a `@Namespace` in the view that owns both halves of the pair."
+            )
+
+            ReferenceTile(
+                name: "When to use",
+                signature: "Inspector rows, settings tables, key/value summaries.",
+                note: "Use when label and value are visually separated (across columns, with whitespace) but semantically belong together. For inline pairs, just `accessibilityElement(children: .combine)`."
             )
         }
     }

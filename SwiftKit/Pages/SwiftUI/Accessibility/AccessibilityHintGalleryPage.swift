@@ -9,10 +9,56 @@ struct AccessibilityHintGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Variants
+
+            VariantTile(
+                name: "Text hint",
+                api: #".accessibilityHint(Text("Double tap to like"))"#
+            ) {
+                Button {
+                } label: {
+                    Image(systemName: "heart")
+                }
+                .accessibilityHint(Text("Double tap to like"))
+            }
+
+            VariantTile(
+                name: "string literal",
+                api: #".accessibilityHint("Opens the share sheet")"#
+            ) {
+                Button {
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .accessibilityHint("Opens the share sheet")
+            }
+
+            VariantTile(
+                name: "isEnabled toggle",
+                api: ".accessibilityHint(_:isEnabled: false)"
+            ) {
+                Button("Save") {}
+                    .accessibilityHint("Saves the current document", isEnabled: false)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "When to use",
+                signature: "Hints supplement labels — they describe the *result* of activation.",
+                note: "If a control's purpose can be inferred from the label, skip the hint. VoiceOver users can disable hints globally and rely on labels alone."
+            )
+
+            ReferenceTile(
+                name: "Voice-over delay",
+                signature: "VoiceOver speaks the hint ~2s after the label.",
+                note: "Keep hints to one short phrase. Long hints are easy to miss and frustrating to wait through."
+            )
+
+            ReferenceTile(
+                name: "Don't repeat the label",
+                signature: "Bad: label 'Like', hint 'Like this post'.",
+                note: "Good: label 'Like', hint 'Adds to your favorites'. Tell users what happens, not what the button is."
             )
         }
     }

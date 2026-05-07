@@ -1,6 +1,12 @@
 import SwiftUI
 
+// WritingToolsBehavior — control the Writing Tools editing experience for
+// text and text input. The behavior types themselves don't render; demos
+// show TextEditor/TextField with each behavior applied.
+
 struct WritingToolsBehaviorGalleryPage: View {
+    @State private var draftText: String = "Compose a quick note here…"
+
     var body: some View {
         GalleryItemPage(
             title: Self.item.title,
@@ -9,10 +15,66 @@ struct WritingToolsBehaviorGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            VariantTile(
+                name: ".writingToolsBehavior(.automatic)",
+                api: ".writingToolsBehavior(.automatic)"
+            ) {
+                TextEditor(text: $draftText)
+                    .frame(height: 60)
+                    .writingToolsBehavior(.automatic)
+            }
+
+            VariantTile(
+                name: ".writingToolsBehavior(.complete)",
+                api: ".writingToolsBehavior(.complete)"
+            ) {
+                TextEditor(text: $draftText)
+                    .frame(height: 60)
+                    .writingToolsBehavior(.complete)
+            }
+
+            VariantTile(
+                name: ".writingToolsBehavior(.limited)",
+                api: ".writingToolsBehavior(.limited)"
+            ) {
+                TextEditor(text: $draftText)
+                    .frame(height: 60)
+                    .writingToolsBehavior(.limited)
+            }
+
+            VariantTile(
+                name: ".writingToolsBehavior(.disabled)",
+                api: ".writingToolsBehavior(.disabled)"
+            ) {
+                TextEditor(text: $draftText)
+                    .frame(height: 60)
+                    .writingToolsBehavior(.disabled)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "WritingToolsBehavior",
+                signature: "struct WritingToolsBehavior",
+                note: "Controls the Writing Tools editing experience for text and text input. Apply to a TextEditor, TextField, or any container that hosts editable text."
+            )
+
+            ReferenceTile(
+                name: "Available values",
+                signature: ".automatic · .complete · .limited · .disabled",
+                note: ".automatic — system default; .complete — full Writing Tools panel; .limited — inline suggestions only; .disabled — opt out entirely. Values exist as static type properties."
+            )
+
+            ReferenceTile(
+                name: "writingToolsBehavior(_:)",
+                signature: "func writingToolsBehavior(_ behavior: WritingToolsBehavior) -> some View",
+                note: "Applies the behavior to this view's text-input descendants. Inheritable — set once on a container and every TextField/TextEditor below picks it up."
+            )
+
+            ReferenceTile(
+                name: "Availability",
+                signature: "// macOS 15.0+ / iOS 18.0+",
+                note: "Writing Tools shipped alongside Apple Intelligence in macOS 15. On older systems, the modifier compiles but is a no-op."
             )
         }
     }

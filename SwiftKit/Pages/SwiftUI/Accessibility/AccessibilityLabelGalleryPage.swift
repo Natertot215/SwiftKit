@@ -9,10 +9,70 @@ struct AccessibilityLabelGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Variants
+
+            VariantTile(
+                name: "string literal",
+                api: #".accessibilityLabel("Like")"#
+            ) {
+                Button {
+                } label: {
+                    Image(systemName: "heart")
+                }
+                .accessibilityLabel("Like")
+            }
+
+            VariantTile(
+                name: "Text label",
+                api: #".accessibilityLabel(Text("Send message"))"#
+            ) {
+                Button {
+                } label: {
+                    Image(systemName: "paperplane.fill")
+                }
+                .accessibilityLabel(Text("Send message"))
+            }
+
+            VariantTile(
+                name: "isEnabled gate",
+                api: ".accessibilityLabel(_:isEnabled: false)"
+            ) {
+                Button("Profile") {}
+                    .accessibilityLabel("User profile", isEnabled: false)
+            }
+
+            VariantTile(
+                name: "content closure",
+                api: ".accessibilityLabel { Text(\"Settings\"); Text(\"unread\") }"
+            ) {
+                Button {
+                } label: {
+                    Image(systemName: "gearshape")
+                }
+                .accessibilityLabel {
+                    Text("Settings")
+                    Text("3 unread")
+                }
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "When SwiftUI fills it for you",
+                signature: "Text-bearing controls inherit their label automatically.",
+                note: "`Button(\"Save\")` already labels itself \"Save\". Reach for `accessibilityLabel` only when the visible UI is icon-only or otherwise non-textual."
+            )
+
+            ReferenceTile(
+                name: "Don't include 'button' or 'image'",
+                signature: "VoiceOver appends the role automatically.",
+                note: "Bad: \"Send button\". Good: \"Send\". The role is communicated by the AccessibilityTraits attached to the control."
+            )
+
+            ReferenceTile(
+                name: "Pair with hint and value",
+                signature: ".accessibilityHint, .accessibilityValue",
+                note: "Label = what the control is. Hint = what activation does. Value = the current state. All three answer different questions."
             )
         }
     }

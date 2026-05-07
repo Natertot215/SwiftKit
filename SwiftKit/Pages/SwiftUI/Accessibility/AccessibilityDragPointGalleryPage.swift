@@ -9,10 +9,50 @@ struct AccessibilityDragPointGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: "single drag point",
+                api: #".accessibilityDragPoint(.center, description: Text("Move card"))"#
+            ) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.tint.opacity(0.25))
+                    .frame(width: 120, height: 60)
+                    .overlay(Text("Drag me").font(.caption))
+                    .accessibilityDragPoint(.center, description: Text("Move card"))
+            }
+
+            VariantTile(
+                name: "named handle",
+                api: #".accessibilityDragPoint(.topLeading, description: Text("Top-left grip"))"#
+            ) {
+                RoundedRectangle(cornerRadius: 8)
+                    .strokeBorder(.tint, lineWidth: 1.5)
+                    .frame(width: 120, height: 60)
+                    .accessibilityDragPoint(
+                        .topLeading,
+                        description: Text("Top-left grip")
+                    )
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "Pair with accessibilityDropPoint",
+                signature: ".accessibilityDropPoint(_:description:)",
+                note: "A drag origin without a drop target can't complete an accessible drag-and-drop. Define both endpoints with descriptive labels VoiceOver speaks during the gesture."
+            )
+
+            ReferenceTile(
+                name: "isEnabled overload",
+                signature: "func accessibilityDragPoint(_:description:isEnabled:)",
+                note: "Toggle drag availability per state — for example, disable while a row is in edit mode or while a transaction is pending."
+            )
+
+            ReferenceTile(
+                name: "Description text",
+                signature: "Text(\"Move {item} to a new column\")",
+                note: "VoiceOver reads the description verbatim when the user starts a drag. Use full sentences and identify the item being dragged."
             )
         }
     }

@@ -9,10 +9,28 @@ struct HandlesGameControllerEventsGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "handlesGameControllerEvents(matching:)",
+                signature: "func handlesGameControllerEvents(matching mask: GCUIEventTypes) -> some View",
+                note: "Declares that this view handles a given class of game controller events. Without the modifier, gamepad input flows to the system's default handlers (focus engine, parental-control overlays)."
+            )
+
+            ReferenceTile(
+                name: "GCUIEventTypes",
+                signature: "struct GCUIEventTypes: OptionSet  //  .gamepad, .pause, .menu …",
+                note: "Mask the event categories the view consumes. Common usage is .gamepad — letting your app receive raw button/stick input — combined with reading GCController.controllers() for state."
+            )
+
+            ReferenceTile(
+                name: "Required import",
+                signature: "import GameController",
+                note: "GameController framework. Gate the modifier behind GCController.controllers().isEmpty == false if you also support keyboard/mouse input, so non-gamepad sessions stay clean."
+            )
+
+            ReferenceTile(
+                name: "Use case",
+                signature: "Custom game scenes / immersive controller routing",
+                note: "The default focus engine (used for buttons and pickers) intercepts dpad/stick events. Apply this modifier on the in-game view so SwiftUI lets the events reach your input system instead."
             )
         }
     }

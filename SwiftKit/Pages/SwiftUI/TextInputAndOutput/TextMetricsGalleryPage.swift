@@ -1,5 +1,8 @@
 import SwiftUI
 
+// Text metrics — baseline offset, kerning, tracking. All operate on Text
+// (not arbitrary View) and return Text so they compose with other Text mods.
+
 struct TextMetricsGalleryPage: View {
     var body: some View {
         GalleryItemPage(
@@ -9,10 +12,103 @@ struct TextMetricsGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: baselineOffset
+
+            VariantTile(
+                name: "Default baseline",
+                api: "// no modifier"
+            ) {
+                Text("AaBbCc")
+                    .font(.title3)
+            }
+
+            VariantTile(
+                name: ".baselineOffset(8)",
+                api: ".baselineOffset(8)"
+            ) {
+                HStack(alignment: .firstTextBaseline, spacing: 0) {
+                    Text("E=mc")
+                    Text("2").baselineOffset(8).font(.caption)
+                }
+                .font(.title3)
+            }
+
+            VariantTile(
+                name: ".baselineOffset(-6)",
+                api: ".baselineOffset(-6)"
+            ) {
+                HStack(alignment: .firstTextBaseline, spacing: 0) {
+                    Text("H")
+                    Text("2").baselineOffset(-6).font(.caption)
+                    Text("O")
+                }
+                .font(.title3)
+            }
+
+            // MARK: kerning
+
+            VariantTile(
+                name: ".kerning(2)",
+                api: ".kerning(2)"
+            ) {
+                Text("LIGATURE")
+                    .kerning(2)
+                    .font(.title3)
+            }
+
+            VariantTile(
+                name: ".kerning(-1)",
+                api: ".kerning(-1)"
+            ) {
+                Text("LIGATURE")
+                    .kerning(-1)
+                    .font(.title3)
+            }
+
+            // MARK: tracking
+
+            VariantTile(
+                name: ".tracking(4)",
+                api: ".tracking(4)"
+            ) {
+                Text("WIDE")
+                    .tracking(4)
+                    .font(.title3)
+            }
+
+            VariantTile(
+                name: ".tracking(-2)",
+                api: ".tracking(-2)"
+            ) {
+                Text("TIGHT")
+                    .tracking(-2)
+                    .font(.title3)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "baselineOffset(_:)",
+                signature: "func baselineOffset(_ baselineOffset: CGFloat) -> Text",
+                note: "Shifts the rendered baseline by the given amount in points. Positive values move text up; negative move it down. Useful for sub/superscripts."
+            )
+
+            ReferenceTile(
+                name: "kerning(_:)",
+                signature: "func kerning(_ kerning: CGFloat) -> Text",
+                note: "Adjusts spacing between specific character pairs that the font has kerning information for. Set to 0 for the font's natural kerning."
+            )
+
+            ReferenceTile(
+                name: "tracking(_:)",
+                signature: "func tracking(_ tracking: CGFloat) -> Text",
+                note: "Adds a uniform amount of space between every character in the run. Unlike kerning, tracking does not vary by glyph pair — it's flat letter-spacing."
+            )
+
+            ReferenceTile(
+                name: "kerning vs tracking",
+                signature: "// kerning = pair-aware, tracking = uniform",
+                note: "When both are applied, the effects compound. Kerning preserves the font's typographic intent; tracking reads more like a hard letter-spacing override."
             )
         }
     }

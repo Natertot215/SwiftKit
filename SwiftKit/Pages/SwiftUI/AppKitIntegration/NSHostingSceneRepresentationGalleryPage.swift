@@ -9,10 +9,28 @@ struct NSHostingSceneRepresentationGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "NSHostingSceneRepresentation",
+                signature: "class NSHostingSceneRepresentation<Content> where Content : Scene",
+                note: "AppKit-side host that owns and presents a SwiftUI Scene tree. Use from an AppKit-lifecycle app (NSApplicationDelegate-based) to surface SwiftUI scenes — Settings, WindowGroup — without converting the entire app shell."
+            )
+
+            ReferenceTile(
+                name: "Initializer",
+                signature: "init(rootScene: Content)",
+                note: "Construct with the SwiftUI Scene to host. The resulting NSHostingSceneRepresentation is the bridge object — register it with NSApplication so it participates in scene management."
+            )
+
+            ReferenceTile(
+                name: "Add to NSApplication",
+                signature: "NSApplication.shared.addSceneRepresentation(_:)",
+                note: "Hand the representation to NSApplication so the system tracks its lifecycle. Settings scenes, in particular, integrate with the standard ⌘, shortcut once registered."
+            )
+
+            ReferenceTile(
+                name: "When to reach for it",
+                signature: "AppKit-lifecycle apps that want SwiftUI scenes",
+                note: "An app already built around AppKit and NSApplicationMain that wants to add a SwiftUI Settings scene or document group without porting the whole app to the SwiftUI App protocol."
             )
         }
     }

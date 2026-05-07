@@ -9,10 +9,62 @@ struct AccessibilityHeadingGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Heading levels
+
+            VariantTile(
+                name: "h1",
+                api: ".accessibilityHeading(.h1)"
+            ) {
+                Text("Settings")
+                    .font(.title)
+                    .accessibilityHeading(.h1)
+            }
+
+            VariantTile(
+                name: "h2",
+                api: ".accessibilityHeading(.h2)"
+            ) {
+                Text("General")
+                    .font(.title2)
+                    .accessibilityHeading(.h2)
+            }
+
+            VariantTile(
+                name: "h3",
+                api: ".accessibilityHeading(.h3)"
+            ) {
+                Text("Appearance")
+                    .font(.title3)
+                    .accessibilityHeading(.h3)
+            }
+
+            VariantTile(
+                name: ".unspecified",
+                api: ".accessibilityHeading(.unspecified)"
+            ) {
+                Text("Section divider")
+                    .font(.headline)
+                    .accessibilityHeading(.unspecified)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityHeadingLevel",
+                signature: "enum AccessibilityHeadingLevel { case unspecified, h1, h2, h3, h4, h5, h6 }",
+                note: "Mirrors HTML heading levels. Use exactly one h1 per screen and nest subsequent levels logically — VoiceOver users navigate by heading hierarchy."
+            )
+
+            ReferenceTile(
+                name: "Pair with traits",
+                signature: ".accessibilityAddTraits(.isHeader)",
+                note: "Older macOS still relies on the `.isHeader` trait. Apply both for maximum compatibility on long-lived codebases."
+            )
+
+            ReferenceTile(
+                name: "Apple guidance",
+                signature: "Don't skip levels just because the visible text is smaller.",
+                note: "Heading hierarchy is for navigation, not styling. A small subtitle can still be h2 if it groups the section below it."
             )
         }
     }

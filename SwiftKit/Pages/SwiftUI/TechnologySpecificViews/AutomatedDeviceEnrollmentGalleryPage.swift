@@ -9,10 +9,22 @@ struct AutomatedDeviceEnrollmentGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "automatedDeviceEnrollmentAddition(isPresented:)",
+                signature: "func automatedDeviceEnrollmentAddition(isPresented: Binding<Bool>) -> some View",
+                note: "Presents the system Automated Device Enrollment (ADE) flow so an unsupervised device can be added to an MDM solution. The sheet is fully system-driven — there is no developer-supplied UI surface inside it."
+            )
+
+            ReferenceTile(
+                name: "Required import & entitlement",
+                signature: "import DeviceManagement  //  com.apple.developer.devicemanagement.automated-device-enrollment",
+                note: "DeviceManagement framework + ADE entitlement. Restricted distribution — Apple gates this entitlement to specific MDM/IT use cases."
+            )
+
+            ReferenceTile(
+                name: "Use case",
+                signature: "MDM-aware admin / kiosk apps",
+                note: "Companion to ABM/ASM enrollment. Most consumer apps will never need this; it surfaces here for completeness."
             )
         }
     }

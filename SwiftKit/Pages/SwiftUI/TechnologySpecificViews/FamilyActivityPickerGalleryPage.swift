@@ -9,10 +9,28 @@ struct FamilyActivityPickerGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "familyActivityPicker(isPresented:selection:)",
+                signature: "func familyActivityPicker(isPresented: Binding<Bool>, selection: Binding<FamilyActivitySelection>) -> some View",
+                note: "Presents the system picker that lets the user choose apps, web domains, and categories to subject to Screen Time controls. The selection is opaque tokens — your app never receives identifiable bundle IDs."
+            )
+
+            ReferenceTile(
+                name: "familyActivityPicker(headerText:footerText:isPresented:selection:)",
+                signature: "func familyActivityPicker(headerText: String?, footerText: String?, isPresented: Binding<Bool>, selection: Binding<FamilyActivitySelection>) -> some View",
+                note: "Same picker with optional header/footer copy explaining context to the user."
+            )
+
+            ReferenceTile(
+                name: "Required import & entitlement",
+                signature: "import FamilyControls  //  com.apple.developer.family-controls",
+                note: "Family Controls entitlement is gated by Apple — restricted to apps in the parental-controls / education space. AuthorizationCenter.shared.requestAuthorization(for: .individual) must succeed before presenting."
+            )
+
+            ReferenceTile(
+                name: "FamilyActivitySelection",
+                signature: "struct FamilyActivitySelection: Codable, Hashable",
+                note: "Holds opaque ApplicationToken / WebDomainToken / ActivityCategoryToken sets. Persist it (e.g. in @AppStorage with Codable) and pass to ManagedSettings or DeviceActivity to enforce restrictions."
             )
         }
     }

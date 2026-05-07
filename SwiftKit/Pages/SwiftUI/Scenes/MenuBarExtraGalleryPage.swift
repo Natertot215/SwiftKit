@@ -9,10 +9,34 @@ struct MenuBarExtraGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "Pull-down menu form",
+                signature: "MenuBarExtra(\"Status\", systemImage: \"hammer\") { Button(\"Action\") { } Divider() Button(\"Quit\") { } }",
+                note: "Default style — a system menu drops down when the user clicks the menu bar item. Children must be Buttons, Toggles, Dividers, or other menu-eligible items."
+            )
+
+            ReferenceTile(
+                name: "Custom window form",
+                signature: ".menuBarExtraStyle(.window)",
+                note: "Switches to a popover-style window that hosts an arbitrary SwiftUI view — appropriate for richer status panels (volume sliders, mini-players, dashboards). Default is the menu form."
+            )
+
+            ReferenceTile(
+                name: "Visibility binding",
+                signature: "MenuBarExtra(\"…\", isInserted: $showMenuBar) { … }",
+                note: "Bind isInserted to a Bool to programmatically add or remove the menu bar item — useful for letting the user hide it from a Settings toggle."
+            )
+
+            ReferenceTile(
+                name: "MenuBarExtraStyle",
+                signature: "protocol MenuBarExtraStyle  // .menu (default) and .window",
+                note: "Built-in styles: .menu renders a system pull-down; .window renders a popover-style window. Apply via .menuBarExtraStyle(_:) on the MenuBarExtra scene."
+            )
+
+            ReferenceTile(
+                name: "App configuration",
+                signature: "Set LSUIElement = true in Info.plist to suppress the Dock icon",
+                note: "MenuBarExtra-only utilities typically run as accessory apps. Add LSUIElement (\"Application is agent\") = YES in Info.plist so the app appears only in the menu bar without a Dock presence or app menu."
             )
         }
     }

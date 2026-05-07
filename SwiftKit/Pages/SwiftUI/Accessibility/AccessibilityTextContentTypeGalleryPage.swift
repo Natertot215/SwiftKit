@@ -9,10 +9,74 @@ struct AccessibilityTextContentTypeGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: ".plain (default)",
+                api: ".accessibilityTextContentType(.plain)"
+            ) {
+                Text("The fox jumps over the lazy dog.")
+                    .font(.callout)
+                    .accessibilityTextContentType(.plain)
+            }
+
+            VariantTile(
+                name: ".sourceCode",
+                api: ".accessibilityTextContentType(.sourceCode)"
+            ) {
+                Text("let x = foo.bar()")
+                    .font(.system(.callout, design: .monospaced))
+                    .accessibilityTextContentType(.sourceCode)
+            }
+
+            VariantTile(
+                name: ".console",
+                api: ".accessibilityTextContentType(.console)"
+            ) {
+                Text("$ xcodebuild build")
+                    .font(.system(.callout, design: .monospaced))
+                    .accessibilityTextContentType(.console)
+            }
+
+            VariantTile(
+                name: ".fileSystem",
+                api: ".accessibilityTextContentType(.fileSystem)"
+            ) {
+                Text("/Users/nathan/projects/")
+                    .font(.system(.callout, design: .monospaced))
+                    .accessibilityTextContentType(.fileSystem)
+            }
+
+            VariantTile(
+                name: ".messaging",
+                api: ".accessibilityTextContentType(.messaging)"
+            ) {
+                Text("Hey — running 5 min late!")
+                    .font(.callout)
+                    .accessibilityTextContentType(.messaging)
+            }
+
+            VariantTile(
+                name: ".narrative",
+                api: ".accessibilityTextContentType(.narrative)"
+            ) {
+                Text("Once upon a time…")
+                    .font(.callout)
+                    .accessibilityTextContentType(.narrative)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityTextContentType",
+                signature: "struct AccessibilityTextContentType  // .plain, .sourceCode, .console, .fileSystem, .messaging, .narrative, .spreadsheet, .wordProcessing",
+                note: "Hints at the structure of the text. VoiceOver tunes pronunciation, punctuation handling, and pause cadence per type."
+            )
+
+            ReferenceTile(
+                name: "Why it matters",
+                signature: "Source code is read literally; narrative is read as prose.",
+                note: "Without the hint, VoiceOver pauses at every punctuation mark inside source code. With `.sourceCode`, it preserves the syntactic flow of the language."
             )
         }
     }

@@ -9,10 +9,28 @@ struct CurrentEntitlementTaskGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "currentEntitlementTask(for:priority:action:)",
+                signature: "func currentEntitlementTask(for productID: Product.ID, priority: TaskPriority = .userInitiated, action: @escaping (EntitlementTaskState<VerificationResult<Transaction>?>) async -> Void) -> some View",
+                note: "Runs an async task tied to view lifetime that streams the user's current entitlement for a given product ID. The state value is .loading, .success(value), or .failure(error)."
+            )
+
+            ReferenceTile(
+                name: "Required import",
+                signature: "import StoreKit",
+                note: "Wraps Transaction.currentEntitlement(for:) in a SwiftUI-friendly task. Same data, lifecycle managed by the modifier."
+            )
+
+            ReferenceTile(
+                name: "Pattern",
+                signature: ".currentEntitlementTask(for: \"premium.monthly\") { state in … }",
+                note: "Use to gate UI on subscription status without manually managing AsyncSequence loops. The task is automatically cancelled when the view disappears and re-runs when the productID changes."
+            )
+
+            ReferenceTile(
+                name: "EntitlementTaskState",
+                signature: "enum EntitlementTaskState<Value> { case loading; case success(Value); case failure(Error) }",
+                note: "Inspect the case to decide whether to show a placeholder, the entitled UI, or an error fallback."
             )
         }
     }

@@ -9,10 +9,28 @@ struct ManageSubscriptionsSheetGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "manageSubscriptionsSheet(isPresented:)",
+                signature: "func manageSubscriptionsSheet(isPresented: Binding<Bool>) -> some View",
+                note: "Presents the system sheet for managing all of the user's auto-renewable subscriptions for this app. The user can upgrade, downgrade, or cancel from inside the sheet."
+            )
+
+            ReferenceTile(
+                name: "manageSubscriptionsSheet(isPresented:subscriptionGroupID:)",
+                signature: "func manageSubscriptionsSheet(isPresented: Binding<Bool>, subscriptionGroupID: String) -> some View",
+                note: "Variant scoped to a single subscription group ID — useful when an app sells multiple unrelated subscriptions and only one group is relevant in this context."
+            )
+
+            ReferenceTile(
+                name: "Required import",
+                signature: "import StoreKit",
+                note: "Replaces the older AppStore.showManageSubscriptions(in:) UIWindowScene API with a SwiftUI-native presentation modifier."
+            )
+
+            ReferenceTile(
+                name: "Use case",
+                signature: "Settings → Subscription / cancel flows",
+                note: "Surfacing this sheet is the App Store-compliant way to let users cancel — never build a custom cancellation UI."
             )
         }
     }

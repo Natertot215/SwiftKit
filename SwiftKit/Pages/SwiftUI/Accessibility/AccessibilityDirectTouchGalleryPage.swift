@@ -9,10 +9,53 @@ struct AccessibilityDirectTouchGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: "default direct-touch area",
+                api: ".accessibilityDirectTouch()"
+            ) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.tint.opacity(0.2))
+                    .frame(width: 140, height: 60)
+                    .overlay(Text("Drawing canvas").font(.caption))
+                    .accessibilityDirectTouch()
+            }
+
+            VariantTile(
+                name: "silent on touch",
+                api: ".accessibilityDirectTouch(options: .silentOnTouch)"
+            ) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.tint.opacity(0.2))
+                    .frame(width: 140, height: 60)
+                    .overlay(Text("Pad").font(.caption))
+                    .accessibilityDirectTouch(options: .silentOnTouch)
+            }
+
+            VariantTile(
+                name: "requires activation",
+                api: ".accessibilityDirectTouch(options: .requiresActivation)"
+            ) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.tint.opacity(0.2))
+                    .frame(width: 140, height: 60)
+                    .overlay(Text("Instrument").font(.caption))
+                    .accessibilityDirectTouch(options: .requiresActivation)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityDirectTouchOptions",
+                signature: "struct AccessibilityDirectTouchOptions : OptionSet  // .silentOnTouch, .requiresActivation",
+                note: "OptionSet used to refine direct-touch behavior. Combine flags as needed."
+            )
+
+            ReferenceTile(
+                name: "When to reach for it",
+                signature: "Drawing canvases, musical instruments, video-game controls, signature pads.",
+                note: "VoiceOver normally swallows touches to read elements aloud. Direct touch lets the underlying view receive raw input — at the cost of standard VoiceOver navigation inside the region."
             )
         }
     }

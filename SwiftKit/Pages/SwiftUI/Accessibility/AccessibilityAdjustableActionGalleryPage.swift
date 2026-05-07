@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct AccessibilityAdjustableActionGalleryPage: View {
+    @State private var value: Int = 5
+
     var body: some View {
         GalleryItemPage(
             title: Self.item.title,
@@ -9,10 +11,49 @@ struct AccessibilityAdjustableActionGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demo
+
+            VariantTile(
+                name: "increment / decrement handler",
+                api: ".accessibilityAdjustableAction { direction in … }"
+            ) {
+                VStack(spacing: 6) {
+                    Text("\(value)")
+                        .font(.title2)
+                        .monospacedDigit()
+                    Text("Custom stepper")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityElement(children: .combine)
+                .accessibilityValue(Text("\(value)"))
+                .accessibilityAdjustableAction { direction in
+                    switch direction {
+                    case .increment: value += 1
+                    case .decrement: value -= 1
+                    @unknown default: break
+                    }
+                }
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityAdjustmentDirection",
+                signature: "enum AccessibilityAdjustmentDirection { case increment, decrement }",
+                note: "VoiceOver maps swipe-up to .increment and swipe-down to .decrement. Switch Control offers explicit Increase / Decrease commands."
+            )
+
+            ReferenceTile(
+                name: "Pair with accessibilityValue",
+                signature: ".accessibilityValue(Text(currentValue))",
+                note: "An adjustable element without a spoken value is silent — always pair the action with `accessibilityValue` so VoiceOver reads the new value after each adjustment."
+            )
+
+            ReferenceTile(
+                name: "Use sparingly",
+                signature: "Best for custom controls that mimic Slider, Stepper, Picker, or DatePicker.",
+                note: "Native controls already adopt the trait — only reach for this when you've replaced the default control with a custom rendering."
             )
         }
     }

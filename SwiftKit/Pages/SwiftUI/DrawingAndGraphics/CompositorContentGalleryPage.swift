@@ -9,10 +9,39 @@ struct CompositorContentGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "CompositorContent",
+                signature: "@MainActor protocol CompositorContent",
+                note: "Protocol describing renderable content composed by SwiftUI's compositor. Conforming types declare a `body` of further compositor content, mirroring the View protocol's compositional shape.",
+                badge: "macOS 26+"
+            )
+
+            ReferenceTile(
+                name: "CompositorContentBuilder",
+                signature: "@resultBuilder struct CompositorContentBuilder",
+                note: "Result builder that lets compositor-content `body` properties declare their content imperatively — same authoring shape as `@ViewBuilder` for SwiftUI views.",
+                badge: "macOS 26+"
+            )
+
+            ReferenceTile(
+                name: "AnyCompositorContent",
+                signature: "@frozen struct AnyCompositorContent : CompositorContent",
+                note: "Type-erased wrapper for compositor content. Use it to store heterogeneous content nodes in collections or to return varying content from a single property.",
+                badge: "macOS 26+"
+            )
+
+            ReferenceTile(
+                name: "Authoring pattern",
+                signature: "struct MyContent: CompositorContent { var body: some CompositorContent { ... } }",
+                note: "Compositor-content types compose like Views — a `body` returning further compositor content, with the result builder collecting child nodes."
+            )
+
+            ReferenceTile(
+                name: "Why no live demo?",
+                signature: "// macOS 26 compositor content has no general-purpose visual surface",
+                note: "CompositorContent is a foundation protocol with no canvas of its own — concrete usage depends on platform-specific compositors. Consult Apple's macOS 26 documentation for renderable conformers."
             )
         }
     }

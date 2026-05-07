@@ -9,10 +9,23 @@ struct WKNotificationSceneGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "WKNotificationScene",
+                signature: "struct WKNotificationScene<Content> : Scene where Content : View",
+                note: "watchOS-only Scene that activates when a notification of a specified category arrives. Catalog placeholder — macOS apps use UNNotificationCenter and UI surfaces inside their existing scenes for notification handling.",
+                badge: "watchOS"
+            )
+
+            ReferenceTile(
+                name: "Initializer",
+                signature: "init(controller:category:)  /  init(content:category:)",
+                note: "Pair the scene with a notification category identifier. The controller form bridges to a WKUserNotificationHostingController; the content form takes a SwiftUI view directly."
+            )
+
+            ReferenceTile(
+                name: "Cross-platform note",
+                signature: "macOS notifications: UNUserNotificationCenter + standard windows",
+                note: "On macOS, notifications surface through UserNotifications.framework rather than a dedicated Scene type — handle them via UNUserNotificationCenterDelegate and present detail UI from existing scenes."
             )
         }
     }

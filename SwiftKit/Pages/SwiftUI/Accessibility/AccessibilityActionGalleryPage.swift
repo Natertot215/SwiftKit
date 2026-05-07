@@ -9,10 +9,72 @@ struct AccessibilityActionGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Action kinds
+
+            VariantTile(
+                name: "default action",
+                api: ".accessibilityAction { … }"
+            ) {
+                Button("Activate") {}
+                    .accessibilityAction {}
+            }
+
+            VariantTile(
+                name: ".magicTap",
+                api: ".accessibilityAction(.magicTap) { … }"
+            ) {
+                Button("Toggle Now Playing") {}
+                    .accessibilityAction(.magicTap) {}
+            }
+
+            VariantTile(
+                name: ".escape",
+                api: ".accessibilityAction(.escape) { … }"
+            ) {
+                Button("Dismiss") {}
+                    .accessibilityAction(.escape) {}
+            }
+
+            // MARK: Named & multiple actions
+
+            VariantTile(
+                name: "named action",
+                api: #".accessibilityAction(named: "Mute") { … }"#
+            ) {
+                Image(systemName: "speaker.wave.2.fill")
+                    .accessibilityAction(named: "Mute") {}
+            }
+
+            VariantTile(
+                name: "accessibilityActions builder",
+                api: ".accessibilityActions { … multiple … }"
+            ) {
+                Image(systemName: "ellipsis.circle")
+                    .accessibilityActions {
+                        Button("Edit") {}
+                        Button("Duplicate") {}
+                        Button("Delete", role: .destructive) {}
+                    }
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityActionKind",
+                signature: "struct AccessibilityActionKind  // .default, .escape, .magicTap",
+                note: "System-defined action slots. Magic Tap and Escape are reserved gestures VoiceOver users invoke without selecting any element."
+            )
+
+            ReferenceTile(
+                name: "AccessibilityActionCategory",
+                signature: "struct AccessibilityActionCategory",
+                note: "Group related custom actions together inside `accessibilityActions(category:_:)`. VoiceOver presents them as a single submenu."
+            )
+
+            ReferenceTile(
+                name: "App Intent overload",
+                signature: "func accessibilityAction(intent:label:) -> some View",
+                note: "Wires an AppIntent to an accessibility action so the same code path runs from VoiceOver, Shortcuts, and Siri."
             )
         }
     }

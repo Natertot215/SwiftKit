@@ -9,10 +9,54 @@ struct PencilGesturesGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "View.onPencilDoubleTap(perform:)",
+                signature: "func onPencilDoubleTap(perform: @escaping (PencilDoubleTapGestureValue) -> Void) -> some View",
+                note: "Receives Apple Pencil double-tap events on supported hardware. The closure receives a PencilDoubleTapGestureValue describing where and when the tap landed.",
+                badge: "iPadOS 17.5+"
+            )
+
+            ReferenceTile(
+                name: "View.onPencilSqueeze(perform:)",
+                signature: "func onPencilSqueeze(perform: @escaping (PencilSqueezeGestureValue) -> Void) -> some View",
+                note: "Receives Apple Pencil Pro squeeze events. The PencilSqueezeGestureValue includes the squeeze phase (.began, .changed, .ended, .cancelled) and a hover pose.",
+                badge: "iPadOS 17.5+"
+            )
+
+            ReferenceTile(
+                name: "PencilDoubleTapGestureValue",
+                signature: "struct PencilDoubleTapGestureValue { hoverPose: PencilHoverPose? }",
+                note: "Holds metadata for a pencil double-tap event — currently a hover pose describing the pencil's location, altitude, and azimuth above the screen at the moment of the tap."
+            )
+
+            ReferenceTile(
+                name: "PencilSqueezeGestureValue",
+                signature: "struct PencilSqueezeGestureValue { phase: PencilSqueezeGesturePhase, hoverPose: PencilHoverPose? }",
+                note: "Holds the squeeze gesture's phase and the pencil's hover pose at that moment. Inspect phase to drive UI that activates on squeeze begin, persists during change, and commits on end."
+            )
+
+            ReferenceTile(
+                name: "PencilSqueezeGesturePhase",
+                signature: "enum PencilSqueezeGesturePhase  ·  .active(SqueezeProgress)  ·  .ended  ·  .cancelled",
+                note: "Reports the squeeze gesture's lifecycle. SqueezeProgress carries normalized progress 0…1 and a hoverPose during the active phase."
+            )
+
+            ReferenceTile(
+                name: "PencilHoverPose",
+                signature: "struct PencilHoverPose { location: CGPoint, altitude: Angle, azimuth: Angle, zOffset: CGFloat? }",
+                note: "Describes the pencil's pose above the screen during pencil events: 2D location, vertical altitude angle, azimuth (rotation about the screen normal), and optional zOffset distance."
+            )
+
+            ReferenceTile(
+                name: "PencilPreferredAction",
+                signature: "enum PencilPreferredAction  ·  .ignore  ·  .switchEraser  ·  .switchPrevious  ·  .showColorPalette  ·  .showInkAttributes  ·  .runSystemShortcut",
+                note: "The user's system-level preference for what a pencil double-tap should do. Honor this in art and note-taking apps so pencil behavior stays consistent across applications."
+            )
+
+            ReferenceTile(
+                name: "macOS availability",
+                signature: "macOS 14.5+ accepts the modifier; runtime events arrive only on iPadOS pencil hardware.",
+                note: "SwiftKit ships a macOS-only target — these modifiers compile and accept callbacks but never fire here. Surface a no-op in your macOS code paths and exercise on iPadOS for live testing."
             )
         }
     }

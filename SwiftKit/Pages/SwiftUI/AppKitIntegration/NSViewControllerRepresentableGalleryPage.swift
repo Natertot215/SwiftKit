@@ -9,10 +9,34 @@ struct NSViewControllerRepresentableGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "Protocol declaration",
+                signature: "protocol NSViewControllerRepresentable : View where Self.Body == Never",
+                note: "Wraps an NSViewController for use inside a SwiftUI view tree. Body is Never — the protocol's required methods replace it. Pair with an associated NSViewControllerType."
+            )
+
+            ReferenceTile(
+                name: "Required methods",
+                signature: "func makeNSViewController(context: Context) -> Self.NSViewControllerType  /  func updateNSViewController(_:context:)",
+                note: "makeNSViewController is called once to construct the controller. updateNSViewController is called on every SwiftUI invalidation — push state in here, never read SwiftUI state in the controller's lifecycle."
+            )
+
+            ReferenceTile(
+                name: "Coordinator",
+                signature: "func makeCoordinator() -> Self.Coordinator",
+                note: "Optional. Returns an NSObject that bridges target-action and delegate messages back to SwiftUI. The coordinator is the canonical place to expose @Binding writes from AppKit callbacks."
+            )
+
+            ReferenceTile(
+                name: "NSViewControllerRepresentableContext",
+                signature: "struct Context  // .coordinator, .environment, .transaction",
+                note: "Passed into make/update. Read .environment for ambient values (colorScheme, locale, layoutDirection) and forward them to the wrapped controller; .coordinator is your bridge object."
+            )
+
+            ReferenceTile(
+                name: "Example skeleton",
+                signature: "struct PrintingPanel: NSViewControllerRepresentable { typealias NSViewControllerType = NSPrintPanel; … }",
+                note: "Use to embed AppKit controllers that have no SwiftUI equivalent — print panel, preview controllers, scene-kit / metal-view controllers. Don't reach for it for views that already have a SwiftUI primitive."
             )
         }
     }

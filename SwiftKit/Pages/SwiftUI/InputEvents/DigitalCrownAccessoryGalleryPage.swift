@@ -9,10 +9,30 @@ struct DigitalCrownAccessoryGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "View.digitalCrownAccessory(_:)",
+                signature: "func digitalCrownAccessory(_ visibility: Visibility) -> some View",
+                note: "Toggles visibility of the system Digital Crown accessory (the small label near the crown). Pass .visible, .hidden, or .automatic.",
+                badge: "watchOS"
+            )
+
+            ReferenceTile(
+                name: "View.digitalCrownAccessory(content:)",
+                signature: "func digitalCrownAccessory<C>(@ViewBuilder content: () -> C) -> some View where C : View",
+                note: "Replaces the system accessory with custom content — typically a small label or symbol that hints at what the crown affects on the focused view.",
+                badge: "watchOS"
+            )
+
+            ReferenceTile(
+                name: "macOS availability",
+                signature: "Compiles on macOS for SDK parity; live-rendered only on watchOS hardware.",
+                note: "SwiftKit ships a macOS-only target. The modifiers accept arguments here so cross-platform code compiles, but no Digital Crown accessory exists on this platform."
+            )
+
+            ReferenceTile(
+                name: "Companion modifier",
+                signature: "View.digitalCrownRotation(_:…) — pairs with the accessory.",
+                note: "An accessory typically describes the value the crown drives. Pair with digitalCrownRotation so the focused view's accessory and rotation handler stay in sync."
             )
         }
     }

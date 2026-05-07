@@ -9,10 +9,54 @@ struct AccessibilityIgnoresInvertColorsGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: "true (default)",
+                api: ".accessibilityIgnoresInvertColors()"
+            ) {
+                LinearGradient(
+                    colors: [.orange, .pink, .purple],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .frame(width: 140, height: 60)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .accessibilityIgnoresInvertColors()
+            }
+
+            VariantTile(
+                name: "explicit false",
+                api: ".accessibilityIgnoresInvertColors(false)"
+            ) {
+                LinearGradient(
+                    colors: [.orange, .pink, .purple],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .frame(width: 140, height: 60)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .accessibilityIgnoresInvertColors(false)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "When to set true",
+                signature: "Photos, app icons, brand artwork, color-coded data viz.",
+                note: "Smart Invert flips most colors but exempts media — opt out manually for any color where Smart Invert would corrupt meaning."
+            )
+
+            ReferenceTile(
+                name: "Don't blanket-disable",
+                signature: "Smart Invert is opt-in by users who need it.",
+                note: "Use sparingly. The user has chosen color inversion as an accommodation — only protect content where flipping breaks comprehension."
+            )
+
+            ReferenceTile(
+                name: "Apple guidance",
+                signature: "macOS Smart Invert ≠ Classic Invert.",
+                note: "Smart Invert preserves images and media by default. This modifier is for cases the system can't auto-detect — chart series, gradient backgrounds, custom illustrations."
             )
         }
     }

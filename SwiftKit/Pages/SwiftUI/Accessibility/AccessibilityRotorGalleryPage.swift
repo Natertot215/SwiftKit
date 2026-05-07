@@ -1,6 +1,17 @@
 import SwiftUI
 
 struct AccessibilityRotorGalleryPage: View {
+    private struct Section: Identifiable {
+        let id = UUID()
+        let title: String
+    }
+
+    private let sections: [Section] = [
+        Section(title: "Overview"),
+        Section(title: "Examples"),
+        Section(title: "Troubleshooting")
+    ]
+
     var body: some View {
         GalleryItemPage(
             title: Self.item.title,
@@ -9,10 +20,55 @@ struct AccessibilityRotorGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: "labeled-entries rotor",
+                api: ".accessibilityRotor(\"Sections\", entries: …)"
+            ) {
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(sections) { section in
+                        Text(section.title).font(.caption)
+                    }
+                }
+                .accessibilityRotor("Sections", entries: sections, entryLabel: \.title)
+            }
+
+            VariantTile(
+                name: "system rotor override",
+                api: ".accessibilityRotor(.headings, entries: …)"
+            ) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("h1 — Title").font(.headline)
+                    Text("h2 — Subtitle").font(.subheadline)
+                }
+                .accessibilityRotor(.headings, entries: sections, entryLabel: \.title)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityRotorContent",
+                signature: "protocol AccessibilityRotorContent",
+                note: "Result-builder protocol returned from the rotor closure. `AccessibilityRotorEntry` is the canonical building block."
+            )
+
+            ReferenceTile(
+                name: "AccessibilitySystemRotor",
+                signature: "struct AccessibilitySystemRotor  // .links, .headings, .landmarks, …",
+                note: "Override or supplement system rotors with app-specific entries. Use `.headings` to publish your own heading hierarchy when SwiftUI's auto-detection misses entries."
+            )
+
+            ReferenceTile(
+                name: "Text-range overload",
+                signature: "func accessibilityRotor(_:textRanges:)",
+                note: "For long-form Text views, expose RangeReplaceableCollection text ranges (URLs, mentions, citations) as rotor entries so VoiceOver users can jump between them."
+            )
+
+            ReferenceTile(
+                name: "AccessibilityRotorEntry",
+                signature: "struct AccessibilityRotorEntry<ID>",
+                note: "Manual entry constructor when you need to bind a label to a specific id within a Namespace — useful for cross-scrollview navigation."
             )
         }
     }

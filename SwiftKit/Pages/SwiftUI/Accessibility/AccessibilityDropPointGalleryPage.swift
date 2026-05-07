@@ -9,10 +9,54 @@ struct AccessibilityDropPointGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: "default drop target",
+                api: #".accessibilityDropPoint(.center, description: Text("Drop into Inbox"))"#
+            ) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.tint.opacity(0.15))
+                    .frame(width: 140, height: 60)
+                    .overlay(Text("Inbox").font(.caption))
+                    .accessibilityDropPoint(
+                        .center,
+                        description: Text("Drop into Inbox")
+                    )
+            }
+
+            VariantTile(
+                name: "edge target",
+                api: #".accessibilityDropPoint(.bottom, description: Text("Append to bottom of list"))"#
+            ) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.tint.opacity(0.15))
+                    .frame(width: 140, height: 60)
+                    .overlay(Text("Playlist").font(.caption))
+                    .accessibilityDropPoint(
+                        .bottom,
+                        description: Text("Append to bottom of list")
+                    )
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "Pair with accessibilityDragPoint",
+                signature: ".accessibilityDragPoint(_:description:)",
+                note: "A drop point is meaningless without a defined drag origin somewhere else in the same view hierarchy."
+            )
+
+            ReferenceTile(
+                name: "isEnabled overload",
+                signature: "func accessibilityDropPoint(_:description:isEnabled:)",
+                note: "Disable drop targets per state — useful when a column rejects new items or a quota is reached."
+            )
+
+            ReferenceTile(
+                name: "Multiple targets per view",
+                signature: "Apply the modifier multiple times with different UnitPoints.",
+                note: "Each invocation registers a separate drop point. VoiceOver presents them as a chooser when the user releases."
             )
         }
     }

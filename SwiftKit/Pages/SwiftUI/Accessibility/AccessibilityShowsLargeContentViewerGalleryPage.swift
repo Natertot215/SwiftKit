@@ -9,10 +9,55 @@ struct AccessibilityShowsLargeContentViewerGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: "default large content",
+                api: ".accessibilityShowsLargeContentViewer()"
+            ) {
+                Button {
+                } label: {
+                    Image(systemName: "star.fill")
+                        .font(.title2)
+                }
+                .buttonStyle(.borderless)
+                .accessibilityShowsLargeContentViewer()
+            }
+
+            VariantTile(
+                name: "custom large content view",
+                api: ".accessibilityShowsLargeContentViewer { Label … }",
+                height: 110
+            ) {
+                Button {
+                } label: {
+                    Image(systemName: "envelope.fill")
+                        .font(.title2)
+                }
+                .buttonStyle(.borderless)
+                .accessibilityShowsLargeContentViewer {
+                    Label("Inbox", systemImage: "envelope.fill")
+                }
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "When to apply",
+                signature: "Toolbar items, tab bar icons, status badges that don't scale with Dynamic Type.",
+                note: "Required by the App Store review guidelines for fixed-size icon controls. Long-press shows the icon and label at large size for users who need it."
+            )
+
+            ReferenceTile(
+                name: "Default vs custom",
+                signature: "Default form: uses the visible content. Custom: provide a labelled large variant.",
+                note: "Provide a custom large content view when the iconography alone is ambiguous at native size — pair the symbol with a `Label` text for clarity."
+            )
+
+            ReferenceTile(
+                name: "Pair with .largeContentViewerInteraction()",
+                signature: "View.largeContentViewerInteraction()",
+                note: "Some interactive scenarios require explicitly opting into the long-press gesture. Apply on the parent container that hosts the content viewer trigger."
             )
         }
     }

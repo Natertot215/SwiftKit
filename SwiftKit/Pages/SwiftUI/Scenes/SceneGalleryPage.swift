@@ -9,10 +9,34 @@ struct SceneGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "protocol Scene",
+                signature: "@MainActor @preconcurrency protocol Scene",
+                note: "Top-level container declared inside an App's body. Implement the body computed property and return a composition of built-in scenes — WindowGroup, Window, Settings, MenuBarExtra, DocumentGroup."
+            )
+
+            ReferenceTile(
+                name: "Built-in conformers",
+                signature: "WindowGroup · Window · Settings · MenuBarExtra · DocumentGroup",
+                note: "Apple ships these as the canonical Scene types. WindowGroup is the primary surface for document-style apps; Window for singletons; Settings for the preferences pane; MenuBarExtra for status-bar apps."
+            )
+
+            ReferenceTile(
+                name: "Composition via @SceneBuilder",
+                signature: "var body: some Scene { WindowGroup { ContentView() }; Settings { SettingsView() } }",
+                note: "An App's body is composed by @SceneBuilder — concatenate scenes by listing them. Each becomes an independently managed window or surface."
+            )
+
+            ReferenceTile(
+                name: "Scene modifier surface",
+                signature: ".commands(_:) · .defaultSize(_:) · .windowStyle(_:) · .windowResizability(_:) · .handlesExternalEvents(matching:)",
+                note: "Scenes carry their own modifier family — separate from View modifiers — that customize launch behavior, sizing, toolbar style, and OS integrations."
+            )
+
+            ReferenceTile(
+                name: "Scene phase",
+                signature: "@Environment(\\.scenePhase) private var scenePhase  // .active / .inactive / .background",
+                note: "Read scenePhase from the environment inside any view to react to scene activation transitions. Each Scene reports its own phase independently."
             )
         }
     }

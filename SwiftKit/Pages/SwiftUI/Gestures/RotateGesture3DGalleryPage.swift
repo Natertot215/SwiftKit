@@ -9,10 +9,29 @@ struct RotateGesture3DGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "RotateGesture3D",
+                signature: "struct RotateGesture3D : Gesture  // visionOS",
+                note: "Recognizes a free-hand rotation in 3D space. Succeeds once the rotation exceeds minimumAngleDelta. Live demo requires visionOS hardware.",
+                badge: "visionOS"
+            )
+
+            ReferenceTile(
+                name: "RotateGesture3D.Value",
+                signature: "rotation: Rotation3D  ·  velocity: Rotation3D  ·  startLocation3D: Point3D  ·  startInputDevicePose3D: …",
+                note: "rotation is a Rotation3D from the Spatial framework expressing the cumulative angle and axis. velocity reports the angular rate at the most recent update."
+            )
+
+            ReferenceTile(
+                name: "constrainedToAxis(_:)",
+                signature: "func constrainedToAxis(_ axis: RotationAxis3D) -> RotateGesture3D",
+                note: "Constrains the gesture to rotate only around the supplied 3D axis (e.g. .y for left-right twist). Other axes are ignored in the resulting Rotation3D."
+            )
+
+            ReferenceTile(
+                name: "macOS availability",
+                signature: "Compiles on macOS 15+ for SDK parity; rotates 3D content only on visionOS.",
+                note: "SwiftKit's macOS target accepts the modifier so cross-platform code compiles, but the gesture never fires here. Validate on visionOS."
             )
         }
     }

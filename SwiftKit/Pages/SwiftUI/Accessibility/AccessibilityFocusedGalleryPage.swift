@@ -1,6 +1,14 @@
 import SwiftUI
 
 struct AccessibilityFocusedGalleryPage: View {
+    @AccessibilityFocusState private var isUsernameFocused: Bool
+
+    private enum Field: Hashable { case username, password }
+    @AccessibilityFocusState private var focusedField: Field?
+
+    @State private var username: String = ""
+    @State private var password: String = ""
+
     var body: some View {
         GalleryItemPage(
             title: Self.item.title,
@@ -9,10 +17,58 @@ struct AccessibilityFocusedGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Bool binding
+
+            VariantTile(
+                name: "Bool binding",
+                api: ".accessibilityFocused($isUsernameFocused)"
+            ) {
+                TextField("Username", text: $username)
+                    .textFieldStyle(.roundedBorder)
+                    .accessibilityFocused($isUsernameFocused)
+                    .frame(maxWidth: 180)
+            }
+
+            // MARK: Hashable equals
+
+            VariantTile(
+                name: "Hashable, equals:",
+                api: ".accessibilityFocused($focusedField, equals: .password)"
+            ) {
+                VStack(spacing: 6) {
+                    TextField("Username", text: $username)
+                        .textFieldStyle(.roundedBorder)
+                        .accessibilityFocused($focusedField, equals: .username)
+                    SecureField("Password", text: $password)
+                        .textFieldStyle(.roundedBorder)
+                        .accessibilityFocused($focusedField, equals: .password)
+                }
+                .frame(maxWidth: 200)
+            }
+
+            // MARK: Programmatic move
+
+            VariantTile(
+                name: "programmatic focus",
+                api: "focusedField = .password"
+            ) {
+                Button("Focus password") {
+                    focusedField = .password
+                }
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "AccessibilityFocusState",
+                signature: "@propertyWrapper struct AccessibilityFocusState<Value>",
+                note: "VoiceOver-specific cousin of `@FocusState`. Read the wrapped value to detect when an element is voice-focused; write it to move focus."
+            )
+
+            ReferenceTile(
+                name: "Use cases",
+                signature: "Form validation, modal dismissal, app-launched workflows.",
+                note: "After surfacing an error, move VoiceOver focus to the offending field. After dismissing a sheet, restore focus to the trigger."
             )
         }
     }

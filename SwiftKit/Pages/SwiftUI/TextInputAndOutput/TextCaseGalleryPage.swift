@@ -1,5 +1,7 @@
 import SwiftUI
 
+// textCase(_:) — environment override that transforms text case for descendants.
+
 struct TextCaseGalleryPage: View {
     var body: some View {
         GalleryItemPage(
@@ -9,10 +11,59 @@ struct TextCaseGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            VariantTile(
+                name: "Default (no override)",
+                api: "// no modifier"
+            ) {
+                Text("Hello, World!")
+            }
+
+            VariantTile(
+                name: ".textCase(.uppercase)",
+                api: ".textCase(.uppercase)"
+            ) {
+                Text("Hello, World!")
+                    .textCase(.uppercase)
+            }
+
+            VariantTile(
+                name: ".textCase(.lowercase)",
+                api: ".textCase(.lowercase)"
+            ) {
+                Text("Hello, World!")
+                    .textCase(.lowercase)
+            }
+
+            VariantTile(
+                name: ".textCase(nil) — explicit reset",
+                api: ".textCase(nil)"
+            ) {
+                VStack {
+                    Text("Hello, World!")
+                        .textCase(.lowercase)
+                    Text("RESET HERE")
+                        .textCase(nil)
+                }
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "textCase(_:)",
+                signature: "func textCase(_ textCase: Text.Case?) -> some View",
+                note: "Sets a transform for the case of text rendered by this view and its descendants. The argument is Text.Case? — pass nil to clear an inherited transform."
+            )
+
+            ReferenceTile(
+                name: "Text.Case",
+                signature: "enum Text.Case { case uppercase, lowercase }",
+                note: "The two case transforms supported. There's no .titleCase or .sentenceCase — handle those at the data layer or with a localized formatter."
+            )
+
+            ReferenceTile(
+                name: "Where it's already applied",
+                signature: "// section headers, navigation titles, etc.",
+                note: "Some built-in containers (notably grouped List headers) ship with .textCase(.uppercase) baked in. Pass .textCase(nil) inside the header to opt back out."
             )
         }
     }

@@ -9,10 +9,57 @@ struct AccessibilitySortPriorityGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: "high priority (visited first)",
+                api: ".accessibilitySortPriority(2)"
+            ) {
+                Text("Critical alert")
+                    .padding(8)
+                    .background(.tint.opacity(0.2), in: Capsule())
+                    .accessibilitySortPriority(2)
+            }
+
+            VariantTile(
+                name: "default priority",
+                api: ".accessibilitySortPriority(0)"
+            ) {
+                Text("Body content")
+                    .padding(8)
+                    .background(.secondary.opacity(0.15), in: Capsule())
+                    .accessibilitySortPriority(0)
+            }
+
+            VariantTile(
+                name: "low priority (visited last)",
+                api: ".accessibilitySortPriority(-1)"
+            ) {
+                Text("Footer note")
+                    .font(.caption)
+                    .padding(8)
+                    .background(.secondary.opacity(0.1), in: Capsule())
+                    .accessibilitySortPriority(-1)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "How it sorts",
+                signature: "Higher Double values come first within the same container.",
+                note: "Default is 0. VoiceOver uses geometric position as a tiebreaker — sort priority only re-orders elements that share an accessibility container."
+            )
+
+            ReferenceTile(
+                name: "When to reach for it",
+                signature: "Visual layout doesn't match reading order.",
+                note: "Multi-column layouts, overlapping toolbars, decorative elements that should be deprioritized. Don't use sort priority to compensate for poor information architecture."
+            )
+
+            ReferenceTile(
+                name: "Apple guidance",
+                signature: "Use sparingly and locally.",
+                note: "Sort priority applies *within* a container. Re-architect with `.accessibilityElement(children: …)` if you need cross-container reordering."
             )
         }
     }

@@ -9,10 +9,28 @@ struct SceneBuilderGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "@resultBuilder SceneBuilder",
+                signature: "@resultBuilder struct SceneBuilder",
+                note: "Powers the trailing closure of an App's body. Treats each statement as a Scene and concatenates them into a composite Scene tree."
+            )
+
+            ReferenceTile(
+                name: "Compose multiple scenes",
+                signature: "@main struct MyApp: App { var body: some Scene { WindowGroup { … }; Settings { … } } }",
+                note: "Inside the body you may list a WindowGroup, a Settings scene, a MenuBarExtra, and a DocumentGroup — SceneBuilder folds them all into a single conforming type."
+            )
+
+            ReferenceTile(
+                name: "Conditional and ForEach support",
+                signature: "if condition { WindowGroup { … } } else { MenuBarExtra(\"\") { … } }",
+                note: "Like ViewBuilder, SceneBuilder supports if/else, switch, and limited iteration so an app can opt scenes in or out at compile time based on platform or feature flags."
+            )
+
+            ReferenceTile(
+                name: "Implicitly applied",
+                signature: "var body: some Scene { … }  // closure is @SceneBuilder by default",
+                note: "You never write @SceneBuilder yourself unless authoring a custom Scene container — Apple applies it automatically to App.body and to Scene-accepting closures."
             )
         }
     }

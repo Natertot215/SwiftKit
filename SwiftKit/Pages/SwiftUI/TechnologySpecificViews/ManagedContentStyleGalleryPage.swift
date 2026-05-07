@@ -9,10 +9,23 @@ struct ManagedContentStyleGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "managedContentStyle(_:)",
+                signature: "func managedContentStyle(_ style: some ManagedContentStyle) -> some View",
+                note: "Configures the visual style applied to managed-content surfaces (e.g. items rendered inside a managed-content list under DeviceManagement / FamilyControls).",
+                badge: "macOS 26.4+"
+            )
+
+            ReferenceTile(
+                name: "Required import",
+                signature: "import DeviceManagement  //  or FamilyControls / ManagedSettings",
+                note: "Lives alongside the managed-content APIs. Style options are framework-supplied conformers — there is no public custom-style protocol expected from app code."
+            )
+
+            ReferenceTile(
+                name: "Use case",
+                signature: "MDM / parental-control admin surfaces",
+                note: "Pairs with the managed-content list views Apple introduced for IT admins and parental-controls UIs. Restricted distribution — most apps will never need it."
             )
         }
     }

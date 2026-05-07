@@ -9,10 +9,50 @@ struct AccessibilityRespondsToUserInteractionGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            // MARK: Demos
+
+            VariantTile(
+                name: "true (default)",
+                api: ".accessibilityRespondsToUserInteraction()"
+            ) {
+                Button("Activate") {}
+                    .accessibilityRespondsToUserInteraction()
+            }
+
+            VariantTile(
+                name: "false — informational",
+                api: ".accessibilityRespondsToUserInteraction(false)"
+            ) {
+                Label("Last synced 5m ago", systemImage: "clock")
+                    .accessibilityRespondsToUserInteraction(false)
+            }
+
+            VariantTile(
+                name: "isEnabled overload",
+                api: ".accessibilityRespondsToUserInteraction(_:isEnabled:)"
+            ) {
+                Button("Conditional") {}
+                    .accessibilityRespondsToUserInteraction(false, isEnabled: true)
+            }
+
+            // MARK: Reference
+
+            ReferenceTile(
+                name: "What it suppresses",
+                signature: "Hides actions, hints, and the activation point from assistive tech.",
+                note: "Use when a view looks tappable but is purely decorative — a status badge, illustration, or read-only summary that users shouldn't be invited to activate."
+            )
+
+            ReferenceTile(
+                name: "Don't conflate with isHidden",
+                signature: ".accessibilityHidden(true)",
+                note: "`accessibilityHidden` removes the element entirely. `respondsToUserInteraction(false)` keeps it visible to VoiceOver but marks it as non-interactive."
+            )
+
+            ReferenceTile(
+                name: "Apple guidance",
+                signature: "Mirror the visible affordance of the view.",
+                note: "If your UI gives no hint that an element is tappable, this modifier prevents VoiceOver from announcing one. Keep the assistive experience honest."
             )
         }
     }

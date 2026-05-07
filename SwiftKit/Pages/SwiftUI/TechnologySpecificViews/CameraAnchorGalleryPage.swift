@@ -9,10 +9,23 @@ struct CameraAnchorGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            ContentUnavailableView(
-                "In progress",
-                systemImage: "hammer",
-                description: Text("This page is awaiting tile content.")
+            ReferenceTile(
+                name: "cameraAnchor(isActive:)",
+                signature: "func cameraAnchor(isActive: Bool = true) -> some View",
+                note: "Anchors the modified view to the camera transform inside an immersive RealityView scene. The view stays locked to the user's head pose while active.",
+                badge: "visionOS"
+            )
+
+            ReferenceTile(
+                name: "Required import",
+                signature: "import RealityKit",
+                note: "Use inside a RealityView whose content is presented in an ImmersiveSpace. The modifier is a no-op outside an immersive scene."
+            )
+
+            ReferenceTile(
+                name: "Use case",
+                signature: "HUDs, reticles, persistent overlays in mixed/full reality",
+                note: "Pin debug HUDs or always-visible UI to the user's view. Toggle isActive to detach the anchor when the player should be free to look around without the overlay following."
             )
         }
     }
