@@ -159,6 +159,31 @@ Each agent runs its own implementer → spec review → code review chain. After
 
 ---
 
+### Phase 0c — Topic-Page Archival *(reversible)*
+
+**Dispatch:** 1 sequential controller pass — no subagent needed (mechanical archival + single index file write). Was inserted mid-Phase-1 after Nathan reinforced "only components in the project; articles, guides, and topic pages all go in `exclude.md`."
+
+**Goal:** Move every navigation/landing/topic-group file out of the active doc tree alongside the Phase 0b article archive, and consolidate every excluded URL into a single `Documentation/_links/exclude.md` index.
+
+**Scope:**
+- AppKit `kind: collectionGroup` files (~36) — sub-topic landings like `views-and-controls/slider.md`, `cocoa-bindings/nsplaceholders.md`. Move to `Documentation/_archive/topic-pages/AppKit/<topic>/...`.
+- SwiftUI master `_index/_index.md` (`kind: framework`, 1 file) — move to `Documentation/_archive/topic-pages/SwiftUI/_index/_index.md`.
+- Any `_index.md` files anywhere else in the active SwiftUI/AppKit tree (current count is 0 elsewhere; verify before move).
+
+**Outputs:**
+- New: `Documentation/_links/exclude.md` — unified index of every excluded URL, sectioned: Articles (SwiftUI + AppKit), Guides (HIG), Topic Pages (SwiftUI + AppKit). Replaces and supersedes `Documentation/_links/guides.md` (which can be deleted or kept as a redirect note).
+- New: `Documentation/_archive/topic-pages/<framework>/...` — archived markdowns.
+
+**Component description rule:** Phase 3 implementation agents authoring tile descriptions MAY reference excluded URLs (articles/guides/topic pages) for context — they're allowed to cite Apple's broader documentation for a component, even though those URLs themselves don't get gallery pages. The exclusion is about WHAT BECOMES A GALLERY PAGE, not what a description can cite.
+
+**Verification:**
+- `grep -rl "^kind: collectionGroup" Documentation/SwiftUI/ Documentation/AppKit/ --exclude-dir=_archive` returns zero matches.
+- `find Documentation/SwiftUI Documentation/AppKit -name "_index.md" -not -path "*/_archive/*"` returns zero results.
+- `find Documentation/_archive/topic-pages -name "*.md" | wc -l` matches the archived file count (~37).
+- `Documentation/_links/exclude.md` exists with sections covering articles, guides, and topic pages.
+
+---
+
 ### Phase 1 — Sorting and Manifest Authoring
 
 **Dispatch:** 3 **parallel** sort agents (standard model). Each writes a disjoint section of the manifest — no file conflicts.
@@ -173,13 +198,62 @@ Each agent's chain: implementer → spec review → code review. Spec reviewer h
 **Approach:** Per-heading sort agents read every reference doc in their scope and output one section of the manifest.
 
 **Agent brief (mandatory inclusions for every sort agent):**
+
 - Treat `.claude/PlanningTree` as the starting page list. Adjust only when a doc clearly doesn't fit any proposed page or when a proposed page has no docs.
-- **Hard rule — only components, code, and descriptions surface as gallery content.** Articles, guides, navigation/landing pages, sample-code wrappers, and collection-group topic listings (like `https://developer.apple.com/documentation/swiftui/menus-and-commands`) are NEVER gallery pages and NEVER tiles.
-- **Classifier gate (drift prevention):** any doc with `kind: method`, `kind: property`, `kind: instance method`, `kind: instance-method`, `kind: init`, or `kind: func` is a **tile candidate, not a page candidate**. Promotion to a page entry requires explicit justification in the manifest.
-- `kind: struct`, `kind: class`, `kind: enum`, `kind: protocol`, `kind: macro`, `kind: typealias` are page-or-tile candidates depending on whether they're user-recognizable as standalone components.
-- `kind: sampleCode` is reference material for the rendering phase, not a tile or page — always deferred.
-- `kind: collectionGroup` and any `_index.md` file (Apple's topic-group landing pages) are navigation aids — always deferred. They never become a tile, a page, or a manifest entry.
-- `kind: article` is already archived in Phase 0b — sort agents won't see these in the active doc tree.
+
+**Gallery targets** *(every doc-kind below IS gallery content — most as tiles inside their parent type's page; user-recognizable types as pages)*:
+
+- `kind: struct`, `kind: class`, `kind: enum`, `kind: protocol`, `kind: macro`, `kind: typealias` → **page or tile**, decided by user-recognizability. Bias toward tile inside an existing page; promote to page only when the type is independently recognizable AND fits a PlanningTree leaf.
+- `kind: method`, `kind: instance method`, `kind: instance-method`, `kind: type method` → **tile** under the parent type's page (Apple's "Type Methods" and "Instance Methods" sections).
+- `kind: property`, `kind: instance property`, `kind: type property` → **tile** under the parent type's page (Apple's "Type Properties" and "Instance Properties" sections).
+- `kind: init` → **tile** under the parent type's page (Apple's "Initializers" section).
+- `kind: func` → **tile** — free function or convenience function. Routed to the closest topical page or its own page if independently user-recognizable.
+- `kind: var` → **tile** — global or type-scoped property.
+- `kind: case` → **tile** under the parent enum's page.
+- `kind: subscript`, `kind: instance subscript` → **tile** under the parent type's page.
+- `kind: sampleCode` → **case-by-case**. Sample code can be useful — evaluate each one on its merits. If the sample illustrates a concrete component pattern that warrants a tile, route it as a tile on the relevant page. If it's just a tutorial or full-app demo without a focused component scope, defer it. Not a blanket-deferral.
+
+These are the targets per Nathan's explicit rule: *"We're targeting Type Properties, Type Methods, Functions, Instances, Instance Methods, Instance Properties, Structures, and any actual component parts."* All of them are gallery content. Tiles inside a page is the dominant placement; standalone pages are reserved for the user-recognizable primitives that anchor a page.
+
+**Excluded entirely** *(NEVER a tile, NEVER a page, NEVER in any manifest)*:
+
+- `kind: article` — articles and guides. Already archived in Phase 0b at `Documentation/_archive/guides/<framework>/...`.
+- `kind: collectionGroup` — topic-group landing pages (e.g. `https://developer.apple.com/documentation/swiftui/menus-and-commands`). Archived in Phase 0c at `Documentation/_archive/topic-pages/<framework>/...`.
+- `kind: framework` — framework root pages. Archived in Phase 0c.
+- Any `_index.md` file — navigation aids. Archived in Phase 0c.
+- The entire HIG corpus — all 180 docs archived in Phase 0b.
+
+Sort agents will not encounter the excluded kinds in the active doc tree (they're already archived). If one shows up unexpectedly, defer it and flag in `sort-decisions-<framework>.md`.
+
+**Component descriptions MAY reference excluded URLs** when citing Apple's broader documentation helps explain a component (per the Phase 0c rule). Exclusion governs what becomes a gallery page; it does not govern what a description can cite.
+
+The unified exclusion index lives at [`Documentation/_links/exclude.md`](../Documentation/_links/exclude.md).
+
+**Active-corpus `kind` inventory** *(post Phase 0b + 0c, full audit run 2026-05-07)*. Every value below is covered by the classifier above:
+
+| `kind` | Count | Disposition |
+|---|---|---|
+| `method` | 739 | Tile |
+| `struct` | 574 | Page or tile |
+| `class` | 298 | Page or tile |
+| `protocol` | 225 | Page or tile |
+| `property` | 193 | Tile |
+| `enum` | 81 | Page or tile |
+| `var` | 36 | Tile |
+| `func` | 32 | Tile |
+| `sampleCode` | 22 | Case-by-case |
+| `case` | 14 | Tile |
+| `typealias` | 11 | Page or tile |
+| `macro` | 11 | Page or tile |
+| `instance method` | 5 | Tile |
+| `article` | 5 | **Edge case** — see note below |
+| `init` | 2 | Tile |
+| `instance-method` | 1 | Tile |
+| **Total** | **2,249** | |
+
+**The 5 remaining `kind: article` files** are method docs whose Apple frontmatter is incorrect — `copyable(_:)`, `cuttable(for:action:)`, `pastedestination(for:action:validator:)`, `focused(_:equals:)`, `prefersdefaultfocus(_:in:)`. Phase 0b's mechanical pass moved them to archive; the controller restored them during the Phase 0b merge step (commit `eb5bacd`). They're classified as **tiles**, routed to their parent component pages (Clipboard / Focus). Sort agents treating them as tiles is correct.
+
+If a future doc capture introduces a `kind` value not in this table, the sort agent must defer it to the orphan list and flag in `sort-decisions-<framework>.md` — never silently bucket it.
 - Every doc must end up in one of three buckets: (1) a tile inside a named page, (2) the orphan list with reason, (3) the deferred list (e.g. internal helper types not for gallery surface).
 - Reuse Phase 0b's `guide-orphan-components.md` — components found only in guides need a tile home in the manifest.
 - Skill kit: `find-docs` (Context7 fallback for ambiguous types), `swiftui-expert-skill` (for naming/categorization sanity checks).

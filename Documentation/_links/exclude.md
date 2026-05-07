@@ -1,16 +1,23 @@
-# Guides — URL List (archived from gallery scope)
+# Exclusions — URL List
 
-Captured during Phase 0b. These are the guide-style docs that were moved out of `Documentation/SwiftUI/`, `Documentation/AppKit/`, and `Documentation/HIG/` into `Documentation/_archive/guides/<framework>/<topic>/...` and excluded from the gallery's component pages.
+Single index of every URL whose markdown was excluded from the gallery's component scope. The gallery surfaces only components, code, and their descriptions — the entries below are articles, guides, or topic-group navigation pages, none of which become a SwiftKit gallery page or tile.
 
-- **SwiftUI:** 51 articles (`kind: article` frontmatter)
-- **AppKit:** 18 articles (`kind: article` frontmatter)
-- **HIG:** 180 docs (entire HIG corpus — design guidance, no API surface)
+**Component descriptions MAY reference these URLs** when citing Apple's broader documentation helps explain a component. The exclusion governs WHAT BECOMES A GALLERY PAGE, not what a description can cite.
 
-If Phase 1 confirms full component coverage outside guides, Phase 4 deletes `Documentation/_archive/guides/` and keeps this index file alone. If a guide turns out to be the only home of a component, the archive subtree is retained and that component appears in `.claude/Planning/guide-orphan-components.md`.
+## Counts
 
-Per-framework manifests (full path + URL list): `Documentation/_archive/guides/<framework>/_manifest.md`.
+- **Articles** *(`kind: article`)*: 51 SwiftUI + 18 AppKit = 69 files. Archived in Phase 0b at `Documentation/_archive/guides/<framework>/...`.
+- **Guides** *(entire HIG corpus)*: 180 files. Archived in Phase 0b at `Documentation/_archive/guides/HIG/...`.
+- **Topic Pages** *(`kind: collectionGroup` and master `_index.md`)*: 36 AppKit + 1 SwiftUI = 37 files. Archived in Phase 0c at `Documentation/_archive/topic-pages/<framework>/...`.
+- **Total: 286 excluded URLs across 3 categories.**
 
-## SwiftUI
+Per-framework manifests (full file lists with paths): `Documentation/_archive/guides/<framework>/_manifest.md` for articles + HIG; topic pages enumerated below.
+
+---
+
+## Articles
+
+### SwiftUI *(51)*
 
 - [Adding a background to your view](https://developer.apple.com/documentation/swiftui/adding-a-background-to-your-view)
 - [Adding a search interface to your app](https://developer.apple.com/documentation/swiftui/adding-a-search-interface-to-your-app)
@@ -64,9 +71,9 @@ Per-framework manifests (full path + URL list): `Documentation/_archive/guides/<
 - [Unifying your app's animations](https://developer.apple.com/documentation/swiftui/unifying-your-app-s-animations)
 - [Wishlist: Planning travel in a SwiftUI app](https://developer.apple.com/documentation/swiftui/wishlist-planning-travel-in-a-swiftui-app)
 
-> Apple cross-lists 3 SwiftUI guides under multiple sub-paths (e.g. `building-and-customizing-the-menu-bar-with-swiftui` lives under both `menus-and-commands/` and `scenes/`). Each cross-listed file appears as a separate bullet above so the bullet count (51) matches the file count in the per-framework manifest. The duplicate URL is identical across the bullets — annotated with the sub-path that distinguishes them.
+> Apple cross-lists 3 SwiftUI guides under multiple sub-paths (e.g. `building-and-customizing-the-menu-bar-with-swiftui` lives under both `menus-and-commands/` and `scenes/`). Each cross-listed file appears as a separate bullet above so the bullet count (51) matches the file count in the per-framework manifest.
 
-## AppKit
+### AppKit *(18)*
 
 - [Accessibility Functions](https://developer.apple.com/documentation/appkit/accessibility-functions)
 - [Adding Writing Tools support to a custom AppKit view](https://developer.apple.com/documentation/appkit/adding-writing-tools-support-to-a-custom-nsview)
@@ -87,6 +94,63 @@ Per-framework manifests (full path + URL list): `Documentation/_archive/guides/<
 - [Updates to AppKit](https://developer.apple.com/documentation/updates/appkit)
 - [Views and Controls](https://developer.apple.com/documentation/appkit/views-and-controls)
 
-## HIG
+---
+
+## Guides
+
+### HIG *(180)*
 
 180 entries — full URL list at `Documentation/_archive/guides/HIG/_manifest.md`. HIG is design guidance only; nothing from this set surfaces as a gallery page. Phase 1's orphan-component cross-check (see `.claude/Planning/guide-orphan-components.md`) covers any HIG-referenced types worth tile homes.
+
+---
+
+## Topic Pages
+
+### SwiftUI *(1)*
+
+- [SwiftUI](https://developer.apple.com/documentation/swiftui) — `SwiftUI/_index/_index.md` *(framework root landing — `kind: framework`)*
+
+### AppKit *(36)*
+
+- [Accessibility Functions](https://developer.apple.com/documentation/appkit/accessibility-functions) — `accessibility-for-appkit/accessibility-functions.md`
+- [Custom Controls](https://developer.apple.com/documentation/appkit/custom-controls) — `accessibility-for-appkit/custom-controls.md`
+- [AppKit Errors](https://developer.apple.com/documentation/appkit/appkit-errors) — `app-structure/appkit-errors.md`
+- [Services Functions](https://developer.apple.com/documentation/appkit/services-functions) — `app-structure/services-functions.md`
+- [Binding dictionary keys](https://developer.apple.com/documentation/appkit/binding-dictionary-keys) — `cocoa-bindings/binding-dictionary-keys.md`
+- [NSPlaceholders](https://developer.apple.com/documentation/appkit/nsplaceholders) — `cocoa-bindings/nsplaceholders.md`
+- [Selection Markers](https://developer.apple.com/documentation/appkit/selection-markers) — `cocoa-bindings/selection-markers.md`
+- [Additional Writing Directions](https://developer.apple.com/documentation/appkit/additional-writing-directions) — `deprecated-symbols/additional-writing-directions.md`
+- [Data Entry Types](https://developer.apple.com/documentation/appkit/data-entry-types) — `deprecated-symbols/data-entry-types.md`
+- [Glyph Attributes](https://developer.apple.com/documentation/appkit/glyph-attributes) — `deprecated-symbols/glyph-attributes.md`
+- [NSAccessibility](https://developer.apple.com/documentation/appkit/nsaccessibility) — `deprecated-symbols/nsaccessibility.md`
+- [Anonymous](https://developer.apple.com/documentation/appkit/nsbuttontypes-anonymous) — `deprecated-symbols/nsbuttontypes-anonymous.md`
+- [Return values for modal operations](https://developer.apple.com/documentation/appkit/return-values-for-modal-operations) — `deprecated-symbols/return-values-for-modal-operations.md`
+- [Tags of Views in the FontPanel](https://developer.apple.com/documentation/appkit/tags-of-views-in-the-fontpanel) — `deprecated-symbols/tags-of-views-in-the-fontpanel.md`
+- [Convenience Functions](https://developer.apple.com/documentation/appkit/convenience-functions) — `drawing/convenience-functions.md`
+- [Protecting the User's Privacy](https://developer.apple.com/documentation/uikit/protecting-the-user-s-privacy) — `essentials/protecting-the-user-s-privacy.md`
+- [Constants](https://developer.apple.com/documentation/appkit/constants) — `reference-enumerations-constants-data-types-macros/constants.md`
+- [Data Types](https://developer.apple.com/documentation/appkit/data-types) — `reference-enumerations-constants-data-types-macros/data-types.md`
+- [Enumerations](https://developer.apple.com/documentation/appkit/enumerations) — `reference-enumerations-constants-data-types-macros/enumerations.md`
+- [Macros](https://developer.apple.com/documentation/appkit/macros) — `reference-enumerations-constants-data-types-macros/macros.md`
+- [Reserved Glyph Codes](https://developer.apple.com/documentation/appkit/reserved-glyph-codes) — `textkit/reserved-glyph-codes.md`
+- [Browser View](https://developer.apple.com/documentation/appkit/browser-view) — `views-and-controls/browser-view.md`
+- [Collection View](https://developer.apple.com/documentation/appkit/collection-view) — `views-and-controls/collection-view.md`
+- [Combo Box](https://developer.apple.com/documentation/appkit/combo-box) — `views-and-controls/combo-box.md`
+- [Date Picker](https://developer.apple.com/documentation/appkit/date-picker) — `views-and-controls/date-picker.md`
+- [Grid View](https://developer.apple.com/documentation/appkit/grid-view) — `views-and-controls/grid-view.md`
+- [Outline View](https://developer.apple.com/documentation/appkit/outline-view) — `views-and-controls/outline-view.md`
+- [Path Control](https://developer.apple.com/documentation/appkit/path-control) — `views-and-controls/path-control.md`
+- [Scroll View](https://developer.apple.com/documentation/appkit/scroll-view) — `views-and-controls/scroll-view.md`
+- [Search Field](https://developer.apple.com/documentation/appkit/search-field) — `views-and-controls/search-field.md`
+- [Slider](https://developer.apple.com/documentation/appkit/slider) — `views-and-controls/slider.md`
+- [Table View](https://developer.apple.com/documentation/appkit/table-view) — `views-and-controls/table-view.md`
+- [Text Field](https://developer.apple.com/documentation/appkit/text-field) — `views-and-controls/text-field.md`
+- [Token Field](https://developer.apple.com/documentation/appkit/token-field) — `views-and-controls/token-field.md`
+- [Toolbar](https://developer.apple.com/documentation/appkit/toolbar) — `views-and-controls/toolbar.md`
+- [NSFontPanelValidation](https://developer.apple.com/documentation/appkit/nsfontpanelvalidation) — `windows-panels-and-screens/nsfontpanelvalidation.md`
+
+> The AppKit topic-pages list above contains URLs that may also appear in the Articles > AppKit section above (e.g. "Browser View", "Collection View", "Custom Controls", "Grid View", "Scroll View"). Apple captured the same URL into multiple files during the original doc walk — one as `kind: article` (an article landing inside a sub-folder) and one as `kind: collectionGroup` (a topic-group file). Both file paths are listed above; both are excluded.
+
+---
+
+> **Replaces** `Documentation/_links/guides.md` (deleted Phase 0c). All exclusion content is consolidated here.
