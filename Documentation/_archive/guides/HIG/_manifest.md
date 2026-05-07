@@ -1,0 +1,185 @@
+# HIG Archive Manifest
+
+All 180 Human Interface Guidelines markdown files archived from `Documentation/HIG/`.
+Moved to `Documentation/_archive/guides/HIG/` — reversible archive per Phase 0b plan.
+
+- [Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility) — `Documentation/HIG/foundations/accessibility.md`
+- [Action button](https://developer.apple.com/design/human-interface-guidelines/action-button) — `Documentation/HIG/inputs/action-button.md`
+- [Action sheets](https://developer.apple.com/design/human-interface-guidelines/action-sheets) — `Documentation/HIG/components/presentation/action-sheets.md`
+- [Activity rings](https://developer.apple.com/design/human-interface-guidelines/activity-rings) — `Documentation/HIG/components/status/activity-rings.md`
+- [Activity views](https://developer.apple.com/design/human-interface-guidelines/activity-views) — `Documentation/HIG/components/menus-and-actions/activity-views.md`
+- [AirPlay](https://developer.apple.com/design/human-interface-guidelines/airplay) — `Documentation/HIG/technologies/airplay.md`
+- [Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts) — `Documentation/HIG/components/presentation/alerts.md`
+- [Always On](https://developer.apple.com/design/human-interface-guidelines/always-on) — `Documentation/HIG/technologies/always-on.md`
+- [App Clips](https://developer.apple.com/design/human-interface-guidelines/app-clips) — `Documentation/HIG/technologies/app-clips.md`
+- [App icons](https://developer.apple.com/design/human-interface-guidelines/app-icons) — `Documentation/HIG/foundations/app-icons.md`
+- [App Shortcuts](https://developer.apple.com/design/human-interface-guidelines/app-shortcuts) — `Documentation/HIG/components/system-experiences/app-shortcuts.md`
+- [Apple Pay](https://developer.apple.com/design/human-interface-guidelines/apple-pay) — `Documentation/HIG/technologies/apple-pay.md`
+- [Apple Pencil and Scribble](https://developer.apple.com/design/human-interface-guidelines/apple-pencil-and-scribble) — `Documentation/HIG/inputs/apple-pencil-and-scribble.md`
+- [Augmented reality](https://developer.apple.com/design/human-interface-guidelines/augmented-reality) — `Documentation/HIG/technologies/augmented-reality.md`
+- [Boxes](https://developer.apple.com/design/human-interface-guidelines/boxes) — `Documentation/HIG/components/layout-and-organization/boxes.md`
+- [Branding](https://developer.apple.com/design/human-interface-guidelines/branding) — `Documentation/HIG/foundations/branding.md`
+- [Buttons](https://developer.apple.com/design/human-interface-guidelines/buttons) — `Documentation/HIG/components/menus-and-actions/buttons.md`
+- [Camera Control](https://developer.apple.com/design/human-interface-guidelines/camera-control) — `Documentation/HIG/inputs/camera-control.md`
+- [CareKit](https://developer.apple.com/design/human-interface-guidelines/carekit) — `Documentation/HIG/technologies/carekit.md`
+- [CarPlay](https://developer.apple.com/design/human-interface-guidelines/carplay) — `Documentation/HIG/technologies/carplay.md`
+- [Charting data](https://developer.apple.com/design/human-interface-guidelines/charting-data) — `Documentation/HIG/patterns/charting-data.md`
+- [Charts](https://developer.apple.com/design/human-interface-guidelines/charts) — `Documentation/HIG/components/content/charts.md`
+- [Collaboration and sharing](https://developer.apple.com/design/human-interface-guidelines/collaboration-and-sharing) — `Documentation/HIG/patterns/collaboration-and-sharing.md`
+- [Collections](https://developer.apple.com/design/human-interface-guidelines/collections) — `Documentation/HIG/components/layout-and-organization/collections.md`
+- [Color](https://developer.apple.com/design/human-interface-guidelines/color) — `Documentation/HIG/foundations/color.md`
+- [Color wells](https://developer.apple.com/design/human-interface-guidelines/color-wells) — `Documentation/HIG/components/selection-and-input/color-wells.md`
+- [Column views](https://developer.apple.com/design/human-interface-guidelines/column-views) — `Documentation/HIG/components/layout-and-organization/column-views.md`
+- [Combo boxes](https://developer.apple.com/design/human-interface-guidelines/combo-boxes) — `Documentation/HIG/components/selection-and-input/combo-boxes.md`
+- [Complications](https://developer.apple.com/design/human-interface-guidelines/complications) — `Documentation/HIG/components/system-experiences/complications.md`
+- [Components](https://developer.apple.com/design/human-interface-guidelines/components) — `Documentation/HIG/components/components.md`
+- [Components](https://developer.apple.com/design/human-interface-guidelines/components) — `Documentation/HIG/components/_index.md`
+- [Content](https://developer.apple.com/design/human-interface-guidelines/content) — `Documentation/HIG/components/content/content.md`
+- [Content](https://developer.apple.com/design/human-interface-guidelines/content) — `Documentation/HIG/components/content/_index.md`
+- [Context menus](https://developer.apple.com/design/human-interface-guidelines/context-menus) — `Documentation/HIG/components/menus-and-actions/context-menus.md`
+- [Controls](https://developer.apple.com/design/human-interface-guidelines/controls) — `Documentation/HIG/components/system-experiences/controls.md`
+- [Dark Mode](https://developer.apple.com/design/human-interface-guidelines/dark-mode) — `Documentation/HIG/foundations/dark-mode.md`
+- [Designing for games](https://developer.apple.com/design/human-interface-guidelines/designing-for-games) — `Documentation/HIG/getting-started/designing-for-games.md`
+- [Designing for iOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-ios) — `Documentation/HIG/getting-started/designing-for-ios.md`
+- [Designing for iPadOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-ipados) — `Documentation/HIG/getting-started/designing-for-ipados.md`
+- [Designing for macOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-macos) — `Documentation/HIG/getting-started/designing-for-macos.md`
+- [Designing for tvOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-tvos) — `Documentation/HIG/getting-started/designing-for-tvos.md`
+- [Designing for visionOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-visionos) — `Documentation/HIG/getting-started/designing-for-visionos.md`
+- [Designing for watchOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-watchos) — `Documentation/HIG/getting-started/designing-for-watchos.md`
+- [Digit entry views](https://developer.apple.com/design/human-interface-guidelines/digit-entry-views) — `Documentation/HIG/components/selection-and-input/digit-entry-views.md`
+- [Digital Crown](https://developer.apple.com/design/human-interface-guidelines/digital-crown) — `Documentation/HIG/inputs/digital-crown.md`
+- [Disclosure controls](https://developer.apple.com/design/human-interface-guidelines/disclosure-controls) — `Documentation/HIG/components/layout-and-organization/disclosure-controls.md`
+- [Dock menus](https://developer.apple.com/design/human-interface-guidelines/dock-menus) — `Documentation/HIG/components/menus-and-actions/dock-menus.md`
+- [Drag and drop](https://developer.apple.com/design/human-interface-guidelines/drag-and-drop) — `Documentation/HIG/patterns/drag-and-drop.md`
+- [Edit menus](https://developer.apple.com/design/human-interface-guidelines/edit-menus) — `Documentation/HIG/components/menus-and-actions/edit-menus.md`
+- [Entering data](https://developer.apple.com/design/human-interface-guidelines/entering-data) — `Documentation/HIG/patterns/entering-data.md`
+- [Eyes](https://developer.apple.com/design/human-interface-guidelines/eyes) — `Documentation/HIG/inputs/eyes.md`
+- [Feedback](https://developer.apple.com/design/human-interface-guidelines/feedback) — `Documentation/HIG/patterns/feedback.md`
+- [File management](https://developer.apple.com/design/human-interface-guidelines/file-management) — `Documentation/HIG/patterns/file-management.md`
+- [Focus and selection](https://developer.apple.com/design/human-interface-guidelines/focus-and-selection) — `Documentation/HIG/inputs/focus-and-selection.md`
+- [Foundations](https://developer.apple.com/design/human-interface-guidelines/foundations) — `Documentation/HIG/foundations/foundations.md`
+- [Game Center](https://developer.apple.com/design/human-interface-guidelines/game-center) — `Documentation/HIG/technologies/game-center.md`
+- [Game controls](https://developer.apple.com/design/human-interface-guidelines/game-controls) — `Documentation/HIG/inputs/game-controls.md`
+- [Gauges](https://developer.apple.com/design/human-interface-guidelines/gauges) — `Documentation/HIG/components/status/gauges.md`
+- [Generative AI](https://developer.apple.com/design/human-interface-guidelines/generative-ai) — `Documentation/HIG/technologies/generative-ai.md`
+- [Gestures](https://developer.apple.com/design/human-interface-guidelines/gestures) — `Documentation/HIG/inputs/gestures.md`
+- [Getting started](https://developer.apple.com/design/human-interface-guidelines/getting-started) — `Documentation/HIG/getting-started/getting-started.md`
+- [Going full screen](https://developer.apple.com/design/human-interface-guidelines/going-full-screen) — `Documentation/HIG/patterns/going-full-screen.md`
+- [Gyroscope and accelerometer](https://developer.apple.com/design/human-interface-guidelines/gyro-and-accelerometer) — `Documentation/HIG/inputs/gyro-and-accelerometer.md`
+- [HealthKit](https://developer.apple.com/design/human-interface-guidelines/healthkit) — `Documentation/HIG/technologies/healthkit.md`
+- [Home Screen quick actions](https://developer.apple.com/design/human-interface-guidelines/home-screen-quick-actions) — `Documentation/HIG/components/menus-and-actions/home-screen-quick-actions.md`
+- [HomeKit](https://developer.apple.com/design/human-interface-guidelines/homekit) — `Documentation/HIG/technologies/homekit.md`
+- [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) — `Documentation/HIG/_root.md`
+- [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) — `Documentation/HIG/root/human-interface-guidelines.md`
+- [iCloud](https://developer.apple.com/design/human-interface-guidelines/icloud) — `Documentation/HIG/technologies/icloud.md`
+- [Icons](https://developer.apple.com/design/human-interface-guidelines/icons) — `Documentation/HIG/foundations/icons.md`
+- [ID Verifier](https://developer.apple.com/design/human-interface-guidelines/id-verifier) — `Documentation/HIG/technologies/id-verifier.md`
+- [Image views](https://developer.apple.com/design/human-interface-guidelines/image-views) — `Documentation/HIG/components/content/image-views.md`
+- [Image wells](https://developer.apple.com/design/human-interface-guidelines/image-wells) — `Documentation/HIG/components/selection-and-input/image-wells.md`
+- [Images](https://developer.apple.com/design/human-interface-guidelines/images) — `Documentation/HIG/foundations/images.md`
+- [iMessage apps and stickers](https://developer.apple.com/design/human-interface-guidelines/imessage-apps-and-stickers) — `Documentation/HIG/technologies/imessage-apps-and-stickers.md`
+- [Immersive experiences](https://developer.apple.com/design/human-interface-guidelines/immersive-experiences) — `Documentation/HIG/foundations/immersive-experiences.md`
+- [In-app purchase](https://developer.apple.com/design/human-interface-guidelines/in-app-purchase) — `Documentation/HIG/technologies/in-app-purchase.md`
+- [Inclusion](https://developer.apple.com/design/human-interface-guidelines/inclusion) — `Documentation/HIG/foundations/inclusion.md`
+- [Inputs](https://developer.apple.com/design/human-interface-guidelines/inputs) — `Documentation/HIG/inputs/inputs.md`
+- [Keyboards](https://developer.apple.com/design/human-interface-guidelines/keyboards) — `Documentation/HIG/inputs/keyboards.md`
+- [Labels](https://developer.apple.com/design/human-interface-guidelines/labels) — `Documentation/HIG/components/layout-and-organization/labels.md`
+- [Launching](https://developer.apple.com/design/human-interface-guidelines/launching) — `Documentation/HIG/patterns/launching.md`
+- [Layout](https://developer.apple.com/design/human-interface-guidelines/layout) — `Documentation/HIG/foundations/layout.md`
+- [Layout and organization](https://developer.apple.com/design/human-interface-guidelines/layout-and-organization) — `Documentation/HIG/components/layout-and-organization/layout-and-organization.md`
+- [Layout and organization](https://developer.apple.com/design/human-interface-guidelines/layout-and-organization) — `Documentation/HIG/components/layout-and-organization/_index.md`
+- [Lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables) — `Documentation/HIG/components/layout-and-organization/lists-and-tables.md`
+- [Live Activities](https://developer.apple.com/design/human-interface-guidelines/live-activities) — `Documentation/HIG/components/system-experiences/live-activities.md`
+- [Live Photos](https://developer.apple.com/design/human-interface-guidelines/live-photos) — `Documentation/HIG/technologies/live-photos.md`
+- [Live-viewing apps](https://developer.apple.com/design/human-interface-guidelines/live-viewing-apps) — `Documentation/HIG/patterns/live-viewing-apps.md`
+- [Loading](https://developer.apple.com/design/human-interface-guidelines/loading) — `Documentation/HIG/patterns/loading.md`
+- [Lockups](https://developer.apple.com/design/human-interface-guidelines/lockups) — `Documentation/HIG/components/layout-and-organization/lockups.md`
+- [Mac Catalyst](https://developer.apple.com/design/human-interface-guidelines/mac-catalyst) — `Documentation/HIG/technologies/mac-catalyst.md`
+- [Machine learning](https://developer.apple.com/design/human-interface-guidelines/machine-learning) — `Documentation/HIG/technologies/machine-learning.md`
+- [Managing accounts](https://developer.apple.com/design/human-interface-guidelines/managing-accounts) — `Documentation/HIG/patterns/managing-accounts.md`
+- [Managing notifications](https://developer.apple.com/design/human-interface-guidelines/managing-notifications) — `Documentation/HIG/patterns/managing-notifications.md`
+- [Maps](https://developer.apple.com/design/human-interface-guidelines/maps) — `Documentation/HIG/technologies/maps.md`
+- [Materials](https://developer.apple.com/design/human-interface-guidelines/materials) — `Documentation/HIG/foundations/materials.md`
+- [Menus](https://developer.apple.com/design/human-interface-guidelines/menus) — `Documentation/HIG/components/menus-and-actions/menus.md`
+- [Menus and actions](https://developer.apple.com/design/human-interface-guidelines/menus-and-actions) — `Documentation/HIG/components/menus-and-actions/menus-and-actions.md`
+- [Menus and actions](https://developer.apple.com/design/human-interface-guidelines/menus-and-actions) — `Documentation/HIG/components/menus-and-actions/_index.md`
+- [Modality](https://developer.apple.com/design/human-interface-guidelines/modality) — `Documentation/HIG/patterns/modality.md`
+- [Motion](https://developer.apple.com/design/human-interface-guidelines/motion) — `Documentation/HIG/foundations/motion.md`
+- [Multitasking](https://developer.apple.com/design/human-interface-guidelines/multitasking) — `Documentation/HIG/patterns/multitasking.md`
+- [Navigation and search](https://developer.apple.com/design/human-interface-guidelines/navigation-and-search) — `Documentation/HIG/components/navigation-and-search/navigation-and-search.md`
+- [Navigation and search](https://developer.apple.com/design/human-interface-guidelines/navigation-and-search) — `Documentation/HIG/components/navigation-and-search/_index.md`
+- [Nearby interactions](https://developer.apple.com/design/human-interface-guidelines/nearby-interactions) — `Documentation/HIG/inputs/nearby-interactions.md`
+- [NFC](https://developer.apple.com/design/human-interface-guidelines/nfc) — `Documentation/HIG/technologies/nfc.md`
+- [Notifications](https://developer.apple.com/design/human-interface-guidelines/notifications) — `Documentation/HIG/components/system-experiences/notifications.md`
+- [Offering help](https://developer.apple.com/design/human-interface-guidelines/offering-help) — `Documentation/HIG/patterns/offering-help.md`
+- [Onboarding](https://developer.apple.com/design/human-interface-guidelines/onboarding) — `Documentation/HIG/patterns/onboarding.md`
+- [Ornaments](https://developer.apple.com/design/human-interface-guidelines/ornaments) — `Documentation/HIG/components/menus-and-actions/ornaments.md`
+- [Outline views](https://developer.apple.com/design/human-interface-guidelines/outline-views) — `Documentation/HIG/components/layout-and-organization/outline-views.md`
+- [Page controls](https://developer.apple.com/design/human-interface-guidelines/page-controls) — `Documentation/HIG/components/presentation/page-controls.md`
+- [Panels](https://developer.apple.com/design/human-interface-guidelines/panels) — `Documentation/HIG/components/presentation/panels.md`
+- [Path controls](https://developer.apple.com/design/human-interface-guidelines/path-controls) — `Documentation/HIG/components/navigation-and-search/path-controls.md`
+- [Patterns](https://developer.apple.com/design/human-interface-guidelines/patterns) — `Documentation/HIG/patterns/patterns.md`
+- [Photo editing](https://developer.apple.com/design/human-interface-guidelines/photo-editing) — `Documentation/HIG/technologies/photo-editing.md`
+- [Pickers](https://developer.apple.com/design/human-interface-guidelines/pickers) — `Documentation/HIG/components/selection-and-input/pickers.md`
+- [Playing audio](https://developer.apple.com/design/human-interface-guidelines/playing-audio) — `Documentation/HIG/patterns/playing-audio.md`
+- [Playing haptics](https://developer.apple.com/design/human-interface-guidelines/playing-haptics) — `Documentation/HIG/patterns/playing-haptics.md`
+- [Playing video](https://developer.apple.com/design/human-interface-guidelines/playing-video) — `Documentation/HIG/patterns/playing-video.md`
+- [Pointing devices](https://developer.apple.com/design/human-interface-guidelines/pointing-devices) — `Documentation/HIG/inputs/pointing-devices.md`
+- [Pop-up buttons](https://developer.apple.com/design/human-interface-guidelines/pop-up-buttons) — `Documentation/HIG/components/menus-and-actions/pop-up-buttons.md`
+- [Popovers](https://developer.apple.com/design/human-interface-guidelines/popovers) — `Documentation/HIG/components/presentation/popovers.md`
+- [Presentation](https://developer.apple.com/design/human-interface-guidelines/presentation) — `Documentation/HIG/components/presentation/presentation.md`
+- [Presentation](https://developer.apple.com/design/human-interface-guidelines/presentation) — `Documentation/HIG/components/presentation/_index.md`
+- [Printing](https://developer.apple.com/design/human-interface-guidelines/printing) — `Documentation/HIG/patterns/printing.md`
+- [Privacy](https://developer.apple.com/design/human-interface-guidelines/privacy) — `Documentation/HIG/foundations/privacy.md`
+- [Progress indicators](https://developer.apple.com/design/human-interface-guidelines/progress-indicators) — `Documentation/HIG/components/status/progress-indicators.md`
+- [Pull-down buttons](https://developer.apple.com/design/human-interface-guidelines/pull-down-buttons) — `Documentation/HIG/components/menus-and-actions/pull-down-buttons.md`
+- [Rating indicators](https://developer.apple.com/design/human-interface-guidelines/rating-indicators) — `Documentation/HIG/components/status/rating-indicators.md`
+- [Ratings and reviews](https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews) — `Documentation/HIG/patterns/ratings-and-reviews.md`
+- [Remotes](https://developer.apple.com/design/human-interface-guidelines/remotes) — `Documentation/HIG/inputs/remotes.md`
+- [ResearchKit](https://developer.apple.com/design/human-interface-guidelines/researchkit) — `Documentation/HIG/technologies/researchkit.md`
+- [Right to left](https://developer.apple.com/design/human-interface-guidelines/right-to-left) — `Documentation/HIG/foundations/right-to-left.md`
+- [Scroll views](https://developer.apple.com/design/human-interface-guidelines/scroll-views) — `Documentation/HIG/components/presentation/scroll-views.md`
+- [Search fields](https://developer.apple.com/design/human-interface-guidelines/search-fields) — `Documentation/HIG/components/navigation-and-search/search-fields.md`
+- [Searching](https://developer.apple.com/design/human-interface-guidelines/searching) — `Documentation/HIG/patterns/searching.md`
+- [Segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls) — `Documentation/HIG/components/selection-and-input/segmented-controls.md`
+- [Selection and input](https://developer.apple.com/design/human-interface-guidelines/selection-and-input) — `Documentation/HIG/components/selection-and-input/selection-and-input.md`
+- [Selection and input](https://developer.apple.com/design/human-interface-guidelines/selection-and-input) — `Documentation/HIG/components/selection-and-input/_index.md`
+- [Settings](https://developer.apple.com/design/human-interface-guidelines/settings) — `Documentation/HIG/patterns/settings.md`
+- [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols) — `Documentation/HIG/foundations/sf-symbols.md`
+- [SharePlay](https://developer.apple.com/design/human-interface-guidelines/shareplay) — `Documentation/HIG/technologies/shareplay.md`
+- [ShazamKit](https://developer.apple.com/design/human-interface-guidelines/shazamkit) — `Documentation/HIG/technologies/shazamkit.md`
+- [Sheets](https://developer.apple.com/design/human-interface-guidelines/sheets) — `Documentation/HIG/components/presentation/sheets.md`
+- [Sidebars](https://developer.apple.com/design/human-interface-guidelines/sidebars) — `Documentation/HIG/components/navigation-and-search/sidebars.md`
+- [Sign in with Apple](https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple) — `Documentation/HIG/technologies/sign-in-with-apple.md`
+- [Siri](https://developer.apple.com/design/human-interface-guidelines/siri) — `Documentation/HIG/technologies/siri.md`
+- [Sliders](https://developer.apple.com/design/human-interface-guidelines/sliders) — `Documentation/HIG/components/selection-and-input/sliders.md`
+- [Spatial layout](https://developer.apple.com/design/human-interface-guidelines/spatial-layout) — `Documentation/HIG/foundations/spatial-layout.md`
+- [Split views](https://developer.apple.com/design/human-interface-guidelines/split-views) — `Documentation/HIG/components/layout-and-organization/split-views.md`
+- [Status](https://developer.apple.com/design/human-interface-guidelines/status) — `Documentation/HIG/components/status/status.md`
+- [Status](https://developer.apple.com/design/human-interface-guidelines/status) — `Documentation/HIG/components/status/_index.md`
+- [Status bars](https://developer.apple.com/design/human-interface-guidelines/status-bars) — `Documentation/HIG/components/system-experiences/status-bars.md`
+- [Steppers](https://developer.apple.com/design/human-interface-guidelines/steppers) — `Documentation/HIG/components/selection-and-input/steppers.md`
+- [System experiences](https://developer.apple.com/design/human-interface-guidelines/system-experiences) — `Documentation/HIG/components/system-experiences/system-experiences.md`
+- [System experiences](https://developer.apple.com/design/human-interface-guidelines/system-experiences) — `Documentation/HIG/components/system-experiences/_index.md`
+- [Tab bars](https://developer.apple.com/design/human-interface-guidelines/tab-bars) — `Documentation/HIG/components/navigation-and-search/tab-bars.md`
+- [Tab views](https://developer.apple.com/design/human-interface-guidelines/tab-views) — `Documentation/HIG/components/layout-and-organization/tab-views.md`
+- [Tap to Pay on iPhone](https://developer.apple.com/design/human-interface-guidelines/tap-to-pay-on-iphone) — `Documentation/HIG/technologies/tap-to-pay-on-iphone.md`
+- [Technologies](https://developer.apple.com/design/human-interface-guidelines/technologies) — `Documentation/HIG/technologies/technologies.md`
+- [Text fields](https://developer.apple.com/design/human-interface-guidelines/text-fields) — `Documentation/HIG/components/selection-and-input/text-fields.md`
+- [Text views](https://developer.apple.com/design/human-interface-guidelines/text-views) — `Documentation/HIG/components/content/text-views.md`
+- [The menu bar](https://developer.apple.com/design/human-interface-guidelines/the-menu-bar) — `Documentation/HIG/components/menus-and-actions/the-menu-bar.md`
+- [Toggles](https://developer.apple.com/design/human-interface-guidelines/toggles) — `Documentation/HIG/components/selection-and-input/toggles.md`
+- [Token fields](https://developer.apple.com/design/human-interface-guidelines/token-fields) — `Documentation/HIG/components/navigation-and-search/token-fields.md`
+- [Toolbars](https://developer.apple.com/design/human-interface-guidelines/toolbars) — `Documentation/HIG/components/menus-and-actions/toolbars.md`
+- [Top Shelf](https://developer.apple.com/design/human-interface-guidelines/top-shelf) — `Documentation/HIG/components/system-experiences/top-shelf.md`
+- [Typography](https://developer.apple.com/design/human-interface-guidelines/typography) — `Documentation/HIG/foundations/typography.md`
+- [Undo and redo](https://developer.apple.com/design/human-interface-guidelines/undo-and-redo) — `Documentation/HIG/patterns/undo-and-redo.md`
+- [Virtual keyboards](https://developer.apple.com/design/human-interface-guidelines/virtual-keyboards) — `Documentation/HIG/components/selection-and-input/virtual-keyboards.md`
+- [VoiceOver](https://developer.apple.com/design/human-interface-guidelines/voiceover) — `Documentation/HIG/technologies/voiceover.md`
+- [Wallet](https://developer.apple.com/design/human-interface-guidelines/wallet) — `Documentation/HIG/technologies/wallet.md`
+- [Watch faces](https://developer.apple.com/design/human-interface-guidelines/watch-faces) — `Documentation/HIG/components/system-experiences/watch-faces.md`
+- [Web views](https://developer.apple.com/design/human-interface-guidelines/web-views) — `Documentation/HIG/components/content/web-views.md`
+- [Widgets](https://developer.apple.com/design/human-interface-guidelines/widgets) — `Documentation/HIG/components/system-experiences/widgets.md`
+- [Windows](https://developer.apple.com/design/human-interface-guidelines/windows) — `Documentation/HIG/components/presentation/windows.md`
+- [Workouts](https://developer.apple.com/design/human-interface-guidelines/workouts) — `Documentation/HIG/patterns/workouts.md`
+- [Writing](https://developer.apple.com/design/human-interface-guidelines/writing) — `Documentation/HIG/foundations/writing.md`
