@@ -23,16 +23,16 @@ Not deep-recursed to per-method (~10K URLs). Per-method pages exist as sub-symbo
 ## 2026-05-02
 
 **Two-column NavigationSplitView with a 3-tier disclosure sidebar**
-Sidebar shape (locked 2026-05-02): **toggle heading > label/folder > item**. "Reference" / "SwiftUI" / "AppKit" are the toggle headings (each a `DisclosureGroup` whose label is tagged for selection — Mail.app's "All Inboxes" pattern); "Modal presentations" / "Images" / "Controls" / etc. are the label/folders; the leaves are the items. AppKit's `Subheading` catalog tier flattens into the parent Folder's item list. Reference's shape is `heading → item` (no Folder layer). HIG-compliant. Implementation in `SwiftKit/App/SidebarView.swift`. Uses `.navigationSplitViewStyle(.prominentDetail)` and `.navigationSplitViewColumnWidth(min: 240, ideal: 280, max: 360)`.
+Sidebar shape (locked 2026-05-02): **toggle heading > label/folder > item**. The top tier is a `DisclosureGroup` whose label is tagged for selection — Mail.app's "All Inboxes" pattern; the middle tier is the folder; the leaves are the items. Single-folder collapse: when a top-level group has only one folder, items hang directly off the heading. HIG-compliant. Implementation in `SwiftKit/App/SidebarView.swift`. Uses `.navigationSplitViewStyle(.prominentDetail)` and `.navigationSplitViewColumnWidth(min: 240, ideal: 280, max: 360)`.
 
 **Catalog data ≠ sidebar depth**
-The catalog tree (Section → Folder → optional Sub-heading → Leaf) is a data model. Sidebar maps these tiers to UI rows: catalog Section → toggle heading; catalog Folder → label/folder; catalog Leaf → item. Catalog Sub-headings (AppKit only) flatten into the parent Folder's item list. If future iteration wants Sub-headings to surface, options are: (a) split each AppKit Folder into multiple Folders by Sub-heading, or (b) introduce a content list (3-column NavigationSplitView) with Sub-headings as Section dividers there.
+The catalog tree (Section → Folder → optional Sub-heading → Leaf) is a data model. Sidebar maps these tiers to UI rows: catalog Section → toggle heading; catalog Folder → label/folder; catalog Leaf → item. Sub-headings flatten into the parent Folder's item list when present. If future iteration wants Sub-headings to surface, options are: (a) split each Folder into multiple Folders by Sub-heading, or (b) introduce a content list (3-column NavigationSplitView) with Sub-headings as Section dividers there.
 
 **Implementation-agent skill kit established for Phase 5 page work**
 When dispatching future implementation agents to write Phase 5 gallery pages, agents must be equipped with: `swiftui-expert-skill` (code review, SwiftUI best practices), `find-docs` (Context7 doc lookup), `superpowers:subagent-driven-development` (independent sub-tasks), `superpowers:executing-plans` (written plans with checkpoints). Each Page-author dispatch loads these explicitly in the agent's prompt.
 
-**Reference toggle heading sits at the top of the sidebar**
-Curated cross-cutting reference pages (Typography first; future Color, Iconography) live above the framework-specific catalog. Reference is `heading → item` (two tiers, no Folder layer); SwiftUI and AppKit are `heading → folder → item` (three tiers). Both shapes coexist. Order: Reference → SwiftUI → AppKit, putting cross-cutting docs above framework-specific content (matches HIG's hierarchy where Foundations precede framework references). At 4+ Reference leaves, restructure into named Folders to match the 3-tier shape.
+**Single-folder collapse rule established for the sidebar**
+A top-level group with only one folder collapses the folder tier and renders items directly under the heading. Multi-folder groups render full 3-tier (heading → folder → item). Both shapes coexist via the same `SidebarView` logic — no special-casing per group.
 
 **`.safeAreaInset(edge: .bottom)` is the documented Apple pattern for bottom-anchored sidebar actions**
 Apple's SwiftUI tutorial sidebar uses `List { Sections } .safeAreaInset(edge: .bottom) { Button(...) .buttonStyle(.borderless) .foregroundColor(.accentColor) }` for any persistent action below the sidebar list. The inset hooks into the source-list material correctly. SwiftKit's sidebar does NOT currently have a bottom action (an earlier "About SwiftKit" placeholder was removed 2026-05-02). Empty `.safeAreaInset(edge: .bottom) { }` reserves dead space and interferes with row hit testing — only apply when there's actual content.
@@ -68,8 +68,8 @@ After a complete project retrospective *(filed at `// The Nexus // Claude // Swi
 **Root cause of the mess (decided permanently)**
 The Phase 5 triage on 2026-05-03 took Apple's 1,722 SwiftUI URLs, classified 990 of them as "leaves," and treated each leaf as a sidebar page. That conflated *variant enumeration* (the role `Documentation/` was supposed to play) with *page list* (the role it should not have played). One modifier per page produced 358 SwiftUI pages where ~60 belonged. Family consolidation arrived May 6 — 3 days late — and was applied to only 8 of ~60 families. The lesson is now codified: **Apple's URL count is not the page count. Modifiers belong as variant tiles inside their primitive's page, not as their own pages.**
 
-**Restart spec direction (locked)**
-Target shape: ~70 pages across 14 folders (Reference 5, SwiftUI 13 folders × ~60 pages, AppKit 1 folder × ~5 pages). Folder names follow title-case per the global ClaudeOS rule. Source content drives off `Documentation/`, never training memory. Cadence is pilot-first (Button), then one folder per session, solo authoring — no parallel agents authoring pages without per-page approval.
+**Restart spec direction (initial sketch — un-locked same day)**
+A first-pass sketch targeted ~70 pages across ~14 folders, with content sourced from `Documentation/` and a pilot-first cadence (no parallel agents authoring pages without per-page approval). The sketch was un-locked the same day for a fresh planning phase.
 
 **Documents filed in The Nexus** *(mobile-accessible)*
 - `// The Nexus // Claude // SwiftKit — Where The Mess Came From.md` — full retrospective with chronological drift, root causes, three forward paths.
@@ -86,4 +86,4 @@ Target shape: ~70 pages across 14 folders (Reference 5, SwiftUI 13 folders × ~6
 - **DerivedData hash** — Capture after first build; use in all subsequent `xcodebuild` commands.
 - **Skills location** — `~/.claude/skills/` (and `~/.agents/skills/` for legacy installs symlinked in); invoke via Skill tool.
 - **`.safeAreaInset(edge: .bottom)`** — Pattern for bottom sidebar action rows; only apply when there's actual content.
-- **Reference toggle heading** — Top of sidebar; order is Reference → SwiftUI → AppKit.
+- **Single-folder collapse rule** — when a top-level group has only one folder, items render directly under the heading (no folder tier).

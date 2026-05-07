@@ -1,9 +1,9 @@
 # SwiftKit — Project Context
 
-Apple-component reference library — one page per user-recognizable component, every documented variant rendered as a tile alongside its exact API call. Modifiers fold into the primitive's page as variant tiles, never as their own pages. Companion output is `Documentation/` (project-root sibling) — a local mirror of Apple HIG, SwiftUI, and AppKit docs as flat markdown.
+Apple-component reference library — one page per user-recognizable component, every documented variant rendered as a tile alongside its exact API call. Modifiers fold into the primitive's page as variant tiles, never as their own pages. Companion output is `Documentation/` (project-root sibling) — a local mirror of Apple's documentation as flat markdown.
 
 **Git remote:** <https://github.com/Natertot215/SwiftKit.git>
-**Status:** post-strip restart (2026-05-07). 5 Reference pages registered. ~70-page target shape documented in `framework.md`.
+**Status:** post-strip blank-slate (2026-05-07). Sidebar runs an 81-item placeholder template. Page list and folder shape are open for the new planning phase.
 
 ## Stack
 

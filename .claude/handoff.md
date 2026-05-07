@@ -12,7 +12,7 @@
 The project was stripped on 2026-05-07. What remains:
 
 - **Shell + scaffolds** *(14 Swift files)* — `SwiftKitApp`, `RootView`, `SidebarView`, `ContentView`, `AppearanceController`, `GalleryItem`, `GalleryRegistry`, `DetailPane`, and the page scaffolds *(`GalleryItemPage`, `VariantTile`, `PageSection`, `APICallout`, `DemoTiles`)*. All proven.
-- **5 Reference pages on disk** at `Pages/Reference/` — Materials, Motion, Color, SF Symbols, Typography. Currently unregistered.
+- **5 reference pages on disk** at `Pages/Reference/` — Materials, Motion, Color, SF Symbols, Typography. Currently unregistered.
 - **Sidebar placeholder template** — `GalleryRegistry` registers 81 placeholder items via `PlaceholderGalleryPage`, organized as 3 main folders × 3 sub-folders × 9 pages. Used to validate disclosure mechanics.
 - **Documentation mirror** at `Documentation/` — 2,535 markdown files, intact, untouched. The eventual authoring source.
 

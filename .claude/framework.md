@@ -4,23 +4,22 @@
 
 A personal Apple-component reference library, native to macOS. Two outputs:
 
-1. **`SwiftKit.app`** — a macOS gallery app. Sidebar navigates *Reference / SwiftUI / AppKit*; each page documents one user-recognizable component with every documented variant rendered as a tile alongside its exact API call. Light/dark toggle on the detail pane (default dark).
-2. **`Documentation/`** (project-root sibling of the Xcode app target) — a complete local mirror of Apple's HIG, SwiftUI, and AppKit documentation as flat markdown files. The authoring source for every gallery page.
+1. **`SwiftKit.app`** — a macOS gallery app. Each page documents one user-recognizable component with every documented variant rendered as a tile alongside its exact API call. Light/dark toggle on the detail pane (default dark).
+2. **`Documentation/`** (project-root sibling of the Xcode app target) — a complete local mirror of Apple's documentation as flat markdown files. The authoring source for every gallery page.
 
 The motivation is concrete: Pommora's UI shell rebuild stalled because there was no confirmed visual reference for what Apple's primitives actually render as on macOS 26. Every "build the sidebar" task became a guessing game off after-the-fact screenshots. SwiftKit is the reference. When Pommora needs a component, Nathan points at SwiftKit and says "that one." No invention. No interpretation.
 
 ## Current State *(2026-05-07, post-strip)*
 
-The project was stripped on 2026-05-07 after drifting into 836 page files / 43 folders. Restart is from a clean foundation with 5 canonical Reference pages.
+The project was stripped on 2026-05-07 after drifting into 836 page files / 43 folders. Restart is from a clean foundation.
 
 ```
-Total Swift files:       20
+Total Swift files:       21
   Shell + scaffolds:     14
-  Reference pages:       5
-  Shared:                1 (DescribePage.swift)
+  Reference pages on disk: 5 (unregistered)
+  Shared:                2 (DescribePage, PlaceholderGalleryPage)
 
-GalleryRegistry entries: 5 (all Reference)
-Sidebar folders:         1 (Reference, single-tier-collapsed)
+GalleryRegistry entries: 81 (placeholder template — 3 main folders × 3 sub-folders × 9 pages)
 Build state:             ✅ green
 Documentation mirror:    2,535 markdown files (intact)
 ```
@@ -30,7 +29,7 @@ Documentation mirror:    2,535 markdown files (intact)
 - Catalog: `GalleryItem` descriptor, `GalleryRegistry` (allItems/byFramework/item(forID:))
 - Detail pane: `DetailPane`
 - Page scaffolds: `GalleryItemPage`, `VariantTile`, `PageSection`, `APICallout`, `DemoTiles`
-- 5 Reference pages: Materials, Motion, Color, SF Symbols, Typography — the canonical "right shape" model
+- 5 canonical reference pages: Materials, Motion, Color, SF Symbols, Typography — the authoring model
 - App icon, asset catalog
 - 2,535-file `Documentation/` mirror
 
@@ -46,7 +45,7 @@ Scope, page count, folder count, naming, and authoring cadence are all open. Set
 
 ## Hard Constraints
 
-- **Apple-only.** Every view, modifier, type, and style must come from Apple's documented SwiftUI or AppKit. No third-party UI libraries. No Claude-authored wrapper views — see `Guidelines/feedback.md`.
+- **Apple-only.** Every view, modifier, type, and style must come from Apple's documented APIs. No third-party UI libraries. No Claude-authored wrapper views — see `Guidelines/feedback.md`.
 - **macOS 26 only** — no backward compat.
 - **Dark mode first.**
 - **No SwiftData.** SwiftKit has no `@Model` types, no `.modelContainer(...)`. (L-007)
@@ -76,8 +75,9 @@ Chronological record of what's in the app. **No code** — just name + date.
 | `SidebarView` (3-tier disclosure + single-folder collapse) | 2026-05-02 |
 | `GalleryItem`, `GalleryRegistry` (descriptor + flat allItems) | 2026-05-06 |
 | `GalleryItemPage`, `VariantTile`, `PageSection`, `APICallout`, `DemoTiles` (page scaffolds) | 2026-05-06 |
-| 5 Reference pages: `Typography`, `Color`, `Materials`, `Motion`, `SF Symbols` | 2026-05-06 |
-| **Strip-and-restart** — 836 pre-strip page files removed; corpus reset to 5 Reference pages | **2026-05-07** |
+| 5 reference pages: `Typography`, `Color`, `Materials`, `Motion`, `SF Symbols` | 2026-05-06 |
+| **Strip-and-restart** — 836 pre-strip page files removed; corpus reset to 5 reference pages | **2026-05-07** |
+| `PlaceholderGalleryPage` + 81-item placeholder template (sidebar mechanics validation) | 2026-05-07 |
 
 ## Planning checklist
 
