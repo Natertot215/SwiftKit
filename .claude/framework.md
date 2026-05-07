@@ -174,9 +174,12 @@ Each agent's chain: implementer → spec review → code review. Spec reviewer h
 
 **Agent brief (mandatory inclusions for every sort agent):**
 - Treat `.claude/PlanningTree` as the starting page list. Adjust only when a doc clearly doesn't fit any proposed page or when a proposed page has no docs.
+- **Hard rule — only components, code, and descriptions surface as gallery content.** Articles, guides, navigation/landing pages, sample-code wrappers, and collection-group topic listings (like `https://developer.apple.com/documentation/swiftui/menus-and-commands`) are NEVER gallery pages and NEVER tiles.
 - **Classifier gate (drift prevention):** any doc with `kind: method`, `kind: property`, `kind: instance method`, `kind: instance-method`, `kind: init`, or `kind: func` is a **tile candidate, not a page candidate**. Promotion to a page entry requires explicit justification in the manifest.
 - `kind: struct`, `kind: class`, `kind: enum`, `kind: protocol`, `kind: macro`, `kind: typealias` are page-or-tile candidates depending on whether they're user-recognizable as standalone components.
-- `kind: sampleCode` is reference material for the rendering phase, not a tile or page.
+- `kind: sampleCode` is reference material for the rendering phase, not a tile or page — always deferred.
+- `kind: collectionGroup` and any `_index.md` file (Apple's topic-group landing pages) are navigation aids — always deferred. They never become a tile, a page, or a manifest entry.
+- `kind: article` is already archived in Phase 0b — sort agents won't see these in the active doc tree.
 - Every doc must end up in one of three buckets: (1) a tile inside a named page, (2) the orphan list with reason, (3) the deferred list (e.g. internal helper types not for gallery surface).
 - Reuse Phase 0b's `guide-orphan-components.md` — components found only in guides need a tile home in the manifest.
 - Skill kit: `find-docs` (Context7 fallback for ambiguous types), `swiftui-expert-skill` (for naming/categorization sanity checks).
