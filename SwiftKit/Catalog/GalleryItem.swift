@@ -99,3 +99,25 @@ struct GalleryItem: Identifiable {
         self.page = page
     }
 }
+
+// MARK: - Framework display
+
+extension Framework {
+    /// User-facing label shown in the sidebar's top-level disclosure.
+    var displayName: String {
+        switch self {
+        case .reference: return "Reference"
+        case .swiftUI:   return "SwiftUI"
+        case .appKit:    return "AppKit"
+        }
+    }
+
+    /// SF Symbol used for the framework's sidebar row.
+    var sidebarSymbolName: String {
+        switch self {
+        case .reference: return "book.closed"
+        case .swiftUI:   return "swift"
+        case .appKit:    return "square.grid.2x2"
+        }
+    }
+}
