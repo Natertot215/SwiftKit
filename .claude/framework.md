@@ -36,60 +36,13 @@ Documentation mirror:    2,535 markdown files (intact)
 
 **Pre-strip corpus** preserved at git tag `pre-restart` (SHA `62db021`). Recoverable via `git show pre-restart:<path>` if any single file becomes useful as reference.
 
-## Future Plans *(post-strip restart)*
+## Future Plans
 
-Target shape: **~70 pages across 14 folders.** Folders are reserved for large groupings; pages are reserved for user-recognizable primitives; modifiers fold in as variant tiles, not as their own pages.
+Project is in a new planning phase as of 2026-05-07. No specifics are committed beyond the broad idea below; the concrete plan is open for re-design.
 
-### Sidebar shape *(target)*
+**Broad idea.** A focused, lean reference library: each sidebar page documents one user-recognizable component with every variant rendered as a tile. Folders are reserved for large groupings. The `Documentation/` mirror is the authoring source, not the page list. The sidebar mechanics *(3-tier disclosure, single-folder collapse, framework default chrome)* are locked — the placeholder template at `753f4d9` exercises the exact shape future content will take.
 
-**Reference** — 5 pages, single-tier-collapsed under the framework heading. *(Already complete.)*
-
-**SwiftUI** — 13 folders, ~60 pages:
-- App Structure *(~3)* — App & Scenes, WindowGroup, Document
-- Navigation *(~6)* — NavigationStack, NavigationSplitView, TabView, Sidebar, Searchable, Inspector
-- Layout *(~8)* — Stacks, Grid, LazyGrid, ScrollView, GeometryReader, Frame & Padding, Alignment, SafeArea
-- Containers *(~6)* — List, Table, Form, GroupBox, Section, DisclosureGroup
-- Controls *(~10)* — Button, Toggle, Picker, DatePicker, ColorPicker, Slider, Stepper, ProgressView, Gauge, Menu
-- Text and Input *(~5)* — Text, TextField, TextEditor, Label, AttributedString
-- Images and Shapes *(~4)* — Image, AsyncImage, Shapes, Gradient
-- Presentation *(~5)* — Sheet, Popover, Alert, ConfirmationDialog, FullScreenCover
-- Toolbars and Menus *(~3)* — Toolbar, ContextMenu, Commands
-- Animation and Effects *(~4)* — Animation, Transition, MatchedGeometry, Canvas
-- Accessibility *(~3)* — Labels & Descriptions, Actions & Behavior, Custom Content
-- Gestures and Input *(~3)* — Gestures, FocusState, Keyboard
-
-**AppKit** — 1 folder, ~5 pages, single-tier-collapsed:
-- Views and Controls *(~5)* — NSOutlineView, NSBrowser, NSPathControl, NSTokenField, NSDatePicker (only AppKit primitives that fill SwiftUI gaps)
-
-### Authoring rules
-
-- **One page per user-recognizable component.** Modifiers go inside that component's page as variant tiles.
-- **One folder per macro-grouping.** A folder with fewer than ~4 pages does not earn its disclosure.
-- **Title-case folder names** — *"Drawing and Graphics"*, not *"Drawing and graphics"* (per ClaudeOS global rule).
-- **Source content from `Documentation/`** — read the relevant markdown(s) for each page before authoring. No re-derivation from training memory.
-- **Apple-only doctrine still binding** — see `Guidelines/feedback.md`. Strip didn't change that.
-
-### Cadence
-
-- **Pilot first.** Author `ButtonGalleryPage` solo. Validate page shape, tile vocabulary, semantic-token discipline, build cleanliness. Adjust scaffold if needed.
-- **One folder per session after that.** With Documentation markdown in hand, author each page directly.
-- **No parallel agents authoring pages without explicit per-page approval.** The May-3-through-May-7 sweep proved agents amplify the wrong thing.
-- **Build green between every page.** Each new file = one Edit + Append-to-`GalleryRegistry.allItems` + clean build.
-
-### First three sessions *(target)*
-
-1. Pilot: `ButtonGalleryPage`. End: 6 working pages.
-2. First folder: Controls (Button-shaped pattern × 10 pages). End: 1 SwiftUI folder, ~15 working pages.
-3. Second folder: Containers. End: 2 SwiftUI folders, ~21 working pages.
-
-After 3 sessions: a usable reference library spanning Reference + 2 SwiftUI folders. Remaining 11 folders fill in over subsequent sessions.
-
-### Open decisions before pilot
-
-- Verify whether `GalleryPageScaffold.swift` has any post-strip consumers (delete if not).
-- Confirm `DescribePage.swift` is wanted under the new model (or delete).
-- Lock in the 13 SwiftUI folder names verbatim.
-- Confirm Button as the pilot.
+Scope, page count, folder count, naming, and authoring cadence are all open. Settle them in a planning session before authoring resumes.
 
 ## Hard Constraints
 
