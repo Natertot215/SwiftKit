@@ -251,6 +251,26 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSGridViewPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsGridView",
+        title: "NSGridView",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSGridView",
+            "NSGridCell",
+            "NSGridColumn",
+            "NSGridRow"
+        ],
+        blurb: "A container that aligns views in a flexible grid of rows and columns. Each row-column intersection is an NSGridCell that hosts a content view; the grid resolves cell intrinsic sizes into aligned rows and columns via Auto Layout.",
+        signature: "class NSGridView : NSView",
+        availability: "macOS 10.12+",
+        docPath: "Documentation/AppKit/views-and-controls/nsgridview.md",
+        page: { AnyView(NSGridViewPage()) }
+    )
+}
+
 #Preview {
     NSGridViewPage().frame(width: 1100, height: 900)
 }

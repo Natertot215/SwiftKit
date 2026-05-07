@@ -216,6 +216,26 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSComboBoxPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsComboBox",
+        title: "NSComboBox",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSComboBox",
+            "NSComboBoxCell",
+            "NSComboBoxDataSource",
+            "NSComboBoxDelegate"
+        ],
+        blurb: "A view that displays a list of values in a pop-up menu where the user selects a value or types in a custom value. Inherits NSTextField and supports both an internal item list and an external NSComboBoxDataSource.",
+        signature: "class NSComboBox : NSTextField",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nscombobox.md",
+        page: { AnyView(NSComboBoxPage()) }
+    )
+}
+
 #Preview {
     NSComboBoxPage().frame(width: 1100, height: 900)
 }

@@ -238,6 +238,24 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSLevelIndicatorPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsLevelIndicator",
+        title: "NSLevelIndicator",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSLevelIndicator",
+            "NSLevelIndicatorCell"
+        ],
+        blurb: "A visual representation of a level or quantity, using discrete values. Renders as a non-interactive read-out for capacity, rating, or relevancy data, with warning and critical thresholds for capacity styles.",
+        signature: "class NSLevelIndicator : NSControl",
+        availability: "macOS 10.4+",
+        docPath: "Documentation/AppKit/views-and-controls/nslevelindicator.md",
+        page: { AnyView(NSLevelIndicatorPage()) }
+    )
+}
+
 #Preview {
     NSLevelIndicatorPage().frame(width: 1100, height: 900)
 }

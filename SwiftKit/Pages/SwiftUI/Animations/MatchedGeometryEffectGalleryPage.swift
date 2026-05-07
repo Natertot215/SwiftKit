@@ -25,11 +25,16 @@ extension MatchedGeometryEffectGalleryPage {
         folder: "Animations",
         framework: .swiftUI,
         absorbedSymbols: [
+            "EmptyMatchedTransitionSourceConfiguration",
+            "MatchedGeometryProperties",
+            "MatchedTransitionSourceConfiguration",
+            "Namespace",
             "View/matchedGeometryEffect(id:in:properties:anchor:isSource:)",
-            "MatchedGeometryProperties"
+            "View/matchedTransitionSource(id:in:)",
+            "View/matchedTransitionSource(id:in:configuration:)"
         ],
-        blurb: "Defines a group of views with synchronized geometry using an identifier and namespace. SwiftUI tweens position, size, and other matched properties between source and destination views.",
-        signature: "func matchedGeometryEffect<ID>(id: ID, in: Namespace.ID, properties: MatchedGeometryProperties = .frame, anchor: UnitPoint = .center, isSource: Bool = true) -> some View where ID : Hashable",
+        blurb: "Synchronizes geometry across views: matchedGeometryEffect tweens position and size between source and destination, while matchedTransitionSource pairs with navigationTransition(.zoom:) for hero-style nav effects. Both rely on a Namespace.ID — declared via the @Namespace property wrapper — to scope their identifiers.",
+        signature: "matchedGeometryEffect · matchedTransitionSource · MatchedTransitionSourceConfiguration · Namespace",
         availability: "macOS 11.0+",
         docPath: "Documentation/SwiftUI/animations/matchedgeometryeffect(id:in:properties:anchor:issource:).md",
         page: { AnyView(MatchedGeometryEffectGalleryPage()) }

@@ -25,13 +25,20 @@ extension MenuGalleryPage {
         folder: "Menus and commands",
         framework: .swiftUI,
         absorbedSymbols: [
+            "ContextMenu",
             "Menu",
-            "View/menuActionDismissBehavior(_:)",
             "MenuActionDismissBehavior",
+            "PullDownButton",
+            "View/contextMenu(forSelectionType:menu:primaryAction:)",
+            "View/contextMenu(menuItems:)",
+            "View/contextMenu(menuItems:preview:)",
+            "View/menuActionDismissBehavior(_:)",
+            "swiftui.menus-and-commands.contextmenu",
+            "swiftui.menus-and-commands.menubutton",
             "swiftui.menus-and-commands.populating-swiftui-menus-with-adaptive-controls"
         ],
-        blurb: "A control for presenting a menu of actions. Build menus with Buttons, Toggles, Sections, Dividers, and nested Menus; pair with menuActionDismissBehavior to control whether a menu closes after a selection.",
-        signature: "struct Menu<Label, Content> where Label : View, Content : View",
+        blurb: "A control for presenting a menu of actions, covering Menu plus its related variants — the deprecated MenuButton, the legacy macOS PullDownButton typealias, and the right-click ContextMenu container. Build menus with Buttons, Toggles, Sections, Dividers, and nested Menus, attach context menus via the contextMenu modifier, and use menuActionDismissBehavior to control whether a menu closes after a selection.",
+        signature: "Menu \u{00b7} MenuButton \u{00b7} PullDownButton \u{00b7} ContextMenu \u{00b7} MenuActionDismissBehavior \u{00b7} MenuStyle",
         availability: "macOS 11.0+",
         docPath: "Documentation/SwiftUI/menus-and-commands/menu.md",
         page: { AnyView(MenuGalleryPage()) }

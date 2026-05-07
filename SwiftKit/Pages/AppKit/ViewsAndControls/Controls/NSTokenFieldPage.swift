@@ -260,6 +260,26 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSTokenFieldPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsTokenField",
+        title: "NSTokenField",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSTokenField",
+            "NSTokenFieldCell",
+            "NSTokenFieldDelegate",
+            "NSTokenFieldCellDelegate"
+        ],
+        blurb: "A text field that converts text into visually distinct tokens. Inherits NSTextField and uses a tokenizing character set plus an optional delegate to translate represented objects into display and editing strings.",
+        signature: "class NSTokenField : NSTextField",
+        availability: "macOS 10.4+",
+        docPath: "Documentation/AppKit/views-and-controls/nstokenfield.md",
+        page: { AnyView(NSTokenFieldPage()) }
+    )
+}
+
 #Preview {
     NSTokenFieldPage().frame(width: 1100, height: 900)
 }

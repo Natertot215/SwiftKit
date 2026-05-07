@@ -279,6 +279,26 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSSliderPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsSlider",
+        title: "NSSlider",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSSlider",
+            "NSSliderCell",
+            "NSSliderAccessory",
+            "NSSliderAccessoryBehavior"
+        ],
+        blurb: "A display of a bar (or circular knob) representing a continuous range of numerical values, with a knob representing the currently selected value. Configurable for tick marks, orientation, snap-to-ticks, and continuous-vs-discrete value reporting.",
+        signature: "class NSSlider : NSControl",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nsslider.md",
+        page: { AnyView(NSSliderPage()) }
+    )
+}
+
 #Preview {
     NSSliderPage().frame(width: 1100, height: 900)
 }

@@ -289,6 +289,25 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSBrowserPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsBrowser",
+        title: "NSBrowser",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSBrowser",
+            "NSBrowserCell",
+            "NSBrowserDelegate"
+        ],
+        blurb: "An interface that displays a hierarchically organized list of data items that can be navigated and selected, drawn as a sequence of columns where each column shows the next level down in a tree.",
+        signature: "class NSBrowser : NSControl",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nsbrowser.md",
+        page: { AnyView(NSBrowserPage()) }
+    )
+}
+
 #Preview {
     NSBrowserPage().frame(width: 1100, height: 900)
 }

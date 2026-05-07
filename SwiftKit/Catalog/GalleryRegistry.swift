@@ -29,9 +29,6 @@ enum GalleryRegistry {
 
         // Modal Presentations — Phase B2
         AlertGalleryPage.item,
-        ConfirmationDialogGalleryPage.item,
-        DialogSuppressionGalleryPage.item,
-        DismissalConfirmationDialogGalleryPage.item,
         FileImporterGalleryPage.item,
         FullScreenCoverGalleryPage.item,
         InspectorGalleryPage.item,
@@ -40,18 +37,12 @@ enum GalleryRegistry {
 
         // Animations — Phase B2
         AnimatableGalleryPage.item,
-        AnimatableModifierGalleryPage.item,
         AnimationGalleryPage.item,
-        AnyTransitionGalleryPage.item,
-        ContentTransitionGalleryPage.item,
         CustomAnimationGalleryPage.item,
         GeometryEffectGalleryPage.item,
         GeometryGroupGalleryPage.item,
         KeyframeAnimatorGalleryPage.item,
         MatchedGeometryEffectGalleryPage.item,
-        MatchedTransitionSourceGalleryPage.item,
-        NamespaceGalleryPage.item,
-        NavigationTransitionGalleryPage.item,
         PhaseAnimatorGalleryPage.item,
         PlaceholderContentViewGalleryPage.item,
         SpringGalleryPage.item,
@@ -62,17 +53,14 @@ enum GalleryRegistry {
 
         // Text Input And Output — Phase B2
         AttributedTextFormattingGalleryPage.item,
-        BoldGalleryPage.item,
         BuildingRichSwiftUITextExperiencesGalleryPage.item,
         DynamicTypeSizeGalleryPage.item,
         FontGalleryPage.item,
-        ItalicGalleryPage.item,
         LabelGalleryPage.item,
         LineLayoutGalleryPage.item,
         LocalizedStringKeyGalleryPage.item,
         MonospacedGalleryPage.item,
         SecureFieldGalleryPage.item,
-        StrikethroughGalleryPage.item,
         SystemFormatStyleGalleryPage.item,
         TextCaseGalleryPage.item,
         TextEditorGalleryPage.item,
@@ -86,7 +74,6 @@ enum GalleryRegistry {
         TextSelectionGalleryPage.item,
         TextVariantPreferenceGalleryPage.item,
         TypesettingLanguageGalleryPage.item,
-        UnderlineGalleryPage.item,
         WritingToolsBehaviorGalleryPage.item,
 
         // Drawing And Graphics — Phase B2
@@ -122,8 +109,6 @@ enum GalleryRegistry {
         ControlActiveStateGalleryPage.item,
         DismissWindowGalleryPage.item,
         OpenWindowGalleryPage.item,
-        SceneLaunchBehaviorGalleryPage.item,
-        SceneRestorationBehaviorGalleryPage.item,
         UtilityWindowGalleryPage.item,
         VolumeViewpointGalleryPage.item,
         WindowGalleryPage.item,
@@ -152,10 +137,7 @@ enum GalleryRegistry {
         VSplitViewGalleryPage.item,
 
         // Toolbars — Phase B3
-        OrnamentGalleryPage.item,
-        ToolbarCustomizationGalleryPage.item,
         ToolbarGalleryPage.item,
-        ToolbarRoleGalleryPage.item,
 
         // Search — Phase B3
         SearchableGalleryPage.item,
@@ -307,15 +289,11 @@ enum GalleryRegistry {
 
         // Menus And Commands — Phase B4
         CommandsGalleryPage.item,
-        ContextMenuGalleryPage.item,
         DividerGalleryPage.item,
-        MenuButtonGalleryPage.item,
         MenuGalleryPage.item,
-        PullDownButtonGalleryPage.item,
 
         // Layout (merged) — Phase B4
         AlignmentGalleryPage.item,
-        AlignmentGuideGalleryPage.item,
         AnyLayoutGalleryPage.item,
         BackgroundOverlayGalleryPage.item,
         EdgeGalleryPage.item,
@@ -358,17 +336,13 @@ enum GalleryRegistry {
         AnyGestureGalleryPage.item,
         DefersSystemGesturesGalleryPage.item,
         DragGestureGalleryPage.item,
-        ExclusiveGestureGalleryPage.item,
         GestureGalleryPage.item,
         HandGestureShortcutGalleryPage.item,
-        HighPriorityGestureGalleryPage.item,
         LongPressGestureGalleryPage.item,
         MagnifyGestureGalleryPage.item,
         PencilGesturesGalleryPage.item,
         RotateGesture3DGalleryPage.item,
         RotateGestureGalleryPage.item,
-        SequenceGestureGalleryPage.item,
-        SimultaneousGestureGalleryPage.item,
         SpatialEventGestureGalleryPage.item,
         SpatialTapGestureGalleryPage.item,
         TapGestureGalleryPage.item,
@@ -412,9 +386,7 @@ enum GalleryRegistry {
         NSGestureRecognizerRepresentableGalleryPage.item,
         NSHostingControllerGalleryPage.item,
         NSHostingMenuGalleryPage.item,
-        NSHostingSceneBridgingOptionsGalleryPage.item,
         NSHostingSceneRepresentationGalleryPage.item,
-        NSHostingSizingOptionsGalleryPage.item,
         NSHostingViewGalleryPage.item,
         NSViewControllerRepresentableGalleryPage.item,
         NSViewRepresentableGalleryPage.item,
@@ -518,6 +490,20 @@ enum GalleryRegistry {
 
         // AppKit · Writing Tools — Phase B5
         NSWritingToolsPage.item,
+
+        // AppKit · Views and controls — third-bucket registrations (2026-05-07)
+        NSOutlineViewPage.item,
+        NSBrowserPage.item,
+        NSComboBoxPage.item,
+        NSDatePickerPage.item,
+        NSTokenFieldPage.item,
+        NSSliderPage.item,
+        NSPathControlPage.item,
+        NSGridViewPage.item,
+        NSStepperPage.item,
+        NSSegmentedControlPage.item,
+        NSProgressIndicatorPage.item,
+        NSLevelIndicatorPage.item,
     ]
 
     /// Items grouped first by framework (Reference / SwiftUI / AppKit), then by

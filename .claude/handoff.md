@@ -2,77 +2,90 @@
 
 > Rewrite at the end of every session. Always reflects current state.
 
-**Last session:** 2026-05-06 (Phase A + B1 + sidebar sweep B2/B3/B4/B5 + catalog dead-code purge + 8 family consolidations + app icon flatten/zoom)
-**Git:** `main` ahead of `origin/main`. **All work since `8ef5c40` was uncommitted at session end** — committing first thing this session.
-**HEAD:** `8ef5c40` (Phase 6 D1-D6 — last commit prior to today's commit pass)
-**Build:** ✅ `** BUILD SUCCEEDED **` end-of-2026-05-06.
+**Last session:** 2026-05-07 (commit pass + 11 medium-confidence consolidations + 12 AppKit registrations + orphan audit)
+**Git:** `main` ahead of `origin/main`. Last commit `cd496cd` is the unified Phase B + 6 + cleanup commit. Day-2 cleanup work pending its own commit.
+**HEAD:** `cd496cd` (Phase B + 6 + cleanup — gallery sidebar shipped, family consolidation, dead code purged)
+**Build:** ✅ `** BUILD SUCCEEDED **` after this session's cleanup pass.
 
-## What landed yesterday
+## What landed this session (2026-05-07)
 
-### Sidebar + shell — done
+### Initial commit (cd496cd)
 
-- Gallery sidebar is the only sidebar. `useGallerySidebar` toggle removed; legacy `Catalog+*.swift` data path deleted.
-- Sidebar single-folder collapse: when a framework has only one folder, items hang directly off the framework heading (Reference works this way).
-- Selection persisted via `@SceneStorage("selectedNodeID")`, default `"item:reference.color.color"`.
-- `VariantTile` static drop shadow only — hover elevation removed.
-- App icon: custom Swift logo, dark-flattened corners, +11% cumulative zoom.
+Unified the prior session's 485 uncommitted file changes into one commit: gallery sidebar replacing legacy catalog, Phase B2/B3/B4/B5 stub sweep (462 GalleryItems), Phase 6 D-batch, catalog dead-code purge, 8 family consolidations, app icon, orientation headers, planning purge, transcript renames.
 
-### Catalog dead-code purge — done
+### 11 medium-confidence family consolidations — done
 
-Deleted: `Catalog+SwiftUI.swift`, `Catalog+AppKit.swift`, `Catalog+Reference.swift`, `CatalogNode.swift`, `Folder`/`SectionNode`/`Leaf`, `GalleryCatalog.swift`, `PageRegistry.swift`, `CatalogFilters.swift`, `Detail/PlaceholderPage.swift`. `Framework` enum relocated to `GalleryItem.swift`. `GalleryRegistry` trimmed to live entry points only (`byFramework`, `item(forID:)`).
+Same parallel-agent pattern as Day 1's seven. Each fold absorbs siblings' `absorbedSymbols` into a master, deletes the siblings.
 
-### Family consolidations — 8 done
+| Family | Master | Siblings deleted |
+|---|---|---|
+| Toolbar | `ToolbarGalleryPage` | 3 |
+| Alert | `AlertGalleryPage` | 3 |
+| Transition | `TransitionGalleryPage` | 3 |
+| Gesture composition | `GestureGalleryPage` | 4 |
+| Menu | `MenuGalleryPage` | 3 |
+| Alignment | `AlignmentGalleryPage` | 1 |
+| Text decorations | `TextGalleryPage` | 4 |
+| Matched-geometry | `MatchedGeometryEffectGalleryPage` | 2 |
+| Animatable | `AnimatableGalleryPage` | 1 |
+| Scene lifecycle | `WindowGroupGalleryPage` | 2 |
+| NSHosting options | `NSHostingControllerGalleryPage` | 2 |
+| **Total** | | **28** |
 
-| Family | Master | Symbols absorbed | Files deleted |
-|---|---|---|---|
-| Tables | `TableGalleryPage` | 8 | 6 |
-| Drag and drop | `DraggableGalleryPage` | 11 | 9 |
-| TabView | `TabViewGalleryPage` | 25 | 6 |
-| Commands | `CommandsGalleryPage` | 16 | 9 |
-| List | `ListGalleryPage` | 23 | 5 |
-| File dialogs | `FileImporterGalleryPage` | 22 | 3 |
-| Searchable | `SearchableGalleryPage` | 30 | 3 |
-| Liquid Glass | `GlassEffectGalleryPage` | 18 | 6 |
-| **Total** | | **153** | **47** |
+### 12 AppKit page registrations — done
 
-### Orientation headers — done
+Added `static let item: GalleryItem` extensions to: `NSOutlineView`, `NSBrowser`, `NSComboBox`, `NSDatePicker`, `NSTokenField`, `NSSlider`, `NSPathControl`, `NSGridView`, `NSStepper`, `NSSegmentedControl`, `NSProgressIndicator`, `NSLevelIndicator`. They're now in `GalleryRegistry.allItems` under "AppKit · Views and controls".
 
-`GalleryItem.swift`, `GalleryRegistry.swift`, `RootView.swift`, `Detail/PageScaffold/GalleryItemPage.swift` now carry full authoring contracts.
+### Orphan audit — done (with a major finding)
 
-### Housekeeping — done
+**Critical finding:** the 562 unregistered `*Page.swift` files in `Pages/SwiftUI/` are NOT stale leftovers — they hold **the original authored gallery content** from the pre-gallery era. The registered `*GalleryPage.swift` files are mostly 40-50 line placeholder stubs.
 
-- `.claude/Planning/` purged of stale docs; only `2026-05-07-finish-line-handoff.md` remains.
-- `.claude/Transcripts/` renamed DD-MM → MM-DD format.
-- `save-script-studio.md` command redeployed from Nexus master to fix DD-MM/MM-DD conflict.
+Concrete examples:
+- `Tables/TablePage.swift` (**953 lines** of real Table/TableColumn/TableStyle gallery content) vs `Tables/TableGalleryPage.swift` (48 lines, `ContentUnavailableView` placeholder)
+- `ControlsAndIndicators/ButtonPage.swift` (**1380 lines**) vs `ButtonGalleryPage.swift` (42 lines, placeholder)
+- `InputEvents/KeyboardInputPage.swift` (**1385 lines**) vs `KeyboardInputGalleryPage.swift` (placeholder)
+
+**Implication for the project:** the tile-content sweep is **migration, not greenfield authoring**. Move existing content into the gallery shell, update `absorbedSymbols`, delete the orphan. Estimate drops from "multi-week authoring" to "focused multi-session migration sweep."
+
+Action taken: deleted 1 trivial orphan (`ViewGroupings/SubviewCollectionPage.swift`, 11 lines, just a comment). 562 files retained as the migration corpus.
+
+Full sorted line-count manifest at `/tmp/orphan_linecounts.txt`.
 
 ## Current numbers
 
-- `GalleryRegistry.allItems`: **415 entries**
+- `GalleryRegistry.allItems`: **399 entries** (was 415; -28 consolidations, +12 AppKit registrations)
 - Authored pages: ~26 (Reference + Phase A Shapes + a handful of older SwiftUI pages)
-- Stub pages: ~389 (`ContentUnavailableView "In progress"`)
+- Stub `*GalleryPage.swift` pages: ~373 (await migration from orphan source content)
+- Orphan source pages (unregistered `*Page.swift`): 562 — the migration corpus
 
-## Today's plan (2026-05-07)
+## Day 1 recap (2026-05-06, all in commit cd496cd)
 
-Defined in `.claude/Planning/2026-05-07-finish-line-handoff.md`. In order:
+Catalog dead-code purge, 8 family consolidations (Tables/Drag-and-drop/TabView/Commands/List/File-dialogs/Searchable/Liquid Glass), Reference framework populated, sidebar single-folder collapse, hover elevation removed, app icon flatten + zoom, orientation headers, planning purge, transcript renames, save-script-studio command redeployed.
 
-1. **Commit working tree** ← starting here
-2. **Mechanical cleanup sweep** (parallel agents):
-   - 11 medium-confidence family consolidations (skip Immersive Spaces — visionOS-only)
-   - 12 AppKit page registrations (NSOutlineView/NSBrowser/NSComboBox/NSDatePicker/NSTokenField/NSSlider/NSPathControl/NSGridView/NSStepper/NSSegmentedControl/NSProgressIndicator/NSLevelIndicator)
-   - Orphan cleanup (non-`GalleryPage` files in Tables/, DragAndDrop/, others)
-3. **Commit again**
-4. **Plan tile-content sweep** (don't start authoring — write a fresh handoff doc with phase split + agent contract)
+## Today's plan (continued from finish-line handoff)
+
+Was: see `.claude/Planning/2026-05-07-finish-line-handoff.md`. Today's queued cleanup is now **complete**.
+
+**Next:** plan and execute the tile-content migration sweep. New handoff doc to be written: `.claude/Planning/2026-05-07-tile-migration-handoff.md`.
 
 ## Standing constraints
 
 - macOS 26 only. Dark mode first. Apple primitives only.
-- `PBXFileSystemSynchronizedRootGroup`: drop files into `SwiftKit/<subdir>/`, Xcode auto-syncs. Never put dev artifacts inside `SwiftKit/SwiftKit/` (gets bundled).
-- SourceKit "Cannot find X in scope" diagnostics are stale — clear after `xcodebuild`. Trust build, not IDE.
-- Cross-folder gallery page name collisions are real. New page names should be checked against existing structs.
-- Documentation lives at `Documentation/` (project-root sibling), not inside `SwiftKit/`.
+- `PBXFileSystemSynchronizedRootGroup`: drop files into `SwiftKit/<subdir>/`, Xcode auto-syncs.
+- SourceKit "Cannot find X in scope" diagnostics are stale — clear after `xcodebuild`. Trust build.
+- Cross-folder gallery page name collisions are real.
+- Documentation lives at `Documentation/` (project-root sibling).
 
 ## Permanent gotchas
 
-- **Commit before any sweep that deletes files.** Yesterday's enrichment pass failed because deleted siblings were uncommitted; `git show HEAD:<path>` couldn't recover their content. Lesson: stage at session boundaries.
-- **Text-folder gallery items use catalog-leaf-id strings as symbols** instead of canonical Apple API symbols. Cosmetic; defer to tile-content phase.
+- **Commit before any sweep that deletes files.** Day 1's enrichment pass failed because deleted siblings were uncommitted; `git show HEAD:<path>` couldn't recover their content.
+- **Orphan `*Page.swift` files are the migration corpus, not stale leftovers.** Treat them as authoring source, not dead code.
 - **Documentation/ completeness is unverified.** `GalleryItem.docPath` references may not all resolve to files. Audit before tile authoring.
+
+## Open follow-ups
+
+- Tile-content migration sweep (the long pole, now reframed as migration)
+- Documentation/ folder audit
+- Visual QA pass through every page in the running app
+- Search bar (deleted with `CatalogFilters`; would need fresh design if wanted)
+- Project root README (currently absent)

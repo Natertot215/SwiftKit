@@ -353,6 +353,25 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSOutlineViewPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsOutlineView",
+        title: "NSOutlineView",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSOutlineView",
+            "NSOutlineViewDataSource",
+            "NSOutlineViewDelegate"
+        ],
+        blurb: "A view that uses a row-and-column format to display hierarchical data, with disclosure triangles for expand and collapse. Inherits NSTableView and is driven by NSOutlineViewDataSource and NSOutlineViewDelegate.",
+        signature: "class NSOutlineView : NSTableView",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nsoutlineview.md",
+        page: { AnyView(NSOutlineViewPage()) }
+    )
+}
+
 #Preview {
     NSOutlineViewPage().frame(width: 1100, height: 900)
 }

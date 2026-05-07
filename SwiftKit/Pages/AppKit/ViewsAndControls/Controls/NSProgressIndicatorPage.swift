@@ -228,6 +228,23 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSProgressIndicatorPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsProgressIndicator",
+        title: "NSProgressIndicator",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSProgressIndicator"
+        ],
+        blurb: "An interface that provides visual feedback to the user about the status of an ongoing task. Available in bar and spinning styles, in either determinate (bound to doubleValue) or indeterminate (animated) modes; can also observe a Foundation Progress directly.",
+        signature: "class NSProgressIndicator : NSView",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nsprogressindicator.md",
+        page: { AnyView(NSProgressIndicatorPage()) }
+    )
+}
+
 #Preview {
     NSProgressIndicatorPage().frame(width: 1100, height: 900)
 }

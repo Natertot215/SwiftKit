@@ -25,14 +25,15 @@ extension AnimatableGalleryPage {
         folder: "Animations",
         framework: .swiftUI,
         absorbedSymbols: [
-            "swiftui.animations.animatable",
-            "AnimatableValues",
+            "AnimatableModifier",
             "AnimatablePair",
-            "swiftui.animations.vectorarithmetic",
-            "EmptyAnimatableData"
+            "AnimatableValues",
+            "EmptyAnimatableData",
+            "swiftui.animations.animatable",
+            "swiftui.animations.vectorarithmetic"
         ],
-        blurb: "A type that describes how to animate a property of a view. Conform to Animatable to expose interpolated state to SwiftUI; combine values with AnimatablePair, AnimatableValues, or VectorArithmetic helpers.",
-        signature: "protocol Animatable",
+        blurb: "A type that describes how to animate a property of a view. Conform to Animatable to expose interpolated state to SwiftUI, or compose Animatable & ViewModifier (the deprecated AnimatableModifier protocol) to drive modifier-level animations alongside AnimatablePair, AnimatableValues, and VectorArithmetic helpers.",
+        signature: "protocol Animatable \u{00b7} protocol AnimatableModifier : Animatable, ViewModifier",
         availability: "macOS 10.15+",
         docPath: "Documentation/SwiftUI/animations/animatable.md",
         page: { AnyView(AnimatableGalleryPage()) }

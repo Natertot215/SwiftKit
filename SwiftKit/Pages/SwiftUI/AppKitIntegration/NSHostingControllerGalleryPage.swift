@@ -26,10 +26,12 @@ extension NSHostingControllerGalleryPage {
         framework: .swiftUI,
         absorbedSymbols: [
             "NSHostingController",
+            "NSHostingSceneBridgingOptions",
+            "NSHostingSizingOptions",
             "swiftui.appkit-integration.unifying-your-app-s-animations"
         ],
-        blurb: "An AppKit view controller that hosts a SwiftUI view hierarchy. Use it to embed SwiftUI inside an AppKit-driven app, or to present SwiftUI content from existing AppKit navigation.",
-        signature: "class NSHostingController<Content> where Content : View",
+        blurb: "An AppKit view controller that hosts a SwiftUI view hierarchy. Use it to embed SwiftUI inside an AppKit-driven app, or to present SwiftUI content from existing AppKit navigation. The page also covers the option-set types that configure it: NSHostingSceneBridgingOptions (window title and toolbar bridging) and NSHostingSizingOptions (Auto Layout sizing behavior).",
+        signature: "NSHostingController<Content> \u{00b7} NSHostingSceneBridgingOptions \u{00b7} NSHostingSizingOptions",
         availability: "macOS 10.15+",
         docPath: "Documentation/SwiftUI/appkit-integration/nshostingcontroller.md",
         page: { AnyView(NSHostingControllerGalleryPage()) }

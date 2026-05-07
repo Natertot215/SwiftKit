@@ -236,6 +236,24 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSSegmentedControlPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsSegmentedControl",
+        title: "NSSegmentedControl",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSSegmentedControl",
+            "NSSegmentedCell"
+        ],
+        blurb: "Display one or more buttons in a single horizontal group. Configurable segment styles (rounded, capsule, separated, textured), tracking modes (selectOne, selectAny, momentary), and per-segment labels, images, menus, and widths.",
+        signature: "class NSSegmentedControl : NSControl",
+        availability: "macOS 10.5+",
+        docPath: "Documentation/AppKit/views-and-controls/nssegmentedcontrol.md",
+        page: { AnyView(NSSegmentedControlPage()) }
+    )
+}
+
 #Preview {
     NSSegmentedControlPage().frame(width: 1100, height: 900)
 }

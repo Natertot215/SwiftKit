@@ -248,6 +248,25 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSDatePickerPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsDatePicker",
+        title: "NSDatePicker",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSDatePicker",
+            "NSDatePickerCell",
+            "NSDatePickerCellDelegate"
+        ],
+        blurb: "A display of a calendar date with controls for editing the date value. Supports textual, stepper, and clock-and-calendar styles, plus per-element flags for choosing which date and time components are editable.",
+        signature: "class NSDatePicker : NSControl",
+        availability: "macOS 10.4+",
+        docPath: "Documentation/AppKit/views-and-controls/nsdatepicker.md",
+        page: { AnyView(NSDatePickerPage()) }
+    )
+}
+
 #Preview {
     NSDatePickerPage().frame(width: 1100, height: 900)
 }

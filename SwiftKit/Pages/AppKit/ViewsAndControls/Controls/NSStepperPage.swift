@@ -237,6 +237,24 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSStepperPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsStepper",
+        title: "NSStepper",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSStepper",
+            "NSStepperCell"
+        ],
+        blurb: "An interface with up and down arrow buttons for incrementing or decrementing a value. Typically paired with an adjacent NSTextField to render the current numeric value.",
+        signature: "class NSStepper : NSControl",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nsstepper.md",
+        page: { AnyView(NSStepperPage()) }
+    )
+}
+
 #Preview {
     NSStepperPage().frame(width: 1100, height: 900)
 }

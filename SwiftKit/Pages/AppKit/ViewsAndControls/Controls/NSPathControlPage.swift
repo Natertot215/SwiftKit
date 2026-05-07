@@ -213,6 +213,27 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSPathControlPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsPathControl",
+        title: "NSPathControl",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSPathControl",
+            "NSPathCell",
+            "NSPathComponentCell",
+            "NSPathControlItem",
+            "NSPathControlDelegate"
+        ],
+        blurb: "A display of a file system path or virtual path information, rendered as a breadcrumb sequence with icons and labels. Supports standard arrow-separator and pop-up presentation styles, optional editing, and drag-and-drop.",
+        signature: "class NSPathControl : NSControl",
+        availability: "macOS 10.5+",
+        docPath: "Documentation/AppKit/views-and-controls/nspathcontrol.md",
+        page: { AnyView(NSPathControlPage()) }
+    )
+}
+
 #Preview {
     NSPathControlPage().frame(width: 1100, height: 900)
 }
