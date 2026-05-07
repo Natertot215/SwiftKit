@@ -21,7 +21,8 @@ Per-framework manifests (full path + URL list): `Documentation/_archive/guides/<
 - [Applying custom fonts to text](https://developer.apple.com/documentation/swiftui/applying-custom-fonts-to-text)
 - [Applying Liquid Glass to custom views](https://developer.apple.com/documentation/swiftui/applying-liquid-glass-to-custom-views)
 - [Backyard Birds: Building an app with SwiftData and widgets](https://developer.apple.com/documentation/swiftui/backyard-birds-sample)
-- [Building and customizing the menu bar with SwiftUI](https://developer.apple.com/documentation/swiftui/building-and-customizing-the-menu-bar-with-swiftui)
+- [Building and customizing the menu bar with SwiftUI](https://developer.apple.com/documentation/swiftui/building-and-customizing-the-menu-bar-with-swiftui) — `menus-and-commands/`
+- [Building and customizing the menu bar with SwiftUI](https://developer.apple.com/documentation/swiftui/building-and-customizing-the-menu-bar-with-swiftui) — `scenes/` *(Apple cross-listing — same URL)*
 - [Building layouts with stack views](https://developer.apple.com/documentation/swiftui/building-layouts-with-stack-views)
 - [Composing SwiftUI gestures](https://developer.apple.com/documentation/swiftui/composing-swiftui-gestures)
 - [Configuring views](https://developer.apple.com/documentation/swiftui/configuring-views)
@@ -36,7 +37,8 @@ Per-framework manifests (full path + URL list): `Documentation/_archive/guides/<
 - [Food Truck: Building a SwiftUI Multiplatform App](https://developer.apple.com/documentation/swiftui/food-truck-building-a-swiftui-multiplatform-app)
 - [Grouping data with lazy stack views](https://developer.apple.com/documentation/swiftui/grouping-data-with-lazy-stack-views)
 - [Inspecting view layout](https://developer.apple.com/documentation/swiftui/inspecting-view-layout)
-- [Landmarks: Building an App with Liquid Glass](https://developer.apple.com/documentation/swiftui/landmarks-building-an-app-with-liquid-glass)
+- [Landmarks: Building an App with Liquid Glass](https://developer.apple.com/documentation/swiftui/landmarks-building-an-app-with-liquid-glass) — `_index/`
+- [Landmarks: Building an app with Liquid Glass](https://developer.apple.com/documentation/swiftui/landmarks-building-an-app-with-liquid-glass) — `view-styles/` *(Apple cross-listing — same URL, different title-case)*
 - [Laying out a simple view](https://developer.apple.com/documentation/swiftui/laying-out-a-simple-view)
 - [Loading and Displaying a Large Data Feed](https://developer.apple.com/documentation/swiftui/loading-and-displaying-a-large-data-feed)
 - [Making a view into a drag source](https://developer.apple.com/documentation/swiftui/making-a-view-into-a-drag-source)
@@ -56,12 +58,13 @@ Per-framework manifests (full path + URL list): `Documentation/_archive/guides/<
 - [Restoring Your App's State with SwiftUI](https://developer.apple.com/documentation/swiftui/restoring-your-app-s-state-with-swiftui)
 - [Scoping a search operation](https://developer.apple.com/documentation/swiftui/scoping-a-search-operation)
 - [Suggesting search terms](https://developer.apple.com/documentation/swiftui/suggesting-search-terms)
-- [SwiftUI Updates](https://developer.apple.com/documentation/updates/swiftui)
+- [SwiftUI Updates](https://developer.apple.com/documentation/updates/swiftui) — `_index/`
+- [SwiftUI updates](https://developer.apple.com/documentation/updates/swiftui) — `essentials/` *(Apple cross-listing — same URL, lowercase 'updates')*
 - [Understanding the Navigation Stack](https://developer.apple.com/documentation/swiftui/understanding-the-navigation-stack)
 - [Unifying your app's animations](https://developer.apple.com/documentation/swiftui/unifying-your-app-s-animations)
 - [Wishlist: Planning travel in a SwiftUI app](https://developer.apple.com/documentation/swiftui/wishlist-planning-travel-in-a-swiftui-app)
 
-> The SwiftUI manifest also contains 5 duplicate sub-paths (e.g. `building-and-customizing-the-menu-bar-with-swiftui` exists under both `menus-and-commands/` and `scenes/`). These are Apple's own cross-listings — same URL, multiple file paths. URLs are unique above; full paths in the per-framework manifest.
+> Apple cross-lists 3 SwiftUI guides under multiple sub-paths (e.g. `building-and-customizing-the-menu-bar-with-swiftui` lives under both `menus-and-commands/` and `scenes/`). Each cross-listed file appears as a separate bullet above so the bullet count (51) matches the file count in the per-framework manifest. The duplicate URL is identical across the bullets — annotated with the sub-path that distinguishes them.
 
 ## AppKit
 
