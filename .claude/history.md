@@ -73,6 +73,8 @@ A first-pass sketch targeted ~70 pages across ~14 folders, with content sourced 
 
 **Spec un-locked, planning phase reset (same day).** After the placeholder template landed, Nathan reset the project posture to a blank-slate planning phase — `framework.md` Future Plans and `handoff.md` were trimmed back to broad-idea only. The two dated pre-strip Planning docs (`finish-line-handoff`, `tile-migration-handoff`) were hard-deleted later the same session for the clean-slate. Sidebar mechanics + 81-item placeholder template stay locked at commit `753f4d9` as the structural template; everything else (page count, folder count, naming, cadence) re-opens for design.
 
+**`swiftui-expert-skill` mandated for all Phase 2/3 agents.** Per Nathan's mid-Phase-1 instruction: every implementer AND every reviewer dispatched in Phase 2 (registry rebuild, page-file scaffold) and Phase 3 (live-tile authoring) MUST invoke `swiftui-expert-skill` via the Skill tool at the start of its work, before writing any Swift. Phase 0a's single implementer also loads it. `framework.md` Execution Methodology updated with explicit "ALL of them, no exceptions" language; Phase 2 and Phase 3 sections each carry a "Mandatory" reminder pointing back at the skill-kit table.
+
 **Phase 0c added — topic-page archival + unified `exclude.md`.** Mid-Phase-1, Nathan reinforced the "only components" rule with successive clarifications:
 
 1. *"the articles and guides should not be implemented into this project; only components, code, and their descriptions"*

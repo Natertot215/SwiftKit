@@ -89,7 +89,7 @@ Sequential-only tasks: Phase 0a (catalog tier change), Phase 2 registry build, P
 
 - **All implementers:** `superpowers:test-driven-development`, `superpowers:verification-before-completion`.
 - **Sort agents (Phase 0b/1):** `find-docs` (Context7 fallback for type lookups).
-- **SwiftUI/AppKit code authors (Phase 0a, 2, 3):** `swiftui-expert-skill`, `find-docs`.
+- **Phase 2 and Phase 3 agents — ALL of them, no exceptions:** `swiftui-expert-skill` is **mandatory**. Every implementer agent dispatched in Phase 2 (registry rebuild, per-folder page-file scaffold generation) and Phase 3 (per-folder live-tile authoring) MUST invoke `swiftui-expert-skill` via the Skill tool at the start of its work, before writing any Swift. This applies to spec-compliance reviewers and code-quality reviewers in those phases too — they review SwiftUI code against the skill's standards. Plus `find-docs` for any API lookup. Phase 0a's single implementer also loads `swiftui-expert-skill`.
 - **All reviewers:** `superpowers:requesting-code-review` (the canonical review template).
 
 **Status handling**
@@ -297,6 +297,8 @@ Plus an "Unmapped / needs decision" appendix.
 - `GalleryItemPage`, `VariantTile`, `PageSection`, `APICallout`, `DemoTiles` — all already proven; do not re-author scaffolding.
 - File placement under `SwiftKit/<subdir>/` — `PBXFileSystemSynchronizedRootGroup` auto-syncs (L-010).
 
+**Mandatory:** Every Phase 2 implementer and reviewer agent must load `swiftui-expert-skill` via the Skill tool at the start of its work (see Execution Methodology > Mandatory skill kit).
+
 **Verification:** `xcodebuild` green. Every sidebar entry navigates to a real (placeholder-content) page. No `PlaceholderGalleryPage` references remain in `GalleryRegistry`.
 
 ---
@@ -335,7 +337,7 @@ Plus an "Unmapped / needs decision" appendix.
 - Use semantic color/font tokens only. No hex, no `Color(red:green:blue:)` (L-001/L-012).
 - Render dark + light both (detail pane appearance toggle is wired; verify both states visually).
 - Page-size discipline: keep nested SwiftUI under a few hundred symbols per binding; break dense pages into `private let` subviews (L-011).
-- Skill kit per dispatch: `swiftui-expert-skill` (review/best practices), `find-docs` (API verification when Apple's frontmatter is sparse), `superpowers:subagent-driven-development` (independent sub-tasks), `superpowers:executing-plans` (checkpoints).
+- **Mandatory skill kit per dispatch:** `swiftui-expert-skill` (review/best practices — invoke via Skill tool before writing any Swift), `find-docs` (API verification when Apple's frontmatter is sparse), `superpowers:subagent-driven-development` (independent sub-tasks), `superpowers:executing-plans` (checkpoints), `superpowers:test-driven-development`, `superpowers:verification-before-completion`. Every Phase 3 implementer AND every Phase 3 reviewer (spec + code-quality) loads `swiftui-expert-skill`.
 
 **Verification (per-page, before merging the batch):**
 - `xcodebuild` green.
