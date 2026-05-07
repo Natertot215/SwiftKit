@@ -18,7 +18,8 @@ Apple-component reference library — one page per user-recognizable component, 
 - UI terminology is descriptive, not a canonical API name — identify the Apple primitive, don't treat the label as the spec.
 - Semantic color/font tokens only. No hand-mixed `Color(red:green:blue:)`, no Figma hex literals. (`Guidelines/visual-rules.md`)
 - **One page = one user-recognizable component.** Modifiers go inside the component's page as variant tiles, never as their own pages. *(Post-strip rule, see `history.md` 2026-05-07.)*
-- **`Documentation/` is the authoring source, NOT the page list.** Read each primitive's markdown before authoring its page. The page list is the ~70-page target spec in `framework.md`, derived from user-recognizable components — not from Apple's URL count.
+- **`Documentation/` is the authoring source, NOT the page list.** Read each primitive's markdown before authoring its page. The page list is settled during planning, derived from user-recognizable components — not from Apple's URL count.
+- **Screenshots are temporary.** Capture for review only, then delete. Never commit screenshots; never let `Screen Recordings/` accumulate. The folder is a scratch space — assume empty between sessions.
 
 ## File Index
 

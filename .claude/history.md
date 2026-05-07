@@ -76,9 +76,7 @@ Target shape: ~70 pages across 14 folders (Reference 5, SwiftUI 13 folders × ~6
 - `// The Nexus // Projects // Project SwiftKit // SwiftKit Status - 5-7.md` — pre-strip objective snapshot.
 - `// The Nexus // Projects // Project SwiftKit // SwiftKit Handoff - 5-7.md` — post-strip handoff with target shape, cadence, first three sessions.
 
-**Pre-strip Planning docs** retained for historical record at `.claude/Planning/2026-05-07-finish-line-handoff.md` and `.claude/Planning/2026-05-07-tile-migration-handoff.md`. Both predate the strip and should not be executed.
-
-**Spec un-locked, planning phase reset (same day).** After the placeholder template landed, Nathan reset the project posture to a blank-slate planning phase — `framework.md` Future Plans and `handoff.md` were trimmed back to broad-idea only, and the dated Nexus snapshots (`SwiftKit Status - 5-7.md`, `SwiftKit Handoff - 5-7.md`) were removed. Sidebar mechanics + 81-item placeholder template stay locked at commit `753f4d9` as the structural template; everything else (page count, folder count, naming, cadence) re-opens for design.
+**Spec un-locked, planning phase reset (same day).** After the placeholder template landed, Nathan reset the project posture to a blank-slate planning phase — `framework.md` Future Plans and `handoff.md` were trimmed back to broad-idea only. The two dated pre-strip Planning docs (`finish-line-handoff`, `tile-migration-handoff`) were hard-deleted later the same session for the clean-slate. Sidebar mechanics + 81-item placeholder template stay locked at commit `753f4d9` as the structural template; everything else (page count, folder count, naming, cadence) re-opens for design.
 
 ---
 
