@@ -1,7 +1,9 @@
 # SwiftUI Guide Archive — Manifest
 
 Archived from `Documentation/SwiftUI/` during Phase 0b. All files had `kind: article` frontmatter.
-56 files total. Sorted alphabetically by title.
+51 files total. Sorted alphabetically by title.
+
+> **Note.** Phase 0b's mechanical pass also matched 5 method-doc files whose frontmatter incorrectly carried `kind: article` (`copyable(_:)`, `cuttable(for:action:)`, `pastedestination(for:action:validator:)`, `focused(_:equals:)`, `prefersdefaultfocus(_:in:)`). The controller restored those 5 files to their original `Documentation/SwiftUI/clipboard/` and `Documentation/SwiftUI/focus/` locations during the merge step — they're tile candidates for Phase 1, not guides. They are not listed below.
 
 - [Adding a background to your view](https://developer.apple.com/documentation/swiftui/adding-a-background-to-your-view) — `Documentation/SwiftUI/layout-fundamentals/adding-a-background-to-your-view.md`
 - [Adding a search interface to your app](https://developer.apple.com/documentation/swiftui/adding-a-search-interface-to-your-app) — `Documentation/SwiftUI/search/adding-a-search-interface-to-your-app.md`
@@ -18,16 +20,13 @@ Archived from `Documentation/SwiftUI/` during Phase 0b. All files had `kind: art
 - [Composing SwiftUI gestures](https://developer.apple.com/documentation/swiftui/composing-swiftui-gestures) — `Documentation/SwiftUI/gestures/composing-swiftui-gestures.md`
 - [Configuring views](https://developer.apple.com/documentation/swiftui/configuring-views) — `Documentation/SwiftUI/view-fundamentals/configuring-views.md`
 - [Controlling the timing and movements of your animations](https://developer.apple.com/documentation/swiftui/controlling-the-timing-and-movements-of-your-animations) — `Documentation/SwiftUI/animations/controlling-the-timing-and-movements-of-your-animations.md`
-- [copyable(_:)](https://developer.apple.com/documentation/swiftui/view/copyable(_:)) — `Documentation/SwiftUI/clipboard/copyable(_:).md`
 - [Creating a tvOS Media Catalog App in SwiftUI](https://developer.apple.com/documentation/swiftui/creating-a-tvos-media-catalog-app-in-swiftui) — `Documentation/SwiftUI/app-organization/creating-a-tvos-media-catalog-app-in-swiftui.md`
 - [Creating performant scrollable stacks](https://developer.apple.com/documentation/swiftui/creating-performant-scrollable-stacks) — `Documentation/SwiftUI/layout-fundamentals/creating-performant-scrollable-stacks.md`
 - [Customizing window styles and state-restoration behavior in macOS](https://developer.apple.com/documentation/swiftui/customizing-window-styles-and-state-restoration-behavior-in-macos) — `Documentation/SwiftUI/windows/customizing-window-styles-and-state-restoration-behavior-in-macos.md`
-- [cuttable(for:action:)](https://developer.apple.com/documentation/swiftui/view/cuttable(for:action:)) — `Documentation/SwiftUI/clipboard/cuttable(for:action:).md`
 - [Declaring a custom view](https://developer.apple.com/documentation/swiftui/declaring-a-custom-view) — `Documentation/SwiftUI/view-fundamentals/declaring-a-custom-view.md`
 - [Displaying data in lists](https://developer.apple.com/documentation/swiftui/displaying-data-in-lists) — `Documentation/SwiftUI/lists/displaying-data-in-lists.md`
 - [Enhancing Your App's Content with Tab Navigation](https://developer.apple.com/documentation/swiftui/enhancing-your-app-content-with-tab-navigation) — `Documentation/SwiftUI/navigation/enhancing-your-app-content-with-tab-navigation.md`
 - [Fitting images into available space](https://developer.apple.com/documentation/swiftui/fitting-images-into-available-space) — `Documentation/SwiftUI/images/fitting-images-into-available-space.md`
-- [focused(_:equals:)](https://developer.apple.com/documentation/swiftui/view/focused(_:equals:)) — `Documentation/SwiftUI/focus/focused(_:equals:).md`
 - [Food Truck: Building a SwiftUI Multiplatform App](https://developer.apple.com/documentation/swiftui/food-truck-building-a-swiftui-multiplatform-app) — `Documentation/SwiftUI/app-organization/food-truck-building-a-swiftui-multiplatform-app.md`
 - [Grouping data with lazy stack views](https://developer.apple.com/documentation/swiftui/grouping-data-with-lazy-stack-views) — `Documentation/SwiftUI/layout-fundamentals/grouping-data-with-lazy-stack-views.md`
 - [Inspecting view layout](https://developer.apple.com/documentation/swiftui/inspecting-view-layout) — `Documentation/SwiftUI/layout-adjustments/inspecting-view-layout.md`
@@ -44,11 +43,9 @@ Archived from `Documentation/SwiftUI/` during Phase 0b. All files had `kind: art
 - [Migrating to New Navigation Types](https://developer.apple.com/documentation/swiftui/migrating-to-new-navigation-types) — `Documentation/SwiftUI/navigation/migrating-to-new-navigation-types.md`
 - [Migrating to the SwiftUI life cycle](https://developer.apple.com/documentation/swiftui/migrating-to-the-swiftui-life-cycle) — `Documentation/SwiftUI/app-organization/migrating-to-the-swiftui-life-cycle.md`
 - [Monitoring Data Changes in Your App](https://developer.apple.com/documentation/swiftui/monitoring-model-data-changes-in-your-app) — `Documentation/SwiftUI/model-data/monitoring-model-data-changes-in-your-app.md`
-- [pasteDestination(for:action:validator:)](https://developer.apple.com/documentation/swiftui/view/pastedestination(for:action:validator:)) — `Documentation/SwiftUI/clipboard/pastedestination(for:action:validator:).md`
 - [Performing a search operation](https://developer.apple.com/documentation/swiftui/performing-a-search-operation) — `Documentation/SwiftUI/search/performing-a-search-operation.md`
 - [Picking container views for your content](https://developer.apple.com/documentation/swiftui/picking-container-views-for-your-content) — `Documentation/SwiftUI/layout-fundamentals/picking-container-views-for-your-content.md`
 - [Populating SwiftUI menus with adaptive controls](https://developer.apple.com/documentation/swiftui/populating-swiftui-menus-with-adaptive-controls) — `Documentation/SwiftUI/menus-and-commands/populating-swiftui-menus-with-adaptive-controls.md`
-- [prefersDefaultFocus(_:in:)](https://developer.apple.com/documentation/swiftui/view/prefersdefaultfocus(_:in:)) — `Documentation/SwiftUI/focus/prefersdefaultfocus(_:in:).md`
 - [Preparing views for localization](https://developer.apple.com/documentation/swiftui/preparing-views-for-localization) — `Documentation/SwiftUI/text-input-and-output/preparing-views-for-localization.md`
 - [Reducing view modifier maintenance](https://developer.apple.com/documentation/swiftui/reducing-view-modifier-maintenance) — `Documentation/SwiftUI/view-fundamentals/reducing-view-modifier-maintenance.md`
 - [Restoring Your App's State with SwiftUI](https://developer.apple.com/documentation/swiftui/restoring-your-app-s-state-with-swiftui) — `Documentation/SwiftUI/persistent-storage/restoring-your-app-s-state-with-swiftui.md`
