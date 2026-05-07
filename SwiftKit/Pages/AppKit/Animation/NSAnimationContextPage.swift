@@ -324,6 +324,23 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSAnimationContextPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.animation.nsAnimationContext",
+        title: "NSAnimationContext",
+        folder: "Animation",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSAnimationContext"
+        ],
+        blurb: "Grouping API for implicit animations driven through the animator() proxy on any NSAnimatablePropertyContainer conformer. Supports nested groupings, duration, and timing functions.",
+        signature: "class NSAnimationContext : NSObject",
+        availability: "macOS 10.5+",
+        docPath: "Documentation/AppKit/animation/nsanimationcontext.md",
+        page: { AnyView(NSAnimationContextPage()) }
+    )
+}
+
 #Preview {
     NSAnimationContextPage().frame(width: 1100, height: 900)
 }

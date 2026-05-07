@@ -256,6 +256,23 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSTextFieldPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsTextField",
+        title: "NSTextField",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSTextField"
+        ],
+        blurb: "Text the user can select or edit to send an action message to a target when the user presses Return. The canonical single-line text/label/input surface in AppKit, configurable via bezel style and edit modes.",
+        signature: "class NSTextField : NSControl",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nstextfield.md",
+        page: { AnyView(NSTextFieldPage()) }
+    )
+}
+
 #Preview {
     NSTextFieldPage().frame(width: 1100, height: 900)
 }

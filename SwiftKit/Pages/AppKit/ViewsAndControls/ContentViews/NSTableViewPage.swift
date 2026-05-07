@@ -509,6 +509,30 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSTableViewPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsTableView",
+        title: "NSTableView",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSTableView",
+            "NSTableColumn",
+            "NSTableViewRowAction",
+            "NSTableViewDataSource",
+            "NSTableViewDelegate",
+            "NSTableViewDiffableDataSource",
+            "NSTableCellView",
+            "NSTableRowView"
+        ],
+        blurb: "A set of related records displayed in rows (records) and columns (attributes). Driven by NSTableViewDataSource and NSTableViewDelegate, with diffable-data-source support on macOS 11+.",
+        signature: "class NSTableView : NSControl",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nstableview.md",
+        page: { AnyView(NSTableViewPage()) }
+    )
+}
+
 #Preview {
     NSTableViewPage().frame(width: 1100, height: 900)
 }

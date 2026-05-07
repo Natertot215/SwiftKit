@@ -710,6 +710,27 @@ struct NSButtonPage: View {
     }
 }
 
+extension NSButtonPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsButton",
+        title: "NSButton",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSButton",
+            "NSPopUpButton",
+            "NSComboButton",
+            "NSStatusBarButton",
+            "NSButtonTouchBarItem"
+        ],
+        blurb: "A control that defines an area on the screen that a user clicks to trigger an action. Absorbs the full NSButton family: NSPopUpButton, NSComboButton, NSStatusBarButton, and NSButtonTouchBarItem.",
+        signature: "class NSButton : NSControl",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nsbutton.md",
+        page: { AnyView(NSButtonPage()) }
+    )
+}
+
 #Preview {
     NSButtonPage().frame(width: 1100, height: 900)
 }

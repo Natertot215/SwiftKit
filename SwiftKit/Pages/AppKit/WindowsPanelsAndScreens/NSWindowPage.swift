@@ -329,6 +329,26 @@ private struct Block<Content: View>: View {
     }
 }
 
+extension NSWindowPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.windowsPanelsAndScreens.nsWindow",
+        title: "NSWindow",
+        folder: "Windows, panels, and screens",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSWindow",
+            "NSWindowDelegate",
+            "NSWindowTab",
+            "NSWindowTabGroup"
+        ],
+        blurb: "The primary macOS window surface. Manages on-screen presence, title bar, content area, and window controls. Absorbs NSWindowDelegate and the native tabbed-window types NSWindowTab and NSWindowTabGroup.",
+        signature: "class NSWindow : NSResponder",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/windows-panels-and-screens/nswindow.md",
+        page: { AnyView(NSWindowPage()) }
+    )
+}
+
 #Preview {
     NSWindowPage().frame(width: 1100, height: 900)
 }

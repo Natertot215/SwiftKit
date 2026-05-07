@@ -595,6 +595,31 @@ struct NSTextViewPage: View {
     }
 }
 
+extension NSTextViewPage {
+    @MainActor static let item = GalleryItem(
+        id: "appkit.viewsAndControls.nsTextView",
+        title: "NSTextView",
+        folder: "Views and controls",
+        framework: .appKit,
+        absorbedSymbols: [
+            "NSTextView",
+            "NSText",
+            "NSTextContainer",
+            "NSTextLayoutManager",
+            "NSTextContentStorage",
+            "NSTextSelection",
+            "NSTextFinder",
+            "NSTextFinderClient",
+            "NSTextFinderBarContainer"
+        ],
+        blurb: "The front-end to AppKit's text system: rich-text editing, selection, finding, attachments, key bindings, undo, and spell-checking. Wraps the TextKit 2 stack (NSTextLayoutManager + NSTextContentStorage).",
+        signature: "class NSTextView : NSText",
+        availability: "macOS 10.0+",
+        docPath: "Documentation/AppKit/views-and-controls/nstextview.md",
+        page: { AnyView(NSTextViewPage()) }
+    )
+}
+
 #Preview {
     NSTextViewPage().frame(width: 1100, height: 900)
 }
