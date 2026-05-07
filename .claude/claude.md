@@ -35,14 +35,6 @@ Apple-component reference library — one page per user-recognizable component, 
 | [`Planning/`](Planning/) | Plans and triage documents | Before any planned feature work |
 | [`Transcripts/`](Transcripts/) | Session transcripts — written on request | When reviewing past session context |
 
-## Companion Documents in The Nexus *(mobile-readable)*
-
-| Path | Purpose |
-|---|---|
-| `// The Nexus // Claude // SwiftKit — Where The Mess Came From.md` | 2026-05-07 retrospective: chronological drift, root causes, three forward paths |
-| `// The Nexus // Projects // Project SwiftKit // SwiftKit Status - 5-7.md` | Pre-strip objective snapshot (file counts, build state, registry numbers) |
-| `// The Nexus // Projects // Project SwiftKit // SwiftKit Handoff - 5-7.md` | Post-strip handoff: target shape, cadence, first three sessions, open decisions |
-
 ## Memory Protocol
 
 - Nathan corrects behavior → append to `Guidelines/feedback.md` immediately.
