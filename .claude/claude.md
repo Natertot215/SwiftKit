@@ -1,8 +1,9 @@
 # SwiftKit — Project Context
 
-Apple-component reference library — one screen per SwiftUI/AppKit primitive, every documented variant rendered side-by-side with its exact API call. Companion output is `Documentation/` (project-root sibling) — a local mirror of Apple HIG, SwiftUI, and AppKit docs as flat markdown.
+Apple-component reference library — one page per user-recognizable component, every documented variant rendered as a tile alongside its exact API call. Modifiers fold into the primitive's page as variant tiles, never as their own pages. Companion output is `Documentation/` (project-root sibling) — a local mirror of Apple HIG, SwiftUI, and AppKit docs as flat markdown.
 
 **Git remote:** <https://github.com/Natertot215/SwiftKit.git>
+**Status:** post-strip restart (2026-05-07). 5 Reference pages registered. ~70-page target shape documented in `framework.md`.
 
 ## Stack
 
@@ -16,6 +17,8 @@ Apple-component reference library — one screen per SwiftUI/AppKit primitive, e
 - Load `Guidelines/macuix-rules.md` before writing any Swift/SwiftUI/macOS code. Non-negotiable.
 - UI terminology is descriptive, not a canonical API name — identify the Apple primitive, don't treat the label as the spec.
 - Semantic color/font tokens only. No hand-mixed `Color(red:green:blue:)`, no Figma hex literals. (`Guidelines/visual-rules.md`)
+- **One page = one user-recognizable component.** Modifiers go inside the component's page as variant tiles, never as their own pages. *(Post-strip rule, see `history.md` 2026-05-07.)*
+- **`Documentation/` is the authoring source, NOT the page list.** Read each primitive's markdown before authoring its page. The page list is the ~70-page target spec in `framework.md`, derived from user-recognizable components — not from Apple's URL count.
 
 ## File Index
 
@@ -31,6 +34,14 @@ Apple-component reference library — one screen per SwiftUI/AppKit primitive, e
 | [`Guidelines/build-and-process.md`](Guidelines/build-and-process.md) | Build setup, file placement, process (L-005–L-011) | Before scaffolding or debugging |
 | [`Planning/`](Planning/) | Plans and triage documents | Before any planned feature work |
 | [`Transcripts/`](Transcripts/) | Session transcripts — written on request | When reviewing past session context |
+
+## Companion Documents in The Nexus *(mobile-readable)*
+
+| Path | Purpose |
+|---|---|
+| `// The Nexus // Claude // SwiftKit — Where The Mess Came From.md` | 2026-05-07 retrospective: chronological drift, root causes, three forward paths |
+| `// The Nexus // Projects // Project SwiftKit // SwiftKit Status - 5-7.md` | Pre-strip objective snapshot (file counts, build state, registry numbers) |
+| `// The Nexus // Projects // Project SwiftKit // SwiftKit Handoff - 5-7.md` | Post-strip handoff: target shape, cadence, first three sessions, open decisions |
 
 ## Memory Protocol
 

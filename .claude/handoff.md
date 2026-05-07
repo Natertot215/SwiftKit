@@ -2,90 +2,87 @@
 
 > Rewrite at the end of every session. Always reflects current state.
 
-**Last session:** 2026-05-07 (commit pass + 11 medium-confidence consolidations + 12 AppKit registrations + orphan audit)
-**Git:** `main` ahead of `origin/main`. Last commit `cd496cd` is the unified Phase B + 6 + cleanup commit. Day-2 cleanup work pending its own commit.
-**HEAD:** `cd496cd` (Phase B + 6 + cleanup — gallery sidebar shipped, family consolidation, dead code purged)
-**Build:** ✅ `** BUILD SUCCEEDED **` after this session's cleanup pass.
+**Last session:** 2026-05-07 *(strip-and-restart event)*
+**Git:** `main` ahead of `origin/main`. Last commit `ee95864` is the strip commit.
+**HEAD:** `ee95864 Strip — restart from canonical Reference shape`
+**Tags:** `pre-restart` → `62db021` *(snapshot of full pre-strip corpus, recoverable via `git show pre-restart:<path>`)*
+**Build:** ✅ `** BUILD SUCCEEDED **` after the strip.
 
-## What landed this session (2026-05-07)
+## What the strip did *(2026-05-07)*
 
-### Initial commit (cd496cd)
+Following Nathan's decision to restart from a clean foundation, the project was stripped:
 
-Unified the prior session's 485 uncommitted file changes into one commit: gallery sidebar replacing legacy catalog, Phase B2/B3/B4/B5 stub sweep (462 GalleryItems), Phase 6 D-batch, catalog dead-code purge, 8 family consolidations, app icon, orientation headers, planning purge, transcript renames.
+- **Pre-strip snapshot committed first** *(commit `62db021`, tag `pre-restart`)*. Full corpus recoverable from that tag — nothing was lost.
+- **Stripped subtrees:** `SwiftKit/Pages/SwiftUI/` *(678 files)*, `SwiftKit/Pages/AppKit/` *(140 files)*, `SwiftKit/Pages/Documentation/` *(11 mis-placed Describe pages)*. Plus the legacy `SwiftKit/Pages/Reference/TypographyPage.swift`.
+- **GalleryRegistry.allItems reset** to the 5 Reference pages: Materials, Motion, Color, SF Symbols, Typography.
+- **Build verified green** with the trimmed registry.
+- **Strip commit landed** *(`ee95864`)*: 831 files changed, 5 insertions, **141,056 deletions**.
 
-### 11 medium-confidence family consolidations — done
+## Why the strip happened
 
-Same parallel-agent pattern as Day 1's seven. Each fold absorbs siblings' `absorbedSymbols` into a master, deletes the siblings.
+Documented in `// The Nexus // Claude // SwiftKit — Where The Mess Came From.md` *(complete retrospective, mobile-readable)* and `// The Nexus // Projects // Project SwiftKit // SwiftKit Status - 5-7.md` *(pre-strip objective snapshot)*.
 
-| Family | Master | Siblings deleted |
-|---|---|---|
-| Toolbar | `ToolbarGalleryPage` | 3 |
-| Alert | `AlertGalleryPage` | 3 |
-| Transition | `TransitionGalleryPage` | 3 |
-| Gesture composition | `GestureGalleryPage` | 4 |
-| Menu | `MenuGalleryPage` | 3 |
-| Alignment | `AlignmentGalleryPage` | 1 |
-| Text decorations | `TextGalleryPage` | 4 |
-| Matched-geometry | `MatchedGeometryEffectGalleryPage` | 2 |
-| Animatable | `AnimatableGalleryPage` | 1 |
-| Scene lifecycle | `WindowGroupGalleryPage` | 2 |
-| NSHosting options | `NSHostingControllerGalleryPage` | 2 |
-| **Total** | | **28** |
+**Short version:** the May-3 Phase 5 triage classified Apple's 1,722 SwiftUI URLs into 990 "leaves" and treated each as a sidebar page. That conflated *variant enumeration* with *page list*, producing 358 SwiftUI pages where ~60 belonged. Family consolidation arrived 3 days late and was applied to only 8 of ~60 families. By 2026-05-07, the corpus was 836 page files / 141,656 lines / 43 folders — a tangled mass that was faster to strip than untangle.
 
-### 12 AppKit page registrations — done
+## Current state
 
-Added `static let item: GalleryItem` extensions to: `NSOutlineView`, `NSBrowser`, `NSComboBox`, `NSDatePicker`, `NSTokenField`, `NSSlider`, `NSPathControl`, `NSGridView`, `NSStepper`, `NSSegmentedControl`, `NSProgressIndicator`, `NSLevelIndicator`. They're now in `GalleryRegistry.allItems` under "AppKit · Views and controls".
+```
+Total Swift files:         20
+  Shell + scaffolds:       14
+  Reference pages:         5
+  Shared:                  1 (DescribePage.swift)
 
-### Orphan audit — done (with a major finding)
+GalleryRegistry entries:   5 (all Reference)
+Sidebar folders:           1 (Reference, single-tier-collapsed)
+Documentation mirror:      2,535 markdown files (intact, unchanged)
+```
 
-**Critical finding:** the 562 unregistered `*Page.swift` files in `Pages/SwiftUI/` are NOT stale leftovers — they hold **the original authored gallery content** from the pre-gallery era. The registered `*GalleryPage.swift` files are mostly 40-50 line placeholder stubs.
+The shell, scaffolds, and Reference pages are all proven and unchanged. The Documentation mirror is intact and is the authoring source for everything that comes next.
 
-Concrete examples:
-- `Tables/TablePage.swift` (**953 lines** of real Table/TableColumn/TableStyle gallery content) vs `Tables/TableGalleryPage.swift` (48 lines, `ContentUnavailableView` placeholder)
-- `ControlsAndIndicators/ButtonPage.swift` (**1380 lines**) vs `ButtonGalleryPage.swift` (42 lines, placeholder)
-- `InputEvents/KeyboardInputPage.swift` (**1385 lines**) vs `KeyboardInputGalleryPage.swift` (placeholder)
+## What's next
 
-**Implication for the project:** the tile-content sweep is **migration, not greenfield authoring**. Move existing content into the gallery shell, update `absorbedSymbols`, delete the orphan. Estimate drops from "multi-week authoring" to "focused multi-session migration sweep."
+Plan documented in detail at `// The Nexus // Projects // Project SwiftKit // SwiftKit Handoff - 5-7.md`.
 
-Action taken: deleted 1 trivial orphan (`ViewGroupings/SubviewCollectionPage.swift`, 11 lines, just a comment). 562 files retained as the migration corpus.
+**Target shape:** ~70 pages across 14 folders *(13 SwiftUI + 1 AppKit + Reference collapses to single-tier)*.
 
-Full sorted line-count manifest at `/tmp/orphan_linecounts.txt`.
+**Cadence:** pilot first *(`ButtonGalleryPage`)*, then one folder per session, solo authoring. No parallel agents authoring pages without explicit per-page approval.
 
-## Current numbers
+**Source content:** read the relevant `Documentation/<framework>/<topic>/<symbol>.md` for each page. No more re-derivation from training memory.
 
-- `GalleryRegistry.allItems`: **399 entries** (was 415; -28 consolidations, +12 AppKit registrations)
-- Authored pages: ~26 (Reference + Phase A Shapes + a handful of older SwiftUI pages)
-- Stub `*GalleryPage.swift` pages: ~373 (await migration from orphan source content)
-- Orphan source pages (unregistered `*Page.swift`): 562 — the migration corpus
+## Open decisions before pilot
 
-## Day 1 recap (2026-05-06, all in commit cd496cd)
+- Whether to delete `SwiftKit/Detail/PageScaffold/GalleryPageScaffold.swift` *(legacy scaffold, no surviving consumers — verify with grep)*.
+- Whether to keep `SwiftKit/Pages/_Shared/DescribePage.swift` *(no consumers post-strip but may be wanted for protocol/iOS-only describe content under the new model)*.
+- Lock in the 13 SwiftUI folder names *(proposed: App Structure, Navigation, Layout, Containers, Controls, Text and Input, Images and Shapes, Presentation, Toolbars and Menus, Animation and Effects, Accessibility, Gestures and Input)*.
+- Confirm `ButtonGalleryPage` as the pilot.
 
-Catalog dead-code purge, 8 family consolidations (Tables/Drag-and-drop/TabView/Commands/List/File-dialogs/Searchable/Liquid Glass), Reference framework populated, sidebar single-folder collapse, hover elevation removed, app icon flatten + zoom, orientation headers, planning purge, transcript renames, save-script-studio command redeployed.
-
-## Today's plan (continued from finish-line handoff)
-
-Was: see `.claude/Planning/2026-05-07-finish-line-handoff.md`. Today's queued cleanup is now **complete**.
-
-**Next:** plan and execute the tile-content migration sweep. New handoff doc to be written: `.claude/Planning/2026-05-07-tile-migration-handoff.md`.
-
-## Standing constraints
+## Standing constraints *(unchanged)*
 
 - macOS 26 only. Dark mode first. Apple primitives only.
-- `PBXFileSystemSynchronizedRootGroup`: drop files into `SwiftKit/<subdir>/`, Xcode auto-syncs.
+- `PBXFileSystemSynchronizedRootGroup`: drop `.swift` files into `SwiftKit/<subdir>/`, Xcode auto-syncs.
+- `Documentation/` is project-root sibling, never inside `SwiftKit/SwiftKit/` *(L-010)*.
+- Keep `GalleryRegistry.allItems` flat *(L-011)*.
+- Semantic tokens only *(visual-rules L-001, L-012)*.
 - SourceKit "Cannot find X in scope" diagnostics are stale — clear after `xcodebuild`. Trust build.
-- Cross-folder gallery page name collisions are real.
-- Documentation lives at `Documentation/` (project-root sibling).
 
 ## Permanent gotchas
 
-- **Commit before any sweep that deletes files.** Day 1's enrichment pass failed because deleted siblings were uncommitted; `git show HEAD:<path>` couldn't recover their content.
-- **Orphan `*Page.swift` files are the migration corpus, not stale leftovers.** Treat them as authoring source, not dead code.
-- **Documentation/ completeness is unverified.** `GalleryItem.docPath` references may not all resolve to files. Audit before tile authoring.
+- **Apple's URL count is not the page count.** A modifier doesn't deserve its own page; it's a variant tile inside a primitive's page.
+- **Documentation mirror is the authoring input** — read the markdown before writing the page.
+- **Folders are reserved for large groupings.** Anything with fewer than ~4 pages folds up.
+- **Commit before any sweep that deletes files.** *(Day 1's enrichment pass burned because deleted files were uncommitted.)*
+
+## Pre-strip Planning docs *(historical only)*
+
+The two dated planning docs in `.claude/Planning/` predate the strip:
+
+- `2026-05-07-finish-line-handoff.md` — written morning of the strip, reflects pre-strip mental model.
+- `2026-05-07-tile-migration-handoff.md` — migration plan that the strip obsoleted.
+
+Both retained for historical record. **Do not execute either plan** — both assume the pre-strip corpus.
 
 ## Open follow-ups
 
-- Tile-content migration sweep (the long pole, now reframed as migration)
-- Documentation/ folder audit
-- Visual QA pass through every page in the running app
-- Search bar (deleted with `CatalogFilters`; would need fresh design if wanted)
-- Project root README (currently absent)
+- Author the pilot page *(`ButtonGalleryPage`)*.
+- After pilot, write `.claude/Planning/2026-05-07-restart-spec.md` with the locked-in folder + page list.
+- Visual QA pass through running app *(currently 5 Reference pages — should all render correctly)*.

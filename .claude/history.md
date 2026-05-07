@@ -54,6 +54,32 @@ Original capture script was at `/tmp/swiftkit_capture.sh` — non-portable and u
 
 ---
 
+## 2026-05-07
+
+**Strip-and-restart executed**
+After a complete project retrospective *(filed at `// The Nexus // Claude // SwiftKit — Where The Mess Came From.md`)* surfaced that the project had drifted from "one page per primitive" to "one page per Apple URL" — producing 836 page files / 141,656 lines / 43 sidebar folders — Nathan authorized a strip-and-restart. Procedure:
+
+1. Pre-strip snapshot committed as `62db021`, tagged `pre-restart` so the full corpus stays recoverable via `git show pre-restart:<path>`.
+2. Stripped: `SwiftKit/Pages/SwiftUI/` (678 files), `SwiftKit/Pages/AppKit/` (140 files), `SwiftKit/Pages/Documentation/` (11 mis-placed Describe pages), `SwiftKit/Pages/Reference/TypographyPage.swift` (legacy duplicate of TypographyGalleryPage).
+3. `GalleryRegistry.allItems` reset to the 5 Reference pages (Materials, Motion, Color, SF Symbols, Typography) — the canonical "right shape" pages.
+4. Clean build verified green.
+5. Strip commit landed as `ee95864`: 831 files changed, 5 insertions, 141,056 deletions.
+
+**Root cause of the mess (decided permanently)**
+The Phase 5 triage on 2026-05-03 took Apple's 1,722 SwiftUI URLs, classified 990 of them as "leaves," and treated each leaf as a sidebar page. That conflated *variant enumeration* (the role `Documentation/` was supposed to play) with *page list* (the role it should not have played). One modifier per page produced 358 SwiftUI pages where ~60 belonged. Family consolidation arrived May 6 — 3 days late — and was applied to only 8 of ~60 families. The lesson is now codified: **Apple's URL count is not the page count. Modifiers belong as variant tiles inside their primitive's page, not as their own pages.**
+
+**Restart spec direction (locked)**
+Target shape: ~70 pages across 14 folders (Reference 5, SwiftUI 13 folders × ~60 pages, AppKit 1 folder × ~5 pages). Folder names follow title-case per the global ClaudeOS rule. Source content drives off `Documentation/`, never training memory. Cadence is pilot-first (Button), then one folder per session, solo authoring — no parallel agents authoring pages without per-page approval.
+
+**Documents filed in The Nexus** *(mobile-accessible)*
+- `// The Nexus // Claude // SwiftKit — Where The Mess Came From.md` — full retrospective with chronological drift, root causes, three forward paths.
+- `// The Nexus // Projects // Project SwiftKit // SwiftKit Status - 5-7.md` — pre-strip objective snapshot.
+- `// The Nexus // Projects // Project SwiftKit // SwiftKit Handoff - 5-7.md` — post-strip handoff with target shape, cadence, first three sessions.
+
+**Pre-strip Planning docs** retained for historical record at `.claude/Planning/2026-05-07-finish-line-handoff.md` and `.claude/Planning/2026-05-07-tile-migration-handoff.md`. Both predate the strip and should not be executed.
+
+---
+
 ## Architectural Constraints (standing)
 
 - **PBXFileSystemSynchronizedRootGroup** — Drop `.swift` files into `SwiftKit/<subdir>/`; Xcode auto-syncs. Never put dev-only artifacts (docs, design refs, screenshots) inside `SwiftKit/SwiftKit/` — they get bundled into the app.
