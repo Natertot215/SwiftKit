@@ -1,7 +1,7 @@
 # SwiftUI Guide Archive — Manifest
 
 Archived from `Documentation/SwiftUI/` during Phase 0b. All files had `kind: article` frontmatter.
-51 files total. Sorted alphabetically by title.
+51 files total. Sorted case-insensitively by title (so `Applying custom fonts...` precedes `Applying Liquid Glass...`).
 
 > **Note.** Phase 0b's mechanical pass also matched 5 method-doc files whose frontmatter incorrectly carried `kind: article` (`copyable(_:)`, `cuttable(for:action:)`, `pastedestination(for:action:validator:)`, `focused(_:equals:)`, `prefersdefaultfocus(_:in:)`). The controller restored those 5 files to their original `Documentation/SwiftUI/clipboard/` and `Documentation/SwiftUI/focus/` locations during the merge step — they're tile candidates for Phase 1, not guides. They are not listed below.
 

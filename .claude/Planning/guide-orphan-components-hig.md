@@ -38,10 +38,10 @@ _After filtering framework names, HIG section headings, and generic Swift types:
 - `PlaceDetail` — referenced in [Maps](https://developer.apple.com/design/human-interface-guidelines/maps)
 - `PlaceSelectionAccessoryStyle` — referenced in [Maps](https://developer.apple.com/design/human-interface-guidelines/maps)
 - `ReadError` — referenced in [Tap to Pay on iPhone](https://developer.apple.com/design/human-interface-guidelines/tap-to-pay-on-iphone)
-- `RequestReviewAction` — referenced in [Ratings and reviews](https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews)
+- *`RequestReviewAction`* — referenced in [Ratings and reviews](https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews) *(SwiftUI environment action — verify)*
 - `SpatialTemplatePreference` — referenced in [SharePlay](https://developer.apple.com/design/human-interface-guidelines/shareplay)
-- `SymbolEffect` — referenced in [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols)
-- `SymbolScale` — referenced in [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols)
+- *`SymbolEffect`* — referenced in [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols) *(may be a SwiftUI type; verify against `Documentation/SwiftUI/`)*
+- *`SymbolScale`* — referenced in [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols) *(verify)*
 - `SystemCoordinator` — referenced in [SharePlay](https://developer.apple.com/design/human-interface-guidelines/shareplay)
 - `TVDigitEntryViewController` — referenced in [Digit entry views](https://developer.apple.com/design/human-interface-guidelines/digit-entry-views)
 - `TouchController` — referenced in [Game controls](https://developer.apple.com/design/human-interface-guidelines/game-controls)

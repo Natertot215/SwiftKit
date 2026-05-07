@@ -89,4 +89,4 @@ Per-framework manifests (full path + URL list): `Documentation/_archive/guides/<
 
 ## HIG
 
-180 entries — full URL list at `Documentation/_archive/guides/HIG/_manifest.md` (alphabetical by title). HIG is design guidance only; nothing from this set surfaces as a gallery page. Phase 1's orphan-component cross-check (see `.claude/Planning/guide-orphan-components.md`) covers any HIG-referenced types worth tile homes.
+180 entries — full URL list at `Documentation/_archive/guides/HIG/_manifest.md`. HIG is design guidance only; nothing from this set surfaces as a gallery page. Phase 1's orphan-component cross-check (see `.claude/Planning/guide-orphan-components.md`) covers any HIG-referenced types worth tile homes.
