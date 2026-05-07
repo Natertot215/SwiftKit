@@ -28,8 +28,8 @@ struct RootView: View {
         }
         .navigationSplitViewStyle(.prominentDetail)
         .onAppear {
-            if selectedID == nil {
-                selectedID = "item:reference.color.color"
+            if selectedID == nil, let first = GalleryRegistry.allItems.first {
+                selectedID = "item:\(first.id)"
             }
         }
     }
