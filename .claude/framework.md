@@ -9,31 +9,9 @@ A personal Apple-component reference library, native to macOS. Two outputs:
 
 The motivation is concrete: Pommora's UI shell rebuild stalled because there was no confirmed visual reference for what Apple's primitives actually render as on macOS 26. Every "build the sidebar" task became a guessing game off after-the-fact screenshots. SwiftKit is the reference. When Pommora needs a component, Nathan points at SwiftKit and says "that one." No invention. No interpretation.
 
-## Current State *(2026-05-07, post-strip)*
+## Current State
 
-The project was stripped on 2026-05-07 after drifting into 836 page files / 43 folders. Restart is from a clean foundation.
-
-```
-Total Swift files:       21
-  Shell + scaffolds:     14
-  Reference pages on disk: 5 (unregistered)
-  Shared:                2 (DescribePage, PlaceholderGalleryPage)
-
-GalleryRegistry entries: 81 (placeholder template — 3 main folders × 3 sub-folders × 9 pages)
-Build state:             ✅ green
-Documentation mirror:    2,535 markdown files (intact)
-```
-
-**What survived the strip and works:**
-- Shell: `SwiftKitApp`, `RootView`, `SidebarView`, `ContentView`, `AppearanceController`
-- Catalog: `GalleryItem` descriptor, `GalleryRegistry` (allItems/byFramework/item(forID:))
-- Detail pane: `DetailPane`
-- Page scaffolds: `GalleryItemPage`, `VariantTile`, `PageSection`, `APICallout`, `DemoTiles`
-- 5 canonical reference pages: Materials, Motion, Color, SF Symbols, Typography — the authoring model
-- App icon, asset catalog
-- 2,535-file `Documentation/` mirror
-
-**Pre-strip corpus** preserved at git tag `pre-restart` (SHA `62db021`). Recoverable via `git show pre-restart:<path>` if any single file becomes useful as reference.
+Live state lives in [`handoff.md`](handoff.md). Chronological record lives in [`history.md`](history.md). The 2026-05-07 strip baseline (21 Swift files, empty registry, 2,535-file doc mirror) is preserved at git tag `pre-restart` → `62db021` for recovery via `git show pre-restart:<path>`.
 
 ## MVP Plan — Foundation to Completion
 
@@ -109,7 +87,7 @@ Everything else runs continuously.
 
 ---
 
-### Phase 0a — Strip Placeholder Template, Restore Canonical Framework Labels *(prerequisite)*
+### Phase 0a — Strip Placeholder Template, Restore Canonical Framework Labels *(✅ DONE — commit `7ea77c8`)*
 
 **Dispatch:** 1 sequential implementer (cheap model — single mechanical refactor) → spec review → code review.
 
@@ -130,7 +108,7 @@ Everything else runs continuously.
 
 ---
 
-### Phase 0b — Documentation Triage *(reversible)*
+### Phase 0b — Documentation Triage *(✅ DONE — commits `f03cb42` … `5d66ae5`)*
 
 **Dispatch:** 3 **parallel** implementers (standard model). Disjoint scope — no file conflicts.
 - Agent A: SwiftUI articles (~56 `kind: article` files under `Documentation/SwiftUI/`)
@@ -159,7 +137,7 @@ Each agent runs its own implementer → spec review → code review chain. After
 
 ---
 
-### Phase 0c — Topic-Page Archival *(reversible)*
+### Phase 0c — Topic-Page Archival *(✅ DONE — commit `3ac3220`)*
 
 **Dispatch:** 1 sequential controller pass — no subagent needed (mechanical archival + single index file write). Was inserted mid-Phase-1 after Nathan reinforced "only components in the project; articles, guides, and topic pages all go in `exclude.md`."
 
@@ -184,7 +162,7 @@ Each agent runs its own implementer → spec review → code review chain. After
 
 ---
 
-### Phase 1 — Sorting and Manifest Authoring
+### Phase 1 — Sorting and Manifest Authoring *(✅ DONE — sorts `65efed1` / `bdd80a2` / `bc8033e`; closure `7bce9f3`; checkpoint cleared `5aec288`; B10 closed `420a19c`)*
 
 **Dispatch:** 3 **parallel** sort agents (standard model). Each writes a disjoint section of the manifest — no file conflicts.
 - Agent R: Reference heading
@@ -280,7 +258,7 @@ Plus an "Unmapped / needs decision" appendix.
 
 ---
 
-### Phase 2 — Scaffold
+### Phase 2 — Scaffold *(✅ DONE — Step 1 `d297d96`, Step 2 `72c3f78`)*
 
 **Dispatch:** Sequential registry build, then **parallel** page-file generation.
 - **Step 1 (sequential, standard model):** 1 implementer rebuilds `GalleryRegistry.swift` from the approved manifest. Single-file edit — must be sequential. → spec review → code review.
@@ -303,7 +281,7 @@ Plus an "Unmapped / needs decision" appendix.
 
 ---
 
-### Phase 2.5 — Scaffold Audit *(read-only gate)*
+### Phase 2.5 — Scaffold Audit *(✅ DONE — 74/74 PASS, commit `488fe28`)*
 
 **Dispatch:** 1 read-only audit agent (cheap model — pure verification, no edits). No spec/code review chain — the audit *is* the review. Reports `PASS` or `FAIL` with per-page table.
 
@@ -323,7 +301,7 @@ Plus an "Unmapped / needs decision" appendix.
 
 ---
 
-### Phase 3 — Implementation
+### Phase 3 — Implementation *(in progress — AppKit pilot ✅ DONE `c2179b7`; 12 SwiftUI folders queued)*
 
 **Dispatch:** **Parallel** — one agent per folder. ~14 folders total (12 SwiftUI + 1 Reference + 1 AppKit assuming PlanningTree holds). Each implementer (standard model, upgrade to most-capable for visually complex pages) authors its own folder's leaf files. Disjoint output → no conflicts. Per-folder chain: implementer → spec review → code quality review → loop until ✅. Folders may dispatch in waves rather than all-at-once if model capacity is constrained — the parallel-safety is a property of the work, not a mandate to fan out maximally.
 
@@ -371,10 +349,11 @@ Plus an "Unmapped / needs decision" appendix.
 | Surface | File | Role |
 |---|---|---|
 | App shell | `SwiftKitApp`, `RootView`, `SidebarView`, `AppearanceController` | Locked. |
-| Catalog | `GalleryItem`, `GalleryRegistry` | Edit in 0a, repopulate in Phase 2. |
+| Catalog | `GalleryItem`, `GalleryRegistry` | Locked (Phase 0a strip + Phase 2 Step 1 repopulation done). |
 | Detail | `DetailPane` | Locked. |
-| Page scaffolds | `GalleryItemPage`, `VariantTile`, `PageSection`, `APICallout`, `DemoTiles` | Locked. Reuse for every Phase 2 + Phase 3 page. |
-| Reference pages | `MaterialsGalleryPage`, `MotionGalleryPage`, `ReferenceColorGalleryPage`, `SFSymbolsGalleryPage`, `TypographyGalleryPage` | Canonical authoring model. Register in Phase 2. |
+| Page scaffolds | `GalleryItemPage`, `VariantTile`, `ReferenceTile`, `PageSection`, `APICallout`, `DemoTiles` | Locked. Reuse for every Phase 3 page (AppKit pilot proved ReferenceTile pattern for non-renderable protocols/delegates). |
+| Reference pages | `MaterialsGalleryPage`, `MotionGalleryPage`, `ReferenceColorGalleryPage`, `SFSymbolsGalleryPage`, `TypographyGalleryPage` | Canonical authoring model — registered in Phase 2 Step 1. |
+| AppKit pages | 6 files at `Pages/AppKit/` (NSOutlineView/NSBrowser/NSPathControl/NSTokenField/NSDatePicker/NSGlassEffectView) | Live tiles authored in Phase 3 pilot — second canonical authoring template (NSViewRepresentable bridges). |
 | Scratch (delete) | `PlaceholderGalleryPage`, `DescribePage` | Remove in Phase 4. |
 
 ### End-to-End Verification (post-Phase 4)
@@ -389,7 +368,6 @@ Plus an "Unmapped / needs decision" appendix.
 
 - Whether `Documentation/_archive/guides/` is fully deleted in Phase 4 or kept as historical record.
 - Whether a future post-MVP phase introduces a 3-column NavigationSplitView with section dividers (the place sub-headings would re-enter — explicitly out of MVP scope).
-- Whether Phase 3 batches commit per-folder or per-heading (default: per-folder commits, consistent with batching).
 
 ## Hard Constraints
 
@@ -426,12 +404,19 @@ Chronological record of what's in the app. **No code** — just name + date.
 | 5 reference pages: `Typography`, `Color`, `Materials`, `Motion`, `SF Symbols` | 2026-05-06 |
 | **Strip-and-restart** — 836 pre-strip page files removed; corpus reset to 5 reference pages | **2026-05-07** |
 | `PlaceholderGalleryPage` + 81-item placeholder template (sidebar mechanics validation) | 2026-05-07 |
+| Phase 0a — strip placeholder template, restore canonical Framework labels | 2026-05-07 |
+| Phase 0b/0c — archive 51 SwiftUI articles + 18 AppKit articles + 180 HIG + 36 AppKit collectionGroup + 1 SwiftUI master `_index`; build unified `Documentation/_links/exclude.md` | 2026-05-07 |
+| Phase 1 — sort + checkpoint resolutions (74 leaves locked: 5 Reference + 63 SwiftUI + 6 AppKit) | 2026-05-07 |
+| Phase 2 Step 1 — `GalleryRegistry.swift` rebuilt with 74 entries | 2026-05-07 |
+| Phase 2 Step 2 — 69 `<LeafName>GalleryPage.swift` scaffolds generated | 2026-05-07 |
+| Phase 2.5 — read-only manifest-vs-scaffold audit (74/74 PASS) | 2026-05-07 |
+| B10 — gradient mirror-gap closed (LinearGradient/RadialGradient/AngularGradient captured + tiled) | 2026-05-07 |
+| Phase 3 AppKit pilot — 6 page files authored with live tiles, NSViewRepresentable bridges, ReferenceTile for non-renderable protocols | 2026-05-07 |
 
 ## Planning checklist
 
-- [ ] Is this work for the post-strip restart, or pre-strip cleanup? *(Restart only — pre-strip Planning docs are historical record.)*
 - [ ] If a new gallery page: does the corresponding markdown exist under `Documentation/<framework>/<topic>/`?
 - [ ] Is the page name a user-recognizable component, not a modifier? Modifiers belong as tiles inside their primitive's page.
 - [ ] Is the folder a macro-grouping with at least ~4 pages? Single-page folders are not allowed.
-- [ ] Does this introduce a Claude-authored helper view? **Stop.** Compose Apple primitives directly.
+- [ ] Does this introduce a Claude-authored helper view? **Stop.** Compose Apple primitives directly. (`NSViewRepresentable` bridges to AppKit primitives are the one allowed exception per the Phase 3 AppKit pattern.)
 - [ ] Are dark + light renderings both planned for the change?

@@ -3,7 +3,7 @@
 Apple-component reference library — one page per user-recognizable component, every documented variant rendered as a tile alongside its exact API call. Modifiers fold into the primitive's page as variant tiles, never as their own pages. Companion output is `Documentation/` (project-root sibling) — a local mirror of Apple's documentation as flat markdown.
 
 **Git remote:** <https://github.com/Natertot215/SwiftKit.git>
-**Status:** post-strip blank-slate (2026-05-07). Sidebar runs an 81-item placeholder template. Page list and folder shape are open for the new planning phase.
+**Status:** see [`handoff.md`](handoff.md) — that file is the live state tracker; this one is the durable project context.
 
 ## Stack
 
@@ -17,7 +17,7 @@ Apple-component reference library — one page per user-recognizable component, 
 - Load `Guidelines/macuix-rules.md` before writing any Swift/SwiftUI/macOS code. Non-negotiable.
 - UI terminology is descriptive, not a canonical API name — identify the Apple primitive, don't treat the label as the spec.
 - Semantic color/font tokens only. No hand-mixed `Color(red:green:blue:)`, no Figma hex literals. (`Guidelines/visual-rules.md`)
-- **One page = one user-recognizable component.** Modifiers go inside the component's page as variant tiles, never as their own pages. *(Post-strip rule, see `history.md` 2026-05-07.)*
+- **One page = one user-recognizable component.** Modifiers go inside the component's page as variant tiles, never as their own pages. *(Post-strip rule, see `history.md` 2026-05-07.)* Pages must reasonably contain a grouping of similar items; similar to a figma design system. 
 - **`Documentation/` is the authoring source, NOT the page list.** Read each primitive's markdown before authoring its page. The page list is settled during planning, derived from user-recognizable components — not from Apple's URL count.
 - **Screenshots are temporary.** Capture for review only, then delete. Never commit screenshots; never let `Screen Recordings/` accumulate. The folder is a scratch space — assume empty between sessions.
 
@@ -33,7 +33,8 @@ Apple-component reference library — one page per user-recognizable component, 
 | [`Guidelines/visual-rules.md`](Guidelines/visual-rules.md) | Semantic tokens, color, styling (L-001, L-012) | Before any UI-facing change |
 | [`Guidelines/api-and-layout.md`](Guidelines/api-and-layout.md) | API verification, layout patterns (L-002, L-003, L-008, L-009) | Before any modifier or layout change |
 | [`Guidelines/build-and-process.md`](Guidelines/build-and-process.md) | Build setup, file placement, process (L-005–L-011) | Before scaffolding or debugging |
-| [`Planning/`](Planning/) | Plans and triage documents | Before any planned feature work |
+| [`PlanningTree`](PlanningTree) | Approved 74-leaf page list with checkpoint annotations | When recapping the manifest at a glance |
+| [`Planning/`](Planning/) | Per-framework manifests, sort-decisions audit trail, scaffold audit | Before any planned feature work |
 | [`Transcripts/`](Transcripts/) | Session transcripts — written on request | When reviewing past session context |
 
 ## Memory Protocol

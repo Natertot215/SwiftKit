@@ -175,7 +175,7 @@ Reference (2):
 
 ## Unmapped / needs decision
 
-None for the Reference heading — every tile maps to existing canonical content on disk. Items deferred from `guide-orphan-components.md`:
+None for the Reference heading — every tile maps to existing canonical content on disk. Phase 0b orphan-component cross-check items handled here:
 
 - `SymbolEffect`, `SymbolScale` (HIG orphans) — flagged for SF Symbols Phase 3 enrichment, but not promoted to tiles for the MVP scaffold. Add as variant tiles only if they have macOS support; otherwise keep deferred.
 - `RequestReviewAction` (HIG orphan) — out of scope for Reference; belongs in SwiftUI > Presentation if anywhere. Routed to the SwiftUI sort agent's deferred list.

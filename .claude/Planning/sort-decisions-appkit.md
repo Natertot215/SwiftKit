@@ -30,7 +30,7 @@ All 101 docs with `kind: method`, `kind: property`, `kind: init`, `kind: func`, 
 
 ## Orphan-Candidate Routing
 
-All 9 AppKit orphan candidates from `guide-orphan-components.md` were checked for type-doc presence in `Documentation/AppKit/`. None have standalone type-docs.
+All 9 AppKit orphan candidates surfaced during Phase 0b's guide-only-component cross-check were checked for type-doc presence in `Documentation/AppKit/`. None have standalone type-docs.
 
 - `NSAccessibilityElement` — No type-doc at `Documentation/AppKit/`. A class `nsaccessibilityelement-swift.class.md` exists in `accessibility-for-appkit/` — this is a different Swift overlay class used for programmatic accessibility element creation, not a visible UI component. **Decision: Deferred.** Not a user-recognizable gallery component; belongs to the accessibility implementation layer, not the component surface.
 - `NSAttributedString` — No type-doc in `Documentation/AppKit/`. NSAttributedString is a Foundation type; AppKit adds drawing extensions but the core type lives in Foundation. **Decision: Out of scope.** Foundation type, not an AppKit UI primitive.

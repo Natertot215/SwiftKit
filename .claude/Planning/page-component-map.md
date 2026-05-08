@@ -63,12 +63,6 @@ Sort-decisions audit trail: [`sort-decisions.md`](sort-decisions.md) (and per-fr
 - No topic-page or article surfaces in any manifest (Phase 0b + 0c archived these).
 - 5 method docs misclassified as `kind: article` (clipboard / focus modifiers) are routed as tiles to their parent component pages per Phase 0b restoration.
 
-## What's next (Phase 2 dispatch)
+## Status post-checkpoint
 
-1. **C11 sample-code review** — controller pass (no agent dispatch).
-2. **Phase 2 Step 1** — sequential `GalleryRegistry.swift` rebuild (single sonnet implementer; spec + code review chain). Stable IDs `<heading>.<folder>.<leaf>` (lower-camel).
-3. **Phase 2 Step 2** — parallel per-folder scaffold generation (cheap-model implementers, one per folder). Each leaf gets a `<PageName>GalleryPage.swift` using `GalleryItemPage` + empty `VariantTile` placeholders matching tile count. Disjoint output paths → fully parallel-safe.
-4. **Phase 2.5** — read-only scaffold audit gate.
-5. **Phase 3** — live tile authoring (parallel per folder). Gradient recapture (B10) runs before this phase.
-
-Mandatory for every Phase 2/3 agent: invoke `swiftui-expert-skill` via Skill tool before writing any Swift. Inline-output protocol applies (subagents return file contents as fenced blocks; controller writes).
+The downstream phases this manifest unlocked are tracked in [`../handoff.md`](../handoff.md). The manifest itself is locked — any further changes belong in a new dated checkpoint, not edits in place.
