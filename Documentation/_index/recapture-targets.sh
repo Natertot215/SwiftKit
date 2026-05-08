@@ -12,14 +12,13 @@ DOC_ROOT="$(cd "$DIR/.." && pwd)"
 source "$DIR/capture.sh" __library__ 2>/dev/null
 
 # Each target: URL | target file path (relative to DOC_ROOT) | framework | category
+# B10 (Phase 1 checkpoint, 2026-05-07): the 3 gradient types are real macOS
+# SwiftUI primitives but were absent from the original capture pass — fill the
+# gap before Phase 3 dispatches.
 TARGETS=(
-  "https://developer.apple.com/documentation/appkit/nsslideraccessory|AppKit/views-and-controls/nsslideraccessory.md|AppKit|Views and controls"
-  "https://developer.apple.com/documentation/appkit/nsseguePerforming|AppKit/resource-management/nsseguePerforming.md|AppKit|Resource management"
-  "https://developer.apple.com/documentation/swiftui/manipulablerespondermodifier|SwiftUI/view-fundamentals/manipulablerespondermodifier.md|SwiftUI|View fundamentals"
-  "https://developer.apple.com/design/human-interface-guidelines|HIG/root/human-interface-guidelines.md|HIG|Root"
-  "https://developer.apple.com/design/human-interface-guidelines/typography|HIG/foundations/typography.md|HIG|Foundations"
-  "https://developer.apple.com/design/human-interface-guidelines/layout|HIG/foundations/layout.md|HIG|Foundations"
-  "https://developer.apple.com/design/human-interface-guidelines/color|HIG/foundations/color.md|HIG|Foundations"
+  "https://developer.apple.com/documentation/swiftui/lineargradient|SwiftUI/drawing-and-graphics/lineargradient.md|SwiftUI|Drawing and graphics"
+  "https://developer.apple.com/documentation/swiftui/radialgradient|SwiftUI/drawing-and-graphics/radialgradient.md|SwiftUI|Drawing and graphics"
+  "https://developer.apple.com/documentation/swiftui/angulargradient|SwiftUI/drawing-and-graphics/angulargradient.md|SwiftUI|Drawing and graphics"
 )
 
 for target in "${TARGETS[@]}"; do

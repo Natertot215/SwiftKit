@@ -34,7 +34,7 @@ Sort-decisions audit trail: [`sort-decisions.md`](sort-decisions.md) (and per-fr
 
 ### B. Mirror gap
 
-10. **`LinearGradient`, `RadialGradient`, `AngularGradient`** — ✅ **Recapture APPROVED.** Run `Documentation/_index/recapture-targets.sh` for these 3 URLs before Phase 3 begins. Tiles attach to the SwiftUI > Images and Shapes > Gradient page once captured.
+10. **`LinearGradient`, `RadialGradient`, `AngularGradient`** — ✅ **B10 CLOSED 2026-05-07.** Recapture script ran cleanly; 3 docs landed in `Documentation/SwiftUI/drawing-and-graphics/`. 3 tiles inserted in source-order into the Gradient page (now 17 tiles). `GradientGalleryPage.swift` and the Phase 2.5 audit both reflect the new count.
 
 ### C. Sample-code case-by-case review
 

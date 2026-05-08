@@ -14,6 +14,9 @@ struct GradientGalleryPage: View {
         ) {
             VariantTile(name: "Gradient", api: nil) { Color.clear }
             VariantTile(name: "AnyGradient", api: nil) { Color.clear }
+            VariantTile(name: "LinearGradient", api: nil) { Color.clear }
+            VariantTile(name: "RadialGradient", api: nil) { Color.clear }
+            VariantTile(name: "AngularGradient", api: nil) { Color.clear }
             VariantTile(name: "MeshGradient", api: nil) { Color.clear }
             VariantTile(name: "Glass", api: nil) { Color.clear }
             VariantTile(name: "ShadowStyle", api: nil) { Color.clear }
@@ -36,7 +39,7 @@ extension GradientGalleryPage {
         title: "Gradient",
         folder: "Images and Shapes",
         framework: .swiftUI,
-        absorbedSymbols: ["AnyGradient", "Gradient", "MeshGradient"],
+        absorbedSymbols: ["AngularGradient", "AnyGradient", "Gradient", "LinearGradient", "MeshGradient", "RadialGradient"],
         blurb: "Gradient — Phase 3 fills this from the Apple documentation Abstract.",
         signature: nil,
         availability: nil,

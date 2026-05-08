@@ -239,3 +239,25 @@ Per Phase 0c case-by-case rule, controller-side review of all 13 SwiftUI `kind: 
 | `windows/bringing-multiple-windows-to-your-swiftui-app.md` | stub | WWDC22 multi-window demo |
 
 **Net change from earlier sort:** Custom Layout drops from 14 to 13 tiles (composing-custom-layouts excluded). All other Phase 1 tile counts unchanged.
+
+---
+
+## B10 — gradient mirror-gap closure (2026-05-07)
+
+`LinearGradient`, `RadialGradient`, `AngularGradient` flagged in Phase 1 as real macOS SwiftUI primitives absent from the doc mirror.
+
+**Action:** Updated `Documentation/_index/recapture-targets.sh` TARGETS to fetch the 3 URLs; ran the script.
+
+**Result:** All 3 captures succeeded (sizes 1329, 1407, 1961 bytes — all above 800B threshold; `kind: struct` confirmed in each frontmatter):
+
+| URL | Target file | kind | Size |
+|---|---|---|---|
+| `https://developer.apple.com/documentation/swiftui/lineargradient` | `SwiftUI/drawing-and-graphics/lineargradient.md` | `struct` | 1329 B |
+| `https://developer.apple.com/documentation/swiftui/radialgradient` | `SwiftUI/drawing-and-graphics/radialgradient.md` | `struct` | 1407 B |
+| `https://developer.apple.com/documentation/swiftui/angulargradient` | `SwiftUI/drawing-and-graphics/angulargradient.md` | `struct` | 1961 B |
+
+**Tile placement:** All 3 inserted in `## SwiftUI > Images and Shapes > Gradient` between `AnyGradient` and `MeshGradient`, grouping the five concrete `*Gradient` structs (`Gradient`, `AnyGradient`, `LinearGradient`, `RadialGradient`, `AngularGradient`, `MeshGradient`). Order within the new trio mirrors Apple's category ordering (linear → radial → angular). Gradient page tile count: 14 → 17.
+
+**Active corpus impact:** +3 docs (now 2,252 active, all `kind: struct` — within the existing classifier-table accounting; no new `kind:` value introduced). All 3 surface as gallery tiles, none orphaned, none deferred.
+
+**Phase 3 implication:** GradientGalleryPage's Phase 3 implementer has 3 additional tiles to author live renders for. The Apple docs for these 3 are abstract-light (1.3–2 KB) — implementers may need to consult `ShapeStyle/linearGradient(_:startPoint:endPoint:)` etc. on the parent `ShapeStyle` page for parameter shapes.

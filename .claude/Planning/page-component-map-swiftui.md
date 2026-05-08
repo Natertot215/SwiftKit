@@ -785,6 +785,9 @@
 
 - `Gradient` — A color gradient represented as an array of color stops.
 - `AnyGradient` — A color gradient that you can use anywhere SwiftUI uses a `ShapeStyle`.
+- `LinearGradient` — A linear gradient that maps a color function along an axis between start and end points.
+- `RadialGradient` — A radial gradient that maps a color function as the distance from a center point, scaled between start and end radii.
+- `AngularGradient` — A conic gradient that maps a color function as the angle changes relative to a center point and start/end angles.
 - `MeshGradient` — A two-dimensional gradient defined by a 2D grid of positioned colors.
 - `Glass` — A shape style that renders a glass effect.
 - `ShadowStyle` — A style to use when rendering shadows.
@@ -798,7 +801,7 @@
 - `backgroundStyle(_:)` — Sets the specified style to render backgrounds within the view.
 - `tint(_:)` — Sets the tint within this view.
 
-> **Mirror gap:** `LinearGradient`, `RadialGradient`, `AngularGradient` are real macOS SwiftUI types but are absent from `Documentation/SwiftUI/`. Recommend targeted recapture before Phase 3 and adding them as tiles here.
+> ✅ B10 closed 2026-05-07: `LinearGradient`, `RadialGradient`, `AngularGradient` recaptured to `Documentation/SwiftUI/drawing-and-graphics/{lineargradient,radialgradient,angulargradient}.md` and tiled here in source-order with the existing concrete `*Gradient` types. 14 tiles → 17 tiles.
 
 ---
 
@@ -1232,5 +1235,5 @@ Other / open:
 
 - **`essentials/` (1 sampleCode doc)** — C11 controller pass evaluates.
 - `CaptionTextFormat`, `DragState`, `TransferRepresentation`, `Transferable` — No type-doc in mirror; DEFERRED.
-- `LinearGradient`, `RadialGradient`, `AngularGradient` — ✅ B10 APPROVED. Recapture via `Documentation/_index/recapture-targets.sh` before Phase 3 begins; tiles attach to Gradient page once captured.
+- `LinearGradient`, `RadialGradient`, `AngularGradient` — ✅ B10 CLOSED 2026-05-07. Captured to `Documentation/SwiftUI/drawing-and-graphics/{lineargradient,radialgradient,angulargradient}.md`; 3 tiles added to Gradient page (14 → 17). See manifest section above.
 - **13 SwiftUI `kind: sampleCode` docs** — ✅ C11 controller pass evaluates each on merit (Phase 0c rule). Outcomes appended to `sort-decisions-swiftui.md`.

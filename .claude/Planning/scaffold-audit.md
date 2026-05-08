@@ -66,7 +66,7 @@ Read-only verification that the 74 generated page-files match the approved Phase
 | SwiftUI | Text and Input | AttributedString | 9 | `swiftui.textAndInput.attributedString` | ✅ |  |
 | SwiftUI | Images and Shapes | Image | 18 | `swiftui.imagesAndShapes.image` | ✅ |  |
 | SwiftUI | Images and Shapes | Shapes | 29 | `swiftui.imagesAndShapes.shapes` | ✅ |  |
-| SwiftUI | Images and Shapes | Gradient | 14 | `swiftui.imagesAndShapes.gradient` | ✅ |  |
+| SwiftUI | Images and Shapes | Gradient | 17 | `swiftui.imagesAndShapes.gradient` | ✅ |  |
 | SwiftUI | Presentation | Sheet | 24 | `swiftui.presentation.sheet` | ✅ |  |
 | SwiftUI | Presentation | Popover | 3 | `swiftui.presentation.popover` | ✅ |  |
 | SwiftUI | Presentation | Alert | 10 | `swiftui.presentation.alert` | ✅ |  |
