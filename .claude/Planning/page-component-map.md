@@ -9,10 +9,10 @@ This is the unified manifest for the SwiftKit MVP page list. Per-framework detai
 | Heading | Folders | Leaves | Tiles (approx) | Per-framework manifest |
 |---|---|---|---|---|
 | Reference | flat (single-folder collapse) | 5 | 93 | [`page-component-map-reference.md`](page-component-map-reference.md) |
-| SwiftUI | 12 | 44 (39 confirmed + 5 added: Environment trimmed, State and Bindings, Custom Layout, AppKit Integration, View Fundamentals; AsyncImage and FullScreenCover folded) | ~960 | [`page-component-map-swiftui.md`](page-component-map-swiftui.md) |
-| AppKit | flat (single-folder collapse) | 6 (5 confirmed + 1 added: NSGlassEffectView) | 29 | [`page-component-map-appkit.md`](page-component-map-appkit.md) |
+| SwiftUI | 12 | 63 (60 from sort + 5 added: Environment trimmed, State and Bindings, Custom Layout, AppKit Integration, View Fundamentals; minus 2 folded: AsyncImage→Image, FullScreenCover→Sheet) | ~960 | [`page-component-map-swiftui.md`](page-component-map-swiftui.md) |
+| AppKit | flat (single-folder collapse) | 6 (5 from sort + 1 added: NSGlassEffectView) | 29 | [`page-component-map-appkit.md`](page-component-map-appkit.md) |
 
-**Total:** ~55 confirmed leaves, ~1,082+ tiles.
+**Total: 74 leaves**, ~1,082+ tiles.
 
 Sort-decisions audit trail: [`sort-decisions.md`](sort-decisions.md) (and per-framework variants).
 
