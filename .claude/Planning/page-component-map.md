@@ -2,7 +2,7 @@
 
 This is the unified manifest for the SwiftKit MVP page list. Per-framework details (every tile, every Apple type name) live in the linked sub-files; this document captured the Phase 1 user-checkpoint decisions.
 
-**Status:** ✅ APPROVED 2026-05-07. Phase 2 dispatch unblocked.
+**Status:** ✅ APPROVED 2026-05-07. Phase 2 ✅ DONE. Phase 3 **REDESIGNED 2026-05-07** — manifest itself unchanged; Phase 3 dispatch shape replaced with per-page bespoke integration on opus per Nathan's redesign directive. See [`../framework.md`](../framework.md) Phase 3 section, [`../handoff.md`](../handoff.md) for tomorrow's queue, [`page-logic-log.md`](page-logic-log.md) for the new per-page reasoning record.
 
 ## Summary (post-resolution)
 

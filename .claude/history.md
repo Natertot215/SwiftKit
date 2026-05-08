@@ -102,6 +102,39 @@ Resulting work:
 
 **Variant consolidation rule rejected (post-V1 revisit).** Mid-checkpoint, controller proposed a Phase 3 rendering rule for multi-variant APIs (`Material` cases, `Animation` presets, `SymbolRenderingMode` cases, `TableStyle` values) — render as a single tile with an in-tile selector instead of separate tiles per variant. Nathan rejected: *"too consolidating; let's not scope this out now and see how the V1 looks after scaffolding and implementation."* Phase 3 keeps the existing per-variant tile pattern from the canonical reference pages (Materials, Motion, etc.). Revisit after V1 ships if visual density becomes a concern.
 
+**Phase 3 redesigned — per-page bespoke integration replaces uniform-grid scaffold.** End-of-day session after the AppKit pilot landed at `c2179b7`, Nathan flagged that Phase 2's scaffold pass had wrapped every page in an identical `GalleryItemPage { VariantTile { Color.clear } × N }` shell, and the AppKit pilot continued in that shape. The cookie-cutter container constrains layout *before* any thought about what the page is documenting — buttons want a condensed grid; sliders want horizontal breathing room; navigation views consume the entire pane and want bare full-bleed listings; typography wants hand-crafted single-column rows with side-aligned API metadata. Nathan also discovered an OG Typography page surviving in older app builds, recoverable from git history at `f3a3308:SwiftKit/Pages/Reference/TypographyPage.swift` (311 lines, hand-crafted single-column rows, fixed `apiColumnWidth: 180`, `PageSection`-based, no `VariantTile` chrome). That OG is the proof-of-concept for bespoke per-page layout.
+
+Nathan's directives across the redesign session:
+
+1. *"Each page should not be like typography — but each page should be formatted as best for their own individual requirements... and that's what the og typo page did well."* → Per-page tailoring discipline, not "copy Typography." Typography exemplifies the principle (it's tailored to typography's needs); each new page must make its own conscious layout decision.
+2. *"We need to strip the page contents while keeping the filetree the same; and re-scope how we should engrain the scaffolding phase alongside the integration phase to be one in the same."* → Phase 3a (mechanical strip of 63 SwiftUI placeholder bodies to `EmptyView()`) + Phase 3b (per-page integration where layout + demos + log entry happen in one pass per agent).
+3. *"Each page should be given the most care as possible."* → Per-page chain upgraded to 4 stages on opus-tier (layout-design → implementation → spec compliance review → code quality review), no review iteration ceiling, per-folder Nathan checkpoints (design pre-flight on first page in folder + visual click-through at folder close).
+4. *"Each agent must be pre loaded with the using-superpowers skill and swift-ui skill."* → Mandatory baseline skill kit on EVERY Phase 3 agent dispatch, including the mechanical 3a strip: `superpowers:using-superpowers` + `swiftui-expert-skill`. Task-specific skills (`ui-ux-pro-max`, `find-docs`, `superpowers:brainstorming`, `superpowers:requesting-code-review`, `superpowers:test-driven-development`, `superpowers:verification-before-completion`) layer on top.
+5. *"Open items will be sorted out after the waves; so after I'm happy with the implementation phase; we will then sort and integrate any orphans or uncertain components."* → Phase 4 absorbs all orphan deletions (`PlaceholderGalleryPage`, `DescribePage`, `GalleryPageScaffold`, `ContentView` inline, `DetailPane` "both sidebar modes" comment) and any uncertain-component decisions held open during waves. No pre-decided cleanups; nothing pulled forward into Phase 3a.
+
+**Investigation findings folded into the redesign:**
+
+- **The "old gallery toggle" half-deletion remnant.** Nathan recalled an earlier appearance toggle that swapped between two gallery modes; a previous agent removed the toggle button but not the view contents. Investigation confirmed: `Pages/_Shared/DescribePage.swift` (141 lines) + `Detail/PageScaffold/GalleryPageScaffold.swift` (34 lines, the old "Default/Variants/States/Notes" 4-section scaffold) survive as orphans (not registered in `GalleryRegistry`, only `DescribePage` references `GalleryPageScaffold`). The `DetailEmptyState` comment in `DetailPane.swift` line 32 ("Reusable across both sidebar modes") confirms the second mode used to exist. All deferred to Phase 4 cleanup per Nathan's directive #5 above.
+- **Reference pages diverge by content type, not by template.** Typography (OG): hand-crafted rows. Color: `VariantTile`s with locked-frame swatches. Motion: custom `AnimationDemoTile`/`TransitionDemoTile` with stable canvases + tap-to-trigger. Materials: custom `MaterialDemoTile` with baked-in gradient backdrop so the filter effect is legible. SF Symbols: `VariantTile`s with Image+modifier. The pattern: same shell choices when content allows, custom tile wrappers (or no wrapper at all) when content demands.
+- **Existing primitives are a toolkit, not a template.** `GalleryItemPage(minTileWidth:)` controls grid density; `VariantTile.height` lets a tile take a tall well; `ReferenceTile` covers non-renderable types; `*DemoTile`s prove the "shared canvas" pattern; `PageSection` enables long-form section grouping. The only real gap is a chromeless full-bleed mode (defer extraction; let first W4 Navigation agent write it locally).
+
+**Wave plan (6 waves, sequential within folder, parallel across folders):**
+
+| Wave | Folders | Leaves |
+|---|---|---|
+| W1 (warm-up, sequential) | Reference (Typography first) | 5 |
+| W2 (parallel folders) | Presentation, Toolbars and Menus, Gestures and Input, Accessibility, Images and Shapes | 16 |
+| W3 (parallel folders) | Text and Input, Animation and Effects, Containers | 15 |
+| W4 (parallel folders) | Controls, Layout, Navigation | 25 |
+| W5 (parallel folders) | App Structure | 7 |
+| W6 (parallel pages, single folder) | AppKit | 6 |
+
+**Logic-log discipline (new for Phase 3b).** Single append-only file at `Planning/page-logic-log.md`. Every implementer reads the entire log before drafting layout (must cite at least one prior entry's decision in their reasoning, OR explain divergence) and appends their own entry as the final act before handing back code. Entry captures: layout shape, component-driven rationale, tile/row shape, demo notes, primitive proposals, heads-up for siblings. Closer to a postmortem than a plan; subsequent agents read it as evidence, not instructions.
+
+**Components log split out.** Nathan directed that the Components log live as its own file (`components-log.md`) rather than embedded in `framework.md`. The framework's Components log section is now a one-line pointer.
+
+Plan-file draft preserved at `~/.claude/plans/rippling-wiggling-widget.md` until tomorrow's Phase 3a dispatch begins, then archived. Canonical home for the redesigned Phase 3 is `framework.md`.
+
 ---
 
 ## Architectural Constraints (standing)

@@ -3,136 +3,146 @@ SwiftKit — Page List (post Phase 1 checkpoint, locked 2026-05-07)
 Legend: Heading > Folder > Leaf
 Reference + AppKit are flat (single-folder collapse) — items render directly under the heading.
 
+Status legend (per leaf, Phase 3b):
+  ⬜  Pending — not yet started under the new per-page methodology
+  🟨  In progress — layout-design or implementation underway
+  ✅  Complete — Phase 3b stages 1–5 done + Nathan folder-close approval received
+  🚫  Blocked — interrupt raised, awaiting human resolution
+
+Initial state (2026-05-07): all 74 leaves ⬜. Reference, SwiftUI placeholder bodies, and AppKit pilot pages all re-author under the new methodology starting tomorrow.
+
 Heading
 │
 ├── Folder
-│   ├── Leaf
-│   ├── Leaf
-│   └── Leaf
+│   ├── ⬜ Leaf
+│   ├── ⬜ Leaf
+│   └── ⬜ Leaf
 
 ────────────────────────────────────────────────────────────────────
 
 SwiftKit
 │
-├── Reference (5 leaves)
-│   ├── Typography
-│   ├── Color
-│   ├── Materials
-│   ├── Motion
-│   └── SF Symbols
+├── Reference (5 leaves) — W1 warm-up
+│   ├── ⬜ Typography                  [W1 first; references OG at f3a3308]
+│   ├── ⬜ Color
+│   ├── ⬜ Materials
+│   ├── ⬜ Motion
+│   └── ⬜ SF Symbols                  [existing on-disk page is starting reference]
 │
 ├── SwiftUI (12 folders, 63 leaves)
 │   │
-│   ├── App Structure (7)
-│   │   ├── App and Scenes
-│   │   ├── WindowGroup
-│   │   ├── Document
-│   │   ├── Environment              [A1: trimmed — 3 anchor tiles only; 162 property docs deferred]
-│   │   ├── State and Bindings       [A2: added]
-│   │   ├── AppKit Integration       [A4: added]
-│   │   └── View Fundamentals        [A5: added — minimal, 5 tiles]
+│   ├── App Structure (7) — W5
+│   │   ├── ⬜ App and Scenes
+│   │   ├── ⬜ WindowGroup
+│   │   ├── ⬜ Document
+│   │   ├── ⬜ Environment              [A1: trimmed — 3 anchor tiles only; 162 property docs deferred]
+│   │   ├── ⬜ State and Bindings       [A2: added]
+│   │   ├── ⬜ AppKit Integration       [A4: added]
+│   │   └── ⬜ View Fundamentals        [A5: added — minimal, 5 tiles]
 │   │
-│   ├── Navigation (6)
-│   │   ├── NavigationStack
-│   │   ├── NavigationSplitView
-│   │   ├── TabView
-│   │   ├── Sidebar
-│   │   ├── Searchable
-│   │   └── Inspector
+│   ├── Navigation (6) — W4
+│   │   ├── ⬜ NavigationStack
+│   │   ├── ⬜ NavigationSplitView      [bare full-bleed candidate]
+│   │   ├── ⬜ TabView                  [bare full-bleed candidate]
+│   │   ├── ⬜ Sidebar                  [bare full-bleed candidate]
+│   │   ├── ⬜ Searchable
+│   │   └── ⬜ Inspector                [bare full-bleed candidate]
 │   │
-│   ├── Layout (9)
-│   │   ├── Stacks
-│   │   ├── Grid
-│   │   ├── LazyGrid
-│   │   ├── ScrollView
-│   │   ├── GeometryReader
-│   │   ├── Frame and Padding
-│   │   ├── Alignment
-│   │   ├── SafeArea
-│   │   └── Custom Layout            [A3: added]
+│   ├── Layout (9) — W4
+│   │   ├── ⬜ Stacks
+│   │   ├── ⬜ Grid
+│   │   ├── ⬜ LazyGrid
+│   │   ├── ⬜ ScrollView
+│   │   ├── ⬜ GeometryReader
+│   │   ├── ⬜ Frame and Padding
+│   │   ├── ⬜ Alignment
+│   │   ├── ⬜ SafeArea
+│   │   └── ⬜ Custom Layout            [A3: added]
 │   │
-│   ├── Containers (6)
-│   │   ├── List
-│   │   ├── Table
-│   │   ├── Form
-│   │   ├── GroupBox
-│   │   ├── Section
-│   │   └── DisclosureGroup
+│   ├── Containers (6) — W3
+│   │   ├── ⬜ List
+│   │   ├── ⬜ Table
+│   │   ├── ⬜ Form
+│   │   ├── ⬜ GroupBox
+│   │   ├── ⬜ Section
+│   │   └── ⬜ DisclosureGroup
 │   │
-│   ├── Controls (10)
-│   │   ├── Button
-│   │   ├── Toggle
-│   │   ├── Picker
-│   │   ├── DatePicker
-│   │   ├── ColorPicker
-│   │   ├── Slider
-│   │   ├── Stepper
-│   │   ├── ProgressView
-│   │   ├── Gauge
-│   │   └── Menu
+│   ├── Controls (10) — W4
+│   │   ├── ⬜ Button
+│   │   ├── ⬜ Toggle
+│   │   ├── ⬜ Picker
+│   │   ├── ⬜ DatePicker
+│   │   ├── ⬜ ColorPicker
+│   │   ├── ⬜ Slider
+│   │   ├── ⬜ Stepper
+│   │   ├── ⬜ ProgressView
+│   │   ├── ⬜ Gauge
+│   │   └── ⬜ Menu
 │   │
-│   ├── Text and Input (5)
-│   │   ├── Text
-│   │   ├── TextField
-│   │   ├── TextEditor
-│   │   ├── Label
-│   │   └── AttributedString
+│   ├── Text and Input (5) — W3
+│   │   ├── ⬜ Text
+│   │   ├── ⬜ TextField
+│   │   ├── ⬜ TextEditor
+│   │   ├── ⬜ Label
+│   │   └── ⬜ AttributedString
 │   │
-│   ├── Images and Shapes (3)        [AsyncImage folded into Image per A6]
-│   │   ├── Image
-│   │   ├── Shapes
-│   │   └── Gradient                 [B10 closed: +LinearGradient, +RadialGradient, +AngularGradient]
+│   ├── Images and Shapes (3) — W2     [AsyncImage folded into Image per A6]
+│   │   ├── ⬜ Image
+│   │   ├── ⬜ Shapes
+│   │   └── ⬜ Gradient                 [B10 closed: +LinearGradient, +RadialGradient, +AngularGradient]
 │   │
-│   ├── Presentation (4)             [FullScreenCover folded into Sheet per A7]
-│   │   ├── Sheet
-│   │   ├── Popover
-│   │   ├── Alert
-│   │   └── ConfirmationDialog
+│   ├── Presentation (4) — W2          [FullScreenCover folded into Sheet per A7]
+│   │   ├── ⬜ Sheet
+│   │   ├── ⬜ Popover
+│   │   ├── ⬜ Alert
+│   │   └── ⬜ ConfirmationDialog
 │   │
-│   ├── Toolbars and Menus (3)
-│   │   ├── Toolbar
-│   │   ├── ContextMenu
-│   │   └── Commands
+│   ├── Toolbars and Menus (3) — W2
+│   │   ├── ⬜ Toolbar
+│   │   ├── ⬜ ContextMenu
+│   │   └── ⬜ Commands
 │   │
-│   ├── Animation and Effects (4)    [A8: Glass Effects rejected — Liquid Glass APIs scattered as tiles on Button/Canvas]
-│   │   ├── Animation
-│   │   ├── Transition
-│   │   ├── MatchedGeometry
-│   │   └── Canvas
+│   ├── Animation and Effects (4) — W3 [A8: Glass Effects rejected — Liquid Glass APIs scattered as tiles on Button/Canvas]
+│   │   ├── ⬜ Animation
+│   │   ├── ⬜ Transition
+│   │   ├── ⬜ MatchedGeometry
+│   │   └── ⬜ Canvas
 │   │
-│   ├── Accessibility (3)
-│   │   ├── Labels and Descriptions
-│   │   ├── Actions and Behavior
-│   │   └── Custom Content
+│   ├── Accessibility (3) — W2
+│   │   ├── ⬜ Labels and Descriptions
+│   │   ├── ⬜ Actions and Behavior
+│   │   └── ⬜ Custom Content
 │   │
-│   └── Gestures and Input (3)
-│       ├── Gestures
-│       ├── FocusState
-│       └── Keyboard
+│   └── Gestures and Input (3) — W2
+│       ├── ⬜ Gestures
+│       ├── ⬜ FocusState
+│       └── ⬜ Keyboard
 │
-└── AppKit (6 leaves)
-    ├── NSOutlineView
-    ├── NSBrowser
-    ├── NSPathControl
-    ├── NSTokenField
-    ├── NSDatePicker
-    └── NSGlassEffectView            [A9: added — macOS 26 Liquid Glass primitive, 3 tiles]
+└── AppKit (6 leaves) — W6 (re-layout pilot)
+    ├── ⬜ NSOutlineView                [pilot live tiles + bridges stay; layout reconsidered]
+    ├── ⬜ NSBrowser                    [pilot live tiles + bridges stay; layout reconsidered]
+    ├── ⬜ NSPathControl                [pilot live tiles + bridges stay; layout reconsidered]
+    ├── ⬜ NSTokenField                 [pilot live tiles + bridges stay; layout reconsidered]
+    ├── ⬜ NSDatePicker                 [pilot live tiles + bridges stay; layout reconsidered]
+    └── ⬜ NSGlassEffectView            [A9: added — macOS 26 Liquid Glass primitive, 3 tiles; pilot tiles + bridges stay]
 
 ────────────────────────────────────────────────────────────────────
 
 Total: 74 leaves
-  Reference:  5  (flat folder, single-folder collapse)
-  SwiftUI:   63  (12 folders)
-  AppKit:     6  (flat folder, single-folder collapse)
+  Reference:  5  (flat folder, single-folder collapse) — W1 warm-up
+  SwiftUI:   63  (12 folders) — W2-W5
+  AppKit:     6  (flat folder, single-folder collapse) — W6 re-layout
 
 Tile total: ~1,082+ across all 74 pages.
 
 Sources of truth:
-  • Unified manifest:   .claude/Planning/page-component-map.md
-  • Per-framework:      .claude/Planning/page-component-map-{reference,swiftui,appkit}.md
-  • Sort audit trail:   .claude/Planning/sort-decisions{,-reference,-swiftui,-appkit}.md
-  • Phase 2.5 audit:    .claude/Planning/scaffold-audit.md  (74/74 PASS)
+  • Unified manifest:    .claude/Planning/page-component-map.md
+  • Per-framework:       .claude/Planning/page-component-map-{reference,swiftui,appkit}.md
+  • Sort audit trail:    .claude/Planning/sort-decisions{,-reference,-swiftui,-appkit}.md
+  • Phase 2.5 audit:     .claude/Planning/scaffold-audit.md  (74/74 PASS)
+  • Phase 3b logic log:  .claude/Planning/page-logic-log.md  (per-page reasoning, append-only)
 
 Annotations key:
-  [A#: …]  → Phase 1 user-checkpoint resolution (2026-05-07). See page-component-map.md § "Phase 1 checkpoint resolution".
-  [B##: …] → Mirror-gap closure (Phase 1 item B). See sort-decisions-swiftui.md § "B10 — gradient mirror-gap closure".
+  [A#: …]   → Phase 1 user-checkpoint resolution (2026-05-07). See page-component-map.md § "Phase 1 checkpoint resolution".
+  [B##: …]  → Mirror-gap closure (Phase 1 item B). See sort-decisions-swiftui.md § "B10 — gradient mirror-gap closure".
+  [W#]      → Phase 3b wave assignment. Sequential within folder; parallel across folders within a wave.
