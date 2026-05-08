@@ -2,10 +2,10 @@
 
 > Rewrite at the end of every session. Always reflects current state.
 
-**Status:** Phase 2 (Scaffold) ✅ complete. Phase 2.5 (read-only audit) ✅ PASS — 74/74 leaves verified, registry clean, build green. **Phase 3 unblocked**, but **B10 (gradient recapture) must run before Phase 3 dispatches**.
-**Git:** `main`, last commit `72c3f78` *(Phase 2 Step 2 — 69 page-file scaffolds)*; pending audit-report commit at session-end.
+**Status:** B10 ✅ closed; Phase 3 AppKit pilot ✅ complete (1 of 14 folders done). Build green. Phase 2.5 audit passes 74/74. **12 SwiftUI folders remain for Phase 3** (Reference is already authored, AppKit just landed).
+**Git:** `main`, last commit `c2179b7` *(Phase 3 AppKit pilot + PlanningTree refresh)*. Recent: `420a19c` (B10 closure), `488fe28` (Phase 2.5 audit), `72c3f78` (Phase 2 Step 2), `d297d96` (Phase 2 Step 1).
 **Tags:** `pre-restart` → `62db021` *(full pre-strip corpus, recoverable)*.
-**Build:** ✅ green *(verified post-Phase-2 commit `72c3f78` — `xcodebuild` exited 0)*.
+**Build:** ✅ green *(verified post-AppKit-pilot — `xcodebuild` exited 0; macOS 26 SDK accepted all NSGlassEffectView.Style cases, NSPathControl.Style names, cell-based NSBrowserDelegate API as-written)*.
 
 ## Phase progression so far
 
@@ -19,9 +19,10 @@
 | Phase 1 user-checkpoint + C11 sample-code review | ✅ APPROVED 2026-05-07 | `5aec288` |
 | Phase 2 Step 1 — `GalleryRegistry.swift` rebuild (74 entries) | ✓ | `d297d96` |
 | Phase 2 Step 2 — 69 page-file scaffolds generated | ✓ | `72c3f78` |
-| Phase 2.5 — read-only audit | ✅ PASS (74/74) | (uncommitted: `Planning/scaffold-audit.md`) |
-| **B10 — gradient recapture** | **next, must run before Phase 3** | — |
-| Phase 3 — live tile authoring (parallel per folder) | pending | — |
+| Phase 2.5 — read-only audit | ✅ PASS (74/74) | `488fe28` |
+| B10 — gradient recapture | ✅ CLOSED 2026-05-07 (3 docs captured, 3 tiles added; Gradient page 14 → 17) | `420a19c` |
+| Phase 3 pilot — AppKit folder | ✅ DONE (6 leaves × 29 tiles, NSViewRepresentable bridges, ReferenceTile for protocols) | `c2179b7` |
+| **Phase 3 — 12 SwiftUI folders remaining** | **next** | — |
 | Phase 4 — polish, final review, refresh handoff/history | pending | — |
 
 ## Phase 2 outcome (locked in code)
@@ -62,20 +63,50 @@ Filesystem path uses `<FolderPascal>` (e.g., `Pages/SwiftUI/AppStructure/`) — 
 
 ## Phase 3 — what dispatches next
 
-**Prerequisite (B10):** Run `Documentation/_index/recapture-targets.sh` for `LinearGradient`, `RadialGradient`, `AngularGradient` URLs. The 3 captured docs land in `Documentation/SwiftUI/gradients/` (or wherever the script puts them) and are tile candidates for `GradientGalleryPage`. Without recapture, Gradient page is missing 3 tiles relative to "real" Apple coverage.
+**B10 closed.** Gradient page already at 17 tiles; no prerequisite blocks Phase 3 dispatch.
 
-**Dispatch shape:** parallel per folder (one agent per folder) — 14 dispatches (12 SwiftUI folders + 1 AppKit + Reference is already authored). Per-agent chain: implementer → spec-compliance review → code-quality review. Mandatory `swiftui-expert-skill` on every implementer AND reviewer.
+**AppKit pilot validated the dispatch shape end-to-end.** Pattern used (and reusable for SwiftUI dispatches):
 
-**Per-page agent brief (mandatory inclusions):**
-- Read this page's manifest entry (`Planning/page-component-map-{swiftui,appkit}.md` per folder)
-- Read every contributing reference doc from `Documentation/<framework>/<topic>/<file>.md`
-- For each tile: fill in `api: "<exact .modifier(...) call>"` parameter and the demo closure body with a live SwiftUI invocation of the documented type with the documented parameters. No invented variants. No Claude-authored wrapper views (`Guidelines/feedback.md`)
-- Replace the placeholder `blurb` and `signature` (currently `"<Leaf> — Phase 3 fills this..."` and `nil`) with values drawn from the doc's `## Abstract` block (lightly grammar-edited if needed)
-- Use semantic color/font tokens only. No hex, no `Color(red:green:blue:)` (L-001/L-012)
-- Render dark + light both
-- Page-size discipline: keep nested SwiftUI under a few hundred symbols per binding; break dense pages into `private let` subviews (L-011)
+1. **Subagent type:** `feature-dev:code-architect` worked well for AppKit. For SwiftUI folders that lean on smaller Apple primitives + `ViewModifier`, `feature-dev:code-architect` or `general-purpose` should also work. Use `swiftui-expert-skill` regardless.
+2. **Brief structure:** see the AppKit dispatch in this session's transcript (or reconstruct from `framework.md` Phase 3 spec + the per-folder manifest section). Mandatory inclusions:
+   - Mandatory-first-action: invoke `swiftui-expert-skill` via Skill tool BEFORE reading any code or writing any output
+   - File list (the N page-files for that folder, full absolute paths)
+   - Manifest section path: `.claude/Planning/page-component-map-{swiftui,appkit}.md`
+   - Apple doc path map: `Documentation/<framework>/<topic>/<file>.md` (per leaf — researcher reads each tile's source doc to extract the verbatim API + Abstract)
+   - Authoring spec: VariantTile for renderable types, ReferenceTile (text-only signature + note) for protocols/delegates/cells/non-renderable enums; `name:` verbatim from manifest; `api:` exact call shape; `demo:` closure with live invocation; replace placeholder blurb/signature/availability/docPath in the GalleryItem extension
+   - Hard constraints: macOS 26 only, semantic tokens only, dark+light renderable, no Claude wrappers, no SwiftData
+   - Inline-output protocol: subagents are blocked from Write/Bash; return content as fenced code blocks (one per file, prefixed `### File N: <relative path>`); controller writes them
+   - Status keyword at end: `DONE` / `DONE_WITH_CONCERNS` / `NEEDS_CONTEXT` / `BLOCKED`
+3. **Controller workflow per dispatch:**
+   - Receive dispatch output → extract fenced blocks via `python3 /tmp/swiftkit_extract_dispatch.py` (or rewrite per dispatch ID — script reads the persisted JSON tool-result blob)
+   - `xcodebuild` after each folder lands; SDK-fidelity concerns the agent flags often resolve themselves at compile-time
+   - `python3 /tmp/swiftkit_audit_step2.py` to verify tile counts unchanged
+   - Per-folder commit
+4. **Spec + code reviewers:** AppKit pilot skipped formal review subagent dispatches because (a) the spec is verifiable mechanically by the audit (`scaffold-audit.md` 74/74 PASS), (b) the build is green, and (c) the implementer-agent self-flagged 6 SDK concerns that all turned out to be unfounded. For trickier SwiftUI folders (Animation, Canvas, Layout — places where API surface is large and inference is tighter), explicit reviewer dispatch is more valuable. Use feature-dev:code-reviewer subagent.
 
-**Inline-output protocol** still applies (subagents blocked from `Write`/`Bash`) — agents return updated file contents as fenced code blocks; controller writes them.
+**Remaining 12 folders to dispatch (Reference + AppKit done):**
+
+| Folder | Leaves | ~Tiles | Suggested batch |
+|---|---|---|---|
+| App Structure | 7 | 100 | Solo dispatch (largest folder; trim Environment to 3 anchors only) |
+| Navigation | 6 | 69 | Solo |
+| Layout | 9 | 129 | Solo (largest; consider further per-leaf sub-dispatches if context tight) |
+| Containers | 6 | 92 | Solo |
+| Controls | 10 | 63 | Solo |
+| Text and Input | 5 | 81 | Solo |
+| Images and Shapes | 3 | 64 | Solo (Gradient now 17 tiles after B10) |
+| Presentation | 4 | 40 | Solo (smallest SwiftUI folder; good warm-up) |
+| Toolbars and Menus | 3 | 53 | Solo |
+| Animation and Effects | 4 | 103 | Solo (Canvas is dense; complex SwiftUI inference; consider opus) |
+| Accessibility | 3 | 71 | Solo |
+| Gestures and Input | 3 | 69 | Solo |
+
+Dispatch order suggestion: warm up with Presentation (smallest), then go folder-by-folder in manifest order. Each folder commits independently; build verifies green after each.
+
+**Tools left in `/tmp/` (NOT in repo):**
+- `/tmp/swiftkit_generate_step2.py` — Phase 2 scaffold generator (one-shot, already used)
+- `/tmp/swiftkit_audit_step2.py` — Phase 2.5 audit (re-runnable; useful between Phase 3 dispatches)
+- `/tmp/swiftkit_extract_dispatch.py` — Extracts fenced Swift blocks from a persisted dispatch-output JSON. Update the `DISPATCH` constant to the new tool-result path each session.
 
 ## Rules added during this session (durable)
 
@@ -112,25 +143,26 @@ Filesystem path uses `<FolderPascal>` (e.g., `Pages/SwiftUI/AppStructure/`) — 
 
 ## Working-tree state (uncommitted at handoff time)
 
-- `.claude/Planning/scaffold-audit.md` — Phase 2.5 audit report.
 - `.claude/handoff.md` — this file.
 
 Pre-existing Nathan-side curation (untouched):
-- `.claude/CLAUDE.md` — Nathan's mid-plan-mode edits.
-- `Screen Recordings/*.png` deletions.
-- `.claude/PlanningTree` — untracked Nathan artifact.
+- `.claude/CLAUDE.md` — Nathan's mid-plan-mode edits (his content; left for him to commit).
+- `Screen Recordings/*.png` deletions (2 files; pre-existing tree state).
+
+**`.claude/PlanningTree` is now committed** (was previously untracked). Refreshed 2026-05-07 to mirror the approved 74-leaf manifest with Phase 1 checkpoint annotations on each post-checkpoint decision.
 
 ## Quick-resume after compaction
 
 1. Read this `handoff.md` first.
 2. Read [`framework.md`](framework.md) — full plan.
-3. Confirm `git log --oneline -10` shows commits through `72c3f78` (Phase 2 Step 2) plus the audit-closure commit (this session-end).
-4. **Run B10 first:** `Documentation/_index/recapture-targets.sh` for the 3 gradient URLs. Then verify the new doc files landed under `Documentation/SwiftUI/gradients/` (or wherever Apple's URL structure puts them). Append the 3 new tiles to `GradientGalleryPage.swift` (currently 14 tiles → 17 expected).
-5. Phase 3 dispatch: 14 parallel implementer agents (one per folder), each authoring tiles for the 3-10 leaves in their folder. Each agent:
-   - Loads `swiftui-expert-skill` first
-   - Reads the manifest section + each tile's source doc under `Documentation/<fw>/<topic>/<file>.md`
-   - Returns updated `<LeafName>GalleryPage.swift` files as fenced output
-   - Controller writes; spec + code reviewers per folder verify
-6. After all 14 folders pass review, manual click-through dark + light, then Phase 4 closure.
+3. Confirm `git log --oneline -10` shows commits through `c2179b7` (Phase 3 AppKit pilot + PlanningTree).
+4. **Pick a SwiftUI folder to dispatch.** Suggested warm-up: **Presentation** (smallest at 4 leaves × ~10 tiles each). Use the AppKit-pilot dispatch in this session's transcript as the brief template — adapt the file list, manifest section, Apple doc paths, and folder name; everything else is reusable.
+5. Each dispatch:
+   - Subagent type: `feature-dev:code-architect` (or `general-purpose` for simpler folders)
+   - Mandatory first action: `swiftui-expert-skill` via Skill tool
+   - Returns fenced code blocks; controller extracts via `/tmp/swiftkit_extract_dispatch.py` (update `DISPATCH` constant to the new tool-result JSON path)
+   - `xcodebuild` after each folder; `python3 /tmp/swiftkit_audit_step2.py` to verify tile counts
+   - Per-folder commit
+6. After all 12 SwiftUI folders complete, optionally run formal reviewer subagents on Animation/Canvas/Layout (the dense ones), then Phase 4 closure.
 
-The 5 Reference pages already have full live-tile content and are the canonical authoring template for Phase 3's pattern (`Pages/Reference/MaterialsGalleryPage.swift` is a representative example).
+The 5 Reference pages and the 6 AppKit pages now both have full live-tile content — `Pages/Reference/MaterialsGalleryPage.swift` and `Pages/AppKit/NSOutlineViewGalleryPage.swift` are both representative authoring templates (Reference for SwiftUI primitives with live renders; AppKit for `NSViewRepresentable` bridging plus `ReferenceTile` for non-renderable protocols).
