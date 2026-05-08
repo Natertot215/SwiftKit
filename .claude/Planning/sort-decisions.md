@@ -17,19 +17,19 @@ Per-framework manifest companions (the actual page lists):
 
 ## Top-level decisions made by sort agents
 
-### Page-list adjustments (require Nathan approval)
+### Page-list adjustments (✅ RESOLVED 2026-05-07)
 
-| Heading | Folder | Adjustment | Source |
-|---|---|---|---|
-| SwiftUI | App Structure | Add **Environment** leaf (165 tiles) | `environment-values/` |
-| SwiftUI | App Structure | Add **State and Bindings** leaf (11 tiles) | `model-data/` |
-| SwiftUI | App Structure | Add **AppKit Integration** leaf (13 tiles) | `appkit-integration/` |
-| SwiftUI | App Structure | Add minimal **View Fundamentals** leaf | `view-fundamentals/` |
-| SwiftUI | Layout | Add **Custom Layout** leaf (14 tiles) | `custom-layout/` |
-| SwiftUI | Images and Shapes | Fold **AsyncImage** into Image page | (drops a separate leaf) |
-| SwiftUI | Presentation | Fold **FullScreenCover** into Sheet | (drops a separate leaf) |
-| SwiftUI | Animation and Effects | Optional **Glass Effects** leaf | macOS 26 Liquid Glass |
-| AppKit | (root) | Add **NSGlassEffectView** leaf (3 tiles) | macOS 26 Liquid Glass AppKit |
+| # | Heading | Folder | Adjustment | Decision |
+|---|---|---|---|---|
+| A1 | SwiftUI | App Structure | **Environment** leaf | ✅ Yes — TRIMMED to 3 anchor tiles (`EnvironmentValues`, `Environment`, `EnvironmentKey`); 162 property docs deferred |
+| A2 | SwiftUI | App Structure | **State and Bindings** leaf (11 tiles) | ✅ Yes |
+| A3 | SwiftUI | Layout | **Custom Layout** leaf (14 tiles) | ✅ Yes |
+| A4 | SwiftUI | App Structure | **AppKit Integration** leaf (13 tiles) | ✅ Yes |
+| A5 | SwiftUI | App Structure | minimal **View Fundamentals** leaf (5 tiles) | ✅ Yes |
+| A6 | SwiftUI | Images and Shapes | Fold **AsyncImage** → Image | ✅ Folded |
+| A7 | SwiftUI | Presentation | Fold **FullScreenCover** → Sheet | ✅ Folded |
+| A8 | SwiftUI | Animation and Effects | **Glass Effects** leaf | ❌ No — keep scattered |
+| A9 | AppKit | (root) | **NSGlassEffectView** leaf (3 tiles) | ✅ Yes |
 
 ### Classifier-gate compliance
 

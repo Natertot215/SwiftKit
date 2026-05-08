@@ -213,3 +213,29 @@ The following folders have all or substantially all docs deferred (not appearing
 | **Subtotal type-gate** | **~715** | |
 | sampleCode | 13 | All deferred (Phase 0c rule says case-by-case — reconsider) |
 | **Grand total** | **~1,654** | |
+
+---
+
+## C11 — sample-code review outcome (2026-05-07)
+
+Per Phase 0c case-by-case rule, controller-side review of all 13 SwiftUI `kind: sampleCode` docs.
+
+**Outcome: 13/13 deferred from gallery tiles.** None fit the single-primitive-render tile model (verbatim type-name header + brief description + live render of one Apple primitive). All are downloadable WWDC-companion sample apps that span multiple primitives in tutorial form. Phase 3 implementers MAY cite specific samples in tile descriptions where they add context (per the descriptions-may-reference-excluded-URLs rule).
+
+| Doc | Length | Reason |
+|---|---|---|
+| `accessibility-fundamentals/creating-accessible-views.md` | stub | WWDC21 demo download — broad accessibility patterns |
+| `custom-layout/composing-custom-layouts-with-swiftui.md` | 236 lines | Full app demo (pet-vote leaderboard); spans Grid/GridRow/ForEach. Phase 3 Custom Layout tiles MAY cite |
+| `documents/building-a-document-based-app-using-swiftdata.md` | stub | Full app + uses SwiftData (banned per L-007) |
+| `documents/building-a-document-based-app-with-swiftui.md` | stub | Full app demo |
+| `drawing-and-graphics/add-rich-graphics-to-your-swiftui-app.md` | stub | WWDC21 demo download |
+| `essentials/landmarks-building-an-app-with-liquid-glass.md` | stub | Full app demo |
+| `focus/focus-cookbook-sample.md` | stub | WWDC23 cookbook demo |
+| `navigation/bringing-robust-navigation-structure-to-your-swiftui-app.md` | stub | WWDC22 nav demo |
+| `tables/building-a-great-mac-app-with-swiftui.md` | stub | Full Mac app demo |
+| `text-input-and-output/building-rich-swiftui-text-experiences.md` | stub | WWDC text experiences demo |
+| `text-input-and-output/creating-visual-effects-with-swiftui.md` | stub | WWDC24 visual effects demo |
+| `view-groupings/creating-custom-container-views.md` | stub | WWDC24 container demo |
+| `windows/bringing-multiple-windows-to-your-swiftui-app.md` | stub | WWDC22 multi-window demo |
+
+**Net change from earlier sort:** Custom Layout drops from 14 to 13 tiles (composing-custom-layouts excluded). All other Phase 1 tile counts unchanged.

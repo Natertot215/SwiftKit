@@ -101,3 +101,29 @@ The AppKit heading is intentionally narrow — only components without clean Swi
 5. **PlanningTree single-folder requirement.** The current PlanningTree has AppKit as a single folder (no sub-folders) with 5 leaves. If NSGlassEffectView is approved (6 leaves), the folder still satisfies the minimum-4-pages rule. If Nathan wants additional AppKit pages beyond that, a sub-folder structure becomes possible but is not required for MVP.
 
 6. **Nested type docs without standalone files.** `NSBrowser.ColumnResizingType` and `NSBrowser.DropOperation` are referenced in the `nsbrowser.md` Topics section but do not have separate markdown files in the corpus — they're documented inline. Tiles for these types should draw descriptions from the parent `nsbrowser.md` Abstract blocks rather than separate files. Same pattern applies to `NSDatePicker` nested types (`Style`, `Mode`, `ElementFlags`) and `NSTokenField.TokenStyle`. Phase 3 implementation agents should be aware.
+
+---
+
+## C11 — sample-code review outcome (2026-05-07)
+
+Per Phase 0c case-by-case rule, controller-side review of all 9 AppKit `kind: sampleCode` docs.
+
+**Outcome: 9/9 deferred from gallery tiles.** Three reasons across the set:
+
+1. Five docs are in DEFERRED folders per item D (app-extensions, touch-bar, writing-tools).
+2. Three docs target NSCollectionView/NSTableView drag-drop or document-based apps — none of which have pages in PlanningTree.
+3. One substantive doc (`navigating-hierarchical-data-using-outline-and-split-views.md`, 163 lines) demonstrates NSOutlineView + NSSplitView together; Phase 3 implementers MAY cite it in NSOutlineView tile descriptions for context (per descriptions-may-reference-excluded-URLs rule).
+
+| Doc | Reason |
+|---|---|
+| `app-extensions/add-functionality-to-finder-with-action-extensions.md` | DEFERRED folder (D) |
+| `cocoa-bindings/navigating-hierarchical-data-using-outline-and-split-views.md` | Multi-primitive tutorial; may cite from NSOutlineView descriptions |
+| `documents/developing-a-document-based-app.md` | Full app demo; no Documents page in PlanningTree |
+| `documents/supporting-collection-view-drag-and-drop-through-file-promises.md` | NSCollectionView drag-drop; no NSCollectionView page |
+| `documents/supporting-drag-and-drop-through-file-promises.md` | Generic drag-drop; no AppKit drag-drop page |
+| `documents/supporting-table-view-drag-and-drop-through-file-promises.md` | NSTableView drag-drop; no NSTableView page |
+| `touch-bar/creating-and-customizing-the-touch-bar.md` | Touch Bar deprecated; out of scope |
+| `views-and-controls/integrating-a-toolbar-and-touch-bar-into-your-app.md` | Touch Bar; out of scope |
+| `writing-tools/enhancing-your-custom-text-engine-with-writing-tools.md` | Out-of-scope folder |
+
+**Net change:** No AppKit tile counts change.

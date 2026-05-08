@@ -116,6 +116,58 @@
 - `importableFromServices(for:action:)` — Makes the view's content importable from macOS Services.
 - `importsItemProviders(_:onImport:)` — Makes the view's content importable via item providers.
 
+## SwiftUI > App Structure > Environment
+
+> ✅ Approved 2026-05-07 (Phase 1 checkpoint A1) — TRIMMED. Anchor types only; 162 individual environment property docs DEFERRED to post-V1.
+
+- `EnvironmentValues` — A collection of environment values propagated through a view hierarchy.
+- `Environment` — A property wrapper that reads a value from a view's environment.
+- `EnvironmentKey` — A protocol for keys used to access values in the environment.
+
+## SwiftUI > App Structure > State and Bindings
+
+> ✅ Approved 2026-05-07 (Phase 1 checkpoint A2). 11 tiles from `model-data/`.
+
+- `State` — A property wrapper that stores a value managed by SwiftUI.
+- `Binding` — A property wrapper that creates a two-way binding between a property and a view.
+- `Bindable` — A property wrapper that supports creating bindings to mutable Observable types.
+- `ObservedObject` — A property wrapper for subscribing to an observable object.
+- `StateObject` — A property wrapper that instantiates an observable object.
+- `EnvironmentObject` — A property wrapper that reads a shared object from the environment.
+- `DynamicProperty` — A protocol for properties that update from external sources.
+- `Environment` — A property wrapper that reads a value from a view's environment. *(Cross-listed; primary tile lives on Environment page.)*
+- `environmentObject(_:)` — Supplies an observable object to a view subhierarchy.
+- `onChange(of:initial:_:)` — Performs an action when a value changes.
+- `onReceive(_:perform:)` — Performs an action when a publisher emits a value.
+
+## SwiftUI > App Structure > AppKit Integration
+
+> ✅ Approved 2026-05-07 (Phase 1 checkpoint A4). 13 tiles from `appkit-integration/`.
+
+- `NSViewRepresentable` — A wrapper for an AppKit view that integrates into a SwiftUI hierarchy.
+- `NSViewRepresentableContext` — Contextual information about the state of an NSViewRepresentable.
+- `NSViewControllerRepresentable` — A wrapper for an AppKit view controller that integrates into a SwiftUI hierarchy.
+- `NSViewControllerRepresentableContext` — Contextual information about the state of an NSViewControllerRepresentable.
+- `NSHostingView` — An AppKit view that hosts a SwiftUI view hierarchy.
+- `NSHostingController` — An AppKit view controller that hosts a SwiftUI view hierarchy.
+- `NSHostingMenu` — An AppKit menu that hosts SwiftUI menu content.
+- `NSHostingSizingOptions` — Options that control how a hosting view computes its size.
+- `NSHostingSceneBridgingOptions` — Options that control how a hosting view bridges scene activity.
+- `NSHostingSceneRepresentation` — A representation of a SwiftUI scene in AppKit.
+- `NSGestureRecognizerRepresentable` — A wrapper for an AppKit gesture recognizer that integrates into SwiftUI.
+- `NSGestureRecognizerRepresentableContext` — Contextual information for an NSGestureRecognizerRepresentable.
+- `NSGestureRecognizerRepresentableCoordinateSpaceConverter` — Converts coordinates between gesture-recognizer and SwiftUI coordinate spaces.
+
+## SwiftUI > App Structure > View Fundamentals
+
+> ✅ Approved 2026-05-07 (Phase 1 checkpoint A5) — minimal leaf. 5 tiles: 2 with live render, 3 description-only.
+
+- `AnyView` — A type-erased view. *(Live render — wrapper demo.)*
+- `EmptyView` — A view that doesn't contain any content. *(Live render.)*
+- `View` — A type that represents part of your app's user interface. *(Description-only — protocol.)*
+- `ViewModifier` — A modifier you apply to a view or another view modifier. *(Description-only — protocol.)*
+- `ViewBuilder` — A custom parameter attribute that constructs views from closures. *(Description-only — result builder.)*
+
 ---
 
 ## SwiftUI > Navigation > NavigationStack
@@ -346,6 +398,24 @@
 - `safeAreaPadding(_:)` — Adds safe area padding to a view.
 - `SafeAreaRegions` — A set of safe area regions.
 - `EdgeInsets` — The inset distances for the edges of a rectangle.
+
+## SwiftUI > Layout > Custom Layout
+
+> ✅ Approved 2026-05-07 (Phase 1 checkpoint A3). 13 tiles from `custom-layout/` (14 source docs; the 1 sampleCode `composing-custom-layouts-with-swiftui` deferred per C11 — Phase 3 may cite it in tile descriptions).
+
+- `Layout` — A type that defines the geometry of a collection of views.
+- `AnyLayout` — A type-erased instance of the Layout protocol.
+- `LayoutProperties` — Layout-specific properties of a layout container.
+- `LayoutSubview` — A proxy that represents one subview of a layout.
+- `LayoutSubviews` — A collection of proxy values that represent the subviews of a layout view.
+- `LayoutValueKey` — A protocol for keys used to access layout-specific values.
+- `ProposedViewSize` — A proposal for the size of a view.
+- `ViewSpacing` — A collection of the geometric spacing preferences of a view.
+- `HStackLayout` — A horizontal container that you can use in conditional layouts.
+- `VStackLayout` — A vertical container that you can use in conditional layouts.
+- `ZStackLayout` — An overlaying container that you can use in conditional layouts.
+- `GridLayout` — A grid that you can use in conditional layouts.
+- `layoutValue(key:value:)` — Associates a value with a custom layout property.
 
 ---
 
@@ -675,9 +745,9 @@
 - `SymbolVariableValueMode` — The rendering mode for the variable value layer of a symbol image.
 - `SymbolEffectTransition` — A transition that applies a symbol effect to the view when appearing or disappearing.
 
-## SwiftUI > Images and Shapes > AsyncImage
+## SwiftUI > Images and Shapes > AsyncImage *(removed — folded into Image)*
 
-*AsyncImage tiles are folded into the Image page above (recommended). PlanningTree adjustment proposed in `sort-decisions-swiftui.md`.*
+✅ Locked 2026-05-07 (Phase 1 checkpoint A6). `AsyncImage` and `AsyncImagePhase` tiles live on the Image page above; this leaf does not exist in the final manifest.
 
 ## SwiftUI > Images and Shapes > Shapes
 
@@ -756,6 +826,8 @@
 - `PresentationContentInteraction` — A behavior that you can use to influence how a presentation responds to swipe gestures.
 - `dismissalConfirmationDialog(_:shouldPresent:actions:)` — Presents a confirmation dialog when the system tries to dismiss the enclosing view.
 - `AlertScene` — A scene that presents an alert when a binding becomes true.
+- `fullScreenCover(isPresented:onDismiss:content:)` — Presents a modal view that covers as much of the screen as possible. *(Folded from FullScreenCover per A7.)*
+- `fullScreenCover(item:onDismiss:content:)` — Presents a modal view that covers as much of the screen as possible using the given item as a data source. *(Folded from FullScreenCover per A7.)*
 
 ## SwiftUI > Presentation > Popover
 
@@ -782,12 +854,9 @@
 - `confirmationDialog(_:isPresented:titleVisibility:actions:message:)` — Presents a confirmation dialog with a message when a given condition is true.
 - `confirmationDialog(_:isPresented:titleVisibility:presenting:actions:)` — Presents a confirmation dialog with actions when a given condition is true, using a data value to produce the content.
 
-## SwiftUI > Presentation > FullScreenCover
+## SwiftUI > Presentation > FullScreenCover *(removed — folded into Sheet)*
 
-- `fullScreenCover(isPresented:onDismiss:content:)` — Presents a modal view that covers as much of the screen as possible.
-- `fullScreenCover(item:onDismiss:content:)` — Presents a modal view that covers as much of the screen as possible using the given item as a data source.
-
-> **Adjustment proposed:** Fold this leaf into Sheet — only 2 method docs. See `sort-decisions-swiftui.md`.
+✅ Locked 2026-05-07 (Phase 1 checkpoint A7). `fullScreenCover(isPresented:onDismiss:content:)` and `fullScreenCover(item:onDismiss:content:)` tiles relocated to the Sheet page above; this leaf does not exist in the final manifest.
 
 ---
 
@@ -1134,26 +1203,34 @@
 
 ---
 
-## Unmapped / needs decision
+## Resolution log (locked 2026-05-07)
 
-- **`environment-values/` (165 docs)** — `EnvironmentValues`, `Environment`, `EnvironmentKey`, plus 162 individual environment property docs. PROPOSED: add an "Environment" leaf under App Structure (or a new "Data Flow" folder). All 165 docs tile on that page. Without approval, all 165 are deferred.
-- **`model-data/` (11 docs)** — `State`, `Binding`, `ObservedObject`, `StateObject`, `EnvironmentObject`, `Bindable`, `DynamicProperty`. PROPOSED: add a "State and Bindings" leaf under App Structure. Without approval, all deferred.
-- **`custom-layout/` (14 docs)** — `Layout`, `AnyLayout`, layout helpers. PROPOSED: add as 8th leaf under Layout folder. Without approval, all deferred.
-- **`appkit-integration/` (13 docs)** — `NSViewRepresentable`, `NSViewControllerRepresentable`, `NSHostingView`, `NSHostingController`. PROPOSED: add an "AppKit Integration" page (under SwiftUI > App Structure or a new folder).
-- **`view-fundamentals/` (25 docs)** — `View`, `ViewModifier`, `AnyView`, `EmptyView`, `ViewBuilder`. RECOMMENDED: minimal "View Fundamentals" page under App Structure for `AnyView`/`EmptyView`; defer the rest as framework-level building blocks.
-- **`view-styles/` (73 docs)** — Per-control style protocols and configuration structs. Mostly tiles into existing control pages (Button, Toggle, etc.). `GlassBackgroundEffect`, `GlassEffectContainer`, `GlassEffectTransition`, `GlassButtonStyle`, `GlassProminentButtonStyle` are macOS 26 — possibly a "Glass Effects" page (Nathan decision).
-- **`view-configuration/` (25 docs)** — `.disabled()`, `.hidden()`, `.opacity()`, `.preferredColorScheme()` modifiers. Route as tiles onto host control pages. No standalone page needed.
-- **`technology-specific-views/` (112 docs, all methods)** — MapKit/StoreKit/HealthKit/PhotosPicker/TipKit/WebKit/Wallet integration. ALL DEFERRED — out-of-scope for a macOS SwiftUI primitive gallery.
-- **`uikit-integration/` (14 docs)** — UIKit bridges; macOS-only stack. ALL DEFERRED.
-- **`watchkit-integration/` (4 docs)** — WatchKit only. ALL DEFERRED.
-- **`immersive-spaces/` (22 docs)** — visionOS only. ALL DEFERRED.
-- **`previews-in-xcode/` (22 docs)** — Developer tooling. ALL DEFERRED.
-- **`app-extensions/` (19 docs)** — Widget/ControlWidget extension infrastructure. ALL DEFERRED.
-- **`system-events/` (17 docs)** — Background tasks, URL handling, NSUserActivity — non-visual. ALL DEFERRED.
-- **`persistent-storage/` (8 docs)** — `AppStorage`, `SceneStorage`, `FetchRequest`. ALL DEFERRED (data layer, not UI).
-- **`preferences/` (11 docs)** — Internal layout preference protocol. ALL DEFERRED.
-- **`accessible-appearance/` (5 docs)** — Route `LegibilityWeight`, `AssistiveAccess` as tiles to Accessibility > Custom Content (already done above).
-- **`essentials/` (1 sampleCode doc)** — Per Phase 0c case-by-case rule, evaluate during Phase 1 review.
-- `CaptionTextFormat`, `DragState`, `TransferRepresentation`, `Transferable` — No type-doc in mirror; deferred.
-- `LinearGradient`, `RadialGradient`, `AngularGradient` — Real macOS SwiftUI types absent from mirror. **Recommend targeted recapture before Phase 3.**
-- **13 `kind: sampleCode` docs** — Were blanket-deferred by the sort agent (operating on pre-Phase-0c rules). Per Phase 0c update, these need case-by-case evaluation. List them and decide each at Phase 1 user-checkpoint review.
+Phase 1 checkpoint resolutions for the previously-unmapped folders:
+
+- **`environment-values/` (165 docs)** — ✅ A1 RESOLVED: TRIMMED. Environment leaf added with 3 anchor tiles (`EnvironmentValues`, `Environment`, `EnvironmentKey`); 162 individual environment property docs DEFERRED to post-V1.
+- **`model-data/` (11 docs)** — ✅ A2 RESOLVED: State and Bindings leaf added (11 tiles).
+- **`custom-layout/` (14 docs)** — ✅ A3 RESOLVED: Custom Layout leaf added (14 tiles).
+- **`appkit-integration/` (13 docs)** — ✅ A4 RESOLVED: AppKit Integration leaf added (13 tiles).
+- **`view-fundamentals/` (25 docs)** — ✅ A5 RESOLVED: minimal View Fundamentals leaf added (5 tiles: `AnyView`, `EmptyView`, plus description-only `View`, `ViewModifier`, `ViewBuilder`); other 20 docs DEFERRED.
+- **`view-styles/` (73 docs)** — ✅ A8 RESOLVED: NO Glass Effects page. macOS 26 Liquid Glass APIs (`GlassBackgroundEffect`, `GlassEffectContainer`, `GlassEffectTransition`, `GlassButtonStyle`, `GlassProminentButtonStyle`) stay scattered as tiles on Button / Canvas / etc. Other style protocols + configuration structs route as tiles to existing control pages (Button, Toggle, Picker, etc.).
+- **`view-configuration/` (25 docs)** — Route as tiles onto host control pages. No standalone page (per pre-checkpoint sort).
+- **`accessible-appearance/` (5 docs)** — Route `LegibilityWeight`, `AssistiveAccess` as tiles to Accessibility > Custom Content (already routed pre-checkpoint).
+
+Deferred entirely (D acknowledged):
+
+- **`technology-specific-views/` (112 docs)** — MapKit/StoreKit/HealthKit/PhotosPicker/TipKit/WebKit/Wallet integration; out-of-scope for a macOS SwiftUI primitive gallery.
+- **`uikit-integration/` (14 docs)** — UIKit bridges; non-macOS stack.
+- **`watchkit-integration/` (4 docs)** — WatchKit only.
+- **`immersive-spaces/` (22 docs)** — visionOS only.
+- **`previews-in-xcode/` (22 docs)** — Developer tooling.
+- **`app-extensions/` (19 docs)** — Widget/ControlWidget extension infrastructure.
+- **`system-events/` (17 docs)** — Background tasks, URL handling, NSUserActivity — non-visual.
+- **`persistent-storage/` (8 docs)** — `AppStorage`, `SceneStorage`, `FetchRequest`. Data layer, not UI.
+- **`preferences/` (11 docs)** — Internal layout preference protocol.
+
+Other / open:
+
+- **`essentials/` (1 sampleCode doc)** — C11 controller pass evaluates.
+- `CaptionTextFormat`, `DragState`, `TransferRepresentation`, `Transferable` — No type-doc in mirror; DEFERRED.
+- `LinearGradient`, `RadialGradient`, `AngularGradient` — ✅ B10 APPROVED. Recapture via `Documentation/_index/recapture-targets.sh` before Phase 3 begins; tiles attach to Gradient page once captured.
+- **13 SwiftUI `kind: sampleCode` docs** — ✅ C11 controller pass evaluates each on merit (Phase 0c rule). Outcomes appended to `sort-decisions-swiftui.md`.

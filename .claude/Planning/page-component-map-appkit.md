@@ -41,14 +41,9 @@
 - `NSDatePickerCell` — An object that controls the behavior of a date picker, or of a single date picker cell in a matrix
 - `NSDatePickerCellDelegate` — A set of optional methods implemented by delegates of NSDatePickerCell objects
 
----
+## AppKit > NSGlassEffectView
 
-## PROPOSED — needs Nathan approval
-
-### AppKit > NSGlassEffectView
-
-> This page is proposed and requires explicit Nathan approval before it enters the manifest.
-> Rationale: macOS 26-exclusive Liquid Glass AppKit primitive. No SwiftUI equivalent at time of writing. Type-doc fully present. Directly relevant to Pommora's macOS 26 shell work.
+> ✅ Approved 2026-05-07 (Phase 1 checkpoint A9). macOS 26-exclusive Liquid Glass AppKit primitive. No SwiftUI equivalent. Directly relevant to Pommora's macOS 26 shell work.
 
 - `NSGlassEffectView` — A view that embeds its content view in a dynamic glass effect
 - `NSGlassEffectView.Style` — The style variants (clear, regular) available for a glass effect view
@@ -56,8 +51,8 @@
 
 ---
 
-## Unmapped / Needs Decision
+## Deferred (per Phase 1 checkpoint resolution)
 
-- `views-and-controls/nsbackgroundextensionview.md` — macOS 26, extends content to fill bounds under safe-area regions; no SwiftUI equivalent but behaves as a layout helper rather than a standalone user-visible component. Recommend deferral unless Nathan wants an AppKit layout-helpers page.
-- `views-and-controls/nsvisualeffectview.md` — Translucency and vibrancy; SwiftUI material modifiers cover the common cases; AppKit version exposes additional blending modes not available in SwiftUI. Nathan should decide whether this warrants a tile in a future AppKit Materials page or stays deferred.
-- `views-and-controls/nsglasseffectview.md` and `nsglasseffectcontainerview.md` — Routed to PROPOSED section above.
+- `views-and-controls/nsbackgroundextensionview.md` — macOS 26 layout helper. Deferred per A9 (Nathan opted for 3-tile NSGlassEffectView page without this addition).
+- `views-and-controls/nsvisualeffectview.md` — SwiftUI material modifiers cover the common cases. Deferred.
+- `app-structure/nshostingmenu.md` — No NSMenu page in PlanningTree. Deferred.
