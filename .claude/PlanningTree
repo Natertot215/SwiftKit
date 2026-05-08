@@ -1,0 +1,138 @@
+SwiftKit — Page List (post Phase 1 checkpoint, locked 2026-05-07)
+
+Legend: Heading > Folder > Leaf
+Reference + AppKit are flat (single-folder collapse) — items render directly under the heading.
+
+Heading
+│
+├── Folder
+│   ├── Leaf
+│   ├── Leaf
+│   └── Leaf
+
+────────────────────────────────────────────────────────────────────
+
+SwiftKit
+│
+├── Reference (5 leaves)
+│   ├── Typography
+│   ├── Color
+│   ├── Materials
+│   ├── Motion
+│   └── SF Symbols
+│
+├── SwiftUI (12 folders, 63 leaves)
+│   │
+│   ├── App Structure (7)
+│   │   ├── App and Scenes
+│   │   ├── WindowGroup
+│   │   ├── Document
+│   │   ├── Environment              [A1: trimmed — 3 anchor tiles only; 162 property docs deferred]
+│   │   ├── State and Bindings       [A2: added]
+│   │   ├── AppKit Integration       [A4: added]
+│   │   └── View Fundamentals        [A5: added — minimal, 5 tiles]
+│   │
+│   ├── Navigation (6)
+│   │   ├── NavigationStack
+│   │   ├── NavigationSplitView
+│   │   ├── TabView
+│   │   ├── Sidebar
+│   │   ├── Searchable
+│   │   └── Inspector
+│   │
+│   ├── Layout (9)
+│   │   ├── Stacks
+│   │   ├── Grid
+│   │   ├── LazyGrid
+│   │   ├── ScrollView
+│   │   ├── GeometryReader
+│   │   ├── Frame and Padding
+│   │   ├── Alignment
+│   │   ├── SafeArea
+│   │   └── Custom Layout            [A3: added]
+│   │
+│   ├── Containers (6)
+│   │   ├── List
+│   │   ├── Table
+│   │   ├── Form
+│   │   ├── GroupBox
+│   │   ├── Section
+│   │   └── DisclosureGroup
+│   │
+│   ├── Controls (10)
+│   │   ├── Button
+│   │   ├── Toggle
+│   │   ├── Picker
+│   │   ├── DatePicker
+│   │   ├── ColorPicker
+│   │   ├── Slider
+│   │   ├── Stepper
+│   │   ├── ProgressView
+│   │   ├── Gauge
+│   │   └── Menu
+│   │
+│   ├── Text and Input (5)
+│   │   ├── Text
+│   │   ├── TextField
+│   │   ├── TextEditor
+│   │   ├── Label
+│   │   └── AttributedString
+│   │
+│   ├── Images and Shapes (3)        [AsyncImage folded into Image per A6]
+│   │   ├── Image
+│   │   ├── Shapes
+│   │   └── Gradient                 [B10 closed: +LinearGradient, +RadialGradient, +AngularGradient]
+│   │
+│   ├── Presentation (4)             [FullScreenCover folded into Sheet per A7]
+│   │   ├── Sheet
+│   │   ├── Popover
+│   │   ├── Alert
+│   │   └── ConfirmationDialog
+│   │
+│   ├── Toolbars and Menus (3)
+│   │   ├── Toolbar
+│   │   ├── ContextMenu
+│   │   └── Commands
+│   │
+│   ├── Animation and Effects (4)    [A8: Glass Effects rejected — Liquid Glass APIs scattered as tiles on Button/Canvas]
+│   │   ├── Animation
+│   │   ├── Transition
+│   │   ├── MatchedGeometry
+│   │   └── Canvas
+│   │
+│   ├── Accessibility (3)
+│   │   ├── Labels and Descriptions
+│   │   ├── Actions and Behavior
+│   │   └── Custom Content
+│   │
+│   └── Gestures and Input (3)
+│       ├── Gestures
+│       ├── FocusState
+│       └── Keyboard
+│
+└── AppKit (6 leaves)
+    ├── NSOutlineView
+    ├── NSBrowser
+    ├── NSPathControl
+    ├── NSTokenField
+    ├── NSDatePicker
+    └── NSGlassEffectView            [A9: added — macOS 26 Liquid Glass primitive, 3 tiles]
+
+────────────────────────────────────────────────────────────────────
+
+Total: 74 leaves
+  Reference:  5  (flat folder, single-folder collapse)
+  SwiftUI:   63  (12 folders)
+  AppKit:     6  (flat folder, single-folder collapse)
+
+Tile total: ~1,082+ across all 74 pages.
+
+Sources of truth:
+  • Unified manifest:   .claude/Planning/page-component-map.md
+  • Per-framework:      .claude/Planning/page-component-map-{reference,swiftui,appkit}.md
+  • Sort audit trail:   .claude/Planning/sort-decisions{,-reference,-swiftui,-appkit}.md
+  • Phase 2.5 audit:    .claude/Planning/scaffold-audit.md  (74/74 PASS)
+
+Annotations key:
+  [A#: …]  → Phase 1 user-checkpoint resolution (2026-05-07). See page-component-map.md § "Phase 1 checkpoint resolution".
+  [B##: …] → Mirror-gap closure (Phase 1 item B). See sort-decisions-swiftui.md § "B10 — gradient mirror-gap closure".

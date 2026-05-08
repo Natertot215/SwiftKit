@@ -1,8 +1,6 @@
 import SwiftUI
+import AppKit
 
-/// Gallery page scaffold for NSTokenField. Phase 2 Step 2 placeholder —
-/// every tile is a `VariantTile` with the verbatim Apple symbol name and an
-/// empty demo well. Phase 3 fills the API string and the live render per tile.
 struct NSTokenFieldGalleryPage: View {
     var body: some View {
         GalleryItemPage(
@@ -12,11 +10,45 @@ struct NSTokenFieldGalleryPage: View {
             availability: Self.item.availability,
             docPath: Self.item.docPath
         ) {
-            VariantTile(name: "NSTokenField", api: nil) { Color.clear }
-            VariantTile(name: "NSTokenField.TokenStyle", api: nil) { Color.clear }
-            VariantTile(name: "NSTokenFieldDelegate", api: nil) { Color.clear }
-            VariantTile(name: "NSTokenFieldCell", api: nil) { Color.clear }
-            VariantTile(name: "NSTokenFieldCellDelegate", api: nil) { Color.clear }
+            // MARK: Style variants — live renders
+
+            VariantTile(
+                name: "NSTokenField",
+                api: "let field = NSTokenField(); field.objectValue = [\"Swift\", \"AppKit\", \"macOS\"]",
+                height: 60
+            ) {
+                NSTokenFieldRepresentable(style: .default)
+                    .frame(maxWidth: .infinity)
+            }
+
+            VariantTile(
+                name: "NSTokenField.TokenStyle",
+                api: "field.tokenStyle = .rounded  // .default | .none | .plainSquared | .rounded",
+                height: 60
+            ) {
+                NSTokenFieldRepresentable(style: .rounded)
+                    .frame(maxWidth: .infinity)
+            }
+
+            // MARK: Reference tiles
+
+            ReferenceTile(
+                name: "NSTokenFieldDelegate",
+                signature: "protocol NSTokenFieldDelegate : NSTextFieldDelegate",
+                note: "Control tokenization behavior — provide completions, display strings, and represented objects. Implement tokenField(_:completionsForSubstring:indexOfToken:tokenIndex:) to offer completion suggestions as the user types."
+            )
+
+            ReferenceTile(
+                name: "NSTokenFieldCell",
+                signature: "@MainActor class NSTokenFieldCell : NSTextFieldCell",
+                note: "Implements much of NSTokenField's functionality. NSTokenField provides cover methods for most NSTokenFieldCell APIs. Access directly when embedding in an NSMatrix."
+            )
+
+            ReferenceTile(
+                name: "NSTokenFieldCellDelegate",
+                signature: "protocol NSTokenFieldCellDelegate : NSObjectProtocol",
+                note: "Mirror of NSTokenFieldDelegate for cell-level tokenized-string work. Used when embedding NSTokenFieldCell directly in an NSMatrix rather than via the NSTokenField cover class."
+            )
         }
     }
 }
@@ -27,11 +59,30 @@ extension NSTokenFieldGalleryPage {
         title: "NSTokenField",
         folder: "AppKit",
         framework: .appKit,
-        absorbedSymbols: ["NSTokenField", "NSTokenFieldDelegate"],
-        blurb: "NSTokenField — Phase 3 fills this from the Apple documentation Abstract.",
-        signature: nil,
-        availability: nil,
-        docPath: nil,
+        absorbedSymbols: ["NSTokenField", "NSTokenField.TokenStyle", "NSTokenFieldDelegate", "NSTokenFieldCell", "NSTokenFieldCellDelegate"],
+        blurb: "A text field that converts text into visually distinct tokens.",
+        signature: "@MainActor class NSTokenField : NSTextField",
+        availability: "macOS 10.4+",
+        docPath: "Documentation/AppKit/views-and-controls/nstokenfield.md",
         page: { AnyView(NSTokenFieldGalleryPage()) }
     )
+}
+
+// MARK: - NSViewRepresentable bridge
+
+private struct NSTokenFieldRepresentable: NSViewRepresentable {
+    let style: NSTokenField.TokenStyle
+
+    func makeNSView(context: Context) -> NSTokenField {
+        let field = NSTokenField()
+        field.tokenStyle = style
+        field.objectValue = ["Swift", "AppKit", "macOS", "Xcode"]
+        field.isEditable = false
+        field.isBezeled = true
+        return field
+    }
+
+    func updateNSView(_ nsView: NSTokenField, context: Context) {
+        nsView.tokenStyle = style
+    }
 }
