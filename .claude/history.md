@@ -114,26 +114,15 @@ Nathan's directives across the redesign session:
 
 **Investigation findings folded into the redesign:**
 
-- **The "old gallery toggle" half-deletion remnant.** Nathan recalled an earlier appearance toggle that swapped between two gallery modes; a previous agent removed the toggle button but not the view contents. Investigation confirmed: `Pages/_Shared/DescribePage.swift` (141 lines) + `Detail/PageScaffold/GalleryPageScaffold.swift` (34 lines, the old "Default/Variants/States/Notes" 4-section scaffold) survive as orphans (not registered in `GalleryRegistry`, only `DescribePage` references `GalleryPageScaffold`). The `DetailEmptyState` comment in `DetailPane.swift` line 32 ("Reusable across both sidebar modes") confirms the second mode used to exist. All deferred to Phase 4 cleanup per Nathan's directive #5 above.
-- **Reference pages diverge by content type, not by template.** Typography (OG): hand-crafted rows. Color: `VariantTile`s with locked-frame swatches. Motion: custom `AnimationDemoTile`/`TransitionDemoTile` with stable canvases + tap-to-trigger. Materials: custom `MaterialDemoTile` with baked-in gradient backdrop so the filter effect is legible. SF Symbols: `VariantTile`s with Image+modifier. The pattern: same shell choices when content allows, custom tile wrappers (or no wrapper at all) when content demands.
-- **Existing primitives are a toolkit, not a template.** `GalleryItemPage(minTileWidth:)` controls grid density; `VariantTile.height` lets a tile take a tall well; `ReferenceTile` covers non-renderable types; `*DemoTile`s prove the "shared canvas" pattern; `PageSection` enables long-form section grouping. The only real gap is a chromeless full-bleed mode (defer extraction; let first W4 Navigation agent write it locally).
+- **The "old gallery toggle" half-deletion remnant.** Nathan recalled an earlier appearance toggle that swapped between two gallery modes; a previous agent removed the toggle button but not the view contents. Investigation confirmed: `Pages/_Shared/DescribePage.swift` + `Detail/PageScaffold/GalleryPageScaffold.swift` survive as orphans (not registered in `GalleryRegistry`); `DetailPane.swift` carries a stale "Reusable across both sidebar modes" comment. All deferred to Phase 4 cleanup per Nathan's directive #5 above.
+- **Reference pages diverge by content type, not by template.** Typography (OG): hand-crafted rows. Color: `VariantTile`s with locked-frame swatches. Motion: custom `AnimationDemoTile`/`TransitionDemoTile` with stable canvases + tap-to-trigger. Materials: custom `MaterialDemoTile` with baked-in gradient backdrop. SF Symbols: `VariantTile`s with Image+modifier. The pattern: same shell choices when content allows, custom tile wrappers (or no wrapper at all) when content demands.
+- **Existing primitives are a toolkit, not a template.** `GalleryItemPage(minTileWidth:)` controls grid density; `VariantTile.height` lets a tile take a tall well; `ReferenceTile` covers non-renderable types; `*DemoTile`s prove the "shared canvas" pattern; `PageSection` enables long-form section grouping. The only real gap is a chromeless full-bleed mode (deferred — let first W4 Navigation agent write it locally).
 
-**Wave plan (6 waves, sequential within folder, parallel across folders):**
-
-| Wave | Folders | Leaves |
-|---|---|---|
-| W1 (warm-up, sequential) | Reference (Typography first) | 5 |
-| W2 (parallel folders) | Presentation, Toolbars and Menus, Gestures and Input, Accessibility, Images and Shapes | 16 |
-| W3 (parallel folders) | Text and Input, Animation and Effects, Containers | 15 |
-| W4 (parallel folders) | Controls, Layout, Navigation | 25 |
-| W5 (parallel folders) | App Structure | 7 |
-| W6 (parallel pages, single folder) | AppKit | 6 |
-
-**Logic-log discipline (new for Phase 3b).** Single append-only file at `Planning/page-logic-log.md`. Every implementer reads the entire log before drafting layout (must cite at least one prior entry's decision in their reasoning, OR explain divergence) and appends their own entry as the final act before handing back code. Entry captures: layout shape, component-driven rationale, tile/row shape, demo notes, primitive proposals, heads-up for siblings. Closer to a postmortem than a plan; subsequent agents read it as evidence, not instructions.
+**Logic-log discipline (new for Phase 3b).** Single append-only file at `Planning/page-logic-log.md`. Every implementer reads the entire log before drafting layout, and appends their own entry as the final act before handing back code. Closer to a postmortem than a plan; subsequent agents read it as evidence, not instructions.
 
 **Components log split out.** Nathan directed that the Components log live as its own file (`components-log.md`) rather than embedded in `framework.md`. The framework's Components log section is now a one-line pointer.
 
-Plan-file draft preserved at `~/.claude/plans/rippling-wiggling-widget.md` until tomorrow's Phase 3a dispatch begins, then archived. Canonical home for the redesigned Phase 3 is `framework.md`.
+**Plan canonical home:** [`Planning/phase-3-plan.md`](Planning/phase-3-plan.md) — execution detail for Phase 3a + 3b lives there. Other docs (`framework.md`, `handoff.md`, this entry) carry summary only and defer to the plan file. Per Nathan's directive: "Phase 3 should not be at risk of conflicting info in other MDs."
 
 ---
 
